@@ -9,14 +9,15 @@ you don't have to check each one individually.
 
 Aggregated directories:
 
-| Source | Site |
-| --- | --- |
-| x402scan (Merit Systems) | https://x402scan.com |
-| Agentic.Market (Base) | https://agentic.market |
-| Pay.sh (Solana) | https://pay.sh |
-| Ampersend | https://app.ampersend.ai/discover |
-| Visa CLI Merchant Registry | https://app.visacli.sh/merchants |
-| Circle Agent Marketplace | https://agents.circle.com |
+| Source | Site | Fetcher |
+| --- | --- | --- |
+| x402scan (Merit Systems) | https://x402scan.com | ✅ implemented |
+| Onyx Bazaar (CDP discovery) | https://onyx-actions.onrender.com/bazaar | ✅ implemented |
+| Agentic.Market (Base) | https://agentic.market | stub |
+| Pay.sh (Solana) | https://pay.sh | stub |
+| Ampersend | https://app.ampersend.ai/discover | stub |
+| Visa CLI Merchant Registry | https://app.visacli.sh/merchants | stub (invite-only) |
+| Circle Agent Marketplace | https://agents.circle.com | stub (dynamic) |
 
 ## Stack
 
