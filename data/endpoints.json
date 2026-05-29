@@ -1,0 +1,71 @@
+{
+  "generated_at": "2026-05-29T00:00:00.000Z",
+  "count": 5,
+  "endpoints": [
+    {
+      "id": "sample-0001",
+      "url": "https://api.example-data.x402/quotes",
+      "name": "Realtime Crypto Quotes",
+      "description": "Streaming spot prices for major crypto pairs, billed per call over x402.",
+      "category": "data",
+      "price": { "amount": 0.001, "currency": "USDC", "unit": "per-call" },
+      "networks": ["Base"],
+      "protocols": ["x402"],
+      "source": ["x402scan"],
+      "source_url": "https://x402scan.com/endpoint/sample-0001",
+      "last_seen": "2026-05-29T00:00:00.000Z"
+    },
+    {
+      "id": "sample-0002",
+      "url": "https://api.example-compute.x402/generate",
+      "name": "Open LLM Inference",
+      "description": "Pay-per-token inference endpoint for an open-weight 70B model.",
+      "category": "compute",
+      "price": { "amount": 0.000002, "currency": "USDC", "unit": "per-token" },
+      "networks": ["Base", "Solana"],
+      "protocols": ["x402", "MPP"],
+      "source": ["agentic-market", "pay-sh"],
+      "source_url": "https://agentic.market/listing/sample-0002",
+      "last_seen": "2026-05-29T00:00:00.000Z"
+    },
+    {
+      "id": "sample-0003",
+      "url": "https://api.example-search.x402/web",
+      "name": "Agentic Web Search",
+      "description": "Web search tuned for agents; returns ranked snippets with citations.",
+      "category": "search",
+      "price": { "amount": 0.005, "currency": "USDC", "unit": "per-call" },
+      "networks": ["Base"],
+      "protocols": ["x402"],
+      "source": ["ampersend"],
+      "source_url": "https://app.ampersend.ai/discover/sample-0003",
+      "last_seen": "2026-05-29T00:00:00.000Z"
+    },
+    {
+      "id": "sample-0004",
+      "url": "https://api.example-media.x402/image",
+      "name": "Stock Image Library",
+      "description": "Royalty-free image assets, licensed per download via x402.",
+      "category": "media",
+      "price": { "amount": 0.25, "currency": "USD", "unit": "per-call" },
+      "networks": ["Polygon"],
+      "protocols": ["L402"],
+      "source": ["visa-cli"],
+      "source_url": "https://app.visacli.sh/merchants/sample-0004",
+      "last_seen": "2026-05-29T00:00:00.000Z"
+    },
+    {
+      "id": "sample-0005",
+      "url": "https://api.example-trading.x402/execute",
+      "name": "Market Execution Gateway",
+      "description": "Programmatic trade execution across DEX liquidity, settled in EURC.",
+      "category": "trading",
+      "price": { "amount": 0.01, "currency": "EURC", "unit": "per-call" },
+      "networks": ["Base", "Ethereum"],
+      "protocols": ["x402"],
+      "source": ["circle-marketplace"],
+      "source_url": "https://agents.circle.com/agent/sample-0005",
+      "last_seen": "2026-05-29T00:00:00.000Z"
+    }
+  ]
+}
