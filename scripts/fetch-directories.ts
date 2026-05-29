@@ -19,6 +19,7 @@ import type { Catalog, Endpoint } from "../src/lib/types";
 import { canonicalUrl, hashId, mergeEndpoints } from "./util";
 
 import { fetchX402scan } from "./fetchers/x402scan";
+import { fetchOnyxBazaar } from "./fetchers/onyx-bazaar";
 import { fetchAgenticMarket } from "./fetchers/agentic-market";
 import { fetchPaySh } from "./fetchers/pay-sh";
 import { fetchAmpersend } from "./fetchers/ampersend";
@@ -35,6 +36,7 @@ type NamedFetcher = {
 
 const FETCHERS: NamedFetcher[] = [
   { name: "x402scan", run: fetchX402scan },
+  { name: "onyx-bazaar", run: fetchOnyxBazaar },
   { name: "agentic-market", run: fetchAgenticMarket },
   { name: "pay-sh", run: fetchPaySh },
   { name: "ampersend", run: fetchAmpersend },

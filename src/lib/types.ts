@@ -12,6 +12,7 @@ export type Category =
 
 export type DirectorySource =
   | "x402scan"
+  | "onyx-bazaar"
   | "agentic-market"
   | "pay-sh"
   | "ampersend"
@@ -60,6 +61,7 @@ export const CATEGORIES: Category[] = [
 
 export const DIRECTORY_SOURCES: DirectorySource[] = [
   "x402scan",
+  "onyx-bazaar",
   "agentic-market",
   "pay-sh",
   "ampersend",
@@ -72,6 +74,10 @@ export const DIRECTORY_META: Record<
   { label: string; home: string }
 > = {
   x402scan: { label: "x402scan", home: "https://x402scan.com" },
+  "onyx-bazaar": {
+    label: "Onyx Bazaar",
+    home: "https://onyx-actions.onrender.com/bazaar",
+  },
   "agentic-market": { label: "Agentic.Market", home: "https://agentic.market" },
   "pay-sh": { label: "Pay.sh", home: "https://pay.sh" },
   ampersend: { label: "Ampersend", home: "https://app.ampersend.ai/discover" },
