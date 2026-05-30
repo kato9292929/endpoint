@@ -35,6 +35,9 @@ export default function RootLayout({
               <Link href="/about" className="hover:text-white">
                 About
               </Link>
+              <Link href="/for-agents" className="hover:text-white">
+                For Agents
+              </Link>
             </div>
           </div>
         </nav>

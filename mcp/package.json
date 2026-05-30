@@ -1,0 +1,36 @@
+{
+  "name": "x402-endpoint-mcp",
+  "version": "1.0.0",
+  "description": "MCP server for the x402 Endpoint catalog — list, search, and inspect x402 ecosystem endpoints.",
+  "license": "MIT",
+  "type": "module",
+  "bin": {
+    "x402-endpoint-mcp": "dist/server.js"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/server.js",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "x402",
+    "mcp",
+    "model-context-protocol",
+    "agents"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.12.0",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "typescript": "^5.7.3"
+  }
+}
