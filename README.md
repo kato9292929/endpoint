@@ -86,6 +86,28 @@ type Endpoint = {
 When the same URL appears in multiple directories the records are merged and
 `source` holds every directory it was seen in.
 
+## Agent access (API + MCP)
+
+The catalog is readable programmatically — no auth, CORS-open, edge-cached.
+
+REST API (`src/app/api/`):
+
+| Route | Description |
+| --- | --- |
+| `GET /api/endpoints` | All endpoints; filter by `category`, `network`, `protocol`, `source` |
+| `GET /api/endpoints/:id` | A single endpoint |
+| `GET /api/search?q=` | Fuzzy search (Fuse.js) |
+| `GET /api/stats` | Aggregate counts |
+| `GET /api/openapi.json` | OpenAPI 3.1 spec |
+
+A light, best-effort per-IP rate limit lives in `src/middleware.ts` (in-memory,
+no external store; returns `429` + `Retry-After` past the window). See
+[`/for-agents`](https://x402endpoint.com/for-agents) for usage.
+
+MCP server: the [`mcp/`](./mcp) package (`x402-endpoint-mcp`) exposes
+`list_endpoints`, `search_endpoints`, `get_endpoint`, and `get_stats`, backed by
+the REST API. See [`mcp/README.md`](./mcp/README.md) for client setup.
+
 ## Development
 
 ```bash
