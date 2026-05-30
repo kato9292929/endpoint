@@ -28,6 +28,10 @@ export default function HomePage() {
       <header className="space-y-1">
         <h1 className="text-3xl font-semibold tracking-tight">x402 Endpoint</h1>
         <p className="text-muted">6 directories. 1 catalog.</p>
+        <p className="text-sm text-muted/80 max-w-2xl">
+          Aggregating x402 directories — and the x402 endpoints that x402 Inc.
+          contributes to them.
+        </p>
       </header>
 
       <StatsBar

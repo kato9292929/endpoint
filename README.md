@@ -11,6 +11,7 @@ Aggregated directories:
 
 | Source | Site | Fetcher |
 | --- | --- | --- |
+| x402 Inc. (self-curated) | https://x402jp.com | ✅ seed (`data/seed/x402-inc.json`) |
 | x402scan (Merit Systems) | https://x402scan.com | ✅ implemented |
 | Onyx Bazaar (CDP discovery) | https://onyx-actions.onrender.com/bazaar | ✅ implemented |
 | Agentic.Market (Base) | https://agentic.market | stub |
@@ -116,6 +117,27 @@ maps a directory's listings into the unified shape. When implementing:
   still run.
 - For directories that can't be fetched automatically, maintaining a manual
   JSON is an acceptable fallback.
+
+## x402 Inc. endpoints (seed source)
+
+This catalog is built by [x402 Inc.](https://x402jp.com), which also ships its
+own x402 endpoints. Those are included here as a **seed source**
+(`source: ["x402-inc"]`), maintained by hand in `data/seed/x402-inc.json` and
+loaded by the `x402-inc` fetcher (`scripts/fetchers/x402-inc.ts`). Modeling
+them as a fetcher means they flow through the same dedupe/merge as every other
+directory — if x402scan or Onyx Bazaar also list one of these URLs, the entry's
+`source` becomes e.g. `["x402-inc", "onyx-bazaar"]`.
+
+### Commercial neutrality
+
+x402 Inc.'s own endpoints are treated **exactly like any other source**:
+
+- No ranking boost, pinning, or special placement — same sort order and the
+  same card as every other endpoint.
+- Listed under their own `x402-inc` source and equally subject to dedupe; a URL
+  found in a third-party directory shows both sources.
+- The catalog aggregates all directories on equal footing; inclusion of x402
+  Inc. products does not privilege them over community-listed endpoints.
 
 ## Contributing
 
