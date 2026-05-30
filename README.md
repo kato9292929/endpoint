@@ -14,9 +14,9 @@ Aggregated directories:
 | x402 Inc. (self-curated) | https://x402jp.com | ✅ seed (`data/seed/x402-inc.json`) |
 | x402scan (Merit Systems) | https://x402scan.com | ✅ implemented |
 | Onyx Bazaar (CDP discovery) | https://onyx-actions.onrender.com/bazaar | ✅ implemented |
-| Agentic.Market (Base) | https://agentic.market | stub |
-| Pay.sh (Solana) | https://pay.sh | stub |
-| Ampersend | https://app.ampersend.ai/discover | stub |
+| Pay.sh (Solana) | https://pay.sh | ✅ implemented (pay-skills catalog) |
+| Agentic.Market (Base) | https://agentic.market | stub (dynamic; data via CDP Bazaar) |
+| Ampersend | https://app.ampersend.ai/discover | stub (no public API) |
 | Visa CLI Merchant Registry | https://app.visacli.sh/merchants | stub (invite-only) |
 | Circle Agent Marketplace | https://agents.circle.com | stub (dynamic) |
 

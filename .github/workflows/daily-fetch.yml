@@ -27,6 +27,9 @@ jobs:
 
       - name: Fetch directories
         run: npm run fetch
+        env:
+          # Raises the GitHub API rate limit for the Pay.sh (pay-skills) fetcher.
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Commit updated catalog
         run: |
