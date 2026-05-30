@@ -3,6 +3,9 @@
 
 export type Category =
   | "data" // market data, onchain data, news
+  | "intelligence" // analytics, screeners, signals, research
+  | "oracle" // price feeds, onchain oracles
+  | "compliance" // KYC, AML, identity
   | "compute" // LLM, image gen, video gen
   | "search" // web search, semantic search
   | "media" // music, image, video assets
@@ -11,6 +14,7 @@ export type Category =
   | "other";
 
 export type DirectorySource =
+  | "x402-inc"
   | "x402scan"
   | "onyx-bazaar"
   | "agentic-market"
@@ -51,6 +55,9 @@ export type Catalog = {
 
 export const CATEGORIES: Category[] = [
   "data",
+  "intelligence",
+  "oracle",
+  "compliance",
   "compute",
   "search",
   "media",
@@ -60,6 +67,7 @@ export const CATEGORIES: Category[] = [
 ];
 
 export const DIRECTORY_SOURCES: DirectorySource[] = [
+  "x402-inc",
   "x402scan",
   "onyx-bazaar",
   "agentic-market",
@@ -73,6 +81,7 @@ export const DIRECTORY_META: Record<
   DirectorySource,
   { label: string; home: string }
 > = {
+  "x402-inc": { label: "x402 Inc.", home: "https://x402jp.com" },
   x402scan: { label: "x402scan", home: "https://x402scan.com" },
   "onyx-bazaar": {
     label: "Onyx Bazaar",
@@ -93,6 +102,9 @@ export const DIRECTORY_META: Record<
 
 export const CATEGORY_LABELS: Record<Category, string> = {
   data: "Data",
+  intelligence: "Intelligence",
+  oracle: "Oracle",
+  compliance: "Compliance",
   compute: "Compute",
   search: "Search",
   media: "Media",

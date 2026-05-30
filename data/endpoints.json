@@ -1,71 +1,319 @@
 {
-  "generated_at": "2026-05-29T00:00:00.000Z",
-  "count": 5,
+  "generated_at": "2026-05-30T10:01:44.637Z",
+  "count": 14,
   "endpoints": [
     {
-      "id": "sample-0001",
-      "url": "https://api.example-data.x402/quotes",
-      "name": "Realtime Crypto Quotes",
-      "description": "Streaming spot prices for major crypto pairs, billed per call over x402.",
+      "id": "x402inc-apac-kyc-api",
+      "url": "https://apijapan.vercel.app/kyc",
+      "name": "APAC KYC API",
+      "description": "KYC / identity verification for APAC, billed per call over x402.",
+      "category": "compliance",
+      "price": {
+        "amount": 1,
+        "currency": "USDC",
+        "unit": "per-call"
+      },
+      "networks": [
+        "Base"
+      ],
+      "protocols": [
+        "x402"
+      ],
+      "source": [
+        "x402-inc"
+      ],
+      "source_url": "https://apijapan.vercel.app/kyc",
+      "last_seen": "2026-05-30T00:00:00.000Z"
+    },
+    {
+      "id": "x402inc-apac-macro-dashboard",
+      "url": "https://x402amd.vercel.app",
+      "name": "APAC Macro Dashboard",
+      "description": "Macroeconomic indicators and dashboards for the APAC region, served as paid x402 endpoints.",
       "category": "data",
-      "price": { "amount": 0.001, "currency": "USDC", "unit": "per-call" },
-      "networks": ["Base"],
-      "protocols": ["x402"],
-      "source": ["x402scan"],
-      "source_url": "https://x402scan.com/endpoint/sample-0001",
-      "last_seen": "2026-05-29T00:00:00.000Z"
+      "price": {
+        "amount": 0.2,
+        "currency": "USDC",
+        "unit": "per-call"
+      },
+      "networks": [
+        "Base"
+      ],
+      "protocols": [
+        "x402"
+      ],
+      "source": [
+        "x402-inc"
+      ],
+      "source_url": "https://x402amd.vercel.app",
+      "last_seen": "2026-05-30T00:00:00.000Z"
     },
     {
-      "id": "sample-0002",
-      "url": "https://api.example-compute.x402/generate",
-      "name": "Open LLM Inference",
-      "description": "Pay-per-token inference endpoint for an open-weight 70B model.",
-      "category": "compute",
-      "price": { "amount": 0.000002, "currency": "USDC", "unit": "per-token" },
-      "networks": ["Base", "Solana"],
-      "protocols": ["x402", "MPP"],
-      "source": ["agentic-market", "pay-sh"],
-      "source_url": "https://agentic.market/listing/sample-0002",
-      "last_seen": "2026-05-29T00:00:00.000Z"
+      "id": "x402inc-hyperliquid-intelligence",
+      "url": "https://x402-hl.vercel.app",
+      "name": "Hyperliquid Intelligence",
+      "description": "Hyperliquid market and positioning intelligence, served as paid x402 endpoints.",
+      "category": "intelligence",
+      "price": {
+        "amount": 0.15,
+        "currency": "USDC",
+        "unit": "per-call"
+      },
+      "networks": [
+        "Base"
+      ],
+      "protocols": [
+        "x402"
+      ],
+      "source": [
+        "x402-inc"
+      ],
+      "source_url": "https://x402-hl.vercel.app",
+      "last_seen": "2026-05-30T00:00:00.000Z"
     },
     {
-      "id": "sample-0003",
-      "url": "https://api.example-search.x402/web",
-      "name": "Agentic Web Search",
-      "description": "Web search tuned for agents; returns ranked snippets with citations.",
-      "category": "search",
-      "price": { "amount": 0.005, "currency": "USDC", "unit": "per-call" },
-      "networks": ["Base"],
-      "protocols": ["x402"],
-      "source": ["ampersend"],
-      "source_url": "https://app.ampersend.ai/discover/sample-0003",
-      "last_seen": "2026-05-29T00:00:00.000Z"
+      "id": "x402inc-japan-real-estate-yield",
+      "url": "https://x402-jrey.vercel.app",
+      "name": "Japan Real Estate Yield",
+      "description": "Japan real-estate yield data and analytics, billed per call over x402.",
+      "category": "data",
+      "price": {
+        "amount": 0.3,
+        "currency": "USDC",
+        "unit": "per-call"
+      },
+      "networks": [
+        "Base"
+      ],
+      "protocols": [
+        "x402"
+      ],
+      "source": [
+        "x402-inc"
+      ],
+      "source_url": "https://x402-jrey.vercel.app",
+      "last_seen": "2026-05-30T00:00:00.000Z"
     },
     {
-      "id": "sample-0004",
-      "url": "https://api.example-media.x402/image",
-      "name": "Stock Image Library",
-      "description": "Royalty-free image assets, licensed per download via x402.",
-      "category": "media",
-      "price": { "amount": 0.25, "currency": "USD", "unit": "per-call" },
-      "networks": ["Polygon"],
-      "protocols": ["L402"],
-      "source": ["visa-cli"],
-      "source_url": "https://app.visacli.sh/merchants/sample-0004",
-      "last_seen": "2026-05-29T00:00:00.000Z"
+      "id": "x402inc-japan-x402-apis",
+      "url": "https://apijapan.vercel.app",
+      "name": "Japan x402 APIs",
+      "description": "A collection of 18 x402-enabled endpoints covering Japan-focused data and services.",
+      "category": "data",
+      "networks": [
+        "Base"
+      ],
+      "protocols": [
+        "x402"
+      ],
+      "source": [
+        "x402-inc"
+      ],
+      "source_url": "https://apijapan.vercel.app",
+      "last_seen": "2026-05-30T00:00:00.000Z"
     },
     {
-      "id": "sample-0005",
-      "url": "https://api.example-trading.x402/execute",
-      "name": "Market Execution Gateway",
-      "description": "Programmatic trade execution across DEX liquidity, settled in EURC.",
-      "category": "trading",
-      "price": { "amount": 0.01, "currency": "EURC", "unit": "per-call" },
-      "networks": ["Base", "Ethereum"],
-      "protocols": ["x402"],
-      "source": ["circle-marketplace"],
-      "source_url": "https://agents.circle.com/agent/sample-0005",
-      "last_seen": "2026-05-29T00:00:00.000Z"
+      "id": "x402inc-nansen-polymarket-divergence",
+      "url": "https://x402nansenpolymarket.vercel.app",
+      "name": "Nansen × Polymarket Divergence",
+      "description": "Signals from divergence between Nansen smart-money flows and Polymarket odds.",
+      "category": "intelligence",
+      "price": {
+        "amount": 0.15,
+        "currency": "USDC",
+        "unit": "per-call"
+      },
+      "networks": [
+        "Base"
+      ],
+      "protocols": [
+        "x402"
+      ],
+      "source": [
+        "x402-inc"
+      ],
+      "source_url": "https://x402nansenpolymarket.vercel.app",
+      "last_seen": "2026-05-30T00:00:00.000Z"
+    },
+    {
+      "id": "x402inc-onchain-intelligence-feed",
+      "url": "https://x402oif.vercel.app",
+      "name": "Onchain Intelligence Feed",
+      "description": "Real-time onchain intelligence feed of notable events and signals.",
+      "category": "intelligence",
+      "price": {
+        "amount": 0.1,
+        "currency": "USDC",
+        "unit": "per-call"
+      },
+      "networks": [
+        "Base"
+      ],
+      "protocols": [
+        "x402"
+      ],
+      "source": [
+        "x402-inc"
+      ],
+      "source_url": "https://x402oif.vercel.app",
+      "last_seen": "2026-05-30T00:00:00.000Z"
+    },
+    {
+      "id": "x402inc-onchain-stock-data",
+      "url": "https://osd-coral.vercel.app",
+      "name": "Onchain Stock Data",
+      "description": "xStocks data for 60+ tokenized equities across 5 functions (quotes, fundamentals, history, and more), billed per call over x402.",
+      "category": "data",
+      "price": {
+        "amount": 0.001,
+        "currency": "USDC",
+        "unit": "per-call"
+      },
+      "networks": [
+        "Solana",
+        "Base"
+      ],
+      "protocols": [
+        "x402"
+      ],
+      "source": [
+        "x402-inc"
+      ],
+      "source_url": "https://osd-coral.vercel.app",
+      "last_seen": "2026-05-30T00:00:00.000Z"
+    },
+    {
+      "id": "x402inc-portfolio-intelligence",
+      "url": "https://x402pi.vercel.app",
+      "name": "Portfolio Intelligence",
+      "description": "Portfolio-level analytics and risk intelligence for onchain holdings.",
+      "category": "intelligence",
+      "price": {
+        "amount": 0.3,
+        "currency": "USDC",
+        "unit": "per-call"
+      },
+      "networks": [
+        "Base"
+      ],
+      "protocols": [
+        "x402"
+      ],
+      "source": [
+        "x402-inc"
+      ],
+      "source_url": "https://x402pi.vercel.app",
+      "last_seen": "2026-05-30T00:00:00.000Z"
+    },
+    {
+      "id": "x402inc-private-market-intelligence",
+      "url": "https://x402pmi.vercel.app",
+      "name": "Private Market Intelligence",
+      "description": "Private-market data and intelligence for venture and pre-IPO assets.",
+      "category": "intelligence",
+      "price": {
+        "amount": 0.15,
+        "currency": "USDC",
+        "unit": "per-call"
+      },
+      "networks": [
+        "Base"
+      ],
+      "protocols": [
+        "x402"
+      ],
+      "source": [
+        "x402-inc"
+      ],
+      "source_url": "https://x402pmi.vercel.app",
+      "last_seen": "2026-05-30T00:00:00.000Z"
+    },
+    {
+      "id": "x402inc-smart-money-screener",
+      "url": "https://smartmoneyscreener.vercel.app",
+      "name": "Smart Money Screener",
+      "description": "Screen wallets and tokens by smart-money activity, billed per query over x402.",
+      "category": "intelligence",
+      "price": {
+        "amount": 0.05,
+        "currency": "USDC",
+        "unit": "per-query"
+      },
+      "networks": [
+        "Base"
+      ],
+      "protocols": [
+        "x402"
+      ],
+      "source": [
+        "x402-inc"
+      ],
+      "source_url": "https://smartmoneyscreener.vercel.app",
+      "last_seen": "2026-05-30T00:00:00.000Z"
+    },
+    {
+      "id": "x402inc-whale-intent-decoder",
+      "url": "https://x402wid.vercel.app",
+      "name": "Whale Intent Decoder",
+      "description": "Decode large-wallet intent and flow signals from onchain activity.",
+      "category": "intelligence",
+      "price": {
+        "amount": 0.1,
+        "currency": "USDC",
+        "unit": "per-call"
+      },
+      "networks": [
+        "Base"
+      ],
+      "protocols": [
+        "x402"
+      ],
+      "source": [
+        "x402-inc"
+      ],
+      "source_url": "https://x402wid.vercel.app",
+      "last_seen": "2026-05-30T00:00:00.000Z"
+    },
+    {
+      "id": "x402inc-x402-oracle",
+      "url": "https://apijapan.vercel.app/oracle",
+      "name": "x402 Oracle",
+      "description": "APAC real-estate price feed exposed as an onchain-consumable x402 oracle.",
+      "category": "oracle",
+      "networks": [
+        "Base"
+      ],
+      "protocols": [
+        "x402"
+      ],
+      "source": [
+        "x402-inc"
+      ],
+      "source_url": "https://apijapan.vercel.app/oracle",
+      "last_seen": "2026-05-30T00:00:00.000Z"
+    },
+    {
+      "id": "x402inc-yield-intelligence",
+      "url": "https://x402yi.vercel.app",
+      "name": "Yield Intelligence",
+      "description": "Cross-protocol yield analytics and signals for onchain strategies.",
+      "category": "intelligence",
+      "price": {
+        "amount": 0.2,
+        "currency": "USDC",
+        "unit": "per-call"
+      },
+      "networks": [
+        "Base"
+      ],
+      "protocols": [
+        "x402"
+      ],
+      "source": [
+        "x402-inc"
+      ],
+      "source_url": "https://x402yi.vercel.app",
+      "last_seen": "2026-05-30T00:00:00.000Z"
     }
   ]
 }

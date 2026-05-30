@@ -3,6 +3,7 @@
 
 import catalogJson from "../../data/endpoints.json";
 import {
+  CATEGORIES,
   type Catalog,
   type Category,
   type DirectorySource,
@@ -52,15 +53,9 @@ export function getNetworks(): { name: string; count: number }[] {
 }
 
 export function getCategoryCounts(): Record<Category, number> {
-  const counts = {
-    data: 0,
-    compute: 0,
-    search: 0,
-    media: 0,
-    trading: 0,
-    messaging: 0,
-    other: 0,
-  } as Record<Category, number>;
+  const counts = Object.fromEntries(
+    CATEGORIES.map((c) => [c, 0]),
+  ) as Record<Category, number>;
   for (const e of catalog.endpoints) counts[e.category]++;
   return counts;
 }

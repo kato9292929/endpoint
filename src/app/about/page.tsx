@@ -69,6 +69,33 @@ export default function AboutPage() {
       </section>
 
       <section className="space-y-2 text-sm text-muted">
+        <h2 className="text-lg font-medium text-white">Built by x402 Inc.</h2>
+        <p>
+          This catalog is built by{" "}
+          <a className="text-accent hover:underline" href="https://x402jp.com">
+            x402 Inc.
+          </a>
+          , which also ships its own x402 endpoints (onchain data,
+          intelligence, oracle, and compliance APIs). Those endpoints are
+          contributed to this catalog under the{" "}
+          <Link className="text-accent hover:underline" href="/by/x402-inc">
+            x402 Inc.
+          </Link>{" "}
+          source, alongside the community directories.
+        </p>
+        <p>
+          They are treated exactly like every other source: aggregated the same
+          way, with no ranking boost or special placement. If a third-party
+          directory also lists one of these URLs, the entry simply shows both
+          sources. See more at{" "}
+          <a className="text-accent hover:underline" href="https://note.com/x402inc">
+            note.com/x402inc
+          </a>
+          .
+        </p>
+      </section>
+
+      <section className="space-y-2 text-sm text-muted">
         <h2 className="text-lg font-medium text-white">Contributing</h2>
         <p>
           There is no sign-up or submission form. To add or correct an
