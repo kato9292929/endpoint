@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import Fuse from "fuse.js";
 import { EndpointCard } from "./EndpointCard";
+import { MAX_LISTING_ITEMS } from "@/lib/constants";
 import {
   CATEGORY_LABELS,
   DIRECTORY_META,
@@ -142,7 +143,8 @@ export function CatalogExplorer({ endpoints, networks, protocols }: Props) {
 
       <div className="flex items-center justify-between text-xs text-muted">
         <span>
-          {results.length} of {endpoints.length} endpoints
+          {results.length.toLocaleString()} of{" "}
+          {endpoints.length.toLocaleString()} endpoints
         </span>
         {active ? (
           <button
@@ -159,11 +161,20 @@ export function CatalogExplorer({ endpoints, networks, protocols }: Props) {
           No endpoints match these filters.
         </p>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {results.map((e) => (
-            <EndpointCard key={e.id} endpoint={e} />
-          ))}
-        </div>
+        <>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {results.slice(0, MAX_LISTING_ITEMS).map((e) => (
+              <EndpointCard key={e.id} endpoint={e} />
+            ))}
+          </div>
+          {results.length > MAX_LISTING_ITEMS ? (
+            <p className="text-xs text-muted text-center py-4">
+              Showing the first {MAX_LISTING_ITEMS.toLocaleString()} of{" "}
+              {results.length.toLocaleString()} matches. Search or add filters to
+              narrow down.
+            </p>
+          ) : null}
+        </>
       )}
     </div>
   );

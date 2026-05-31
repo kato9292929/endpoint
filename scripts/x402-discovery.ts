@@ -111,13 +111,40 @@ function networkDisplay(raw?: string): string | null {
 }
 
 // ── Category heuristic ───────────────────────────────
+// Matched against name + description + tags + URL (path segments included),
+// first rule wins. Keep the lists broad: anything that falls through lands in
+// "other", and a swollen "other" bucket both hurts UX and bloats that page.
 const CATEGORY_RULES: { category: Category; words: RegExp }[] = [
-  { category: "messaging", words: /\b(email|sms|otp|notif|message|telegram|discord|webhook|push)\b/i },
-  { category: "search", words: /\b(search|retriev|index|lookup|scrape|crawl|serp)\b/i },
-  { category: "trading", words: /\b(trade|trading|swap|dex|execution|order|liquidity|perp|portfolio)\b/i },
-  { category: "media", words: /\b(music|audio|video|image gen|stock photo|photo|asset|render|tts|voice)\b/i },
-  { category: "compute", words: /\b(llm|model|inference|generate|generation|gpu|ocr|embedding|chat|completion|transcrib|speech|vision|agent)\b/i },
-  { category: "data", words: /\b(data|price|prices|quote|market|onchain|on-chain|weather|news|feed|analytics|stats|finance|token)\b/i },
+  {
+    category: "messaging",
+    words:
+      /\b(email|e-mail|sms|otp|notif\w*|messag\w*|telegram|discord|slack|webhook|push|inbox|mailbox|mailer|outbound|call|voice|phone|whatsapp)\b/i,
+  },
+  {
+    category: "search",
+    words:
+      /\b(search|find|finder|query|lookup|look-?up|retriev\w*|index|scrape|scraper|crawl\w*|serp|discover\w*|browse|explore|semantic)\b/i,
+  },
+  {
+    category: "trading",
+    words:
+      /\b(trade|trading|trader|swap|dex|execution|execute|order|orderbook|liquidity|perp\w*|portfolio|bridge|stake|staking|lend\w*|borrow\w*|router|aggregator|slippage|limit-order)\b/i,
+  },
+  {
+    category: "media",
+    words:
+      /\b(music|audio|sound|video|image[- ]?gen\w*|imagegen|stock[- ]?photo|photo|picture|asset|render\w*|tts|text-to-speech|voice|avatar|nft|art|design|thumbnail|gif|meme)\b/i,
+  },
+  {
+    category: "compute",
+    words:
+      /\b(llm|model|inference|generat\w*|gpu|ocr|embedding\w*|chat|completion\w*|transcri\w*|speech|vision|agent|ai|ml|prompt|fine-?tune|rerank|classif\w*|summ?ariz\w*|translat\w*|extract\w*|parse|parser|sandbox|execute-code|code-?gen|compute|serverless)\b/i,
+  },
+  {
+    category: "data",
+    words:
+      /\b(data\w*|dataset\w*|price\w*|quote\w*|market\w*|ticker|ohlc|candle\w*|onchain|on-chain|oracle\w*|feed\w*|weather|climate|news|analytics|stat\w*|finance|financial|token\w*|wallet\w*|balance\w*|tvl|yield\w*|defi|metric\w*|enrich\w*|records?|registry|geocod\w*|geo|maps?|places?|address\w*|location|api|info|insight\w*|intel\w*|score|rating|kyc|identit\w*|verif\w*)\b/i,
+  },
 ];
 
 function deriveCategory(text: string): Category {

@@ -25,10 +25,10 @@ const CATEGORY_MAP: Record<string, Category> = {
   cloud: "compute",
   compute: "compute",
   data: "data",
-  devtools: "other",
+  devtools: "compute",
   finance: "data",
   identity: "compliance",
-  maps: "other",
+  maps: "data",
   media: "media",
   messaging: "messaging",
   other: "other",
@@ -37,7 +37,7 @@ const CATEGORY_MAP: Record<string, Category> = {
   security: "other",
   shopping: "other",
   storage: "other",
-  translation: "other",
+  translation: "compute",
 };
 
 type Frontmatter = Record<string, string>;
