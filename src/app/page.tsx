@@ -1,5 +1,6 @@
 import { CatalogExplorer } from "@/components/CatalogExplorer";
 import { StatsBar } from "@/components/StatsBar";
+import { TotalSparkline } from "@/components/TotalSparkline";
 import {
   getCatalog,
   getCategoryCounts,
@@ -32,6 +33,9 @@ export default function HomePage() {
           Aggregating x402 directories — and the x402 endpoints that x402 Inc.
           contributes to them.
         </p>
+        <div className="pt-2">
+          <TotalSparkline />
+        </div>
       </header>
 
       <StatsBar
