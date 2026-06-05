@@ -138,10 +138,20 @@ export function openapiSpec() {
       "/api/stats": {
         get: {
           operationId: "getStats",
-          summary: "Aggregate catalog statistics",
+          summary: "Aggregate catalog statistics plus a daily time series",
+          parameters: [
+            {
+              name: "range",
+              in: "query",
+              description:
+                "Time-series window: `14d` (default), `30d`, any `Nd`, or `all`.",
+              schema: { type: "string", default: "14d" },
+            },
+          ],
           responses: {
             "200": {
-              description: "Counts by source, category, network, protocol",
+              description:
+                "Current counts by source/category/network/protocol, plus `points` (per-day snapshots; missing days have `present: false`, `total: null`) and `missing`.",
               content: { "application/json": { schema: { type: "object" } } },
             },
           },

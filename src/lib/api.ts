@@ -12,7 +12,7 @@ const CORS = {
 
 export function apiJson(data: unknown, init?: { status?: number; cache?: boolean }) {
   const headers: Record<string, string> = { ...CORS };
-  if (init?.cache !== false) headers["Cache-Control"] = CACHE;
+  headers["Cache-Control"] = init?.cache === false ? "no-store" : CACHE;
   return NextResponse.json(data, { status: init?.status ?? 200, headers });
 }
 
