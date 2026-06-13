@@ -168,8 +168,22 @@ endpoint, open a pull request — everything is PR-based.
 
 ## Deployment
 
-Connect the repo to Vercel. The daily GitHub Actions job pushes fresh data and
-Vercel redeploys automatically; ISR revalidates pages once per day.
+Connect the repo to Vercel with **Production Branch = `main`**. The daily GitHub
+Actions job (`.github/workflows/daily-fetch.yml`) fetches, writes a stats
+snapshot, and commits `data/endpoints.json` + `data/stats/` to `main`.
+
+Because the site imports `data/endpoints.json` **at build time**, the front only
+updates on a fresh deploy — ISR revalidation alone won't change the numbers. To
+guarantee a rebuild on each daily commit, the workflow can call a **Vercel
+Deploy Hook**:
+
+1. Vercel → Project → Settings → Git → **Deploy Hooks** → create one for `main`.
+2. GitHub → repo → Settings → Secrets and variables → Actions → add
+   `VERCEL_DEPLOY_HOOK` = the hook URL.
+
+When set, the cron POSTs the hook after pushing (only when data changed). If the
+secret is absent, it falls back to Vercel's Git auto-deploy — so make sure that
+is enabled and pointed at `main` if you don't use the hook.
 
 ## Disclaimer
 

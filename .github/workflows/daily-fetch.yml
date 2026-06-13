@@ -35,15 +35,39 @@ jobs:
         run: node scripts/write-stats-snapshot.mjs
 
       - name: Commit updated catalog and snapshot
+        id: commit
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add data/endpoints.json data/stats
           if git diff --cached --quiet; then
             echo "No changes to commit"
+            echo "changed=false" >> "$GITHUB_OUTPUT"
           else
             git commit -m "chore: daily directory fetch ($(date -u +%Y-%m-%d))"
             git push
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      # The site bakes data/endpoints.json in at build time, so the front only
+      # updates on a fresh deploy. Force a Vercel production rebuild when data
+      # changed. No-ops unless the VERCEL_DEPLOY_HOOK secret is set, so Git
+      # auto-deploy remains the path if you prefer it.
+      - name: Trigger Vercel deploy
+        if: steps.commit.outputs.changed == 'true'
+        env:
+          VERCEL_DEPLOY_HOOK: ${{ secrets.VERCEL_DEPLOY_HOOK }}
+        run: |
+          if [ -z "$VERCEL_DEPLOY_HOOK" ]; then
+            echo "VERCEL_DEPLOY_HOOK not set — relying on Vercel Git auto-deploy."
+            exit 0
+          fi
+          echo "Triggering Vercel deploy hook…"
+          code=$(curl -s -o /dev/null -w "%{http_code}" -X POST "$VERCEL_DEPLOY_HOOK")
+          echo "Deploy hook responded HTTP $code"
+          if [ "$code" -lt 200 ] || [ "$code" -ge 300 ]; then
+            echo "::error::Vercel deploy hook failed (HTTP $code)."
+            exit 1
           fi
 
       - name: Report failure
