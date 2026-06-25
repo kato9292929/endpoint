@@ -4,7 +4,7 @@ import { useMemo, useState } from "react";
 import Fuse from "fuse.js";
 import { EndpointCard } from "./EndpointCard";
 import { MAX_LISTING_ITEMS } from "@/lib/constants";
-import { featuredFirst } from "@/lib/featured";
+import { featuredFirst, rankListing } from "@/lib/featured";
 import {
   CATEGORY_LABELS,
   DIRECTORY_META,
@@ -90,8 +90,9 @@ export function CatalogExplorer({ endpoints, networks, protocols }: Props) {
     if (filters.protocol)
       list = list.filter((e) => e.protocols.includes(filters.protocol));
 
-    // Pin x402 Inc. endpoints to the top so they always land on the first page.
-    return featuredFirst(list);
+    // Default view: x402 Inc. pinned, then most-used first. While searching,
+    // keep Fuse relevance order but still float x402 Inc. matches to the top.
+    return query.trim() ? featuredFirst(list) : rankListing(list);
   }, [query, filters, fuse, endpoints]);
 
   const set = (patch: Partial<Filters>) =>

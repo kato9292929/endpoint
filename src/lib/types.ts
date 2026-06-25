@@ -45,6 +45,9 @@ export type Endpoint = {
   source: DirectorySource[];
   source_url: string; // URL in the originating directory
   last_seen: string; // ISO 8601
+  // Upstream popularity signal (e.g. x402scan cumulative tool calls / Onyx
+  // volume) used to rank listings. Absent when no source provides one.
+  popularity?: number;
 };
 
 export type Catalog = {

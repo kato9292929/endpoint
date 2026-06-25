@@ -43,5 +43,10 @@ export function mergeEndpoints(a: Endpoint, b: Endpoint): Endpoint {
     // Prefer a description if the newer one is empty.
     description: newer.description || older.description,
     price: newer.price ?? older.price,
+    // Keep the strongest popularity signal across sources.
+    popularity:
+      a.popularity != null || b.popularity != null
+        ? Math.max(a.popularity ?? 0, b.popularity ?? 0)
+        : undefined,
   };
 }

@@ -35,6 +35,15 @@ export type DiscoveryLike = {
   // x402scan enrichments:
   origin?: { title?: string | null; description?: string | null } | null;
   tags?: ({ tag?: { name?: string } | null } | string)[] | null;
+  _count?: { toolCalls?: number; invocations?: number } | null;
+  // popularity signals (x402scan toolCalls via _count; Onyx volume/payers):
+  toolCalls?: number;
+  invocations?: number;
+  volume?: number;
+  totalVolume?: number;
+  txCount?: number;
+  calls?: number;
+  uniquePayers?: number;
 };
 
 export type MapOptions = {
@@ -181,6 +190,25 @@ function amountOf(accept: AcceptLike): string | number | undefined {
   return accept.maxAmountRequired ?? accept.amount;
 }
 
+// First positive numeric popularity signal across the known shapes.
+function popularityOf(res: DiscoveryLike): number | undefined {
+  const cands = [
+    res._count?.toolCalls,
+    res._count?.invocations,
+    res.toolCalls,
+    res.invocations,
+    res.volume,
+    res.totalVolume,
+    res.txCount,
+    res.calls,
+    res.uniquePayers,
+  ];
+  for (const c of cands) {
+    if (typeof c === "number" && Number.isFinite(c) && c > 0) return c;
+  }
+  return undefined;
+}
+
 function toMajorUnits(atomic: string | number, decimals: number): number {
   const n = typeof atomic === "number" ? atomic : Number(atomic);
   if (!Number.isFinite(n)) return 0;
@@ -258,6 +286,7 @@ export function mapDiscoveryResource(
     source: [opts.source],
     source_url: opts.sourceUrl(res, url),
     last_seen: lastUpdated,
+    popularity: popularityOf(res),
   };
 }
 

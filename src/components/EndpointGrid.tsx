@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { EndpointCard } from "./EndpointCard";
 import { MAX_LISTING_ITEMS } from "@/lib/constants";
-import { featuredFirst } from "@/lib/featured";
+import { rankListing } from "@/lib/featured";
 import type { Endpoint } from "@/lib/types";
 
 export function EndpointGrid({
@@ -15,7 +15,7 @@ export function EndpointGrid({
   endpoints: Endpoint[];
   limit?: number;
 }) {
-  const ordered = featuredFirst(endpoints);
+  const ordered = rankListing(endpoints);
   const shown = ordered.slice(0, limit);
   const hidden = ordered.length - shown.length;
 
