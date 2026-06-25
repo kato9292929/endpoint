@@ -17,3 +17,17 @@ export function featuredFirst(endpoints: Endpoint[]): Endpoint[] {
   for (const e of endpoints) (isFeatured(e) ? featured : rest).push(e);
   return [...featured, ...rest];
 }
+
+// Most-used first; endpoints without a popularity signal sort last, name as
+// the stable tiebreak.
+export function byPopularity(a: Endpoint, b: Endpoint): number {
+  const pa = a.popularity ?? -1;
+  const pb = b.popularity ?? -1;
+  if (pb !== pa) return pb - pa;
+  return a.name.localeCompare(b.name);
+}
+
+// Default listing order: x402 Inc. pinned first, then by popularity.
+export function rankListing(endpoints: Endpoint[]): Endpoint[] {
+  return featuredFirst([...endpoints].sort(byPopularity));
+}
