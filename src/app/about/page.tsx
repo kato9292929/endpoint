@@ -84,10 +84,12 @@ export default function AboutPage() {
           source, alongside the community directories.
         </p>
         <p>
-          They are treated exactly like every other source: aggregated the same
-          way, with no ranking boost or special placement. If a third-party
-          directory also lists one of these URLs, the entry simply shows both
-          sources. See more at{" "}
+          As the operator, x402 Inc. features its own endpoints: they are
+          highlighted in gold and pinned to the top of listings. This is
+          disclosed, not hidden. Everything else — the third-party directories —
+          is aggregated on equal footing with no preferential ranking between
+          them. If a third-party directory also lists one of x402 Inc.&apos;s
+          URLs, the entry shows both sources. See more at{" "}
           <a className="text-accent hover:underline" href="https://note.com/x402inc">
             note.com/x402inc
           </a>

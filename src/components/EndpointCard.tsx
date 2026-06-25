@@ -13,9 +13,21 @@ function priceLabel(e: Endpoint): string | null {
 
 export function EndpointCard({ endpoint }: { endpoint: Endpoint }) {
   const price = priceLabel(endpoint);
+  const featured = endpoint.source.includes("x402-inc");
 
   return (
-    <div className="rounded-lg border border-border bg-surface p-4 flex flex-col gap-3">
+    <div
+      className={
+        featured
+          ? "rounded-lg border border-gold/60 bg-gold/[0.06] ring-1 ring-gold/20 p-4 flex flex-col gap-3"
+          : "rounded-lg border border-border bg-surface p-4 flex flex-col gap-3"
+      }
+    >
+      {featured ? (
+        <span className="inline-flex items-center gap-1 self-start text-[10px] font-semibold uppercase tracking-wide text-gold">
+          ★ x402 Inc.
+        </span>
+      ) : null}
       <div className="flex items-start justify-between gap-3">
         <h3 className="font-medium leading-tight">{endpoint.name}</h3>
         <Link

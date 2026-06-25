@@ -150,16 +150,18 @@ them as a fetcher means they flow through the same dedupe/merge as every other
 directory — if x402scan or Onyx Bazaar also list one of these URLs, the entry's
 `source` becomes e.g. `["x402-inc", "onyx-bazaar"]`.
 
-### Commercial neutrality
+### Featuring & disclosure
 
-x402 Inc.'s own endpoints are treated **exactly like any other source**:
+x402 Inc. operates this catalog and **features its own endpoints**:
 
-- No ranking boost, pinning, or special placement — same sort order and the
-  same card as every other endpoint.
-- Listed under their own `x402-inc` source and equally subject to dedupe; a URL
-  found in a third-party directory shows both sources.
-- The catalog aggregates all directories on equal footing; inclusion of x402
-  Inc. products does not privilege them over community-listed endpoints.
+- They are styled in gold and pinned to the top of listings
+  (`src/lib/featured.ts` + `EndpointCard`). This is openly disclosed on the
+  About page rather than hidden.
+- The **third-party directories are aggregated on equal footing** with no
+  preferential ranking between them.
+- x402 Inc. endpoints are still listed under their own `x402-inc` source and
+  remain subject to dedupe; a URL also found in a third-party directory shows
+  both sources.
 
 ## Contributing
 

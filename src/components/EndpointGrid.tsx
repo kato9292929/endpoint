@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { EndpointCard } from "./EndpointCard";
 import { MAX_LISTING_ITEMS } from "@/lib/constants";
+import { featuredFirst } from "@/lib/featured";
 import type { Endpoint } from "@/lib/types";
 
 export function EndpointGrid({
@@ -14,8 +15,9 @@ export function EndpointGrid({
   endpoints: Endpoint[];
   limit?: number;
 }) {
-  const shown = endpoints.slice(0, limit);
-  const hidden = endpoints.length - shown.length;
+  const ordered = featuredFirst(endpoints);
+  const shown = ordered.slice(0, limit);
+  const hidden = ordered.length - shown.length;
 
   return (
     <div className="space-y-6">
