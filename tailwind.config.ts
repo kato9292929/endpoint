@@ -13,6 +13,8 @@ const config: Config = {
         border: "#26262a",
         accent: "#5b8cff",
         muted: "#8a8a93",
+        gold: "#e8b84b",
+        "gold-dim": "#9a7d2e",
       },
       fontFamily: {
         mono: ["ui-monospace", "SFMono-Regular", "Menlo", "monospace"],

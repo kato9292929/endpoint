@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import Fuse from "fuse.js";
 import { EndpointCard } from "./EndpointCard";
 import { MAX_LISTING_ITEMS } from "@/lib/constants";
+import { featuredFirst } from "@/lib/featured";
 import {
   CATEGORY_LABELS,
   DIRECTORY_META,
@@ -89,7 +90,8 @@ export function CatalogExplorer({ endpoints, networks, protocols }: Props) {
     if (filters.protocol)
       list = list.filter((e) => e.protocols.includes(filters.protocol));
 
-    return list;
+    // Pin x402 Inc. endpoints to the top so they always land on the first page.
+    return featuredFirst(list);
   }, [query, filters, fuse, endpoints]);
 
   const set = (patch: Partial<Filters>) =>
