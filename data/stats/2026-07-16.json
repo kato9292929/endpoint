@@ -1,0 +1,34 @@
+{
+  "date": "2026-07-16",
+  "generatedAt": "2026-07-16T08:31:03.180Z",
+  "total": 18979,
+  "byCategory": {
+    "other": 390,
+    "data": 2915,
+    "compute": 2166,
+    "search": 3656,
+    "media": 225,
+    "trading": 1850,
+    "messaging": 7766,
+    "compliance": 2,
+    "intelligence": 8,
+    "oracle": 1
+  },
+  "byChain": {
+    "Base": 17868,
+    "Solana": 6124
+  },
+  "bySource": {
+    "x402scan": 18897,
+    "pay-sh": 68,
+    "x402-inc": 14
+  },
+  "byPriceTier": {
+    "<$0.01": 7076,
+    "unknown": 863,
+    "$0.05–0.15": 4784,
+    "$0.01–0.05": 3974,
+    ">$0.15": 2254,
+    "free": 28
+  }
+}
