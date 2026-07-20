@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-  color-scheme: dark;
+  color-scheme: light;
   --font-heading: "HelveticaNowDisplay-Medium", "Helvetica Neue", Arial, sans-serif;
   --font-body: "HelveticaNowDisplayW01-Rg", "Helvetica Neue", Arial, sans-serif;
   --font-hero: "Inter", "Helvetica Neue", Arial, sans-serif;
@@ -11,8 +11,8 @@
 
 html,
 body {
-  background: #0a0a0b;
-  color: #ededed;
+  background: #f5f4f2;
+  color: #111111;
 }
 
 body {
@@ -26,6 +26,22 @@ a {
 
 .font-heading {
   font-family: var(--font-heading);
+}
+
+/* Iridescent "chrome" text — echoes the metallic torus in the hero. */
+.metallic {
+  background: linear-gradient(
+    100deg,
+    #8a8792 0%,
+    #d9d7de 18%,
+    #5e0ed7 42%,
+    #c9c7d0 58%,
+    #7fd4e6 76%,
+    #9a98a5 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
 @keyframes blink {

@@ -12,13 +12,13 @@ export default function AboutPage() {
   const { generated_at, endpoints } = getCatalog();
 
   return (
-    <div className="prose-invert max-w-2xl space-y-6">
+    <div className="max-w-2xl space-y-6">
       <header>
         <h1 className="text-2xl font-semibold tracking-tight">About</h1>
       </header>
 
       <section className="space-y-3 text-sm text-muted">
-        <p className="text-white">
+        <p className="text-black">
           x402 Endpoint is a cross-directory unified catalog of x402 ecosystem
           endpoints. The x402 ecosystem has several community-maintained
           directories running in parallel — this site brings them into one
@@ -26,9 +26,9 @@ export default function AboutPage() {
         </p>
         <p>
           Currently tracking{" "}
-          <span className="text-white">{endpoints.length}</span> endpoints,
+          <span className="text-black">{endpoints.length}</span> endpoints,
           last updated{" "}
-          <span className="text-white">
+          <span className="text-black">
             {new Date(generated_at).toISOString().slice(0, 10)}
           </span>
           .
@@ -50,7 +50,7 @@ export default function AboutPage() {
                 href={DIRECTORY_META[s].home}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-muted hover:text-white text-xs"
+                className="text-muted hover:text-black text-xs"
               >
                 {DIRECTORY_META[s].home} ↗
               </a>
@@ -60,7 +60,7 @@ export default function AboutPage() {
       </section>
 
       <section className="space-y-2 text-sm text-muted">
-        <h2 className="text-lg font-medium text-white">Update frequency</h2>
+        <h2 className="text-lg font-medium text-black">Update frequency</h2>
         <p>
           A daily GitHub Actions job fetches each directory, rebuilds the
           unified <code>data/endpoints.json</code>, and commits it. Vercel
@@ -69,7 +69,7 @@ export default function AboutPage() {
       </section>
 
       <section className="space-y-2 text-sm text-muted">
-        <h2 className="text-lg font-medium text-white">Built by x402 Inc.</h2>
+        <h2 className="text-lg font-medium text-black">Built by x402 Inc.</h2>
         <p>
           This catalog is built by{" "}
           <a className="text-accent hover:underline" href="https://x402jp.com">
@@ -98,7 +98,7 @@ export default function AboutPage() {
       </section>
 
       <section className="space-y-2 text-sm text-muted">
-        <h2 className="text-lg font-medium text-white">Contributing</h2>
+        <h2 className="text-lg font-medium text-black">Contributing</h2>
         <p>
           There is no sign-up or submission form. To add or correct an
           endpoint, open a pull request against{" "}
@@ -113,7 +113,7 @@ export default function AboutPage() {
       </section>
 
       <section className="space-y-2 text-sm text-muted">
-        <h2 className="text-lg font-medium text-white">Disclaimer</h2>
+        <h2 className="text-lg font-medium text-black">Disclaimer</h2>
         <ul className="list-disc pl-5 space-y-1">
           <li>Data reflects each directory as of its fetch time.</li>
           <li>

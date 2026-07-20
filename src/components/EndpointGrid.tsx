@@ -22,7 +22,7 @@ export function EndpointGrid({
   return (
     <div className="space-y-6">
       <header className="space-y-1">
-        <Link href="/" className="text-xs text-muted hover:text-white">
+        <Link href="/" className="text-xs text-muted hover:text-black">
           ← All endpoints
         </Link>
         <h1 className="text-2xl font-semibold tracking-tight">{title}</h1>

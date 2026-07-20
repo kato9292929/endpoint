@@ -12,7 +12,7 @@ export function Footer() {
       <div className="mx-auto max-w-6xl px-4 py-6 text-xs text-muted space-y-2">
         <p>
           Data reflects each directory as of its fetch time. Last catalog
-          update: <span className="text-white">{human}</span>.
+          update: <span className="text-black">{human}</span>.
         </p>
         <ul className="list-disc pl-5 space-y-1">
           <li>

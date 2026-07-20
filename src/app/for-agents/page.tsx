@@ -18,7 +18,7 @@ function Code({ children }: { children: React.ReactNode }) {
 function Endpoint({ method, path, desc }: { method: string; path: string; desc: string }) {
   return (
     <div className="flex flex-wrap items-baseline gap-2 text-sm">
-      <span className="font-mono text-[11px] rounded bg-black/40 border border-border px-1.5 py-0.5 text-accent">
+      <span className="font-mono text-[11px] rounded bg-black/[0.05] border border-border px-1.5 py-0.5 text-accent">
         {method}
       </span>
       <code className="font-mono">{path}</code>
@@ -94,7 +94,7 @@ curl "${SITE_URL}/api/stats"`}</Code>
       </section>
 
       <section className="space-y-2 text-sm text-muted">
-        <h2 className="text-lg font-medium text-white">Fair use</h2>
+        <h2 className="text-lg font-medium text-black">Fair use</h2>
         <p>
           Free and unauthenticated. A light, best-effort per-IP rate limit
           protects the service; agents that respond to{" "}

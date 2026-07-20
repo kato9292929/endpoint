@@ -96,7 +96,7 @@ export function TotalSparkline() {
         )}
       </svg>
       <div className="text-xs text-muted leading-tight">
-        <div className="text-white font-medium">
+        <div className="text-black font-medium">
           {latest.toLocaleString()} endpoints
         </div>
         <div>
