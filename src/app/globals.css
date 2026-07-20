@@ -4,28 +4,23 @@
 
 :root {
   color-scheme: light;
-  --font-heading: "HelveticaNowDisplay-Medium", "Helvetica Neue", Arial, sans-serif;
-  --font-body: "HelveticaNowDisplayW01-Rg", "Helvetica Neue", Arial, sans-serif;
+  /* One font for the whole site — Inter, same as the hero. */
   --font-hero: "Inter", "Helvetica Neue", Arial, sans-serif;
 }
 
 html,
 body {
-  background: #f5f4f2;
+  background: #fafafa;
   color: #111111;
 }
 
 body {
-  font-family: var(--font-body);
+  font-family: var(--font-hero);
   overflow-x: hidden;
 }
 
 a {
   color: inherit;
-}
-
-.font-heading {
-  font-family: var(--font-heading);
 }
 
 /* Iridescent "chrome" text — echoes the metallic torus in the hero. */

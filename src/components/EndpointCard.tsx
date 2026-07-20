@@ -19,12 +19,12 @@ export function EndpointCard({ endpoint }: { endpoint: Endpoint }) {
     <div
       className={
         featured
-          ? "rounded-lg border border-gold/50 bg-gold/[0.07] ring-1 ring-gold/20 p-4 flex flex-col gap-3 shadow-sm transition-shadow hover:shadow-md"
+          ? "rounded-lg border border-accent/40 bg-accent/[0.04] ring-1 ring-accent/10 p-4 flex flex-col gap-3 shadow-sm transition-shadow hover:shadow-md"
           : "rounded-lg border border-border bg-surface p-4 flex flex-col gap-3 shadow-sm transition-shadow hover:shadow-md"
       }
     >
       {featured ? (
-        <span className="inline-flex items-center gap-1 self-start text-[10px] font-semibold uppercase tracking-wide text-gold">
+        <span className="inline-flex items-center gap-1 self-start text-[10px] font-semibold uppercase tracking-wide text-accent">
           ★ x402 Inc.
         </span>
       ) : null}

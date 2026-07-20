@@ -33,14 +33,6 @@ export default function RootLayout({
           rel="stylesheet"
           href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
         />
-        <link
-          rel="stylesheet"
-          href="https://db.onlinewebfonts.com/c/5ac3fe7c6abd2f62067f266d89671492?family=HelveticaNowDisplay-Medium"
-        />
-        <link
-          rel="stylesheet"
-          href="https://db.onlinewebfonts.com/c/1aa3377e489837a26d019bba501e779d?family=HelveticaNowDisplayW01-Rg"
-        />
       </head>
       <body className="min-h-screen flex flex-col antialiased">
         <SiteNav />

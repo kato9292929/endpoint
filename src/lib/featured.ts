@@ -1,6 +1,6 @@
-// x402 Inc.'s own endpoints are featured: gold-styled (EndpointCard) and pinned
-// to the top of listings. Kept dependency-free (no catalog import) so it's safe
-// to use from client components.
+// x402 Inc.'s own endpoints are featured: accent-highlighted (EndpointCard) and
+// pinned to the top of listings. Kept dependency-free (no catalog import) so
+// it's safe to use from client components.
 import type { DirectorySource, Endpoint } from "./types";
 
 export const FEATURED_SOURCE: DirectorySource = "x402-inc";
