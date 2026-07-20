@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import "./globals.css";
 import { Footer } from "@/components/Footer";
+import { SiteNav } from "@/components/SiteNav";
 
 export const metadata: Metadata = {
   title: "x402 Endpoint — 6 directories. 1 catalog.",
@@ -22,25 +22,18 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <link
+          rel="stylesheet"
+          href="https://db.onlinewebfonts.com/c/5ac3fe7c6abd2f62067f266d89671492?family=HelveticaNowDisplay-Medium"
+        />
+        <link
+          rel="stylesheet"
+          href="https://db.onlinewebfonts.com/c/1aa3377e489837a26d019bba501e779d?family=HelveticaNowDisplayW01-Rg"
+        />
+      </head>
       <body className="min-h-screen flex flex-col antialiased">
-        <nav className="border-b border-border">
-          <div className="mx-auto max-w-6xl px-4 py-3 flex items-center gap-6 text-sm">
-            <Link href="/" className="font-semibold tracking-tight">
-              x402 Endpoint
-            </Link>
-            <div className="flex gap-4 text-muted">
-              <Link href="/" className="hover:text-white">
-                Catalog
-              </Link>
-              <Link href="/about" className="hover:text-white">
-                About
-              </Link>
-              <Link href="/for-agents" className="hover:text-white">
-                For Agents
-              </Link>
-            </div>
-          </div>
-        </nav>
+        <SiteNav />
         <main className="flex-1 mx-auto max-w-6xl w-full px-4 py-8">
           {children}
         </main>
