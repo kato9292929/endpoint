@@ -48,7 +48,7 @@ function Select({
       <select
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="bg-surface border border-border rounded px-2 py-1.5 text-sm text-white"
+        className="bg-surface border border-border rounded px-2 py-1.5 text-sm text-black"
       >
         <option value="">All</option>
         {options.map((o) => (
@@ -117,7 +117,7 @@ export function CatalogExplorer({ endpoints, networks, protocols }: Props) {
         placeholder="Search endpoints by name, description, URL…"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
-        className="w-full bg-surface border border-border rounded px-3 py-2 text-sm text-white placeholder:text-muted"
+        className="w-full bg-surface border border-border rounded px-3 py-2 text-sm text-black placeholder:text-muted"
       />
 
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
@@ -165,7 +165,7 @@ export function CatalogExplorer({ endpoints, networks, protocols }: Props) {
         {active ? (
           <button
             onClick={() => setFilters(EMPTY)}
-            className="hover:text-white underline"
+            className="hover:text-black underline"
           >
             Clear filters
           </button>
@@ -187,7 +187,7 @@ export function CatalogExplorer({ endpoints, networks, protocols }: Props) {
             <div className="flex flex-col items-center gap-2 py-6">
               <button
                 onClick={() => setVisible((v) => v + PAGE_SIZE)}
-                className="rounded-full border border-border bg-surface px-6 py-2 text-sm text-white hover:bg-white/5"
+                className="rounded-full border border-border bg-surface px-6 py-2 text-sm text-black hover:bg-black/[0.04]"
               >
                 Load next{" "}
                 {Math.min(PAGE_SIZE, results.length - visible).toLocaleString()}

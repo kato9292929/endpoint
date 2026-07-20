@@ -19,8 +19,8 @@ export function EndpointCard({ endpoint }: { endpoint: Endpoint }) {
     <div
       className={
         featured
-          ? "rounded-lg border border-gold/60 bg-gold/[0.06] ring-1 ring-gold/20 p-4 flex flex-col gap-3"
-          : "rounded-lg border border-border bg-surface p-4 flex flex-col gap-3"
+          ? "rounded-lg border border-gold/50 bg-gold/[0.07] ring-1 ring-gold/20 p-4 flex flex-col gap-3 shadow-sm transition-shadow hover:shadow-md"
+          : "rounded-lg border border-border bg-surface p-4 flex flex-col gap-3 shadow-sm transition-shadow hover:shadow-md"
       }
     >
       {featured ? (
@@ -32,7 +32,7 @@ export function EndpointCard({ endpoint }: { endpoint: Endpoint }) {
         <h3 className="font-medium leading-tight">{endpoint.name}</h3>
         <Link
           href={`/category/${endpoint.category}`}
-          className="shrink-0 text-[11px] uppercase tracking-wide text-muted border border-border rounded px-2 py-0.5 hover:text-white"
+          className="shrink-0 text-[11px] uppercase tracking-wide text-muted border border-border rounded px-2 py-0.5 hover:text-black"
         >
           {CATEGORY_LABELS[endpoint.category]}
         </Link>
@@ -45,7 +45,7 @@ export function EndpointCard({ endpoint }: { endpoint: Endpoint }) {
           <Link
             key={n}
             href={`/network/${n.toLowerCase()}`}
-            className="rounded bg-black/40 border border-border px-1.5 py-0.5 hover:text-white"
+            className="rounded bg-black/[0.05] border border-border px-1.5 py-0.5 hover:text-black"
           >
             {n}
           </Link>
@@ -63,7 +63,7 @@ export function EndpointCard({ endpoint }: { endpoint: Endpoint }) {
       <div className="mt-auto flex items-center justify-between gap-2 pt-2 border-t border-border">
         <span className="text-sm">
           {price ? (
-            <span className="text-white">{price}</span>
+            <span className="text-black">{price}</span>
           ) : (
             <span className="text-muted">price n/a</span>
           )}
@@ -73,7 +73,7 @@ export function EndpointCard({ endpoint }: { endpoint: Endpoint }) {
             <Link
               key={s}
               href={`/directory/${s}`}
-              className="hover:text-white"
+              className="hover:text-black"
               title={DIRECTORY_META[s]?.label ?? s}
             >
               {DIRECTORY_META[s]?.label ?? s}
