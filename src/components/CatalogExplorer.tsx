@@ -1,10 +1,13 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Fuse from "fuse.js";
 import { EndpointCard } from "./EndpointCard";
-import { MAX_LISTING_ITEMS } from "@/lib/constants";
 import { featuredFirst, rankListing } from "@/lib/featured";
+
+// Render endpoints a page at a time so the initial payload stays bounded and
+// the user pages through in ~100s rather than scrolling one giant list.
+const PAGE_SIZE = 100;
 import {
   CATEGORY_LABELS,
   DIRECTORY_META,
@@ -95,6 +98,12 @@ export function CatalogExplorer({ endpoints, networks, protocols }: Props) {
     return query.trim() ? featuredFirst(list) : rankListing(list);
   }, [query, filters, fuse, endpoints]);
 
+  // How many to show; grows by PAGE_SIZE. Reset whenever the result set changes.
+  const [visible, setVisible] = useState(PAGE_SIZE);
+  useEffect(() => {
+    setVisible(PAGE_SIZE);
+  }, [query, filters]);
+
   const set = (patch: Partial<Filters>) =>
     setFilters((f) => ({ ...f, ...patch }));
 
@@ -146,8 +155,12 @@ export function CatalogExplorer({ endpoints, networks, protocols }: Props) {
 
       <div className="flex items-center justify-between text-xs text-muted">
         <span>
-          {results.length.toLocaleString()} of{" "}
-          {endpoints.length.toLocaleString()} endpoints
+          Showing {Math.min(visible, results.length).toLocaleString()} of{" "}
+          {results.length.toLocaleString()}
+          {results.length !== endpoints.length
+            ? ` (of ${endpoints.length.toLocaleString()})`
+            : ""}{" "}
+          endpoints
         </span>
         {active ? (
           <button
@@ -166,16 +179,23 @@ export function CatalogExplorer({ endpoints, networks, protocols }: Props) {
       ) : (
         <>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {results.slice(0, MAX_LISTING_ITEMS).map((e) => (
+            {results.slice(0, visible).map((e) => (
               <EndpointCard key={e.id} endpoint={e} />
             ))}
           </div>
-          {results.length > MAX_LISTING_ITEMS ? (
-            <p className="text-xs text-muted text-center py-4">
-              Showing the first {MAX_LISTING_ITEMS.toLocaleString()} of{" "}
-              {results.length.toLocaleString()} matches. Search or add filters to
-              narrow down.
-            </p>
+          {results.length > visible ? (
+            <div className="flex flex-col items-center gap-2 py-6">
+              <button
+                onClick={() => setVisible((v) => v + PAGE_SIZE)}
+                className="rounded-full border border-border bg-surface px-6 py-2 text-sm text-white hover:bg-white/5"
+              >
+                Load next{" "}
+                {Math.min(PAGE_SIZE, results.length - visible).toLocaleString()}
+              </button>
+              <span className="text-xs text-muted">
+                {(results.length - visible).toLocaleString()} more
+              </span>
+            </div>
           ) : null}
         </>
       )}

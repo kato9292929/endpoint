@@ -6,6 +6,7 @@
   color-scheme: dark;
   --font-heading: "HelveticaNowDisplay-Medium", "Helvetica Neue", Arial, sans-serif;
   --font-body: "HelveticaNowDisplayW01-Rg", "Helvetica Neue", Arial, sans-serif;
+  --font-hero: "Inter", "Helvetica Neue", Arial, sans-serif;
 }
 
 html,
@@ -37,13 +38,34 @@ a {
   }
 }
 
-@keyframes fade-up {
+/* Hero entrance animations (CSS instead of Framer Motion — one-shot reveals). */
+@keyframes hero-fade-down {
   from {
     opacity: 0;
-    transform: translateY(8px);
+    transform: translateY(-20px);
   }
   to {
     opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes hero-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(32px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes hero-rise {
+  from {
+    transform: translateY(110%);
+  }
+  to {
     transform: translateY(0);
   }
 }

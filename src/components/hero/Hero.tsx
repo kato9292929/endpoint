@@ -1,139 +1,109 @@
 "use client";
 
-import Link from "next/link";
-import { useEffect, useState } from "react";
-import { useTypewriter } from "./useTypewriter";
+const INTER = { fontFamily: "var(--font-hero)" } as const;
+const EASE = "cubic-bezier(0.22,1,0.36,1)";
 
-const EMAIL = "hello@x402jp.com";
+type Stat = { value: number; label: string; plus?: boolean };
 
-const WHITE_PILLS: { label: string; href: string }[] = [
-  { label: "Browse the catalog", href: "#catalog" },
-  { label: "For agents · API", href: "/for-agents" },
-  { label: "OpenAPI spec", href: "/api/openapi.json" },
-  { label: "About the project", href: "/about" },
-];
+function fadeUp(i: number): React.CSSProperties {
+  return {
+    animation: `hero-fade-up 0.6s ${EASE} both`,
+    animationDelay: `${i * 0.12}s`,
+  };
+}
 
-function CopyIcon() {
+function ArrowUpRight({ size = 20 }: { size?: number }) {
   return (
-    <svg
-      width="12"
-      height="12"
-      viewBox="0 0 12 12"
-      fill="none"
-      aria-hidden
-      className="shrink-0"
-    >
-      <rect x="3.5" y="3.5" width="6.5" height="6.5" rx="1.2" stroke="currentColor" />
-      <rect x="1.8" y="1.8" width="6.5" height="6.5" rx="1.2" stroke="currentColor" />
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" aria-hidden className="shrink-0">
+      <path d="M7 17 17 7M8 7h9v9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 }
 
-export function Hero({ count }: { count: number }) {
-  const typed = `Glad you stopped by. ${count.toLocaleString()} machine-payable endpoints, aggregated across the x402 ecosystem. Now — what are you building?`;
-  const { displayed, done } = useTypewriter(typed);
+const HEADING = ["EVERY", "PAYABLE", "ENDPOINT"];
 
-  const [pillsVisible, setPillsVisible] = useState(false);
-  const [copied, setCopied] = useState(false);
-
-  useEffect(() => {
-    const t = setTimeout(() => setPillsVisible(true), 400);
-    return () => clearTimeout(t);
-  }, []);
-
-  const copy = () => {
-    navigator.clipboard?.writeText(EMAIL).then(
-      () => {
-        setCopied(true);
-        setTimeout(() => setCopied(false), 1500);
-      },
-      () => {},
-    );
-  };
-
-  const pillBase =
-    "inline-flex items-center justify-center rounded-full text-[13px] sm:text-[15px] px-4 sm:px-5 py-[0.3em] mx-[0.2em] mb-[0.4em] whitespace-nowrap transition-colors duration-200";
-
+export function Hero({ stats }: { stats: Stat[] }) {
   return (
-    <section className="relative flex h-screen flex-col justify-end overflow-hidden px-5 pb-12 sm:px-8 md:justify-center md:px-10 md:pb-0">
-      <div className="relative z-10 max-w-xl">
-        {/* Blurred intro label */}
-        <p
-          className="pointer-events-none mb-5 select-none sm:mb-6"
-          style={{
-            fontSize: "clamp(18px, 4vw, 26px)",
-            lineHeight: 1.3,
-            fontWeight: 400,
-            color: "#000",
-            filter: "blur(4px)",
-          }}
-        >
-          Hey there — this is x402 Endpoint,
-          <br />
-          the cross-directory catalog of machine-payable APIs.
-        </p>
-
-        {/* Typewriter */}
-        <p
-          className="mb-5 text-black sm:mb-6"
-          style={{
-            fontSize: "clamp(18px, 4vw, 26px)",
-            lineHeight: 1.35,
-            fontWeight: 400,
-            minHeight: 54,
-          }}
-        >
-          {displayed}
-          {!done ? (
-            <span
-              className="ml-[2px] inline-block h-[1.1em] w-[2px] bg-black align-middle"
-              style={{ animation: "blink 1s step-end infinite" }}
-            />
-          ) : null}
-        </p>
-
-        {/* Action pills */}
-        <div
-          className="flex flex-wrap gap-y-1"
-          style={{
-            opacity: pillsVisible ? 1 : 0,
-            transform: pillsVisible ? "translateY(0)" : "translateY(8px)",
-            transition: "opacity 0.4s ease, transform 0.4s ease",
-          }}
-        >
-          {WHITE_PILLS.map((p) =>
-            p.href.startsWith("#") || p.href.startsWith("/api") ? (
-              <a
-                key={p.href}
-                href={p.href}
-                className={`${pillBase} border border-black/10 bg-white text-black hover:bg-black hover:text-white`}
+    <section
+      style={INTER}
+      className="relative z-10 flex min-h-screen flex-col overflow-hidden pt-[72px] md:pt-[92px]"
+    >
+      {/* Stats row (middle) */}
+      <div className="flex flex-1 items-center justify-end px-5 py-8 sm:px-8 md:px-12 md:py-0">
+        <div className="flex items-start gap-5 sm:gap-8 md:gap-10">
+          {stats.map((s, i) => (
+            <div key={s.label} className="text-right" style={fadeUp(i + 2)}>
+              <div
+                className="font-semibold leading-none text-black"
+                style={{ fontSize: "clamp(1.5rem, 5vw, 3.5rem)", fontWeight: 600 }}
               >
-                {p.label}
-              </a>
-            ) : (
-              <Link
-                key={p.href}
-                href={p.href}
-                className={`${pillBase} border border-black/10 bg-white text-black hover:bg-black hover:text-white`}
-              >
-                {p.label}
-              </Link>
-            ),
-          )}
+                {s.plus ? (
+                  <span className="text-hero" style={{ fontSize: "0.5em" }}>
+                    +
+                  </span>
+                ) : null}
+                {s.value.toLocaleString()}
+              </div>
+              <div className="mt-1 whitespace-pre-line text-[10px] font-semibold uppercase leading-tight tracking-widest text-black sm:text-xs md:text-sm">
+                {s.label}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
 
-          {/* Outline pill: copy email */}
-          <button
-            type="button"
-            onClick={copy}
-            className={`${pillBase} gap-2 border border-white bg-transparent text-white hover:bg-white hover:text-black sm:gap-3`}
+      {/* Bottom section */}
+      <div className="flex flex-col gap-6 px-5 pb-8 sm:px-8 md:gap-12 md:px-12 md:pb-12">
+        {/* Row A: tagline + CTA */}
+        <div className="flex items-center justify-between gap-4">
+          <p
+            className="max-w-[130px] text-[10px] font-semibold uppercase tracking-widest text-black sm:max-w-[160px] sm:text-xs md:max-w-xs md:text-sm"
+            style={fadeUp(5)}
           >
-            <span>
-              Reach us:{" "}
-              <span className="underline underline-offset-1">{EMAIL}</span>
-            </span>
-            <CopyIcon />
-            {copied ? <span className="text-[11px]">copied</span> : null}
-          </button>
+            Aggregating every
+            <br />
+            x402 endpoint
+            <br />
+            worth listing
+          </p>
+          <a
+            href="#catalog"
+            className="inline-flex items-center gap-1.5 whitespace-nowrap text-base font-semibold uppercase tracking-widest text-hero sm:text-xl md:text-2xl"
+            style={fadeUp(6)}
+          >
+            Browse the catalog
+            <ArrowUpRight size={22} />
+          </a>
+        </div>
+
+        {/* Row B: description + main heading */}
+        <div className="flex items-end justify-between gap-3 sm:gap-4">
+          <div
+            className="w-[120px] shrink-0 text-left text-[9px] font-semibold uppercase tracking-widest text-black sm:w-[180px] sm:text-xs md:w-[280px] md:text-right md:text-sm"
+            style={fadeUp(7)}
+          >
+            A cross-directory catalog of machine-payable x402 endpoints —
+            aggregated, ranked, and searchable.
+          </div>
+
+          <h1
+            className="text-right font-semibold uppercase text-black"
+            style={{ fontSize: "clamp(2rem, 9vw, 9rem)", lineHeight: 0.88, fontWeight: 600 }}
+          >
+            {HEADING.map((word, i) => (
+              <span key={word} className="block overflow-hidden">
+                <span
+                  className="block"
+                  style={{
+                    animation: `hero-rise 0.7s ${EASE} both`,
+                    animationDelay: `${0.4 + i * 0.14}s`,
+                  }}
+                >
+                  {word}
+                </span>
+              </span>
+            ))}
+          </h1>
         </div>
       </div>
     </section>

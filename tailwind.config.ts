@@ -15,6 +15,7 @@ const config: Config = {
         muted: "#8a8a93",
         gold: "#e8b84b",
         "gold-dim": "#9a7d2e",
+        hero: "#5E0ED7",
       },
       fontFamily: {
         mono: ["ui-monospace", "SFMono-Regular", "Menlo", "monospace"],

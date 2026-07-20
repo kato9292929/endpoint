@@ -1,7 +1,7 @@
 import { CatalogExplorer } from "@/components/CatalogExplorer";
 import { StatsBar } from "@/components/StatsBar";
 import { TotalSparkline } from "@/components/TotalSparkline";
-import { ScrubVideo } from "@/components/hero/ScrubVideo";
+import { HeroVideo } from "@/components/hero/HeroVideo";
 import { HeroNav } from "@/components/hero/HeroNav";
 import { Hero } from "@/components/hero/Hero";
 import {
@@ -15,8 +15,9 @@ import {
 // Rebuild at most once per day; the daily fetch job pushes fresh data.
 export const revalidate = 86400;
 
+// Swap this to change the hero background (autoplaying, looping, muted).
 const HERO_VIDEO =
-  "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260530_042513_df96a13b-6155-4f6e-8b93-c9dee66fba08.mp4";
+  "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260517_222138_3e3205be-3364-417b-a64a-bfe087acbec4.mp4";
 
 export default function HomePage() {
   const { endpoints, generated_at } = getCatalog();
@@ -30,14 +31,25 @@ export default function HomePage() {
     ? "—"
     : updated.toISOString().slice(0, 10);
 
+  const nonEmptyCategories = Object.values(categoryCounts).filter(
+    (c) => c > 0,
+  ).length;
+  const directoriesCount = Object.keys(sourceCounts).length;
+
+  const heroStats = [
+    { value: endpoints.length, label: "ENDPOINTS\nINDEXED", plus: true },
+    { value: nonEmptyCategories, label: "CATEGORIES\nTRACKED" },
+    { value: directoriesCount, label: "SOURCE\nDIRECTORIES" },
+  ];
+
   return (
     <>
-      <ScrubVideo src={HERO_VIDEO} />
+      <HeroVideo src={HERO_VIDEO} />
       <HeroNav />
 
       {/* Break out of the layout's max-w-6xl / padding to go full-bleed. */}
       <div className="relative left-1/2 right-1/2 -mx-[50vw] -mt-8 -mb-8 w-screen">
-        <Hero count={endpoints.length} />
+        <Hero stats={heroStats} />
 
         {/* Catalog on a solid background so it scrolls over the fixed video. */}
         <section id="catalog" className="relative z-[1] bg-bg">
