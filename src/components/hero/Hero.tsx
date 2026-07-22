@@ -26,7 +26,7 @@ export function Hero({ stats }: { stats: Stat[] }) {
   return (
     <section
       style={INTER}
-      className="relative z-10 flex min-h-screen flex-col overflow-hidden pt-[72px] md:pt-[92px]"
+      className="relative z-10 flex min-h-[100svh] flex-col overflow-hidden pt-[72px] md:pt-[92px]"
     >
       {/* Stats row (middle) */}
       <div className="flex flex-1 items-center justify-end px-5 py-8 sm:px-8 md:px-12 md:py-0">
@@ -68,11 +68,11 @@ export function Hero({ stats }: { stats: Stat[] }) {
           </p>
           <a
             href="#catalog"
-            className="inline-flex items-center gap-1.5 whitespace-nowrap text-base font-semibold uppercase tracking-widest text-hero sm:text-xl md:text-2xl"
+            className="inline-flex items-center gap-1.5 whitespace-nowrap text-sm font-semibold uppercase tracking-wide text-hero sm:text-xl sm:tracking-widest md:text-2xl"
             style={fadeUp(6)}
           >
             Browse the catalog
-            <ArrowUpRight size={22} />
+            <ArrowUpRight size={18} />
           </a>
         </div>
 
