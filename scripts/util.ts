@@ -34,6 +34,15 @@ export function mergeEndpoints(a: Endpoint, b: Endpoint): Endpoint {
   // Keep the more recently seen record's scalar fields.
   const newer = a.last_seen >= b.last_seen ? a : b;
   const older = newer === a ? b : a;
+  // Keep the strongest popularity signal, and the metric that goes with it.
+  const popA = a.popularity ?? -1;
+  const popB = b.popularity ?? -1;
+  const popWinner = popA >= popB ? a : b;
+  const popularity =
+    a.popularity != null || b.popularity != null
+      ? Math.max(a.popularity ?? 0, b.popularity ?? 0)
+      : undefined;
+
   return {
     ...older,
     ...newer,
@@ -43,10 +52,11 @@ export function mergeEndpoints(a: Endpoint, b: Endpoint): Endpoint {
     // Prefer a description if the newer one is empty.
     description: newer.description || older.description,
     price: newer.price ?? older.price,
-    // Keep the strongest popularity signal across sources.
-    popularity:
-      a.popularity != null || b.popularity != null
-        ? Math.max(a.popularity ?? 0, b.popularity ?? 0)
-        : undefined,
+    popularity,
+    popularity_metric:
+      popularity == null ? undefined : popWinner.popularity_metric,
+    // Prefer whichever record actually carries the signal.
+    health: newer.health ?? older.health,
+    verification: newer.verification ?? older.verification,
   };
 }

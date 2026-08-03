@@ -9,7 +9,8 @@
     "start": "next start",
     "lint": "next lint",
     "fetch": "tsx scripts/fetch-directories.ts",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test": "tsx scripts/tests/run.ts"
   },
   "dependencies": {
     "fuse.js": "^7.0.0",

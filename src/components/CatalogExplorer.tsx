@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import Fuse from "fuse.js";
 import { EndpointCard } from "./EndpointCard";
-import { featuredFirst, rankListing } from "@/lib/featured";
+import { defaultOrder } from "@/lib/featured";
 
 // Render endpoints a page at a time so the initial payload stays bounded and
 // the user pages through in ~100s rather than scrolling one giant list.
@@ -93,9 +93,9 @@ export function CatalogExplorer({ endpoints, networks, protocols }: Props) {
     if (filters.protocol)
       list = list.filter((e) => e.protocols.includes(filters.protocol));
 
-    // Default view: x402 Inc. pinned, then most-used first. While searching,
-    // keep Fuse relevance order but still float x402 Inc. matches to the top.
-    return query.trim() ? featuredFirst(list) : rankListing(list);
+    // No featured pinning. Search keeps Fuse relevance; default view uses the
+    // popularity/name order (x402 Inc. is disclosed, not boosted — see /about).
+    return query.trim() ? list : defaultOrder(list);
   }, [query, filters, fuse, endpoints]);
 
   // How many to show; grows by PAGE_SIZE. Reset whenever the result set changes.

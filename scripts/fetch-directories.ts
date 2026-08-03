@@ -4,18 +4,22 @@
 // Run with: npm run fetch  (tsx scripts/fetch-directories.ts)
 //
 // Behaviour:
-//  - Each fetcher runs independently. If one throws, it is skipped with a
-//    warning and the others still run (a failed directory must not break the
-//    whole batch).
+//  - Each fetcher runs independently. If one throws, the others still run, but
+//    the outcome is recorded in `fetch_report` — an implemented fetcher that
+//    silently returns 0 is detectable (status "empty"), not hidden.
 //  - Records are deduped by canonical URL; duplicates across directories are
 //    merged so `source` becomes the union of directories the URL was seen in.
-//  - If every fetcher returns nothing (e.g. all still TODO), the existing
-//    data/endpoints.json is left untouched so the sample/seed data survives.
+//  - `fetch_report` and `popularity_coverage` are ALWAYS written.
 
 import { writeFile, readFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
-import type { Catalog, Endpoint } from "../src/lib/types";
+import type {
+  Catalog,
+  Endpoint,
+  FetchReportEntry,
+  FetchStatus,
+} from "../src/lib/types";
 import { canonicalUrl, hashId, mergeEndpoints } from "./util";
 
 import { fetchX402Inc } from "./fetchers/x402-inc";
@@ -33,31 +37,50 @@ const OUT = join(__dirname, "..", "data", "endpoints.json");
 type NamedFetcher = {
   name: string;
   run: () => Promise<Endpoint[]>;
+  // Implemented fetchers set this true: a 0 result is then "empty" (a bug to
+  // surface), not silently accepted. Stub fetchers set it false → "stub".
+  expectNonEmpty: boolean;
 };
 
 const FETCHERS: NamedFetcher[] = [
-  { name: "x402-inc", run: fetchX402Inc },
-  { name: "x402scan", run: fetchX402scan },
-  { name: "onyx-bazaar", run: fetchOnyxBazaar },
-  { name: "agentic-market", run: fetchAgenticMarket },
-  { name: "pay-sh", run: fetchPaySh },
-  { name: "ampersend", run: fetchAmpersend },
-  { name: "visa-cli", run: fetchVisaCli },
-  { name: "circle-marketplace", run: fetchCircleMarketplace },
+  { name: "x402-inc", run: fetchX402Inc, expectNonEmpty: true },
+  { name: "x402scan", run: fetchX402scan, expectNonEmpty: true },
+  { name: "onyx-bazaar", run: fetchOnyxBazaar, expectNonEmpty: true },
+  { name: "pay-sh", run: fetchPaySh, expectNonEmpty: true },
+  { name: "agentic-market", run: fetchAgenticMarket, expectNonEmpty: false },
+  { name: "ampersend", run: fetchAmpersend, expectNonEmpty: false },
+  { name: "visa-cli", run: fetchVisaCli, expectNonEmpty: false },
+  {
+    name: "circle-marketplace",
+    run: fetchCircleMarketplace,
+    expectNonEmpty: false,
+  },
 ];
 
-async function collect(): Promise<Endpoint[]> {
-  const all: Endpoint[] = [];
+type CollectResult = { report: FetchReportEntry[]; endpoints: Endpoint[] };
+
+async function collect(): Promise<CollectResult> {
+  const report: FetchReportEntry[] = [];
+  const endpoints: Endpoint[] = [];
+
   for (const f of FETCHERS) {
     try {
       const items = await f.run();
-      console.log(`  ✓ ${f.name}: ${items.length} endpoint(s)`);
-      all.push(...items);
+      let status: FetchStatus;
+      if (items.length > 0) status = "ok";
+      else status = f.expectNonEmpty ? "empty" : "stub";
+      report.push({ source: f.name, status, count: items.length });
+      const flag = status === "empty" ? "⚠" : status === "stub" ? "·" : "✓";
+      console.log(`  ${flag} ${f.name}: ${items.length} (${status})`);
+      endpoints.push(...items);
     } catch (err) {
-      console.warn(`  ✗ ${f.name}: skipped — ${(err as Error).message}`);
+      const error = (err as Error).message;
+      report.push({ source: f.name, status: "failed", count: 0, error });
+      console.warn(`  ✗ ${f.name}: failed — ${error}`);
     }
   }
-  return all;
+
+  return { report, endpoints };
 }
 
 // Dedup by canonical URL, normalize ids, and merge cross-directory duplicates.
@@ -74,30 +97,41 @@ function dedupe(endpoints: Endpoint[]): Endpoint[] {
 
 async function main() {
   console.log("Fetching x402 directories…");
-  const collected = await collect();
+  const { report, endpoints: collected } = await collect();
 
-  if (collected.length === 0) {
-    console.log(
-      "No endpoints fetched (fetchers are still stubs). Leaving existing data/endpoints.json untouched.",
+  // Preserve existing endpoints if a run collected nothing (e.g. everything
+  // failed), but still write the report so the failure is visible.
+  let endpoints: Endpoint[];
+  if (collected.length > 0) {
+    endpoints = dedupe(collected);
+  } else {
+    console.warn(
+      "No endpoints collected — preserving existing catalog, recording the failure in fetch_report.",
     );
     try {
-      const current = JSON.parse(await readFile(OUT, "utf8")) as Catalog;
-      console.log(`Existing catalog has ${current.count} endpoint(s).`);
+      endpoints = (JSON.parse(await readFile(OUT, "utf8")) as Catalog).endpoints;
     } catch {
-      // No existing file — that's fine.
+      endpoints = [];
     }
-    return;
   }
 
-  const endpoints = dedupe(collected);
+  const popularity_coverage = endpoints.filter(
+    (e) => e.popularity != null,
+  ).length;
+
   const catalog: Catalog = {
     generated_at: new Date().toISOString(),
     count: endpoints.length,
+    fetch_report: report,
+    popularity_coverage,
     endpoints,
   };
 
   await writeFile(OUT, JSON.stringify(catalog, null, 2) + "\n", "utf8");
-  console.log(`Wrote ${endpoints.length} endpoint(s) to data/endpoints.json`);
+  console.log(
+    `Wrote ${endpoints.length} endpoint(s); popularity coverage ${popularity_coverage}.`,
+  );
+  console.table(report);
 }
 
 main().catch((err) => {

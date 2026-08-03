@@ -73,10 +73,14 @@ function sourceUrl(item: ScanItem): string {
 
 export async function fetchX402scan(): Promise<Endpoint[]> {
   const endpoints: Endpoint[] = [];
+  let reachedEnd = false;
 
   for (let page = 0; page < MAX_PAGES; page++) {
     const { items, hasNextPage } = await fetchPage(page);
-    if (!items || items.length === 0) break;
+    if (!items || items.length === 0) {
+      reachedEnd = true;
+      break;
+    }
 
     for (const item of items) {
       const mapped = mapDiscoveryResource(item, {
@@ -86,8 +90,20 @@ export async function fetchX402scan(): Promise<Endpoint[]> {
       if (mapped) endpoints.push(mapped);
     }
 
-    if (!hasNextPage) break;
+    if (!hasNextPage) {
+      reachedEnd = true;
+      break;
+    }
     await sleep(1000); // politeness: >=1s between requests
+  }
+
+  // M0-1: don't silently truncate. If the cap is hit while the upstream still
+  // reports more pages, fail loudly so the cap gets raised.
+  if (!reachedEnd) {
+    throw new Error(
+      `x402scan: MAX_PAGES (${MAX_PAGES}) reached while hasNextPage was still true ` +
+        `(> ${MAX_PAGES * PAGE_SIZE} resources). Raise MAX_PAGES.`,
+    );
   }
 
   return endpoints;

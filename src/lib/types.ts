@@ -21,7 +21,11 @@ export type DirectorySource =
   | "pay-sh"
   | "ampersend"
   | "visa-cli"
-  | "circle-marketplace";
+  | "circle-marketplace"
+  | "402index"
+  | "cdp-bazaar"
+  | "gold-402"
+  | "well-known";
 
 export type Protocol = "x402" | "MPP" | "L402" | (string & {});
 
@@ -45,14 +49,49 @@ export type Endpoint = {
   source: DirectorySource[];
   source_url: string; // URL in the originating directory
   last_seen: string; // ISO 8601
-  // Upstream popularity signal (e.g. x402scan cumulative tool calls / Onyx
-  // volume) used to rank listings. Absent when no source provides one.
+  // Upstream popularity signal (e.g. x402scan cumulative tool calls). Absent
+  // when no source provides one. `popularity_metric` names what it counted;
+  // never write a bare popularity number without its metric.
   popularity?: number;
+  popularity_metric?: string; // e.g. "x402scan:toolCalls"
+  // Optional health/verification signals — only present when a source provides
+  // them. Never fill missing signals with 0 / "unknown".
+  health?: EndpointHealth;
+  verification?: EndpointVerification;
+};
+
+export type EndpointHealth = {
+  status: "healthy" | "degraded" | "down" | "unknown";
+  uptime_30d?: number; // 0..1
+  latency_p50_ms?: number;
+  reliability_score?: number; // 0..100
+  last_checked?: string; // ISO 8601
+};
+
+export type EndpointVerification = {
+  domain_verified?: boolean;
+  payment_valid?: boolean;
+  probed_at?: string; // ISO 8601
+};
+
+// Per-source outcome of a fetch run. Always written to the catalog so an
+// implemented source silently returning 0 is detectable.
+export type FetchStatus = "ok" | "failed" | "empty" | "stub";
+
+export type FetchReportEntry = {
+  source: string;
+  status: FetchStatus;
+  count: number;
+  error?: string;
 };
 
 export type Catalog = {
   generated_at: string; // ISO 8601 — when this file was produced
   count: number;
+  // Always present (not optional). One entry per fetcher.
+  fetch_report: FetchReportEntry[];
+  // How many endpoints carry a `popularity` value (ranking-signal coverage).
+  popularity_coverage: number;
   endpoints: Endpoint[];
 };
 
@@ -78,6 +117,10 @@ export const DIRECTORY_SOURCES: DirectorySource[] = [
   "ampersend",
   "visa-cli",
   "circle-marketplace",
+  "402index",
+  "cdp-bazaar",
+  "gold-402",
+  "well-known",
 ];
 
 export const DIRECTORY_META: Record<
@@ -100,6 +143,20 @@ export const DIRECTORY_META: Record<
   "circle-marketplace": {
     label: "Circle Agent Marketplace",
     home: "https://agents.circle.com",
+  },
+  "402index": { label: "402 Index", home: "https://402index.io" },
+  "cdp-bazaar": {
+    label: "CDP Bazaar",
+    home: "https://docs.cdp.coinbase.com/x402/bazaar",
+  },
+  "gold-402": {
+    label: "gold-402 (24K Labs)",
+    home: "https://github.com/Haustorium12/gold-402",
+  },
+  // .well-known/x402 read directly from an endpoint's own host.
+  "well-known": {
+    label: ".well-known/x402 (direct)",
+    home: "https://x402.org",
   },
 };
 

@@ -10,7 +10,17 @@ import {
   type Endpoint,
 } from "./types";
 
-const catalog = catalogJson as Catalog;
+// Normalize: catalogs written before fetch_report/popularity_coverage existed
+// (or hand-committed data) still load. The orchestrator always writes both.
+const raw = catalogJson as Omit<Catalog, "fetch_report" | "popularity_coverage"> &
+  Partial<Pick<Catalog, "fetch_report" | "popularity_coverage">>;
+const catalog: Catalog = {
+  ...raw,
+  fetch_report: raw.fetch_report ?? [],
+  popularity_coverage:
+    raw.popularity_coverage ??
+    raw.endpoints.filter((e) => e.popularity != null).length,
+};
 
 export function getCatalog(): Catalog {
   return catalog;
