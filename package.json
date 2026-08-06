@@ -10,7 +10,8 @@
     "lint": "next lint",
     "fetch": "tsx scripts/fetch-directories.ts",
     "typecheck": "tsc --noEmit",
-    "test": "tsx scripts/tests/run.ts"
+    "test": "tsx scripts/tests/run.ts",
+    "fetch:rank": "tsx scripts/fetch-ranking.ts"
   },
   "dependencies": {
     "fuse.js": "^7.0.0",

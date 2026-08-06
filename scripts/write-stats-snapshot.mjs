@@ -79,11 +79,70 @@ function main() {
   const bySource = {};
   const byPriceTier = {};
 
+  // Host aggregation (routes per host).
+  const hostMap = new Map();
+  const hostOf = (url) => {
+    try {
+      return new URL(url).hostname.replace(/^www\./, "");
+    } catch {
+      return url;
+    }
+  };
+  const median = (xs) => {
+    if (!xs.length) return null;
+    const s = [...xs].sort((a, b) => a - b);
+    const m = Math.floor(s.length / 2);
+    return s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2;
+  };
   for (const e of endpoints) {
     tally(byCategory, e.category ?? e.cat ?? "unknown");
     for (const c of chainsOf(e)) tally(byChain, c);
     for (const s of sourcesOf(e)) tally(bySource, s);
     tally(byPriceTier, priceTier(priceOf(e)));
+
+    const host = hostOf(e.url);
+    let h = hostMap.get(host);
+    if (!h) {
+      h = { host, names: {}, count: 0, cats: {}, prices: [] };
+      hostMap.set(host, h);
+    }
+    h.count++;
+    h.names[e.name] = (h.names[e.name] ?? 0) + 1;
+    h.cats[e.category] = (h.cats[e.category] ?? 0) + 1;
+    const amt = priceOf(e);
+    if (typeof amt === "number") h.prices.push(amt);
+  }
+
+  const byHost = [...hostMap.values()]
+    .sort((a, b) => b.count - a.count || a.host.localeCompare(b.host))
+    .slice(0, 100)
+    .map((h) => ({
+      host: h.host,
+      name: Object.entries(h.names).sort((a, b) => b[1] - a[1])[0]?.[0] ?? h.host,
+      count: h.count,
+      priceMedian: median(h.prices),
+      topCategory:
+        Object.entries(h.cats).sort((a, b) => b[1] - a[1])[0]?.[0] ?? null,
+    }));
+
+  // rankTop50 from data/rank.json (empty when the ranking is unavailable).
+  let rankTop50 = [];
+  try {
+    const rank = JSON.parse(readFileSync(join(ROOT, "data", "rank.json"), "utf8"));
+    if (rank.status === "ok" && Array.isArray(rank.rows)) {
+      rankTop50 = rank.rows.slice(0, 50).map((r) => ({
+        rank: r.rank,
+        origin: r.origin,
+        title: r.title,
+        host: r.host,
+        tx_count: r.tx_count,
+        total_amount: r.total_amount,
+        unique_buyers: r.unique_buyers,
+        popularity_metric: r.popularity_metric,
+      }));
+    }
+  } catch {
+    // no rank artifact — leave rankTop50 empty
   }
 
   const date = new Date().toISOString().slice(0, 10); // UTC YYYY-MM-DD
@@ -95,6 +154,9 @@ function main() {
     byChain,
     bySource,
     byPriceTier,
+    hostCount: hostMap.size,
+    byHost,
+    rankTop50,
   };
 
   mkdirSync(OUT_DIR, { recursive: true });
