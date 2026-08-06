@@ -1,0 +1,31 @@
+{
+  "date": "2026-08-06",
+  "generatedAt": "2026-08-06T08:53:46.549Z",
+  "total": 84,
+  "byCategory": {
+    "compute": 34,
+    "data": 22,
+    "messaging": 2,
+    "search": 6,
+    "other": 7,
+    "compliance": 2,
+    "media": 2,
+    "intelligence": 8,
+    "oracle": 1
+  },
+  "byChain": {
+    "Solana": 71,
+    "Base": 14
+  },
+  "bySource": {
+    "pay-sh": 70,
+    "x402-inc": 14
+  },
+  "byPriceTier": {
+    "unknown": 63,
+    ">$0.15": 8,
+    "$0.01–0.05": 8,
+    "$0.05–0.15": 3,
+    "<$0.01": 2
+  }
+}
