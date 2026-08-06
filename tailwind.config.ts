@@ -8,14 +8,12 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Light theme, tuned to the hero's off-white + purple aesthetic.
-        bg: "#f5f4f2", // page background (warm off-white)
+        // White-based theme, matching the hero (white + purple).
+        bg: "#fafafa", // page background (near-white)
         surface: "#ffffff", // cards / inputs
-        border: "#e4e1dc", // hairline borders on light
+        border: "#ececeb", // hairline borders on white
         accent: "#5E0ED7", // deep purple (matches the hero)
-        muted: "#6b6a70", // secondary text on light
-        gold: "#a97b12", // featured (x402 Inc.) — readable on white
-        "gold-dim": "#7f5c0d",
+        muted: "#6b6a70", // secondary text
         hero: "#5E0ED7",
       },
       fontFamily: {

@@ -85,7 +85,7 @@ export default function AboutPage() {
         </p>
         <p>
           As the operator, x402 Inc. features its own endpoints: they are
-          highlighted in gold and pinned to the top of listings. This is
+          highlighted and pinned to the top of listings. This is
           disclosed, not hidden. Everything else — the third-party directories —
           is aggregated on equal footing with no preferential ranking between
           them. If a third-party directory also lists one of x402 Inc.&apos;s

@@ -1,6 +1,6 @@
-// x402 Inc.'s own endpoints are featured: gold-styled (EndpointCard) and pinned
-// to the top of listings. Kept dependency-free (no catalog import) so it's safe
-// to use from client components.
+// x402 Inc. is the operator of this catalog. Its own endpoints are DISCLOSED
+// (a labeled block + a row marker) but NOT rank-boosted: they are never pinned
+// to the top of a listing and never reordered within the ranking. See /about.
 import type { DirectorySource, Endpoint } from "./types";
 
 export const FEATURED_SOURCE: DirectorySource = "x402-inc";
@@ -9,17 +9,10 @@ export function isFeatured(e: Endpoint): boolean {
   return e.source.includes(FEATURED_SOURCE);
 }
 
-// Stable partition that floats featured endpoints to the front while preserving
-// the incoming order within each group.
-export function featuredFirst(endpoints: Endpoint[]): Endpoint[] {
-  const featured: Endpoint[] = [];
-  const rest: Endpoint[] = [];
-  for (const e of endpoints) (isFeatured(e) ? featured : rest).push(e);
-  return [...featured, ...rest];
-}
-
-// Most-used first; endpoints without a popularity signal sort last, name as
-// the stable tiebreak.
+// Default listing order: most-used first (popularity desc), name as a stable
+// tiebreak. NO featured pinning — every endpoint sorts purely on the signal.
+// (Popularity currently has ~0 coverage, so this degenerates to name order
+// until the ranking surface is wired; see M3-1.)
 export function byPopularity(a: Endpoint, b: Endpoint): number {
   const pa = a.popularity ?? -1;
   const pb = b.popularity ?? -1;
@@ -27,7 +20,6 @@ export function byPopularity(a: Endpoint, b: Endpoint): number {
   return a.name.localeCompare(b.name);
 }
 
-// Default listing order: x402 Inc. pinned first, then by popularity.
-export function rankListing(endpoints: Endpoint[]): Endpoint[] {
-  return featuredFirst([...endpoints].sort(byPopularity));
+export function defaultOrder(endpoints: Endpoint[]): Endpoint[] {
+  return [...endpoints].sort(byPopularity);
 }
