@@ -2,8 +2,10 @@
 
 import { useEffect, useMemo, useState } from "react";
 import Fuse from "fuse.js";
-import { EndpointCard } from "./EndpointCard";
-import { defaultOrder } from "@/lib/featured";
+import { EndpointRow } from "./EndpointRow";
+import { RowHeader } from "./RowHeader";
+import { FeaturedBlock } from "./FeaturedBlock";
+import { defaultOrder, isFeatured } from "@/lib/featured";
 
 // Render endpoints a page at a time so the initial payload stays bounded and
 // the user pages through in ~100s rather than scrolling one giant list.
@@ -178,9 +180,18 @@ export function CatalogExplorer({ endpoints, networks, protocols }: Props) {
         </p>
       ) : (
         <>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {results.slice(0, visible).map((e) => (
-              <EndpointCard key={e.id} endpoint={e} />
+          <div className="rounded-lg border border-border bg-surface">
+            <RowHeader />
+            {/* Page 1 rows */}
+            {results.slice(0, PAGE_SIZE).map((e) => (
+              <EndpointRow key={e.id} endpoint={e} />
+            ))}
+            {/* End of page 1: x402 Inc. disclosed block (only here). Shows all
+                matching x402 Inc. endpoints; they also appear in the list above. */}
+            <FeaturedBlock endpoints={results.filter(isFeatured)} />
+            {/* Loaded-more rows (page 2+) */}
+            {results.slice(PAGE_SIZE, visible).map((e) => (
+              <EndpointRow key={e.id} endpoint={e} />
             ))}
           </div>
           {results.length > visible ? (

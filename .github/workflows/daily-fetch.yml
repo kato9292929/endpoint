@@ -31,6 +31,9 @@ jobs:
           # Raises the GitHub API rate limit for the Pay.sh (pay-skills) fetcher.
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Fetch ranking (x402scan most-called)
+        run: npm run fetch:rank
+
       - name: Write stats snapshot
         run: node scripts/write-stats-snapshot.mjs
 
@@ -39,7 +42,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/endpoints.json data/stats
+          git add data/endpoints.json data/stats data/rank.json
           if git diff --cached --quiet; then
             echo "No changes to commit"
             echo "changed=false" >> "$GITHUB_OUTPUT"

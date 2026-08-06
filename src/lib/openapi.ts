@@ -157,6 +157,35 @@ export function openapiSpec() {
           },
         },
       },
+      "/api/rank": {
+        get: {
+          operationId: "getRank",
+          summary: "x402scan most-called endpoints, re-listed as-is",
+          parameters: [
+            { name: "limit", in: "query", schema: { type: "integer", minimum: 1, maximum: 50, default: 50 } },
+          ],
+          responses: {
+            "200": {
+              description:
+                "`{ status: 'ok' | 'unavailable', metric, count, rows }`. When the x402scan call-count surface isn't wired, `status` is `unavailable` and `rows` is empty — never a substitute ordering.",
+              content: { "application/json": { schema: { type: "object" } } },
+            },
+          },
+        },
+      },
+      "/api/hosts": {
+        get: {
+          operationId: "getHosts",
+          summary: "Per-host route aggregation (routes, top category, median price)",
+          responses: {
+            "200": {
+              description:
+                "`{ host_count, total_routes, hosts[] }`, most routes first. The catalog counts routes, not services.",
+              content: { "application/json": { schema: { type: "object" } } },
+            },
+          },
+        },
+      },
     },
     components: { schemas: { Endpoint, Price } },
   } as const;

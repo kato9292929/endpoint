@@ -7,8 +7,9 @@ type NavLink = { label: string; href: string };
 
 const LINKS: NavLink[] = [
   { label: "Catalog", href: "#catalog" },
+  { label: "Rank", href: "/rank" },
+  { label: "Hosts", href: "/hosts" },
   { label: "About", href: "/about" },
-  { label: "Agents", href: "/for-agents" },
   { label: "API", href: "/api/openapi.json" },
 ];
 

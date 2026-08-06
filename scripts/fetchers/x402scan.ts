@@ -20,7 +20,11 @@ import {
 const BASE = "https://x402scan.com";
 const PROCEDURE = "public.resources.list.paginated";
 const PAGE_SIZE = 100;
-const MAX_PAGES = 200; // safety cap (≈20k resources)
+// Backstop only. The ecosystem is already > 20k resources, so a low cap made
+// the M0-1 "throw on cap" fire every run and drop ALL of x402scan (catalog
+// collapsed to ~84). Keep the loud-failure semantics, but set the cap high
+// enough that normal runs never hit it (~100k resources).
+const MAX_PAGES = 1000;
 
 // A page item carries the resource plus x402scan enrichments.
 type ScanItem = DiscoveryLike & {
