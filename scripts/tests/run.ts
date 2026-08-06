@@ -3,6 +3,8 @@
 import assert from "node:assert/strict";
 import { mergeEndpoints } from "../util";
 import { defaultOrder, isFeatured } from "../../src/lib/featured";
+import { aggregateHosts, hostOf } from "../../src/lib/hosts";
+import { rankFrom } from "../../src/lib/rank";
 import type { Endpoint } from "../../src/lib/types";
 
 let passed = 0;
@@ -75,6 +77,42 @@ test("defaultOrder does NOT pin featured (x402-inc) — pure popularity/name", (
   assert.equal(ordered[0].id, "top", "highest popularity leads, not the featured one");
   assert.equal(isFeatured(featured), true);
   assert.notEqual(ordered[0].id, "inc", "featured must not be pinned first");
+});
+
+console.log("\nStage 3 — hosts / rank");
+
+test("aggregateHosts groups routes by host, sorts by count desc", () => {
+  const eps = [
+    ep({ id: "1", url: "https://a.example/x", category: "data", price: { amount: 0.01, currency: "USDC", unit: "per-call" } }),
+    ep({ id: "2", url: "https://a.example/y", category: "data", price: { amount: 0.03, currency: "USDC", unit: "per-call" } }),
+    ep({ id: "3", url: "https://a.example/z", category: "search" }),
+    ep({ id: "4", url: "https://b.example/w", category: "data" }),
+  ];
+  const hosts = aggregateHosts(eps);
+  assert.equal(hosts[0].host, "a.example");
+  assert.equal(hosts[0].count, 3);
+  assert.equal(hosts[0].topCategory, "data");
+  assert.equal(hosts[0].priceMedian, 0.02); // median of [0.01, 0.03]
+  assert.equal(hosts[1].host, "b.example");
+  assert.equal(hostOf("https://www.c.example/p"), "c.example");
+});
+
+test("rankFrom is UNAVAILABLE when no endpoint has popularity (no fake order)", () => {
+  const r = rankFrom([ep({ id: "1" }), ep({ id: "2" })]);
+  assert.equal(r.status, "unavailable");
+  assert.equal(r.rows.length, 0);
+});
+
+test("rankFrom re-lists by popularity as-is with its metric", () => {
+  const r = rankFrom([
+    ep({ id: "lo", name: "Lo", popularity: 5, popularity_metric: "x402scan:toolCalls" }),
+    ep({ id: "hi", name: "Hi", url: "https://h.example/a", popularity: 900, popularity_metric: "x402scan:toolCalls" }),
+  ]);
+  assert.equal(r.status, "ok");
+  assert.equal(r.metric, "x402scan:toolCalls");
+  assert.equal(r.rows[0].id, "hi");
+  assert.equal(r.rows[0].rank, 1);
+  assert.equal(r.rows[0].host, "h.example");
 });
 
 console.log(`\n${passed} passed`);

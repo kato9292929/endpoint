@@ -1,6 +1,7 @@
 import { CatalogExplorer } from "@/components/CatalogExplorer";
 import { StatsBar } from "@/components/StatsBar";
 import { TotalSparkline } from "@/components/TotalSparkline";
+import { RankSection } from "@/components/RankSection";
 import { HeroVideo } from "@/components/hero/HeroVideo";
 import { HeroNav } from "@/components/hero/HeroNav";
 import { Hero } from "@/components/hero/Hero";
@@ -53,30 +54,32 @@ export default function HomePage() {
 
         {/* Catalog on a solid background so it scrolls over the fixed video. */}
         <section id="catalog" className="relative z-[1] bg-bg">
-          <div className="mx-auto max-w-6xl space-y-8 px-5 py-16 sm:px-8">
-            <header className="space-y-1">
+          <div className="mx-auto max-w-6xl space-y-10 px-5 py-16 sm:px-8">
+            {/* 1. Heading (one line) */}
+            <header>
               <h2 className="text-2xl font-semibold tracking-tight">
-                The catalog
+                The catalog — what&apos;s live, and where it&apos;s called
               </h2>
-              <p className="text-sm text-muted/80 max-w-2xl">
-                Aggregating x402 directories — and the x402 endpoints that x402
-                Inc. contributes to them.
-              </p>
-              <div className="pt-2">
-                <TotalSparkline />
-              </div>
             </header>
 
-            <StatsBar
-              total={endpoints.length}
-              networks={networks.length}
-              categories={
-                Object.values(categoryCounts).filter((c) => c > 0).length
-              }
-              directories={Object.keys(sourceCounts).length}
-              updated={updatedLabel}
-            />
+            {/* 2. Active endpoints (ranking / route concentration) */}
+            <RankSection />
 
+            {/* 3. Stats + sparkline */}
+            <div className="space-y-3">
+              <StatsBar
+                total={endpoints.length}
+                networks={networks.length}
+                categories={
+                  Object.values(categoryCounts).filter((c) => c > 0).length
+                }
+                directories={Object.keys(sourceCounts).length}
+                updated={updatedLabel}
+              />
+              <TotalSparkline />
+            </div>
+
+            {/* 4 + 5. Search + filters + full list (rows) */}
             <CatalogExplorer
               endpoints={endpoints}
               networks={networks.map((n) => n.name)}

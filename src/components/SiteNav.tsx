@@ -25,6 +25,12 @@ export function SiteNav() {
           <Link href="/" className="hover:text-black">
             Catalog
           </Link>
+          <Link href="/rank" className="hover:text-black">
+            Rank
+          </Link>
+          <Link href="/hosts" className="hover:text-black">
+            Hosts
+          </Link>
           <Link href="/about" className="hover:text-black">
             About
           </Link>

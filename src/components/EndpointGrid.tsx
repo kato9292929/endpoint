@@ -1,9 +1,11 @@
 import Link from "next/link";
-import { EndpointCard } from "./EndpointCard";
+import { EndpointRow } from "./EndpointRow";
+import { RowHeader } from "./RowHeader";
 import { MAX_LISTING_ITEMS } from "@/lib/constants";
 import { defaultOrder } from "@/lib/featured";
 import type { Endpoint } from "@/lib/types";
 
+// A titled, row-based listing (category / network / directory / by pages).
 export function EndpointGrid({
   title,
   subtitle,
@@ -34,24 +36,22 @@ export function EndpointGrid({
           No endpoints found here yet.
         </p>
       ) : (
-        <>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {shown.map((e) => (
-              <EndpointCard key={e.id} endpoint={e} />
-            ))}
-          </div>
+        <div className="rounded-lg border border-border bg-surface">
+          <RowHeader />
+          {shown.map((e) => (
+            <EndpointRow key={e.id} endpoint={e} />
+          ))}
           {hidden > 0 ? (
-            <div className="rounded-lg border border-border bg-surface p-4 text-sm text-muted">
+            <div className="px-2 py-3 text-xs text-muted">
               Showing the first {shown.length.toLocaleString()} of{" "}
               {endpoints.length.toLocaleString()}.{" "}
               <Link href="/for-agents" className="text-accent hover:underline">
                 Use the API
               </Link>{" "}
-              or see more in the source directories to reach the remaining{" "}
-              {hidden.toLocaleString()}.
+              to reach the remaining {hidden.toLocaleString()}.
             </div>
           ) : null}
-        </>
+        </div>
       )}
     </div>
   );
