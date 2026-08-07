@@ -120,7 +120,8 @@ async function main() {
       title: it.origins?.[0]?.title ?? hostOf(origin),
       host: hostOf(origin),
       tx_count: num(it.tx_count),
-      total_amount: num(it.total_amount),
+      // x402scan reports settled amount in atomic USDC (6 decimals) → dollars.
+      total_amount: num(it.total_amount) / 1e6,
       unique_buyers: num(it.unique_buyers),
       popularity_metric: METRIC,
     };

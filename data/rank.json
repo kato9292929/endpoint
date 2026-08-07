@@ -11,7 +11,7 @@
       "title": "BlockRun — The routing & payment layer for AI",
       "host": "blockrun.ai",
       "tx_count": 154056,
-      "total_amount": 5759203214,
+      "total_amount": 5759.203214,
       "unique_buyers": 45,
       "popularity_metric": "x402scan:tx_count:1d"
     },
@@ -21,7 +21,7 @@
       "title": "claw402 — x402 API Payment Gateway",
       "host": "claw402.ai",
       "tx_count": 29389,
-      "total_amount": 58778000,
+      "total_amount": 58.778,
       "unique_buyers": 34,
       "popularity_metric": "x402scan:tx_count:1d"
     },
@@ -31,7 +31,7 @@
       "title": "Cluster Protocol - Liberation Engine for Internet Capital Market",
       "host": "api.clusterprotocol.ai",
       "tx_count": 4697,
-      "total_amount": 3079367000,
+      "total_amount": 3079.367,
       "unique_buyers": 637,
       "popularity_metric": "x402scan:tx_count:1d"
     },
@@ -41,7 +41,7 @@
       "title": "Syra — Machine Money for Agents",
       "host": "api.syraa.fun",
       "tx_count": 3122,
-      "total_amount": 120095000,
+      "total_amount": 120.095,
       "unique_buyers": 69,
       "popularity_metric": "x402scan:tx_count:1d"
     },
@@ -51,7 +51,7 @@
       "title": "StableEnrich",
       "host": "stableenrich.dev",
       "tx_count": 1679,
-      "total_amount": 73759400,
+      "total_amount": 73.7594,
       "unique_buyers": 54,
       "popularity_metric": "x402scan:tx_count:1d"
     },
@@ -61,7 +61,7 @@
       "title": "x402.Boats - Game for AI Agents",
       "host": "mcp.x402.boats",
       "tx_count": 1110,
-      "total_amount": 13082003032,
+      "total_amount": 13082.003032,
       "unique_buyers": 16,
       "popularity_metric": "x402scan:tx_count:1d"
     },
@@ -71,7 +71,7 @@
       "title": "SniperX•x402 super AI agent for sniping Alpha and Newpair on solana",
       "host": "x402.sniperx.fun",
       "tx_count": 1103,
-      "total_amount": 22060000,
+      "total_amount": 22.06,
       "unique_buyers": 12,
       "popularity_metric": "x402scan:tx_count:1d"
     },
@@ -81,7 +81,7 @@
       "title": "FortClaw - x402 Territory Game for AI Agents",
       "host": "mcp.fortclaw.com",
       "tx_count": 925,
-      "total_amount": 77520000,
+      "total_amount": 77.52,
       "unique_buyers": 11,
       "popularity_metric": "x402scan:tx_count:1d"
     },
@@ -91,7 +91,7 @@
       "title": "agentutility — paid x402 endpoints for autonomous agents",
       "host": "x402.agentutility.ai",
       "tx_count": 612,
-      "total_amount": 15605000,
+      "total_amount": 15.605,
       "unique_buyers": 5,
       "popularity_metric": "x402scan:tx_count:1d"
     },
@@ -101,7 +101,7 @@
       "title": "dTelecom x402 Gateway — WebRTC, STT & TTS API",
       "host": "x402.dtelecom.org",
       "tx_count": 505,
-      "total_amount": 1004100000,
+      "total_amount": 1004.1,
       "unique_buyers": 26,
       "popularity_metric": "x402scan:tx_count:1d"
     },
@@ -111,7 +111,7 @@
       "title": "OneSource - EVM RPC for AI Agents",
       "host": "api.onesource.io",
       "tx_count": 470,
-      "total_amount": 1948000,
+      "total_amount": 1.948,
       "unique_buyers": 54,
       "popularity_metric": "x402scan:tx_count:1d"
     },
@@ -121,7 +121,7 @@
       "title": "Losbeto — x402 AI Trading Swarm | Multi-Chain USDC Payments",
       "host": "markets.losbeto.xyz",
       "tx_count": 465,
-      "total_amount": 33415000,
+      "total_amount": 33.415,
       "unique_buyers": 1,
       "popularity_metric": "x402scan:tx_count:1d"
     },
@@ -131,7 +131,7 @@
       "title": "Loyal Spark - Loyalty Rewards That Grow",
       "host": "api.loyalspark.online",
       "tx_count": 411,
-      "total_amount": 2821000,
+      "total_amount": 2.821,
       "unique_buyers": 66,
       "popularity_metric": "x402scan:tx_count:1d"
     },
@@ -141,7 +141,7 @@
       "title": "Kronos x402 API",
       "host": "kronossignals.com",
       "tx_count": 406,
-      "total_amount": 4590000,
+      "total_amount": 4.59,
       "unique_buyers": 6,
       "popularity_metric": "x402scan:tx_count:1d"
     },
@@ -151,7 +151,7 @@
       "title": "Delx — Infrastructure for autonomous agents",
       "host": "api.delx.ai",
       "tx_count": 399,
-      "total_amount": 1088000,
+      "total_amount": 1.088,
       "unique_buyers": 5,
       "popularity_metric": "x402scan:tx_count:1d"
     },
@@ -161,7 +161,7 @@
       "title": "Nansen AI - Trade Everything Onchain with AI",
       "host": "api.nansen.ai",
       "tx_count": 305,
-      "total_amount": 5450000,
+      "total_amount": 5.45,
       "unique_buyers": 17,
       "popularity_metric": "x402scan:tx_count:1d"
     },
@@ -171,7 +171,7 @@
       "title": "Signalbound API",
       "host": "api.signalbound.art",
       "tx_count": 288,
-      "total_amount": 2880000,
+      "total_amount": 2.88,
       "unique_buyers": 7,
       "popularity_metric": "x402scan:tx_count:1d"
     },
@@ -181,7 +181,7 @@
       "title": "2s — the (most) everything API",
       "host": "2s.io",
       "tx_count": 269,
-      "total_amount": 2212900,
+      "total_amount": 2.2129,
       "unique_buyers": 32,
       "popularity_metric": "x402scan:tx_count:1d"
     },
@@ -191,7 +191,7 @@
       "title": "Exa | Web Search API, AI Search Engine, &amp; Website Crawler",
       "host": "api.exa.ai",
       "tx_count": 268,
-      "total_amount": 1607000,
+      "total_amount": 1.607,
       "unique_buyers": 14,
       "popularity_metric": "x402scan:tx_count:1d"
     },
@@ -201,7 +201,7 @@
       "title": "The Bot Wire",
       "host": "thebotwire.com",
       "tx_count": 233,
-      "total_amount": 1175000,
+      "total_amount": 1.175,
       "unique_buyers": 5,
       "popularity_metric": "x402scan:tx_count:1d"
     },
@@ -211,7 +211,7 @@
       "title": "BaseHub - Play Games and Earn XP",
       "host": "basehub.fun",
       "tx_count": 225,
-      "total_amount": 12250000,
+      "total_amount": 12.25,
       "unique_buyers": 45,
       "popularity_metric": "x402scan:tx_count:1d"
     },
@@ -221,7 +221,7 @@
       "title": "Vishwa",
       "host": "api.vishwalab.com",
       "tx_count": 214,
-      "total_amount": 214000,
+      "total_amount": 0.214,
       "unique_buyers": 155,
       "popularity_metric": "x402scan:tx_count:1d"
     },
@@ -231,7 +231,7 @@
       "title": "StableTravel",
       "host": "stabletravel.dev",
       "tx_count": 196,
-      "total_amount": 5470000,
+      "total_amount": 5.47,
       "unique_buyers": 6,
       "popularity_metric": "x402scan:tx_count:1d"
     },
@@ -241,7 +241,7 @@
       "title": "cn402 — Chinese Metaphysics Data for AI Agents",
       "host": "api.cn402.com",
       "tx_count": 195,
-      "total_amount": 2303200,
+      "total_amount": 2.3032,
       "unique_buyers": 75,
       "popularity_metric": "x402scan:tx_count:1d"
     },
@@ -251,7 +251,7 @@
       "title": "Deepnets.ai",
       "host": "api.deepnets.ai",
       "tx_count": 193,
-      "total_amount": 1930000,
+      "total_amount": 1.93,
       "unique_buyers": 3,
       "popularity_metric": "x402scan:tx_count:1d"
     },
@@ -261,7 +261,7 @@
       "title": "api.polymer.zone",
       "host": "api.polymer.zone",
       "tx_count": 191,
-      "total_amount": 19100000,
+      "total_amount": 19.1,
       "unique_buyers": 1,
       "popularity_metric": "x402scan:tx_count:1d"
     },
@@ -271,7 +271,7 @@
       "title": "x402engine — Pay-per-call APIs for AI Agents",
       "host": "x402engine.app",
       "tx_count": 176,
-      "total_amount": 295000,
+      "total_amount": 0.295,
       "unique_buyers": 2,
       "popularity_metric": "x402scan:tx_count:1d"
     },
@@ -281,7 +281,7 @@
       "title": "Scout — Multi-source Intelligence API",
       "host": "scout.hugen.tokyo",
       "tx_count": 145,
-      "total_amount": 1440000,
+      "total_amount": 1.44,
       "unique_buyers": 10,
       "popularity_metric": "x402scan:tx_count:1d"
     },
@@ -291,7 +291,7 @@
       "title": "StableSocial",
       "host": "stablesocial.dev",
       "tx_count": 143,
-      "total_amount": 8580000,
+      "total_amount": 8.58,
       "unique_buyers": 10,
       "popularity_metric": "x402scan:tx_count:1d"
     },
@@ -301,7 +301,7 @@
       "title": "x402.anyspend.com",
       "host": "x402.anyspend.com",
       "tx_count": 142,
-      "total_amount": 229000000,
+      "total_amount": 229,
       "unique_buyers": 76,
       "popularity_metric": "x402scan:tx_count:1d"
     },
@@ -311,7 +311,7 @@
       "title": "Otto AI x402 — Market Intelligence, DeFi & Trading",
       "host": "x402.ottoai.services",
       "tx_count": 136,
-      "total_amount": 546000,
+      "total_amount": 0.546,
       "unique_buyers": 29,
       "popularity_metric": "x402scan:tx_count:1d"
     },
@@ -321,7 +321,7 @@
       "title": "Laevitas API V2",
       "host": "apiv2.laevitas.ch",
       "tx_count": 125,
-      "total_amount": 12500000,
+      "total_amount": 12.5,
       "unique_buyers": 6,
       "popularity_metric": "x402scan:tx_count:1d"
     },
@@ -331,7 +331,7 @@
       "title": "glim.sh - give your AI agent live data from across the web",
       "host": "glim.sh",
       "tx_count": 124,
-      "total_amount": 615000,
+      "total_amount": 0.615,
       "unique_buyers": 13,
       "popularity_metric": "x402scan:tx_count:1d"
     },
@@ -341,7 +341,7 @@
       "title": "glim.sh - live data for any agent",
       "host": "surf.cascade.fyi",
       "tx_count": 116,
-      "total_amount": 395000,
+      "total_amount": 0.395,
       "unique_buyers": 5,
       "popularity_metric": "x402scan:tx_count:1d"
     },
@@ -351,7 +351,7 @@
       "title": "VAPE",
       "host": "vape-x402.vapex402.workers.dev",
       "tx_count": 108,
-      "total_amount": 2310000,
+      "total_amount": 2.31,
       "unique_buyers": 2,
       "popularity_metric": "x402scan:tx_count:1d"
     },
@@ -361,7 +361,7 @@
       "title": "Google Trends SEO Keyword Data",
       "host": "google-trends.use.x402atlas.com",
       "tx_count": 101,
-      "total_amount": 3830000,
+      "total_amount": 3.83,
       "unique_buyers": 1,
       "popularity_metric": "x402scan:tx_count:1d"
     },
@@ -371,7 +371,7 @@
       "title": "BlockRun AI Gateway",
       "host": "sol.blockrun.ai",
       "tx_count": 93,
-      "total_amount": 217010,
+      "total_amount": 0.21701,
       "unique_buyers": 6,
       "popularity_metric": "x402scan:tx_count:1d"
     },
@@ -381,7 +381,7 @@
       "title": "SlinkyLayer API",
       "host": "x402.slinkylayer.ai",
       "tx_count": 89,
-      "total_amount": 721000,
+      "total_amount": 0.721,
       "unique_buyers": 89,
       "popularity_metric": "x402scan:tx_count:1d"
     },
@@ -391,7 +391,7 @@
       "title": "Clash of Coins API",
       "host": "x402.clashofcoins.com",
       "tx_count": 76,
-      "total_amount": 306468000,
+      "total_amount": 306.468,
       "unique_buyers": 18,
       "popularity_metric": "x402scan:tx_count:1d"
     },
@@ -401,7 +401,7 @@
       "title": "Deepline GTM API",
       "host": "stable-deepline.dev",
       "tx_count": 75,
-      "total_amount": 11520000,
+      "total_amount": 11.52,
       "unique_buyers": 7,
       "popularity_metric": "x402scan:tx_count:1d"
     },
@@ -411,7 +411,7 @@
       "title": "Strale — Trust and Quality Infrastructure for AI Agents",
       "host": "api.strale.io",
       "tx_count": 74,
-      "total_amount": 4503618,
+      "total_amount": 4.503618,
       "unique_buyers": 1,
       "popularity_metric": "x402scan:tx_count:1d"
     },
@@ -421,7 +421,7 @@
       "title": "StockWaves — China market data + tokenized-stock safety gate for AI agents (x402)",
       "host": "stockwaves.net",
       "tx_count": 73,
-      "total_amount": 4276000,
+      "total_amount": 4.276,
       "unique_buyers": 3,
       "popularity_metric": "x402scan:tx_count:1d"
     },
@@ -431,7 +431,7 @@
       "title": "twit.sh — Plug AI agents into X",
       "host": "x402.twit.sh",
       "tx_count": 61,
-      "total_amount": 392000,
+      "total_amount": 0.392,
       "unique_buyers": 13,
       "popularity_metric": "x402scan:tx_count:1d"
     },
@@ -441,7 +441,7 @@
       "title": "Token4u | 极致安全，算力更省",
       "host": "token4u.ai",
       "tx_count": 58,
-      "total_amount": 3192936,
+      "total_amount": 3.192936,
       "unique_buyers": 1,
       "popularity_metric": "x402scan:tx_count:1d"
     },
@@ -451,7 +451,7 @@
       "title": "global-econ-x402-production.up.railway.app",
       "host": "global-econ-x402-production.up.railway.app",
       "tx_count": 51,
-      "total_amount": 252000,
+      "total_amount": 0.252,
       "unique_buyers": 5,
       "popularity_metric": "x402scan:tx_count:1d"
     },
@@ -461,7 +461,7 @@
       "title": "Financial Data x402",
       "host": "x402-stock-indicators.vercel.app",
       "tx_count": 47,
-      "total_amount": 235000,
+      "total_amount": 0.235,
       "unique_buyers": 3,
       "popularity_metric": "x402scan:tx_count:1d"
     },
@@ -471,7 +471,7 @@
       "title": "imgnAI Katana API",
       "host": "kat.imgnai.com",
       "tx_count": 38,
-      "total_amount": 2766400,
+      "total_amount": 2.7664,
       "unique_buyers": 1,
       "popularity_metric": "x402scan:tx_count:1d"
     },
@@ -481,7 +481,7 @@
       "title": "Google Patents Search & Data",
       "host": "google-patents.use.x402atlas.com",
       "tx_count": 35,
-      "total_amount": 200000,
+      "total_amount": 0.2,
       "unique_buyers": 1,
       "popularity_metric": "x402scan:tx_count:1d"
     },
@@ -491,7 +491,7 @@
       "title": "OnchainExpat x402 APIs",
       "host": "x402.onchainexpat.com",
       "tx_count": 34,
-      "total_amount": 6950000,
+      "total_amount": 6.95,
       "unique_buyers": 1,
       "popularity_metric": "x402scan:tx_count:1d"
     },
@@ -501,7 +501,7 @@
       "title": "Welcome to nginx!",
       "host": "api.myceliasignal.com",
       "tx_count": 32,
-      "total_amount": 4220000,
+      "total_amount": 4.22,
       "unique_buyers": 3,
       "popularity_metric": "x402scan:tx_count:1d"
     }
