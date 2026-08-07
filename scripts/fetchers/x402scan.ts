@@ -20,11 +20,15 @@ import {
 const BASE = "https://x402scan.com";
 const PROCEDURE = "public.resources.list.paginated";
 const PAGE_SIZE = 100;
-// Backstop only. The ecosystem is already > 20k resources, so a low cap made
-// the M0-1 "throw on cap" fire every run and drop ALL of x402scan (catalog
-// collapsed to ~84). Keep the loud-failure semantics, but set the cap high
-// enough that normal runs never hit it (~100k resources).
+// Backstop page cap.
 const MAX_PAGES = 1000;
+// Endpoint cap. x402scan is now 65k+ resources; embedding that many into the
+// homepage's client-side search blows Vercel's ~19 MB ISR limit (proven safe
+// at ~19k). Cap the collected set so the build never fails. The full set can be
+// unlocked later by moving homepage search server-side (/api/search).
+const MAX_ENDPOINTS = 20000;
+// Retry a page a couple of times on a 5xx before giving up on it.
+const PAGE_RETRIES = 2;
 
 // A page item carries the resource plus x402scan enrichments.
 type ScanItem = DiscoveryLike & {
@@ -49,7 +53,7 @@ function trpcUrl(page: number): string {
   return `${BASE}/api/trpc/${PROCEDURE}?${q.toString()}`;
 }
 
-async function fetchPage(page: number): Promise<Paginated> {
+async function fetchPageOnce(page: number): Promise<Paginated> {
   const res = await fetch(trpcUrl(page), {
     headers: {
       accept: "application/json",
@@ -70,6 +74,19 @@ async function fetchPage(page: number): Promise<Paginated> {
   return (payload ?? {}) as Paginated;
 }
 
+async function fetchPage(page: number): Promise<Paginated> {
+  let lastErr: unknown;
+  for (let attempt = 0; attempt <= PAGE_RETRIES; attempt++) {
+    try {
+      return await fetchPageOnce(page);
+    } catch (err) {
+      lastErr = err;
+      await sleep(1000 * (attempt + 1));
+    }
+  }
+  throw lastErr;
+}
+
 function sourceUrl(item: ScanItem): string {
   const originId = item.originId ?? item.origin?.id;
   return originId ? `${BASE}/server/${originId}` : `${BASE}/resources`;
@@ -77,14 +94,26 @@ function sourceUrl(item: ScanItem): string {
 
 export async function fetchX402scan(): Promise<Endpoint[]> {
   const endpoints: Endpoint[] = [];
-  let reachedEnd = false;
 
   for (let page = 0; page < MAX_PAGES; page++) {
-    const { items, hasNextPage } = await fetchPage(page);
-    if (!items || items.length === 0) {
-      reachedEnd = true;
-      break;
+    let res: Paginated;
+    try {
+      res = await fetchPage(page);
+    } catch (err) {
+      // A page error MUST NOT discard everything already collected (a single
+      // deep-page 500 previously collapsed the whole catalog to ~84). Keep the
+      // partial result; only a page-0 failure is a true failure.
+      if (endpoints.length > 0) {
+        console.warn(
+          `x402scan: stopping at page ${page} with ${endpoints.length} endpoints — ${(err as Error).message}`,
+        );
+        break;
+      }
+      throw err;
     }
+
+    const { items, hasNextPage } = res;
+    if (!items || items.length === 0) break;
 
     for (const item of items) {
       const mapped = mapDiscoveryResource(item, {
@@ -94,20 +123,14 @@ export async function fetchX402scan(): Promise<Endpoint[]> {
       if (mapped) endpoints.push(mapped);
     }
 
-    if (!hasNextPage) {
-      reachedEnd = true;
+    if (endpoints.length >= MAX_ENDPOINTS) {
+      console.warn(
+        `x402scan: reached MAX_ENDPOINTS (${MAX_ENDPOINTS}); returning a capped set.`,
+      );
       break;
     }
+    if (!hasNextPage) break;
     await sleep(1000); // politeness: >=1s between requests
-  }
-
-  // M0-1: don't silently truncate. If the cap is hit while the upstream still
-  // reports more pages, fail loudly so the cap gets raised.
-  if (!reachedEnd) {
-    throw new Error(
-      `x402scan: MAX_PAGES (${MAX_PAGES}) reached while hasNextPage was still true ` +
-        `(> ${MAX_PAGES * PAGE_SIZE} resources). Raise MAX_PAGES.`,
-    );
   }
 
   return endpoints;
