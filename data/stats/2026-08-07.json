@@ -1,10 +1,597 @@
 {
-  "generated_at": "2026-08-07T04:34:47.617Z",
-  "status": "ok",
-  "metric": "x402scan:tx_count:1d",
-  "timeframe": 1,
-  "sorting": "tx_count",
-  "rows": [
+  "date": "2026-08-07",
+  "generatedAt": "2026-08-07T04:34:40.625Z",
+  "total": 84,
+  "byCategory": {
+    "compute": 34,
+    "data": 22,
+    "messaging": 2,
+    "search": 6,
+    "other": 7,
+    "compliance": 2,
+    "media": 2,
+    "intelligence": 8,
+    "oracle": 1
+  },
+  "byChain": {
+    "Solana": 71,
+    "Base": 14
+  },
+  "bySource": {
+    "pay-sh": 70,
+    "x402-inc": 14
+  },
+  "byPriceTier": {
+    "unknown": 63,
+    ">$0.15": 8,
+    "$0.01–0.05": 8,
+    "$0.05–0.15": 3,
+    "<$0.01": 2
+  },
+  "hostCount": 80,
+  "byHost": [
+    {
+      "host": "api.paysponge.com",
+      "name": "Nyne AI",
+      "count": 3,
+      "priceMedian": 0.02,
+      "topCategory": "data"
+    },
+    {
+      "host": "apijapan.vercel.app",
+      "name": "APAC KYC API",
+      "count": 3,
+      "priceMedian": 1,
+      "topCategory": "compliance"
+    },
+    {
+      "host": "2captcha.x402.paysponge.com",
+      "name": "2Captcha",
+      "count": 1,
+      "priceMedian": null,
+      "topCategory": "compute"
+    },
+    {
+      "host": "addressvalidation.google.gateway-402.com",
+      "name": "Address Validation API",
+      "count": 1,
+      "priceMedian": null,
+      "topCategory": "data"
+    },
+    {
+      "host": "agentexplorer.alibaba.gateway-402.com",
+      "name": "Alibaba Cloud Agent Skills Explorer",
+      "count": 1,
+      "priceMedian": null,
+      "topCategory": "search"
+    },
+    {
+      "host": "ai-scraper-api.duckdns.org",
+      "name": "Web3 Autonomous Scraper",
+      "count": 1,
+      "priceMedian": null,
+      "topCategory": "data"
+    },
+    {
+      "host": "aigen.alibaba.gateway-402.com",
+      "name": "Alibaba Cloud AI Generation",
+      "count": 1,
+      "priceMedian": null,
+      "topCategory": "compute"
+    },
+    {
+      "host": "airquality.google.gateway-402.com",
+      "name": "Air Quality API",
+      "count": 1,
+      "priceMedian": null,
+      "topCategory": "data"
+    },
+    {
+      "host": "anytrans.alibaba.gateway-402.com",
+      "name": "Alibaba Cloud AnyTrans",
+      "count": 1,
+      "priceMedian": null,
+      "topCategory": "compute"
+    },
+    {
+      "host": "api.exa.ai",
+      "name": "Exa",
+      "count": 1,
+      "priceMedian": null,
+      "topCategory": "search"
+    },
+    {
+      "host": "api.nansen.ai",
+      "name": "Nansen API",
+      "count": 1,
+      "priceMedian": null,
+      "topCategory": "data"
+    },
+    {
+      "host": "api.purch.xyz",
+      "name": "Purch",
+      "count": 1,
+      "priceMedian": null,
+      "topCategory": "other"
+    },
+    {
+      "host": "api.socialintel.dev",
+      "name": "Social Intel",
+      "count": 1,
+      "priceMedian": null,
+      "topCategory": "data"
+    },
+    {
+      "host": "api.syntalic.com",
+      "name": "Syntalic",
+      "count": 1,
+      "priceMedian": null,
+      "topCategory": "other"
+    },
+    {
+      "host": "api.venice.ai",
+      "name": "Venice.ai — Private AI Inference",
+      "count": 1,
+      "priceMedian": null,
+      "topCategory": "compute"
+    },
+    {
+      "host": "app.dynamicauth.com",
+      "name": "Dynamic Wallets API",
+      "count": 1,
+      "priceMedian": null,
+      "topCategory": "compliance"
+    },
+    {
+      "host": "app.earnfi.fun",
+      "name": "EarnFi Agent API",
+      "count": 1,
+      "priceMedian": null,
+      "topCategory": "other"
+    },
+    {
+      "host": "bigquery.google.gateway-402.com",
+      "name": "BigQuery API",
+      "count": 1,
+      "priceMedian": null,
+      "topCategory": "data"
+    },
+    {
+      "host": "captcha.alibaba.gateway-402.com",
+      "name": "Alibaba Cloud CAPTCHA",
+      "count": 1,
+      "priceMedian": null,
+      "topCategory": "compute"
+    },
+    {
+      "host": "civicinfo.google.gateway-402.com",
+      "name": "Google Civic Information API",
+      "count": 1,
+      "priceMedian": null,
+      "topCategory": "search"
+    },
+    {
+      "host": "contactcenterai.alibaba.gateway-402.com",
+      "name": "Alibaba Cloud Contact Center AI",
+      "count": 1,
+      "priceMedian": null,
+      "topCategory": "compute"
+    },
+    {
+      "host": "documentai.google.gateway-402.com",
+      "name": "Cloud Document AI API",
+      "count": 1,
+      "priceMedian": null,
+      "topCategory": "compute"
+    },
+    {
+      "host": "edututor.alibaba.gateway-402.com",
+      "name": "Alibaba Cloud EduTutor",
+      "count": 1,
+      "priceMedian": null,
+      "topCategory": "compute"
+    },
+    {
+      "host": "embeddings.alibaba.gateway-402.com",
+      "name": "Alibaba Cloud Model Studio Embeddings",
+      "count": 1,
+      "priceMedian": null,
+      "topCategory": "compute"
+    },
+    {
+      "host": "facebody.alibaba.gateway-402.com",
+      "name": "Alibaba Cloud Facebody",
+      "count": 1,
+      "priceMedian": null,
+      "topCategory": "compute"
+    },
+    {
+      "host": "factchecktools.google.gateway-402.com",
+      "name": "Fact Check Tools API",
+      "count": 1,
+      "priceMedian": null,
+      "topCategory": "search"
+    },
+    {
+      "host": "fal.x402.paysponge.com",
+      "name": "fal.ai",
+      "count": 1,
+      "priceMedian": null,
+      "topCategory": "media"
+    },
+    {
+      "host": "farui.alibaba.gateway-402.com",
+      "name": "Alibaba Cloud FaRui",
+      "count": 1,
+      "priceMedian": null,
+      "topCategory": "compute"
+    },
+    {
+      "host": "generativelanguage.google.gateway-402.com",
+      "name": "Generative Language API (Gemini)",
+      "count": 1,
+      "priceMedian": null,
+      "topCategory": "compute"
+    },
+    {
+      "host": "glim.sh",
+      "name": "glim.sh",
+      "count": 1,
+      "priceMedian": 0.015,
+      "topCategory": "data"
+    },
+    {
+      "host": "green.alibaba.gateway-402.com",
+      "name": "Alibaba Cloud Green",
+      "count": 1,
+      "priceMedian": null,
+      "topCategory": "other"
+    },
+    {
+      "host": "imagerecog.alibaba.gateway-402.com",
+      "name": "Alibaba Cloud Image Recognition",
+      "count": 1,
+      "priceMedian": null,
+      "topCategory": "compute"
+    },
+    {
+      "host": "imageseg.alibaba.gateway-402.com",
+      "name": "Alibaba Cloud Image Segmentation",
+      "count": 1,
+      "priceMedian": null,
+      "topCategory": "compute"
+    },
+    {
+      "host": "intelligentspeechinteraction.alibaba.gateway-402.com",
+      "name": "Alibaba Cloud Intelligent Speech Interaction",
+      "count": 1,
+      "priceMedian": null,
+      "topCategory": "compute"
+    },
+    {
+      "host": "iqs.alibaba.gateway-402.com",
+      "name": "Alibaba Cloud Information Query Service",
+      "count": 1,
+      "priceMedian": null,
+      "topCategory": "search"
+    },
+    {
+      "host": "ivpd.alibaba.gateway-402.com",
+      "name": "Alibaba Cloud IVPD",
+      "count": 1,
+      "priceMedian": null,
+      "topCategory": "compute"
+    },
+    {
+      "host": "kgsearch.google.gateway-402.com",
+      "name": "Knowledge Graph Search API",
+      "count": 1,
+      "priceMedian": null,
+      "topCategory": "search"
+    },
+    {
+      "host": "language.google.gateway-402.com",
+      "name": "Cloud Natural Language API",
+      "count": 1,
+      "priceMedian": null,
+      "topCategory": "compute"
+    },
+    {
+      "host": "machinetranslation.alibaba.gateway-402.com",
+      "name": "Alibaba Cloud Machine Translation",
+      "count": 1,
+      "priceMedian": null,
+      "topCategory": "compute"
+    },
+    {
+      "host": "mcp.blocksize.info",
+      "name": "Blocksize Market Data",
+      "count": 1,
+      "priceMedian": null,
+      "topCategory": "data"
+    },
+    {
+      "host": "modelstudio.alibaba.gateway-402.com",
+      "name": "Alibaba Cloud Model Studio (Qwen)",
+      "count": 1,
+      "priceMedian": null,
+      "topCategory": "compute"
+    },
+    {
+      "host": "ocr.alibaba.gateway-402.com",
+      "name": "Alibaba Cloud Model Studio OCR",
+      "count": 1,
+      "priceMedian": null,
+      "topCategory": "compute"
+    },
+    {
+      "host": "osd-coral.vercel.app",
+      "name": "Onchain Stock Data",
+      "count": 1,
+      "priceMedian": 0.001,
+      "topCategory": "data"
+    },
+    {
+      "host": "paimodelgallery.alibaba.gateway-402.com",
+      "name": "Alibaba Cloud PAI Model Gallery",
+      "count": 1,
+      "priceMedian": null,
+      "topCategory": "compute"
+    },
+    {
+      "host": "pay.smartmoney.market",
+      "name": "smartmoney.market",
+      "count": 1,
+      "priceMedian": null,
+      "topCategory": "data"
+    },
+    {
+      "host": "places.google.gateway-402.com",
+      "name": "Places API (New)",
+      "count": 1,
+      "priceMedian": null,
+      "topCategory": "data"
+    },
+    {
+      "host": "pplx.x402.paysponge.com",
+      "name": "Perplexity AI API",
+      "count": 1,
+      "priceMedian": null,
+      "topCategory": "compute"
+    },
+    {
+      "host": "pro-api.coingecko.com",
+      "name": "CoinGecko Onchain DEX API",
+      "count": 1,
+      "priceMedian": 0.01,
+      "topCategory": "data"
+    },
+    {
+      "host": "public-api.birdeye.so",
+      "name": "Birdeye Data",
+      "count": 1,
+      "priceMedian": 0.01,
+      "topCategory": "data"
+    },
+    {
+      "host": "rentcast.x402.paysponge.com",
+      "name": "RentCast API",
+      "count": 1,
+      "priceMedian": 0.01,
+      "topCategory": "data"
+    },
+    {
+      "host": "saf.alibaba.gateway-402.com",
+      "name": "Alibaba Cloud SAF",
+      "count": 1,
+      "priceMedian": null,
+      "topCategory": "other"
+    },
+    {
+      "host": "screenshotone.x402.paysponge.com",
+      "name": "ScreenshotOne",
+      "count": 1,
+      "priceMedian": 0.02,
+      "topCategory": "media"
+    },
+    {
+      "host": "smartmoneyscreener.vercel.app",
+      "name": "Smart Money Screener",
+      "count": 1,
+      "priceMedian": 0.05,
+      "topCategory": "intelligence"
+    },
+    {
+      "host": "sol.blockrun.ai",
+      "name": "BlockRun - Stablecoin gated LLM inference",
+      "count": 1,
+      "priceMedian": null,
+      "topCategory": "compute"
+    },
+    {
+      "host": "solana.x402.cryptorefills.com",
+      "name": "CryptoRefills",
+      "count": 1,
+      "priceMedian": null,
+      "topCategory": "other"
+    },
+    {
+      "host": "speech.alibaba.gateway-402.com",
+      "name": "Alibaba Cloud Model Studio Speech Recognition",
+      "count": 1,
+      "priceMedian": null,
+      "topCategory": "compute"
+    },
+    {
+      "host": "speech.google.gateway-402.com",
+      "name": "Cloud Speech-to-Text API",
+      "count": 1,
+      "priceMedian": null,
+      "topCategory": "compute"
+    },
+    {
+      "host": "texttospeech.alibaba.gateway-402.com",
+      "name": "Alibaba Cloud Model Studio Text-to-Speech",
+      "count": 1,
+      "priceMedian": null,
+      "topCategory": "compute"
+    },
+    {
+      "host": "texttospeech.google.gateway-402.com",
+      "name": "Cloud Text-to-Speech API",
+      "count": 1,
+      "priceMedian": null,
+      "topCategory": "compute"
+    },
+    {
+      "host": "tip.clustly.ai",
+      "name": "Clustly",
+      "count": 1,
+      "priceMedian": null,
+      "topCategory": "data"
+    },
+    {
+      "host": "translate.alibaba.gateway-402.com",
+      "name": "Alibaba Cloud Model Studio Translation",
+      "count": 1,
+      "priceMedian": null,
+      "topCategory": "compute"
+    },
+    {
+      "host": "translate.google.gateway-402.com",
+      "name": "Cloud Translation API",
+      "count": 1,
+      "priceMedian": null,
+      "topCategory": "compute"
+    },
+    {
+      "host": "travel.brij.fi",
+      "name": "BRIJ Flight API",
+      "count": 1,
+      "priceMedian": null,
+      "topCategory": "other"
+    },
+    {
+      "host": "tripadvisor.x402.paysponge.com",
+      "name": "Tripadvisor",
+      "count": 1,
+      "priceMedian": 0.01,
+      "topCategory": "data"
+    },
+    {
+      "host": "videointelligence.google.gateway-402.com",
+      "name": "Cloud Video Intelligence API",
+      "count": 1,
+      "priceMedian": null,
+      "topCategory": "compute"
+    },
+    {
+      "host": "vision.google.gateway-402.com",
+      "name": "Cloud Vision API",
+      "count": 1,
+      "priceMedian": null,
+      "topCategory": "compute"
+    },
+    {
+      "host": "wolframalpha.x402.paysponge.com",
+      "name": "Wolfram Alpha",
+      "count": 1,
+      "priceMedian": 0.01,
+      "topCategory": "data"
+    },
+    {
+      "host": "x402-api.vybenetwork.xyz",
+      "name": "Vybe Solana Analytics API (x402)",
+      "count": 1,
+      "priceMedian": null,
+      "topCategory": "data"
+    },
+    {
+      "host": "x402-hl.vercel.app",
+      "name": "Hyperliquid Intelligence",
+      "count": 1,
+      "priceMedian": 0.15,
+      "topCategory": "intelligence"
+    },
+    {
+      "host": "x402-jrey.vercel.app",
+      "name": "Japan Real Estate Yield",
+      "count": 1,
+      "priceMedian": 0.3,
+      "topCategory": "data"
+    },
+    {
+      "host": "x402.api.agentmail.to",
+      "name": "AgentMail",
+      "count": 1,
+      "priceMedian": null,
+      "topCategory": "messaging"
+    },
+    {
+      "host": "x402.dtelecom.org",
+      "name": "dTelecom",
+      "count": 1,
+      "priceMedian": null,
+      "topCategory": "compute"
+    },
+    {
+      "host": "x402.quicknode.com",
+      "name": "Quicknode",
+      "count": 1,
+      "priceMedian": 0.001,
+      "topCategory": "compute"
+    },
+    {
+      "host": "x402amd.vercel.app",
+      "name": "APAC Macro Dashboard",
+      "count": 1,
+      "priceMedian": 0.2,
+      "topCategory": "data"
+    },
+    {
+      "host": "x402nansenpolymarket.vercel.app",
+      "name": "Nansen × Polymarket Divergence",
+      "count": 1,
+      "priceMedian": 0.15,
+      "topCategory": "intelligence"
+    },
+    {
+      "host": "x402oif.vercel.app",
+      "name": "Onchain Intelligence Feed",
+      "count": 1,
+      "priceMedian": 0.1,
+      "topCategory": "intelligence"
+    },
+    {
+      "host": "x402pi.vercel.app",
+      "name": "Portfolio Intelligence",
+      "count": 1,
+      "priceMedian": 0.3,
+      "topCategory": "intelligence"
+    },
+    {
+      "host": "x402pmi.vercel.app",
+      "name": "Private Market Intelligence",
+      "count": 1,
+      "priceMedian": 0.15,
+      "topCategory": "intelligence"
+    },
+    {
+      "host": "x402wid.vercel.app",
+      "name": "Whale Intent Decoder",
+      "count": 1,
+      "priceMedian": 0.1,
+      "topCategory": "intelligence"
+    },
+    {
+      "host": "x402yi.vercel.app",
+      "name": "Yield Intelligence",
+      "count": 1,
+      "priceMedian": 0.2,
+      "topCategory": "intelligence"
+    }
+  ],
+  "rankTop50": [
     {
       "rank": 1,
       "origin": "https://blockrun.ai",
