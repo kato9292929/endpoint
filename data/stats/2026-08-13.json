@@ -1,0 +1,1239 @@
+{
+  "date": "2026-08-13",
+  "generatedAt": "2026-08-13T07:50:25.297Z",
+  "total": 19758,
+  "byCategory": {
+    "search": 5138,
+    "data": 3344,
+    "compute": 4062,
+    "messaging": 3385,
+    "trading": 3002,
+    "media": 446,
+    "other": 370,
+    "compliance": 2,
+    "intelligence": 8,
+    "oracle": 1
+  },
+  "byChain": {
+    "Base": 16960,
+    "Solana": 7096
+  },
+  "bySource": {
+    "x402scan": 19674,
+    "pay-sh": 70,
+    "x402-inc": 14
+  },
+  "byPriceTier": {
+    "unknown": 2053,
+    "$0.05–0.15": 3035,
+    "<$0.01": 6864,
+    "$0.01–0.05": 5583,
+    ">$0.15": 2207,
+    "free": 16
+  },
+  "hostCount": 1060,
+  "byHost": [
+    {
+      "host": "api.m2mcent.com",
+      "name": "M2MCent — 1,069 Monetized Remote MCP Nodes &amp; AEO Network (x402 Protocol)",
+      "count": 1004,
+      "priceMedian": 0.15,
+      "topCategory": "trading"
+    },
+    {
+      "host": "x402-api-production-5133.up.railway.app",
+      "name": "Orders of Magnitude API",
+      "count": 1002,
+      "priceMedian": 0.01,
+      "topCategory": "data"
+    },
+    {
+      "host": "api.delx.ai",
+      "name": "Delx — Infrastructure for autonomous agents",
+      "count": 1000,
+      "priceMedian": 0.001,
+      "topCategory": "messaging"
+    },
+    {
+      "host": "k2so.wrong.systems",
+      "name": "K-2SO · Autonomous x402 Agent Merchant on Base",
+      "count": 691,
+      "priceMedian": 0.002,
+      "topCategory": "compute"
+    },
+    {
+      "host": "cheshireterminal.ai",
+      "name": "Cheshire Terminal — Solana Markets & Agent Infrastructure",
+      "count": 643,
+      "priceMedian": 0.01,
+      "topCategory": "trading"
+    },
+    {
+      "host": "api.gocreativeai.com",
+      "name": "GoCreative — keyless compliance &amp; regulated-data API for AI agents",
+      "count": 636,
+      "priceMedian": 0.05,
+      "topCategory": "search"
+    },
+    {
+      "host": "2s.io",
+      "name": "2s — the (most) everything API",
+      "count": 561,
+      "priceMedian": 0.0036,
+      "topCategory": "search"
+    },
+    {
+      "host": "agent402.tools",
+      "name": "Agent402 - 102 agent skill packs, one x402 payment each (527 tools)",
+      "count": 528,
+      "priceMedian": 0.003,
+      "topCategory": "messaging"
+    },
+    {
+      "host": "api.jarvisclaw.ai",
+      "name": "JarvisClaw API",
+      "count": 454,
+      "priceMedian": 0.0115,
+      "topCategory": "compute"
+    },
+    {
+      "host": "phantom-api-omega.vercel.app",
+      "name": "Phantom API — Invisible Infrastructure, Fast On-Chain Data",
+      "count": 427,
+      "priceMedian": 0.01,
+      "topCategory": "data"
+    },
+    {
+      "host": "x402.forgemesh.io",
+      "name": "x402 Utility APIs for AI Agents — ForgeMesh Utility Grid",
+      "count": 415,
+      "priceMedian": 0.003,
+      "topCategory": "compute"
+    },
+    {
+      "host": "quanta-roan.vercel.app",
+      "name": "QuantaFlow - x402 API Gateway",
+      "count": 330,
+      "priceMedian": 0.01,
+      "topCategory": "data"
+    },
+    {
+      "host": "library.forgemesh.io",
+      "name": "ForgeMesh Library",
+      "count": 318,
+      "priceMedian": 0.003,
+      "topCategory": "search"
+    },
+    {
+      "host": "x402.openwebninja.com",
+      "name": "OpenWeb Ninja — x402 APIs",
+      "count": 310,
+      "priceMedian": 0.003,
+      "topCategory": "search"
+    },
+    {
+      "host": "api.24klabs.ai",
+      "name": "24K Labs — The Gold-402 Directory for the x402 Ecosystem",
+      "count": 286,
+      "priceMedian": 0.002,
+      "topCategory": "compute"
+    },
+    {
+      "host": "api.agentstools.dev",
+      "name": "x402 web tools",
+      "count": 244,
+      "priceMedian": 0.015,
+      "topCategory": "search"
+    },
+    {
+      "host": "stablesocial.dev",
+      "name": "StableSocial",
+      "count": 212,
+      "priceMedian": 0.06,
+      "topCategory": "search"
+    },
+    {
+      "host": "blockrun.ai",
+      "name": "BlockRun — The routing & payment layer for AI",
+      "count": 185,
+      "priceMedian": 0.0085,
+      "topCategory": "trading"
+    },
+    {
+      "host": "claw402.ai",
+      "name": "claw402 — x402 API Payment Gateway",
+      "count": 176,
+      "priceMedian": 0.002,
+      "topCategory": "trading"
+    },
+    {
+      "host": "api.run402.com",
+      "name": "Run402 — Full-stack infrastructure for AI agents",
+      "count": 160,
+      "priceMedian": 0.03,
+      "topCategory": "compute"
+    },
+    {
+      "host": "api.execution.market",
+      "name": "Execution Market API",
+      "count": 152,
+      "priceMedian": null,
+      "topCategory": "trading"
+    },
+    {
+      "host": "x402-services-production.up.railway.app",
+      "name": "Onchain & Trading Intelligence for AI Agents — 147 Multichain Tools, Pay in Any Stablecoin",
+      "count": 147,
+      "priceMedian": 0.005,
+      "topCategory": "trading"
+    },
+    {
+      "host": "x402stock.xyz",
+      "name": "x402stock: market &amp; economic data API for AI agents",
+      "count": 143,
+      "priceMedian": 0.02,
+      "topCategory": "search"
+    },
+    {
+      "host": "agents.x402stock.xyz",
+      "name": "x402stock",
+      "count": 140,
+      "priceMedian": 0.02,
+      "topCategory": "search"
+    },
+    {
+      "host": "api.glianalabs.com",
+      "name": "GlianaAI — pay-per-call AI inference across 90+ models",
+      "count": 136,
+      "priceMedian": 0.048,
+      "topCategory": "messaging"
+    },
+    {
+      "host": "acp-x402-scriptmasterlabs.onrender.com",
+      "name": "ScriptMasterLabs — ACP x402 Data API",
+      "count": 133,
+      "priceMedian": 0.001,
+      "topCategory": "data"
+    },
+    {
+      "host": "eltociear-tokenguard.hf.space",
+      "name": "tokenguard API",
+      "count": 124,
+      "priceMedian": 0.02,
+      "topCategory": "data"
+    },
+    {
+      "host": "base-agent-preflight.bytoken2023.workers.dev",
+      "name": "NO HANDS AI x402scan",
+      "count": 114,
+      "priceMedian": 0.025,
+      "topCategory": "compute"
+    },
+    {
+      "host": "fetcher.sh",
+      "name": "fetcher.sh — 111 web-data APIs for agents, paid in USDC",
+      "count": 111,
+      "priceMedian": 0.004,
+      "topCategory": "search"
+    },
+    {
+      "host": "netintel-production-440c.up.railway.app",
+      "name": "NetIntel API",
+      "count": 111,
+      "priceMedian": 0.03,
+      "topCategory": "messaging"
+    },
+    {
+      "host": "netintel.dev",
+      "name": "NetIntel API",
+      "count": 111,
+      "priceMedian": 0.03,
+      "topCategory": "messaging"
+    },
+    {
+      "host": "x402engine.app",
+      "name": "x402engine — Pay-per-call APIs for AI Agents",
+      "count": 109,
+      "priceMedian": 0.015,
+      "topCategory": "messaging"
+    },
+    {
+      "host": "agent402.co.uk",
+      "name": "Agent402 UK — x402 utils for agents (not agent402.tools)",
+      "count": 105,
+      "priceMedian": 0.001,
+      "topCategory": "other"
+    },
+    {
+      "host": "agenttoll.dev",
+      "name": "agenttoll.dev — Paid work products for AI agents",
+      "count": 100,
+      "priceMedian": 0.03,
+      "topCategory": "search"
+    },
+    {
+      "host": "api.losbeto.xyz",
+      "name": "Losbeto — cross-asset market data for AI agents",
+      "count": 100,
+      "priceMedian": 0.06,
+      "topCategory": "media"
+    },
+    {
+      "host": "api.arkm.com",
+      "name": "Arkham API",
+      "count": 91,
+      "priceMedian": 0.4,
+      "topCategory": "data"
+    },
+    {
+      "host": "api.loyalspark.online",
+      "name": "Loyal Spark - Loyalty Rewards That Grow",
+      "count": 82,
+      "priceMedian": 0.01,
+      "topCategory": "data"
+    },
+    {
+      "host": "x402.ottoai.services",
+      "name": "Otto AI x402 — Market Intelligence, DeFi & Trading",
+      "count": 81,
+      "priceMedian": 0.003,
+      "topCategory": "trading"
+    },
+    {
+      "host": "friday-seller-tools-production.up.railway.app",
+      "name": "Friday Seller Tools | Marketplace listing and advertising deliverables",
+      "count": 80,
+      "priceMedian": 0.375,
+      "topCategory": "data"
+    },
+    {
+      "host": "api.locus.report",
+      "name": "Locus: Property Scan",
+      "count": 78,
+      "priceMedian": 0.05,
+      "topCategory": "data"
+    },
+    {
+      "host": "api.meshrelay.xyz",
+      "name": "MeshRelay API",
+      "count": 77,
+      "priceMedian": 1,
+      "topCategory": "data"
+    },
+    {
+      "host": "mcp-x402.onrender.com",
+      "name": "Script Master Labs — x402 Data API",
+      "count": 77,
+      "priceMedian": 0.001,
+      "topCategory": "search"
+    },
+    {
+      "host": "x402.tanship.dev",
+      "name": "Tanship PayAI Console — x402 API",
+      "count": 76,
+      "priceMedian": 0.005,
+      "topCategory": "data"
+    },
+    {
+      "host": "ai-data-marketplace-1042299154756.us-central1.run.app",
+      "name": "DopamineDesk x402 Marketplace | Pay-per-use agent data and security APIs",
+      "count": 69,
+      "priceMedian": 0.02,
+      "topCategory": "compute"
+    },
+    {
+      "host": "api.tantra-authority.com",
+      "name": "Tantra Authority — Tantra without the mythology",
+      "count": 68,
+      "priceMedian": 19.97,
+      "topCategory": "data"
+    },
+    {
+      "host": "api.invoket.com",
+      "name": "Invoket — pre-action checks for AI agents: verify IBANs, phones, laws, weather &amp; vehicles",
+      "count": 66,
+      "priceMedian": 0.01,
+      "topCategory": "compute"
+    },
+    {
+      "host": "archtools.dev",
+      "name": "Arch Tools — 63 AI Agent Tools in One API (x402, LangChain, MCP)",
+      "count": 66,
+      "priceMedian": 0.01,
+      "topCategory": "compute"
+    },
+    {
+      "host": "x402.shizu.me",
+      "name": "scrape402",
+      "count": 66,
+      "priceMedian": 0.003,
+      "topCategory": "messaging"
+    },
+    {
+      "host": "api.borisinc.com",
+      "name": "GameDataKit — Steam and Twitch data for AI agents",
+      "count": 65,
+      "priceMedian": 0.004,
+      "topCategory": "compute"
+    },
+    {
+      "host": "obol-x402.fly.dev",
+      "name": "OBOL — pre-trade safety verdicts for AI agents (x402)",
+      "count": 65,
+      "priceMedian": 0.01,
+      "topCategory": "trading"
+    },
+    {
+      "host": "aeml-x402.zeabur.app",
+      "name": "Truth Bear - Verifiable Screening Intelligence for AI Agents (x402, USDC on Base, GAUGE engine)",
+      "count": 64,
+      "priceMedian": 0.25,
+      "topCategory": "compute"
+    },
+    {
+      "host": "api.excelexi.com",
+      "name": "Excelexi — the API layer for AI agents",
+      "count": 63,
+      "priceMedian": 0.00005,
+      "topCategory": "compute"
+    },
+    {
+      "host": "blixtworks.com",
+      "name": "blixtworks.com · address_validate",
+      "count": 63,
+      "priceMedian": 0.01,
+      "topCategory": "other"
+    },
+    {
+      "host": "three.ws",
+      "name": "three.ws — The 3D Agent Layer of the Internet",
+      "count": 62,
+      "priceMedian": 0.05,
+      "topCategory": "compute"
+    },
+    {
+      "host": "aegis.borisinc.com",
+      "name": "Aegis — the verified registry of agent-payable services",
+      "count": 60,
+      "priceMedian": 0.01,
+      "topCategory": "compute"
+    },
+    {
+      "host": "api.timzinin.com",
+      "name": "Zinin M2M Hub",
+      "count": 60,
+      "priceMedian": 0.02,
+      "topCategory": "search"
+    },
+    {
+      "host": "store.agentexchange.work",
+      "name": "Agent Exchange — data APIs you can buy with a card",
+      "count": 60,
+      "priceMedian": 0.01,
+      "topCategory": "search"
+    },
+    {
+      "host": "x402-stock-indicators.vercel.app",
+      "name": "Financial Data x402",
+      "count": 60,
+      "priceMedian": 0.01,
+      "topCategory": "data"
+    },
+    {
+      "host": "x402financialdata.com",
+      "name": "Financial Data x402",
+      "count": 60,
+      "priceMedian": 0.01,
+      "topCategory": "data"
+    },
+    {
+      "host": "api.relayshield.net",
+      "name": "RelayShield Landing Site",
+      "count": 59,
+      "priceMedian": 0.3,
+      "topCategory": "data"
+    },
+    {
+      "host": "api.weblens.dev",
+      "name": "WebLens API",
+      "count": 58,
+      "priceMedian": 0.015,
+      "topCategory": "search"
+    },
+    {
+      "host": "apiacre.com",
+      "name": "API Acre — Pay-per-call APIs on Base",
+      "count": 58,
+      "priceMedian": 0.02,
+      "topCategory": "messaging"
+    },
+    {
+      "host": "app.keeperhub.com",
+      "name": "KeeperHub - Blockchain Workflow Automation",
+      "count": 54,
+      "priceMedian": 0.030000000000000002,
+      "topCategory": "messaging"
+    },
+    {
+      "host": "rotaryagency.uk",
+      "name": "Rotary Agency — AI Data Marketplace (Pay-per-call via x402)",
+      "count": 54,
+      "priceMedian": 0.003,
+      "topCategory": "messaging"
+    },
+    {
+      "host": "agents.withzero.xyz",
+      "name": "WithZero",
+      "count": 51,
+      "priceMedian": 0.08,
+      "topCategory": "messaging"
+    },
+    {
+      "host": "oracle.the-undesirables.com",
+      "name": "The Undesirables — AI Tools API",
+      "count": 51,
+      "priceMedian": 0.1,
+      "topCategory": "compute"
+    },
+    {
+      "host": "agentdata-api.sander-van-aard.workers.dev",
+      "name": "agentdata-nl",
+      "count": 50,
+      "priceMedian": 0.01,
+      "topCategory": "data"
+    },
+    {
+      "host": "meterly-ai.vercel.app",
+      "name": "Meterly.Ai — Pay-per-call API for Autonomous Agents",
+      "count": 49,
+      "priceMedian": 0.1,
+      "topCategory": "messaging"
+    },
+    {
+      "host": "scvd.store",
+      "name": "Sean-Claude Van Damme&#39;s General Store",
+      "count": 49,
+      "priceMedian": 3,
+      "topCategory": "data"
+    },
+    {
+      "host": "vibesprings.net",
+      "name": "Vibe Springs — World Data API for AI Agents",
+      "count": 48,
+      "priceMedian": 0.006500000000000001,
+      "topCategory": "compute"
+    },
+    {
+      "host": "jp-data-api-production.up.railway.app",
+      "name": "JP Data API",
+      "count": 47,
+      "priceMedian": 0.01,
+      "topCategory": "search"
+    },
+    {
+      "host": "stabletravel.dev",
+      "name": "StableTravel",
+      "count": 45,
+      "priceMedian": 0.02,
+      "topCategory": "search"
+    },
+    {
+      "host": "cloudworldmodel.ai",
+      "name": "Cloud World Model",
+      "count": 44,
+      "priceMedian": 0.001,
+      "topCategory": "compute"
+    },
+    {
+      "host": "stablefinance.dev",
+      "name": "StableFinance",
+      "count": 43,
+      "priceMedian": 0.02,
+      "topCategory": "search"
+    },
+    {
+      "host": "thebotwire.com",
+      "name": "The Bot Wire",
+      "count": 43,
+      "priceMedian": 0.005,
+      "topCategory": "search"
+    },
+    {
+      "host": "x402.ailabra.org",
+      "name": "Ailabra Agent Profit Ledger",
+      "count": 42,
+      "priceMedian": 0.07500000000000001,
+      "topCategory": "compute"
+    },
+    {
+      "host": "true402.dev",
+      "name": "true402 · the machine-native marketplace",
+      "count": 40,
+      "priceMedian": 0.005,
+      "topCategory": "data"
+    },
+    {
+      "host": "api.agmsg.world",
+      "name": "AgMsg",
+      "count": 39,
+      "priceMedian": 0.002,
+      "topCategory": "compute"
+    },
+    {
+      "host": "stableenrich.dev",
+      "name": "StableEnrich",
+      "count": 39,
+      "priceMedian": 0.04,
+      "topCategory": "search"
+    },
+    {
+      "host": "rest.coincap.io",
+      "name": "CoinCap API",
+      "count": 38,
+      "priceMedian": 0.004,
+      "topCategory": "search"
+    },
+    {
+      "host": "api.solenrich.com",
+      "name": "SolEnrich",
+      "count": 37,
+      "priceMedian": 0.01,
+      "topCategory": "data"
+    },
+    {
+      "host": "defi-api.agenticfi.wtf",
+      "name": "AgenticFi API",
+      "count": 36,
+      "priceMedian": 0.001,
+      "topCategory": "data"
+    },
+    {
+      "host": "fiatdock.com",
+      "name": "FiatDock",
+      "count": 36,
+      "priceMedian": 0.002,
+      "topCategory": "data"
+    },
+    {
+      "host": "api.blockchainmoneymap.com",
+      "name": "Blockchain Money Map | Choose Human Reports or Agent Services",
+      "count": 35,
+      "priceMedian": 0.01,
+      "topCategory": "compute"
+    },
+    {
+      "host": "api.syraa.fun",
+      "name": "Syra — Machine Money for Agents",
+      "count": 35,
+      "priceMedian": 0.005,
+      "topCategory": "data"
+    },
+    {
+      "host": "autoscrape-api-seven.vercel.app",
+      "name": "AutoScrape Data API - Public Data APIs for Agent Workflows",
+      "count": 35,
+      "priceMedian": 0.01,
+      "topCategory": "search"
+    },
+    {
+      "host": "readx.sh",
+      "name": "ReadX — X/Twitter JSON API, Paid Per Call",
+      "count": 35,
+      "priceMedian": 0.01,
+      "topCategory": "messaging"
+    },
+    {
+      "host": "api.hergertsynthora.com",
+      "name": "HERGERT SYNTHORA · Tecnología. Capital. Crecimiento.",
+      "count": 34,
+      "priceMedian": 0.1,
+      "topCategory": "data"
+    },
+    {
+      "host": "api.zerion.io",
+      "name": "Zerion API - Wallet Data for Apps and Agents",
+      "count": 34,
+      "priceMedian": 0.01,
+      "topCategory": "data"
+    },
+    {
+      "host": "surf.cascade.fyi",
+      "name": "glim.sh - live data for any agent",
+      "count": 34,
+      "priceMedian": 0.004,
+      "topCategory": "search"
+    },
+    {
+      "host": "lionx402.com",
+      "name": "LION — Verified Company Data",
+      "count": 32,
+      "priceMedian": 0.01,
+      "topCategory": "search"
+    },
+    {
+      "host": "x402.aispace.bot",
+      "name": "AiSpace - Everything AI",
+      "count": 32,
+      "priceMedian": 0.005,
+      "topCategory": "compute"
+    },
+    {
+      "host": "83-29-153-50.sslip.io",
+      "name": "QuietSignal Public Data — machine-readable facts for agents",
+      "count": 31,
+      "priceMedian": 0.02,
+      "topCategory": "data"
+    },
+    {
+      "host": "agents.oromi.co.uk",
+      "name": "Oromi Agent Services",
+      "count": 31,
+      "priceMedian": 0.01,
+      "topCategory": "compute"
+    },
+    {
+      "host": "api.mydev-tools.tech",
+      "name": "Habitcore — Behavioural Intelligence API",
+      "count": 31,
+      "priceMedian": 0.05,
+      "topCategory": "data"
+    },
+    {
+      "host": "seo.hypa1m.xyz",
+      "name": "Pa1m SEO",
+      "count": 31,
+      "priceMedian": 0.15,
+      "topCategory": "search"
+    },
+    {
+      "host": "stablestudio.dev",
+      "name": "StableStudio",
+      "count": 31,
+      "priceMedian": 10,
+      "topCategory": "compute"
+    },
+    {
+      "host": "api.canuverify.com",
+      "name": "api.canuverify.com · api.contract.scenario",
+      "count": 30,
+      "priceMedian": 0.295,
+      "topCategory": "data"
+    },
+    {
+      "host": "api.seerium.xyz",
+      "name": "Seerium Market Intelligence",
+      "count": 29,
+      "priceMedian": 0.1,
+      "topCategory": "trading"
+    },
+    {
+      "host": "twitr.sh",
+      "name": "twitr.sh — pay-per-call X/Twitter API for AI agents",
+      "count": 29,
+      "priceMedian": 0.024,
+      "topCategory": "messaging"
+    }
+  ],
+  "rankTop50": [
+    {
+      "rank": 1,
+      "origin": "http://blockrun.ai",
+      "title": "BlockRun — The routing &amp; payment layer for AI",
+      "host": "blockrun.ai",
+      "tx_count": 77620,
+      "total_amount": 10526.601367,
+      "unique_buyers": 25,
+      "popularity_metric": "x402scan:tx_count:1d"
+    },
+    {
+      "rank": 2,
+      "origin": "https://claw402.ai",
+      "title": "claw402 — x402 API Payment Gateway",
+      "host": "claw402.ai",
+      "tx_count": 59374,
+      "total_amount": 118.748,
+      "unique_buyers": 25,
+      "popularity_metric": "x402scan:tx_count:1d"
+    },
+    {
+      "rank": 3,
+      "origin": "http://sol.blockrun.ai",
+      "title": "sol.blockrun.ai",
+      "host": "sol.blockrun.ai",
+      "tx_count": 13591,
+      "total_amount": 1246.077785,
+      "unique_buyers": 5,
+      "popularity_metric": "x402scan:tx_count:1d"
+    },
+    {
+      "rank": 4,
+      "origin": "https://api.clusterprotocol.ai",
+      "title": "Cluster Protocol - Liberation Engine for Internet Capital Market",
+      "host": "api.clusterprotocol.ai",
+      "tx_count": 4699,
+      "total_amount": 3130.268,
+      "unique_buyers": 658,
+      "popularity_metric": "x402scan:tx_count:1d"
+    },
+    {
+      "rank": 5,
+      "origin": "https://api.botpay.network",
+      "title": "BotPay",
+      "host": "api.botpay.network",
+      "tx_count": 2470,
+      "total_amount": 218.83,
+      "unique_buyers": 279,
+      "popularity_metric": "x402scan:tx_count:1d"
+    },
+    {
+      "rank": 6,
+      "origin": "https://stableenrich.dev",
+      "title": "StableEnrich",
+      "host": "stableenrich.dev",
+      "tx_count": 2150,
+      "total_amount": 152.752,
+      "unique_buyers": 65,
+      "popularity_metric": "x402scan:tx_count:1d"
+    },
+    {
+      "rank": 7,
+      "origin": "https://mcp.x402.boats",
+      "title": "x402.Boats - Game for AI Agents",
+      "host": "mcp.x402.boats",
+      "tx_count": 1756,
+      "total_amount": 14258.174874,
+      "unique_buyers": 17,
+      "popularity_metric": "x402scan:tx_count:1d"
+    },
+    {
+      "rank": 8,
+      "origin": "https://x402.sniperx.fun",
+      "title": "SniperX•x402 super AI agent for sniping Alpha and Newpair on solana",
+      "host": "x402.sniperx.fun",
+      "tx_count": 1078,
+      "total_amount": 21.56,
+      "unique_buyers": 12,
+      "popularity_metric": "x402scan:tx_count:1d"
+    },
+    {
+      "rank": 9,
+      "origin": "https://mcp.fortclaw.com",
+      "title": "FortClaw - x402 Territory Game for AI Agents",
+      "host": "mcp.fortclaw.com",
+      "tx_count": 920,
+      "total_amount": 65.79,
+      "unique_buyers": 14,
+      "popularity_metric": "x402scan:tx_count:1d"
+    },
+    {
+      "rank": 10,
+      "origin": "https://metisagent.co",
+      "title": "Metis | An autonomous research agent for tokenized markets on Solana",
+      "host": "metisagent.co",
+      "tx_count": 725,
+      "total_amount": 7.25,
+      "unique_buyers": 5,
+      "popularity_metric": "x402scan:tx_count:1d"
+    },
+    {
+      "rank": 11,
+      "origin": "https://api.syraa.fun",
+      "title": "Syra — Machine Money for Agents",
+      "host": "api.syraa.fun",
+      "tx_count": 705,
+      "total_amount": 40.33,
+      "unique_buyers": 28,
+      "popularity_metric": "x402scan:tx_count:1d"
+    },
+    {
+      "rank": 12,
+      "origin": "https://api.loyalspark.online",
+      "title": "Loyal Spark - Loyalty Rewards That Grow",
+      "host": "api.loyalspark.online",
+      "tx_count": 693,
+      "total_amount": 4.64,
+      "unique_buyers": 68,
+      "popularity_metric": "x402scan:tx_count:1d"
+    },
+    {
+      "rank": 13,
+      "origin": "https://api.onesource.io",
+      "title": "OneSource - EVM RPC for AI Agents",
+      "host": "api.onesource.io",
+      "tx_count": 554,
+      "total_amount": 2.355,
+      "unique_buyers": 69,
+      "popularity_metric": "x402scan:tx_count:1d"
+    },
+    {
+      "rank": 14,
+      "origin": "https://x402.agentutility.ai",
+      "title": "agentutility — paid x402 endpoints for autonomous agents",
+      "host": "x402.agentutility.ai",
+      "tx_count": 532,
+      "total_amount": 13.6105,
+      "unique_buyers": 7,
+      "popularity_metric": "x402scan:tx_count:1d"
+    },
+    {
+      "rank": 15,
+      "origin": "https://apiv2.laevitas.ch",
+      "title": "Laevitas API V2",
+      "host": "apiv2.laevitas.ch",
+      "tx_count": 519,
+      "total_amount": 51.9,
+      "unique_buyers": 7,
+      "popularity_metric": "x402scan:tx_count:1d"
+    },
+    {
+      "rank": 16,
+      "origin": "https://x402.dtelecom.org",
+      "title": "dTelecom x402 Gateway — WebRTC, STT & TTS API",
+      "host": "x402.dtelecom.org",
+      "tx_count": 504,
+      "total_amount": 1059.5,
+      "unique_buyers": 23,
+      "popularity_metric": "x402scan:tx_count:1d"
+    },
+    {
+      "rank": 17,
+      "origin": "https://stabletravel.dev",
+      "title": "StableTravel",
+      "host": "stabletravel.dev",
+      "tx_count": 473,
+      "total_amount": 9.838,
+      "unique_buyers": 7,
+      "popularity_metric": "x402scan:tx_count:1d"
+    },
+    {
+      "rank": 18,
+      "origin": "https://token4u.ai",
+      "title": "Token4u | 极致安全，算力更省",
+      "host": "token4u.ai",
+      "tx_count": 421,
+      "total_amount": 3.556624,
+      "unique_buyers": 2,
+      "popularity_metric": "x402scan:tx_count:1d"
+    },
+    {
+      "rank": 19,
+      "origin": "https://www.basehub.fun",
+      "title": "BaseHub - Play Games and Earn XP",
+      "host": "basehub.fun",
+      "tx_count": 346,
+      "total_amount": 18.15,
+      "unique_buyers": 55,
+      "popularity_metric": "x402scan:tx_count:1d"
+    },
+    {
+      "rank": 20,
+      "origin": "https://k2so.wrong.systems",
+      "title": "K-2SO · Autonomous x402 Agent Merchant on Base",
+      "host": "k2so.wrong.systems",
+      "tx_count": 340,
+      "total_amount": 2.303,
+      "unique_buyers": 3,
+      "popularity_metric": "x402scan:tx_count:1d"
+    },
+    {
+      "rank": 21,
+      "origin": "https://readx.sh",
+      "title": "ReadX — X/Twitter JSON API, Paid Per Call",
+      "host": "readx.sh",
+      "tx_count": 307,
+      "total_amount": 3.07,
+      "unique_buyers": 2,
+      "popularity_metric": "x402scan:tx_count:1d"
+    },
+    {
+      "rank": 22,
+      "origin": "https://surf.cascade.fyi",
+      "title": "glim.sh - live data for any agent",
+      "host": "surf.cascade.fyi",
+      "tx_count": 265,
+      "total_amount": 0.72,
+      "unique_buyers": 3,
+      "popularity_metric": "x402scan:tx_count:1d"
+    },
+    {
+      "rank": 23,
+      "origin": "https://api.deepnets.ai",
+      "title": "Deepnets.ai",
+      "host": "api.deepnets.ai",
+      "tx_count": 261,
+      "total_amount": 2.61,
+      "unique_buyers": 4,
+      "popularity_metric": "x402scan:tx_count:1d"
+    },
+    {
+      "rank": 24,
+      "origin": "https://stablesocial.dev",
+      "title": "StableSocial",
+      "host": "stablesocial.dev",
+      "tx_count": 222,
+      "total_amount": 13.32,
+      "unique_buyers": 13,
+      "popularity_metric": "x402scan:tx_count:1d"
+    },
+    {
+      "rank": 25,
+      "origin": "http://api.polymer.zone",
+      "title": "api.polymer.zone",
+      "host": "api.polymer.zone",
+      "tx_count": 190,
+      "total_amount": 19,
+      "unique_buyers": 1,
+      "popularity_metric": "x402scan:tx_count:1d"
+    },
+    {
+      "rank": 26,
+      "origin": "https://api.exa.ai",
+      "title": "Exa | Web Search API, AI Search Engine, &amp; Website Crawler",
+      "host": "api.exa.ai",
+      "tx_count": 179,
+      "total_amount": 1.193,
+      "unique_buyers": 13,
+      "popularity_metric": "x402scan:tx_count:1d"
+    },
+    {
+      "rank": 27,
+      "origin": "https://vape-x402.vapex402.workers.dev",
+      "title": "VAPE",
+      "host": "vape-x402.vapex402.workers.dev",
+      "tx_count": 163,
+      "total_amount": 4.01,
+      "unique_buyers": 3,
+      "popularity_metric": "x402scan:tx_count:1d"
+    },
+    {
+      "rank": 28,
+      "origin": "https://api.strale.io",
+      "title": "Strale — Trust and Quality Infrastructure for AI Agents",
+      "host": "api.strale.io",
+      "tx_count": 149,
+      "total_amount": 10.06561,
+      "unique_buyers": 3,
+      "popularity_metric": "x402scan:tx_count:1d"
+    },
+    {
+      "rank": 29,
+      "origin": "https://defi.hugen.tokyo",
+      "title": "defi.hugen.tokyo",
+      "host": "defi.hugen.tokyo",
+      "tx_count": 148,
+      "total_amount": 1.495,
+      "unique_buyers": 14,
+      "popularity_metric": "x402scan:tx_count:1d"
+    },
+    {
+      "rank": 30,
+      "origin": "https://x402.twit.sh",
+      "title": "twit.sh — Plug AI agents into X",
+      "host": "x402.twit.sh",
+      "tx_count": 143,
+      "total_amount": 0.979,
+      "unique_buyers": 8,
+      "popularity_metric": "x402scan:tx_count:1d"
+    },
+    {
+      "rank": 31,
+      "origin": "https://x402.ottoai.services",
+      "title": "Otto AI x402 — Market Intelligence, DeFi & Trading",
+      "host": "x402.ottoai.services",
+      "tx_count": 135,
+      "total_amount": 0.38,
+      "unique_buyers": 29,
+      "popularity_metric": "x402scan:tx_count:1d"
+    },
+    {
+      "rank": 32,
+      "origin": "https://x402.anyspend.com",
+      "title": "x402.anyspend.com",
+      "host": "x402.anyspend.com",
+      "tx_count": 127,
+      "total_amount": 208,
+      "unique_buyers": 73,
+      "popularity_metric": "x402scan:tx_count:1d"
+    },
+    {
+      "rank": 33,
+      "origin": "https://api.signalbound.art",
+      "title": "Signalbound API",
+      "host": "api.signalbound.art",
+      "tx_count": 124,
+      "total_amount": 1.24,
+      "unique_buyers": 8,
+      "popularity_metric": "x402scan:tx_count:1d"
+    },
+    {
+      "rank": 34,
+      "origin": "https://api.linkedpanda.com",
+      "title": "Linked Panda - The best LinkedIn leads, at the best time",
+      "host": "api.linkedpanda.com",
+      "tx_count": 116,
+      "total_amount": 12.01,
+      "unique_buyers": 9,
+      "popularity_metric": "x402scan:tx_count:1d"
+    },
+    {
+      "rank": 35,
+      "origin": "https://stable-deepline.dev",
+      "title": "Deepline GTM API",
+      "host": "stable-deepline.dev",
+      "tx_count": 114,
+      "total_amount": 10.8,
+      "unique_buyers": 10,
+      "popularity_metric": "x402scan:tx_count:1d"
+    },
+    {
+      "rank": 36,
+      "origin": "https://api.nansen.ai",
+      "title": "Nansen AI - Trade Everything Onchain with AI",
+      "host": "api.nansen.ai",
+      "tx_count": 112,
+      "total_amount": 2.08,
+      "unique_buyers": 16,
+      "popularity_metric": "x402scan:tx_count:1d"
+    },
+    {
+      "rank": 37,
+      "origin": "https://stablestudio.dev",
+      "title": "StableStudio",
+      "host": "stablestudio.dev",
+      "tx_count": 110,
+      "total_amount": 16.39,
+      "unique_buyers": 8,
+      "popularity_metric": "x402scan:tx_count:1d"
+    },
+    {
+      "rank": 38,
+      "origin": "https://glim.sh",
+      "title": "glim.sh - give your AI agent live data from across the web",
+      "host": "glim.sh",
+      "tx_count": 102,
+      "total_amount": 0.472,
+      "unique_buyers": 19,
+      "popularity_metric": "x402scan:tx_count:1d"
+    },
+    {
+      "rank": 39,
+      "origin": "https://api.x402node.dev",
+      "title": "x402node — Developer & Data Tools for AI Agents",
+      "host": "api.x402node.dev",
+      "tx_count": 100,
+      "total_amount": 1.3184,
+      "unique_buyers": 25,
+      "popularity_metric": "x402scan:tx_count:1d"
+    },
+    {
+      "rank": 40,
+      "origin": "https://api.losbeto.xyz",
+      "title": "Losbeto — cross-asset market data for AI agents",
+      "host": "api.losbeto.xyz",
+      "tx_count": 91,
+      "total_amount": 6.51,
+      "unique_buyers": 3,
+      "popularity_metric": "x402scan:tx_count:1d"
+    },
+    {
+      "rank": 41,
+      "origin": "https://x402.slinkylayer.ai",
+      "title": "SlinkyLayer API",
+      "host": "x402.slinkylayer.ai",
+      "tx_count": 85,
+      "total_amount": 0.65,
+      "unique_buyers": 85,
+      "popularity_metric": "x402scan:tx_count:1d"
+    },
+    {
+      "rank": 42,
+      "origin": "https://2s.io",
+      "title": "2s — the (most) everything API",
+      "host": "2s.io",
+      "tx_count": 77,
+      "total_amount": 0.2691,
+      "unique_buyers": 7,
+      "popularity_metric": "x402scan:tx_count:1d"
+    },
+    {
+      "rank": 43,
+      "origin": "https://x402-mcp.onrender.com",
+      "title": "x402 terminal",
+      "host": "x402-mcp.onrender.com",
+      "tx_count": 61,
+      "total_amount": 0.65,
+      "unique_buyers": 3,
+      "popularity_metric": "x402scan:tx_count:1d"
+    },
+    {
+      "rank": 44,
+      "origin": "https://x402financialdata.com",
+      "title": "Financial Data x402",
+      "host": "x402financialdata.com",
+      "tx_count": 61,
+      "total_amount": 0.305,
+      "unique_buyers": 5,
+      "popularity_metric": "x402scan:tx_count:1d"
+    },
+    {
+      "rank": 45,
+      "origin": "https://x402.openwebninja.com",
+      "title": "OpenWeb Ninja — x402 APIs",
+      "host": "x402.openwebninja.com",
+      "tx_count": 60,
+      "total_amount": 0.18,
+      "unique_buyers": 3,
+      "popularity_metric": "x402scan:tx_count:1d"
+    },
+    {
+      "rank": 46,
+      "origin": "https://sfmta-x402-ticket-bridge.bflynn4141.workers.dev",
+      "title": "SFMTA x402 Ticket Card Bridge",
+      "host": "sfmta-x402-ticket-bridge.bflynn4141.workers.dev",
+      "tx_count": 59,
+      "total_amount": 0.59,
+      "unique_buyers": 3,
+      "popularity_metric": "x402scan:tx_count:1d"
+    },
+    {
+      "rank": 47,
+      "origin": "https://global-econ-x402-production.up.railway.app",
+      "title": "global-econ-x402-production.up.railway.app",
+      "host": "global-econ-x402-production.up.railway.app",
+      "tx_count": 54,
+      "total_amount": 0.261,
+      "unique_buyers": 9,
+      "popularity_metric": "x402scan:tx_count:1d"
+    },
+    {
+      "rank": 48,
+      "origin": "https://api.x402cloud.space",
+      "title": "api-x402-space",
+      "host": "api.x402cloud.space",
+      "tx_count": 50,
+      "total_amount": 7.34,
+      "unique_buyers": 1,
+      "popularity_metric": "x402scan:tx_count:1d"
+    },
+    {
+      "rank": 49,
+      "origin": "https://agent402.tools",
+      "title": "Agent402 - 102 agent skill packs, one x402 payment each (527 tools)",
+      "host": "agent402.tools",
+      "tx_count": 47,
+      "total_amount": 1.034,
+      "unique_buyers": 6,
+      "popularity_metric": "x402scan:tx_count:1d"
+    },
+    {
+      "rank": 50,
+      "origin": "https://api.jarvisclaw.ai",
+      "title": "JarvisClaw API",
+      "host": "api.jarvisclaw.ai",
+      "tx_count": 45,
+      "total_amount": 0.118264,
+      "unique_buyers": 3,
+      "popularity_metric": "x402scan:tx_count:1d"
+    }
+  ]
+}
