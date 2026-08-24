@@ -1,6 +1,6 @@
 {
   "generated_at": "2026-08-24T07:17:30.324Z",
-  "count": 19729,
+  "count": 19730,
   "fetch_report": [
     {
       "source": "x402-inc",
@@ -285620,8 +285620,31 @@
       "last_seen": "2026-05-30T00:00:00.000Z"
     },
     {
+      "id": "x402inc-japan-inflation-nowcast",
+      "url": "https://jin.x402jp.com",
+      "name": "Japan Inflation Nowcast",
+      "description": "Daily Japan inflation nowcast index (latest observation, historical series, and same-day movers with promo tagging), billed per call over x402.",
+      "category": "data",
+      "price": {
+        "amount": 0.01,
+        "currency": "USDC",
+        "unit": "per-call"
+      },
+      "networks": [
+        "Solana"
+      ],
+      "protocols": [
+        "x402"
+      ],
+      "source": [
+        "x402-inc"
+      ],
+      "source_url": "https://jin.x402jp.com",
+      "last_seen": "2026-08-24T00:00:00.000Z"
+    },
+    {
       "id": "x402inc-onchain-stock-data",
-      "url": "https://osd-coral.vercel.app",
+      "url": "https://osd.x402jp.com",
       "name": "Onchain Stock Data",
       "description": "xStocks data for 60+ tokenized equities across 5 functions (quotes, fundamentals, history, and more), billed per call over x402.",
       "category": "data",
@@ -285640,7 +285663,7 @@
       "source": [
         "x402-inc"
       ],
-      "source_url": "https://osd-coral.vercel.app",
+      "source_url": "https://osd.x402jp.com",
       "last_seen": "2026-05-30T00:00:00.000Z"
     },
     {
