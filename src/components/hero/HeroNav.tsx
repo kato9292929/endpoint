@@ -6,11 +6,10 @@ import { useState } from "react";
 type NavLink = { label: string; href: string };
 
 const LINKS: NavLink[] = [
-  { label: "Catalog", href: "#catalog" },
-  { label: "Rank", href: "/rank" },
+  { label: "Most-called endpoints", href: "/rank" },
   { label: "Hosts", href: "/hosts" },
   { label: "About", href: "/about" },
-  { label: "API", href: "/api/openapi.json" },
+  { label: "For Agents", href: "/for-agents" },
 ];
 
 const CTA: NavLink = { label: "Browse the catalog", href: "#catalog" };
