@@ -58,6 +58,7 @@ export function MostCalledSection() {
             <span className="text-right">Buyers</span>
             <span>Category</span>
           </div>
+          <div className="max-h-[48rem] overflow-y-auto">
           {rank.rows.map((r) => (
             <div
               key={r.origin}
@@ -86,6 +87,7 @@ export function MostCalledSection() {
               </span>
             </div>
           ))}
+          </div>
           <div className="px-3 py-2 text-[11px] text-muted">
             Source of the numbers: x402scan ({rank.metric}). Re-listed, not
             re-measured. Fetched {rank.generated_at.slice(0, 10)}.
@@ -147,6 +149,7 @@ export function HostsSection() {
           <span className="text-right">Median price</span>
           <span>Top category</span>
         </div>
+        <div className="max-h-[48rem] overflow-y-auto">
         {shown.map((h, i) => (
           <div
             key={h.host}
@@ -179,6 +182,7 @@ export function HostsSection() {
             </span>
           </div>
         ))}
+        </div>
         {hidden > 0 ? (
           <div className="px-3 py-2 text-[11px] text-muted">
             Showing the top {TOP_N} of {hosts.length.toLocaleString()} hosts. The
