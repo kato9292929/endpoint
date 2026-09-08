@@ -22,11 +22,8 @@ export function SiteNav() {
           <span className="metallic">x402 Endpoint</span>
         </Link>
         <div className="flex gap-4 text-muted">
-          <Link href="/" className="hover:text-black">
-            Catalog
-          </Link>
           <Link href="/rank" className="hover:text-black">
-            Rank
+            Most-called endpoints
           </Link>
           <Link href="/hosts" className="hover:text-black">
             Hosts
