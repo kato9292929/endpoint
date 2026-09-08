@@ -5,7 +5,7 @@ import { CATEGORIES, DIRECTORY_SOURCES } from "@/lib/types";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const u = (path: string) => `${SITE_URL}${path}`;
-  const staticPages = ["/", "/about", "/for-agents"].map((p) => ({ url: u(p) }));
+  const staticPages = ["/"].map((p) => ({ url: u(p) }));
   const categories = CATEGORIES.map((c) => ({ url: u(`/category/${c}`) }));
   const sources = DIRECTORY_SOURCES.flatMap((s) => [
     { url: u(`/directory/${s}`) },

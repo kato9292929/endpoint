@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Footer } from "@/components/Footer";
-import { SiteNav } from "@/components/SiteNav";
 
 export const metadata: Metadata = {
   title: "x402 Endpoint — 6 directories. 1 catalog.",
@@ -35,7 +34,6 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-screen flex flex-col antialiased">
-        <SiteNav />
         <main className="flex-1 mx-auto max-w-6xl w-full px-4 py-8">
           {children}
         </main>

@@ -45,9 +45,9 @@ export function EndpointGrid({
             <div className="px-2 py-3 text-xs text-muted">
               Showing the first {shown.length.toLocaleString()} of{" "}
               {endpoints.length.toLocaleString()}.{" "}
-              <Link href="/for-agents" className="text-accent hover:underline">
+              <a href="#for-agents" className="text-accent hover:underline">
                 Use the API
-              </Link>{" "}
+              </a>{" "}
               to reach the remaining {hidden.toLocaleString()}.
             </div>
           ) : null}
