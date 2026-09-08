@@ -182,17 +182,19 @@ export function CatalogExplorer({ endpoints, networks, protocols }: Props) {
         <>
           <div className="rounded-lg border border-border bg-surface">
             <RowHeader />
-            {/* Page 1 rows */}
-            {results.slice(0, PAGE_SIZE).map((e) => (
-              <EndpointRow key={e.id} endpoint={e} />
-            ))}
-            {/* End of page 1: x402 Inc. disclosed block (only here). Shows all
-                matching x402 Inc. endpoints; they also appear in the list above. */}
-            <FeaturedBlock endpoints={results.filter(isFeatured)} />
-            {/* Loaded-more rows (page 2+) */}
-            {results.slice(PAGE_SIZE, visible).map((e) => (
-              <EndpointRow key={e.id} endpoint={e} />
-            ))}
+            <div className="max-h-[48rem] overflow-y-auto">
+              {/* Page 1 rows */}
+              {results.slice(0, PAGE_SIZE).map((e) => (
+                <EndpointRow key={e.id} endpoint={e} />
+              ))}
+              {/* End of page 1: x402 Inc. disclosed block (only here). Shows all
+                  matching x402 Inc. endpoints; they also appear in the list above. */}
+              <FeaturedBlock endpoints={results.filter(isFeatured)} />
+              {/* Loaded-more rows (page 2+) */}
+              {results.slice(PAGE_SIZE, visible).map((e) => (
+                <EndpointRow key={e.id} endpoint={e} />
+              ))}
+            </div>
           </div>
           {results.length > visible ? (
             <div className="flex flex-col items-center gap-2 py-6">

@@ -79,15 +79,15 @@ export default function HomePage() {
               <TotalSparkline />
             </div>
 
-            {/* Search + filters + full list */}
+            {/* Hosts */}
+            <HostsSection />
+
+            {/* Search + filters + full list — the full catalog, just above About */}
             <CatalogExplorer
               endpoints={endpoints}
               networks={networks.map((n) => n.name)}
               protocols={protocols.map((p) => p.name)}
             />
-
-            {/* Hosts */}
-            <HostsSection />
 
             {/* About */}
             <AboutSection />
