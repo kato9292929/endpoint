@@ -25,7 +25,8 @@ export type DirectorySource =
   | "402index"
   | "cdp-bazaar"
   | "gold-402"
-  | "well-known";
+  | "well-known"
+  | "community";
 
 export type Protocol = "x402" | "MPP" | "L402" | (string & {});
 
@@ -121,6 +122,7 @@ export const DIRECTORY_SOURCES: DirectorySource[] = [
   "cdp-bazaar",
   "gold-402",
   "well-known",
+  "community",
 ];
 
 export const DIRECTORY_META: Record<
@@ -157,6 +159,11 @@ export const DIRECTORY_META: Record<
   "well-known": {
     label: ".well-known/x402 (direct)",
     home: "https://x402.org",
+  },
+  // Third-party endpoints contributed by PR to data/seed/community.json.
+  community: {
+    label: "Community submissions",
+    home: "https://github.com/kato9292929/endpoint",
   },
 };
 
