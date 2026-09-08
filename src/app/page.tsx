@@ -1,9 +1,13 @@
 import { CatalogExplorer } from "@/components/CatalogExplorer";
 import { StatsBar } from "@/components/StatsBar";
 import { TotalSparkline } from "@/components/TotalSparkline";
-import { RankSection } from "@/components/RankSection";
+import {
+  MostCalledSection,
+  HostsSection,
+  AboutSection,
+  ForAgentsSection,
+} from "@/components/sections";
 import { HeroVideo } from "@/components/hero/HeroVideo";
-import { HeroNav } from "@/components/hero/HeroNav";
 import { Hero } from "@/components/hero/Hero";
 import {
   getCatalog,
@@ -46,45 +50,50 @@ export default function HomePage() {
   return (
     <>
       <HeroVideo src={HERO_VIDEO} />
-      <HeroNav />
 
       {/* Break out of the layout's max-w-6xl / padding to go full-bleed. */}
       <div className="relative left-1/2 right-1/2 -mx-[50vw] -mt-8 -mb-8 w-screen">
         <Hero stats={heroStats} />
 
-        {/* Catalog on a solid background so it scrolls over the fixed video. */}
+        {/* Everything on one page, on a solid background over the fixed video. */}
         <section id="catalog" className="relative z-[1] bg-bg">
-          <div className="mx-auto max-w-6xl space-y-10 px-5 py-16 sm:px-8">
-            {/* 1. Heading (one line) */}
+          <div className="mx-auto max-w-6xl space-y-16 px-5 py-16 sm:px-8">
             <header>
               <h2 className="text-2xl font-semibold tracking-tight">
                 The catalog — what&apos;s live, and where it&apos;s called
               </h2>
             </header>
 
-            {/* 2. Active endpoints (ranking / route concentration) */}
-            <RankSection />
+            {/* Most-called endpoints (x402scan ranking) */}
+            <MostCalledSection />
 
-            {/* 3. Stats + sparkline */}
+            {/* Aggregate stats + trend */}
             <div className="space-y-3">
               <StatsBar
                 total={endpoints.length}
                 networks={networks.length}
-                categories={
-                  Object.values(categoryCounts).filter((c) => c > 0).length
-                }
-                directories={Object.keys(sourceCounts).length}
+                categories={nonEmptyCategories}
+                directories={directoriesCount}
                 updated={updatedLabel}
               />
               <TotalSparkline />
             </div>
 
-            {/* 4 + 5. Search + filters + full list (rows) */}
+            {/* Search + filters + full list */}
             <CatalogExplorer
               endpoints={endpoints}
               networks={networks.map((n) => n.name)}
               protocols={protocols.map((p) => p.name)}
             />
+
+            {/* Hosts */}
+            <HostsSection />
+
+            {/* About */}
+            <AboutSection />
+
+            {/* For Agents */}
+            <ForAgentsSection />
           </div>
         </section>
       </div>
