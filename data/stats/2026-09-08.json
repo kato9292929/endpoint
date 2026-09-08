@@ -1,0 +1,737 @@
+{
+  "date": "2026-09-08",
+  "generatedAt": "2026-09-08T11:05:42.347Z",
+  "total": 3638,
+  "byCategory": {
+    "compute": 620,
+    "data": 267,
+    "messaging": 723,
+    "search": 643,
+    "other": 128,
+    "media": 100,
+    "compliance": 2,
+    "trading": 1146,
+    "intelligence": 8,
+    "oracle": 1
+  },
+  "byChain": {
+    "Solana": 1521,
+    "Base": 3294
+  },
+  "bySource": {
+    "pay-sh": 72,
+    "x402scan": 3551,
+    "x402-inc": 15
+  },
+  "byPriceTier": {
+    "unknown": 323,
+    "$0.05–0.15": 866,
+    "<$0.01": 889,
+    "$0.01–0.05": 715,
+    ">$0.15": 845
+  },
+  "hostCount": 332,
+  "byHost": [
+    {
+      "host": "api.m2mcent.com",
+      "name": "M2MCent — 1,069 Monetized Remote MCP Nodes &amp; AEO Network (x402 Protocol)",
+      "count": 996,
+      "priceMedian": 0.15,
+      "topCategory": "trading"
+    },
+    {
+      "host": "api.gocreativeai.com",
+      "name": "GoCreative — keyless compliance &amp; regulated-data API for AI agents",
+      "count": 636,
+      "priceMedian": 0.05,
+      "topCategory": "search"
+    },
+    {
+      "host": "agent402.tools",
+      "name": "Agent402: 500+ pay-per-call tools for AI agents, metered models and finished reports, over x402, MPP or card",
+      "count": 586,
+      "priceMedian": 0.003,
+      "topCategory": "messaging"
+    },
+    {
+      "host": "pay.edge-agents.ai",
+      "name": "Edge Agents AI | Evidence-Backed Intelligence for Agents, Individuals, Business &amp; Government",
+      "count": 286,
+      "priceMedian": 0.01,
+      "topCategory": "compute"
+    },
+    {
+      "host": "api.losbeto.xyz",
+      "name": "Losbeto — cross-asset market data for AI agents",
+      "count": 101,
+      "priceMedian": 0.06,
+      "topCategory": "media"
+    },
+    {
+      "host": "api.oblique.markets",
+      "name": "Oblique Markets",
+      "count": 81,
+      "priceMedian": 0.01,
+      "topCategory": "compute"
+    },
+    {
+      "host": "agentshare.dev",
+      "name": "AgentShare — Agent-paid API · dual-auth · discovery",
+      "count": 70,
+      "priceMedian": 0.002,
+      "topCategory": "search"
+    },
+    {
+      "host": "organiccryptoyyc.com",
+      "name": "organiccryptoyyc.com — Multi-Region Verification & On-Chain Data API",
+      "count": 54,
+      "priceMedian": 0.02,
+      "topCategory": "data"
+    },
+    {
+      "host": "ssdf.site",
+      "name": "SSDF",
+      "count": 45,
+      "priceMedian": 68,
+      "topCategory": "data"
+    },
+    {
+      "host": "agents.samedaydesk.com",
+      "name": "SameDayDesk machine commerce gateway",
+      "count": 39,
+      "priceMedian": 0.01,
+      "topCategory": "compute"
+    },
+    {
+      "host": "x402-sage.vercel.app",
+      "name": "MAMMBA x402 Marketplace",
+      "count": 37,
+      "priceMedian": 0.003,
+      "topCategory": "data"
+    },
+    {
+      "host": "api.onesource.io",
+      "name": "OneSource - Blockchain Data API for AI Agents",
+      "count": 33,
+      "priceMedian": 0.005,
+      "topCategory": "compute"
+    },
+    {
+      "host": "badhttp.dev",
+      "name": "badhttp — the server that misbehaves on purpose",
+      "count": 33,
+      "priceMedian": 0.01,
+      "topCategory": "other"
+    },
+    {
+      "host": "tereno.xyz",
+      "name": "tereno.xyz // The Cooperation Layer for Agents",
+      "count": 29,
+      "priceMedian": 0.03,
+      "topCategory": "data"
+    },
+    {
+      "host": "svm402.com",
+      "name": "SVM402 — Solana Virtual Machine × HTTP 402",
+      "count": 22,
+      "priceMedian": 0.01,
+      "topCategory": "other"
+    },
+    {
+      "host": "x402.agentindex.world",
+      "name": "AgentIndex x402",
+      "count": 21,
+      "priceMedian": 0.05,
+      "topCategory": "compute"
+    },
+    {
+      "host": "x402donghang.duckdns.org",
+      "name": "x402donghang Crypto Radar — live agent research via x402",
+      "count": 18,
+      "priceMedian": 0.01,
+      "topCategory": "compute"
+    },
+    {
+      "host": "x402vid.com",
+      "name": "x402vid — AI Video Intelligence",
+      "count": 18,
+      "priceMedian": 0.05,
+      "topCategory": "media"
+    },
+    {
+      "host": "sigtap-outreach-api.sigtap.workers.dev",
+      "name": "sigtap Outreach API",
+      "count": 16,
+      "priceMedian": 0.001,
+      "topCategory": "data"
+    },
+    {
+      "host": "moneymaker-x402.monie98-8b9.workers.dev",
+      "name": "MoneyMaker x402 Worker",
+      "count": 15,
+      "priceMedian": 1,
+      "topCategory": "other"
+    },
+    {
+      "host": "toll402.dev",
+      "name": "Toll402",
+      "count": 15,
+      "priceMedian": 0.02,
+      "topCategory": "search"
+    },
+    {
+      "host": "api.naco.li",
+      "name": "x402 enabled social media lookingglass for autonomous agents",
+      "count": 12,
+      "priceMedian": 0.1,
+      "topCategory": "search"
+    },
+    {
+      "host": "api.mavrin.app",
+      "name": "Mavrin | Prediction-market API for AI agents",
+      "count": 10,
+      "priceMedian": 0.02,
+      "topCategory": "trading"
+    },
+    {
+      "host": "obol.danieldutoit.net",
+      "name": "Obol — verified blockchain data",
+      "count": 10,
+      "priceMedian": 0.003,
+      "topCategory": "search"
+    },
+    {
+      "host": "api.agent-payload-tools.workers.dev",
+      "name": "Agent Payload Tools — x402 &amp; MCP Utilities for AI Agents",
+      "count": 9,
+      "priceMedian": 0.001,
+      "topCategory": "compute"
+    },
+    {
+      "host": "ari001.tailb4ac3a.ts.net",
+      "name": "Xerxes",
+      "count": 8,
+      "priceMedian": 0.01,
+      "topCategory": "compute"
+    },
+    {
+      "host": "basetoolbox.cartonpliant.workers.dev",
+      "name": "Base toolbox",
+      "count": 8,
+      "priceMedian": 0.1,
+      "topCategory": "data"
+    },
+    {
+      "host": "lazareus.xyz",
+      "name": "Lazareus — S3 storage & multi-chain health checks for AI agents",
+      "count": 8,
+      "priceMedian": 0.002,
+      "topCategory": "compute"
+    },
+    {
+      "host": "time-place.agent-utils.workers.dev",
+      "name": "Agent Time & Place",
+      "count": 8,
+      "priceMedian": 0.005,
+      "topCategory": "compute"
+    },
+    {
+      "host": "api.venturebot.party",
+      "name": "Venture Reader API — URL → clean Markdown for LLMs",
+      "count": 7,
+      "priceMedian": 0.01,
+      "topCategory": "data"
+    },
+    {
+      "host": "base-pulse.annushka1190.workers.dev",
+      "name": "Base Pulse",
+      "count": 7,
+      "priceMedian": 0.008,
+      "topCategory": "data"
+    },
+    {
+      "host": "base-spot.monnet-yanis1.workers.dev",
+      "name": "Basetoolbox",
+      "count": 7,
+      "priceMedian": 0.1,
+      "topCategory": "data"
+    },
+    {
+      "host": "brmarket.thomenz.me",
+      "name": "brmarket — Brazilian marketplace product search (x402)",
+      "count": 7,
+      "priceMedian": 0.04,
+      "topCategory": "search"
+    },
+    {
+      "host": "celerapi.com",
+      "name": "CelerAPI — Company Intelligence for AI Agents",
+      "count": 7,
+      "priceMedian": 0.0075,
+      "topCategory": "search"
+    },
+    {
+      "host": "hlrisk.paidapis.net",
+      "name": "paidapis.net — hlrisk",
+      "count": 7,
+      "priceMedian": 0.01,
+      "topCategory": "data"
+    },
+    {
+      "host": "kit-lite.randall-75d.workers.dev",
+      "name": "Kit Lite — instant x402 spend-cap pack ($9)",
+      "count": 7,
+      "priceMedian": 12,
+      "topCategory": "compute"
+    },
+    {
+      "host": "wren-unlock-mcp.randall-75d.workers.dev",
+      "name": "Agents Get Paid Kit — x402 MCP Monetization & Web Unlock ($49)",
+      "count": 7,
+      "priceMedian": 0.008,
+      "topCategory": "other"
+    },
+    {
+      "host": "agent.butiful.org",
+      "name": "Butiful Agent Commerce",
+      "count": 6,
+      "priceMedian": 0.01,
+      "topCategory": "compute"
+    },
+    {
+      "host": "x402-api-catalog.onrender.com",
+      "name": "PreFlight Checker: pre-flight checks for AI agents",
+      "count": 6,
+      "priceMedian": 0.035,
+      "topCategory": "compute"
+    },
+    {
+      "host": "x402-stable-door.lu7897859.workers.dev",
+      "name": "China Sourcing Audit Tools",
+      "count": 6,
+      "priceMedian": 0.03,
+      "topCategory": "other"
+    },
+    {
+      "host": "seller.agratys.website",
+      "name": "RONIN Machine Services",
+      "count": 5,
+      "priceMedian": 0.01,
+      "topCategory": "other"
+    },
+    {
+      "host": "agent-trust.agent-utils.workers.dev",
+      "name": "Agent Trust Lookup",
+      "count": 4,
+      "priceMedian": 0.01,
+      "topCategory": "search"
+    },
+    {
+      "host": "api.snapfix.media",
+      "name": "Snap Fix — Image utilities for agents",
+      "count": 4,
+      "priceMedian": 0.005,
+      "topCategory": "data"
+    },
+    {
+      "host": "dep-trust.agent-utils.workers.dev",
+      "name": "Dependency Trust",
+      "count": 4,
+      "priceMedian": 0.0075,
+      "topCategory": "messaging"
+    },
+    {
+      "host": "doc-json.agent-utils.workers.dev",
+      "name": "Hi",
+      "count": 4,
+      "priceMedian": 0.01,
+      "topCategory": "compute"
+    },
+    {
+      "host": "geld-machen-x402.fly.dev",
+      "name": "geld machen x402",
+      "count": 4,
+      "priceMedian": 8.875,
+      "topCategory": "search"
+    },
+    {
+      "host": "watch-diff.agent-utils.workers.dev",
+      "name": "Watch & Diff",
+      "count": 4,
+      "priceMedian": 0.005,
+      "topCategory": "compute"
+    },
+    {
+      "host": "aidatatools.dev",
+      "name": "Data Quality Gate",
+      "count": 3,
+      "priceMedian": 0.04,
+      "topCategory": "data"
+    },
+    {
+      "host": "api.agentwork.run",
+      "name": "AgentWork — Web evidence for agents",
+      "count": 3,
+      "priceMedian": 0.005,
+      "topCategory": "compute"
+    },
+    {
+      "host": "api.paysponge.com",
+      "name": "Nyne AI",
+      "count": 3,
+      "priceMedian": 0.02,
+      "topCategory": "data"
+    },
+    {
+      "host": "api.pennyforge.org",
+      "name": "SendCheck — verify a crypto address BEFORE you send (checksum + wrong network + wrong token)",
+      "count": 3,
+      "priceMedian": 0.030000000000000002,
+      "topCategory": "data"
+    },
+    {
+      "host": "api.postopz.com",
+      "name": "PostOpz | Managed Cloud Editorial Infrastructure",
+      "count": 3,
+      "priceMedian": 0.5,
+      "topCategory": "data"
+    },
+    {
+      "host": "apijapan.vercel.app",
+      "name": "APAC KYC API",
+      "count": 3,
+      "priceMedian": 1,
+      "topCategory": "compliance"
+    },
+    {
+      "host": "contract-guard.hergertsynthora.com",
+      "name": "SYNTHORA Machine-Payable API Mesh (aggregate)",
+      "count": 3,
+      "priceMedian": 0.32,
+      "topCategory": "compute"
+    },
+    {
+      "host": "counterparty-attestation.hergertsynthora.com",
+      "name": "SYNTHORA Machine-Payable API Mesh (aggregate)",
+      "count": 3,
+      "priceMedian": 0.5,
+      "topCategory": "compute"
+    },
+    {
+      "host": "counterparty-clearance.hergertsynthora.com",
+      "name": "SYNTHORA Machine-Payable API Mesh (aggregate)",
+      "count": 3,
+      "priceMedian": 0.1,
+      "topCategory": "compute"
+    },
+    {
+      "host": "reactionpulse-production.reactionpulse-x402.workers.dev",
+      "name": "ReactionPulse",
+      "count": 3,
+      "priceMedian": 0.49,
+      "topCategory": "other"
+    },
+    {
+      "host": "sendcheck-x402.pennyforgeorg.workers.dev",
+      "name": "SendCheck",
+      "count": 3,
+      "priceMedian": 0.030000000000000002,
+      "topCategory": "data"
+    },
+    {
+      "host": "aifor500.com",
+      "name": "Ai for 500 — Market Intelligence for the Agent Economy",
+      "count": 2,
+      "priceMedian": 0.05,
+      "topCategory": "compute"
+    },
+    {
+      "host": "api.walletforge.app",
+      "name": "api.walletforge.app · fetch-markdown",
+      "count": 2,
+      "priceMedian": 0.030000000000000002,
+      "topCategory": "data"
+    },
+    {
+      "host": "aws-bedrock.grok.me",
+      "name": "Solstice",
+      "count": 2,
+      "priceMedian": 0.001,
+      "topCategory": "compute"
+    },
+    {
+      "host": "claim-check.agent-utils.workers.dev",
+      "name": "Claim Check",
+      "count": 2,
+      "priceMedian": 0.05,
+      "topCategory": "messaging"
+    },
+    {
+      "host": "2captcha.x402.paysponge.com",
+      "name": "2Captcha",
+      "count": 1,
+      "priceMedian": null,
+      "topCategory": "compute"
+    },
+    {
+      "host": "address-risk.hergertsynthora.com",
+      "name": "SYNTHORA SYNTHORA Address Risk Screen",
+      "count": 1,
+      "priceMedian": 0.001,
+      "topCategory": "data"
+    },
+    {
+      "host": "addressvalidation.google.gateway-402.com",
+      "name": "Address Validation API",
+      "count": 1,
+      "priceMedian": null,
+      "topCategory": "data"
+    },
+    {
+      "host": "agent-guild-5d5r.onrender.com",
+      "name": "Agent Guild",
+      "count": 1,
+      "priceMedian": 0.1,
+      "topCategory": "messaging"
+    },
+    {
+      "host": "agentattest.hergertsynthora.com",
+      "name": "SYNTHORA Agent Capability Attestation",
+      "count": 1,
+      "priceMedian": 0.001,
+      "topCategory": "compute"
+    },
+    {
+      "host": "agentcard.hergertsynthora.com",
+      "name": "SYNTHORA Agent Card Validator (A2A)",
+      "count": 1,
+      "priceMedian": 0.01,
+      "topCategory": "compute"
+    },
+    {
+      "host": "agentexplorer.alibaba.gateway-402.com",
+      "name": "Alibaba Cloud Agent Skills Explorer",
+      "count": 1,
+      "priceMedian": null,
+      "topCategory": "search"
+    },
+    {
+      "host": "agentres.dev",
+      "name": "Agentic Reservations",
+      "count": 1,
+      "priceMedian": 0.01,
+      "topCategory": "other"
+    },
+    {
+      "host": "ai-scraper-api.duckdns.org",
+      "name": "Web3 Autonomous Scraper",
+      "count": 1,
+      "priceMedian": null,
+      "topCategory": "data"
+    },
+    {
+      "host": "aigen.alibaba.gateway-402.com",
+      "name": "Alibaba Cloud AI Generation",
+      "count": 1,
+      "priceMedian": null,
+      "topCategory": "compute"
+    },
+    {
+      "host": "airquality.google.gateway-402.com",
+      "name": "Air Quality API",
+      "count": 1,
+      "priceMedian": null,
+      "topCategory": "data"
+    },
+    {
+      "host": "amlscreen.hergertsynthora.com",
+      "name": "SYNTHORA AML Screening",
+      "count": 1,
+      "priceMedian": 0.1,
+      "topCategory": "other"
+    },
+    {
+      "host": "anytrans.alibaba.gateway-402.com",
+      "name": "Alibaba Cloud AnyTrans",
+      "count": 1,
+      "priceMedian": null,
+      "topCategory": "compute"
+    },
+    {
+      "host": "api.carsxe.com",
+      "name": "Vehicle Data API — VIN Decoder, Plate Lookup &amp; Market Value | CarsXE",
+      "count": 1,
+      "priceMedian": 0.15,
+      "topCategory": "search"
+    },
+    {
+      "host": "api.exa.ai",
+      "name": "Exa",
+      "count": 1,
+      "priceMedian": null,
+      "topCategory": "search"
+    },
+    {
+      "host": "api.nansen.ai",
+      "name": "Nansen API",
+      "count": 1,
+      "priceMedian": null,
+      "topCategory": "data"
+    },
+    {
+      "host": "api.purch.xyz",
+      "name": "Purch",
+      "count": 1,
+      "priceMedian": null,
+      "topCategory": "other"
+    },
+    {
+      "host": "api.socialintel.dev",
+      "name": "Social Intel",
+      "count": 1,
+      "priceMedian": null,
+      "topCategory": "data"
+    },
+    {
+      "host": "api.syntalic.com",
+      "name": "Syntalic",
+      "count": 1,
+      "priceMedian": null,
+      "topCategory": "other"
+    },
+    {
+      "host": "api.venice.ai",
+      "name": "Venice.ai — Private AI Inference",
+      "count": 1,
+      "priceMedian": null,
+      "topCategory": "compute"
+    },
+    {
+      "host": "app.dynamicauth.com",
+      "name": "Dynamic Wallets API",
+      "count": 1,
+      "priceMedian": null,
+      "topCategory": "compliance"
+    },
+    {
+      "host": "app.earnfi.fun",
+      "name": "EarnFi Agent API",
+      "count": 1,
+      "priceMedian": null,
+      "topCategory": "other"
+    },
+    {
+      "host": "arbiter.hergertsynthora.com",
+      "name": "SYNTHORA arbitro",
+      "count": 1,
+      "priceMedian": 0.02,
+      "topCategory": "other"
+    },
+    {
+      "host": "arxiv-preprint-search.hergertsynthora.com",
+      "name": "SYNTHORA arxiv_preprint_search",
+      "count": 1,
+      "priceMedian": 0.001,
+      "topCategory": "search"
+    },
+    {
+      "host": "ax1.vc",
+      "name": "AX1 Research — startup ecosystem",
+      "count": 1,
+      "priceMedian": 0.02,
+      "topCategory": "compute"
+    },
+    {
+      "host": "base-block-metrics.hergertsynthora.com",
+      "name": "SYNTHORA SYNTHORA Base Chain Metrics",
+      "count": 1,
+      "priceMedian": 0.004,
+      "topCategory": "data"
+    },
+    {
+      "host": "biccheck.hergertsynthora.com",
+      "name": "SYNTHORA BIC Check",
+      "count": 1,
+      "priceMedian": 0.001,
+      "topCategory": "other"
+    },
+    {
+      "host": "bigquery.google.gateway-402.com",
+      "name": "BigQuery API",
+      "count": 1,
+      "priceMedian": null,
+      "topCategory": "data"
+    },
+    {
+      "host": "bitcoin-mempool-congestion.hergertsynthora.com",
+      "name": "SYNTHORA bitcoin_mempool_congestion",
+      "count": 1,
+      "priceMedian": 0.001,
+      "topCategory": "other"
+    },
+    {
+      "host": "bitcoin-network-stats-blockchair.hergertsynthora.com",
+      "name": "SYNTHORA bitcoin_network_stats_blockchair",
+      "count": 1,
+      "priceMedian": 0.001,
+      "topCategory": "data"
+    },
+    {
+      "host": "bitcoin-recommended-fees.hergertsynthora.com",
+      "name": "SYNTHORA bitcoin_recommended_fees",
+      "count": 1,
+      "priceMedian": 0.001,
+      "topCategory": "other"
+    },
+    {
+      "host": "blockscout-chain-stats-multichain.hergertsynthora.com",
+      "name": "SYNTHORA blockscout_chain_stats_multichain",
+      "count": 1,
+      "priceMedian": 0.001,
+      "topCategory": "data"
+    },
+    {
+      "host": "blockscout-token-holder-counters.hergertsynthora.com",
+      "name": "SYNTHORA blockscout_token_holder_counters",
+      "count": 1,
+      "priceMedian": 0.001,
+      "topCategory": "data"
+    },
+    {
+      "host": "bls-cpi-us-index.hergertsynthora.com",
+      "name": "SYNTHORA bls_cpi_us_index",
+      "count": 1,
+      "priceMedian": 0.001,
+      "topCategory": "search"
+    },
+    {
+      "host": "bls-unemployment-rate-us.hergertsynthora.com",
+      "name": "SYNTHORA bls_unemployment_rate_us",
+      "count": 1,
+      "priceMedian": 0.001,
+      "topCategory": "search"
+    },
+    {
+      "host": "bridgerisk.hergertsynthora.com",
+      "name": "SYNTHORA Bridge Risk Evaluator",
+      "count": 1,
+      "priceMedian": 0.1,
+      "topCategory": "trading"
+    },
+    {
+      "host": "businessrisk.hergertsynthora.com",
+      "name": "SYNTHORA Counterparty Business-Risk Verdict",
+      "count": 1,
+      "priceMedian": 0.05,
+      "topCategory": "data"
+    },
+    {
+      "host": "captcha.alibaba.gateway-402.com",
+      "name": "Alibaba Cloud CAPTCHA",
+      "count": 1,
+      "priceMedian": null,
+      "topCategory": "compute"
+    }
+  ],
+  "rankTop50": []
+}
