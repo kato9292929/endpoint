@@ -58,7 +58,7 @@ export function HeroNav() {
     <>
       <nav
         style={INTER}
-        className="fixed inset-x-0 top-0 z-[10] flex items-center justify-between px-5 pt-5 sm:px-8 md:px-12 md:pt-6"
+        className="fixed inset-x-0 top-0 z-[30] flex items-center justify-between px-5 pt-5 sm:px-8 md:px-12 md:pt-6"
       >
         <div style={fadeDown(0)}>
           <Logo />
