@@ -2,6 +2,12 @@
 
 **6 directories. 1 catalog.**
 
+**Live product:** https://endpoint.x402jp.com/
+
+This repository is the source for x402 Endpoint's public catalog, REST API,
+and MCP server. The catalog is refreshed by the scheduled workflow; see the
+`last_seen` field on individual records for each endpoint's observed freshness.
+
 A cross-directory unified catalog of x402 ecosystem endpoints. The x402
 ecosystem has several community-maintained directories running in parallel;
 this is a static site that aggregates them into a single browsable catalog so
@@ -102,7 +108,7 @@ REST API (`src/app/api/`):
 
 A light, best-effort per-IP rate limit lives in `src/middleware.ts` (in-memory,
 no external store; returns `429` + `Retry-After` past the window). See
-[`/for-agents`](https://x402endpoint.com/for-agents) for usage.
+[`For Agents`](https://endpoint.x402jp.com/#for-agents) for usage.
 
 MCP server: the [`mcp/`](./mcp) package (`x402-endpoint-mcp`) exposes
 `list_endpoints`, `search_endpoints`, `get_endpoint`, and `get_stats`, backed by
