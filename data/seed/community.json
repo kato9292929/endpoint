@@ -1,0 +1,67 @@
+[
+  {
+    "id": "webcap-capture",
+    "url": "https://nickname-trident-driveway.ngrok-free.dev/v1/x402/capture",
+    "name": "webcap",
+    "description": "Screenshot any URL as PNG/JPEG/PDF (base64) plus a persistent public artifact link and free OG metadata, billed per call over x402.",
+    "category": "media",
+    "price": { "amount": 0.001, "currency": "USDC", "unit": "per-call" },
+    "networks": ["Base"],
+    "protocols": ["x402"],
+    "source": ["community"],
+    "source_url": "https://nickname-trident-driveway.ngrok-free.dev/v1/x402/capture",
+    "last_seen": "2026-09-06T00:00:00.000Z"
+  },
+  {
+    "id": "webcap-extract",
+    "url": "https://nickname-trident-driveway.ngrok-free.dev/v1/x402/extract",
+    "name": "webcap",
+    "description": "Structured page data as JSON (title, description, headings, paragraphs, links, images, word count, document-order markdown); one URL, or a batch of up to 50 URLs for one payment.",
+    "category": "data",
+    "price": { "amount": 0.01, "currency": "USDC", "unit": "per-call" },
+    "networks": ["Base"],
+    "protocols": ["x402"],
+    "source": ["community"],
+    "source_url": "https://nickname-trident-driveway.ngrok-free.dev/v1/x402/extract",
+    "last_seen": "2026-09-06T00:00:00.000Z"
+  },
+  {
+    "id": "webcap-audit",
+    "url": "https://nickname-trident-driveway.ngrok-free.dev/v1/x402/audit",
+    "name": "webcap",
+    "description": "SEO basics plus link and OG-tag health for a URL in one call (title, description, OG tags, link health), billed per call over x402.",
+    "category": "data",
+    "price": { "amount": 0.002, "currency": "USDC", "unit": "per-call" },
+    "networks": ["Base"],
+    "protocols": ["x402"],
+    "source": ["community"],
+    "source_url": "https://nickname-trident-driveway.ngrok-free.dev/v1/x402/audit",
+    "last_seen": "2026-09-06T00:00:00.000Z"
+  },
+  {
+    "id": "webcap-map-lite",
+    "url": "https://nickname-trident-driveway.ngrok-free.dev/v1/x402/map-lite",
+    "name": "webcap",
+    "description": "Site URL list in one call: URLs from sitemap/robots plus a 1-hop same-host crawl (maxUrls optional, default 20, at most 50).",
+    "category": "search",
+    "price": { "amount": 0.002, "currency": "USDC", "unit": "per-call" },
+    "networks": ["Base"],
+    "protocols": ["x402"],
+    "source": ["community"],
+    "source_url": "https://nickname-trident-driveway.ngrok-free.dev/v1/x402/map-lite",
+    "last_seen": "2026-09-06T00:00:00.000Z"
+  },
+  {
+    "id": "webcap-video",
+    "url": "https://nickname-trident-driveway.ngrok-free.dev/v1/x402/video",
+    "name": "webcap",
+    "description": "Scroll-capture any URL as an MP4/WebM video (base64) in one call, billed per call over x402.",
+    "category": "media",
+    "price": { "amount": 0.005, "currency": "USDC", "unit": "per-call" },
+    "networks": ["Base"],
+    "protocols": ["x402"],
+    "source": ["community"],
+    "source_url": "https://nickname-trident-driveway.ngrok-free.dev/v1/x402/video",
+    "last_seen": "2026-09-06T00:00:00.000Z"
+  }
+]
