@@ -39,7 +39,8 @@ Static site + daily batch fetch:
 
 1. **`scripts/fetch-directories.ts`** runs each per-directory fetcher, dedupes
    by canonical URL, merges cross-directory duplicates, and writes the unified
-   **`data/endpoints.json`**.
+   **`data/endpoints.json`**. Every run records a per-source `fetch_report`
+   (see [Fetch coverage](#fetch-coverage-and-the-2026-09-22-break)).
 2. **Next.js pages** read `data/endpoints.json` in server components and render
    it. Pages use ISR (`revalidate = 86400`) so they refresh at most once a day.
 3. **GitHub Actions** (`.github/workflows/daily-fetch.yml`) runs the fetch on a
@@ -91,6 +92,50 @@ type Endpoint = {
 
 When the same URL appears in multiple directories the records are merged and
 `source` holds every directory it was seen in.
+
+## Fetch coverage, and the 2026-09-22 break
+
+**Runs from 2026-09-22 onward fetch x402scan in full. Earlier runs did not.**
+
+Until 2026-09-22 the x402scan fetcher stopped after 20,000 rows (a
+`MAX_ENDPOINTS` constant in `scripts/fetchers/x402scan.ts`). Every healthy run
+from 2026-08-07 on therefore reported exactly 20,000 for that source — the
+number was the cap, not the directory. x402scan's API has no such limit
+(`paginatedQuerySchema` puts no upper bound on `page_size`, and the query is a
+plain Prisma `skip`/`take`), so the fetcher now pages until the list is
+exhausted.
+
+**Do not compare totals across that boundary without saying so.** The catalog
+count and everything derived from it — `data/stats/*.json`, host counts,
+category and price-tier splits — change scale on that date because coverage
+changed, not because the ecosystem did. The daily snapshots on either side are
+each internally consistent; a trend line that crosses 2026-09-22 is not.
+
+Each run records its own coverage in `fetch_report`, so a short catalog can
+never look like a healthy one:
+
+| field | meaning |
+| --- | --- |
+| `rows` | rows the upstream API actually served (x402scan keys rows by URL + method, so one URL can appear more than once) |
+| `count` | endpoints the fetcher returned |
+| `unique_after_dedup` | distinct canonical URLs in those, before the cross-source merge |
+| `pages` | requests made |
+| `api_total` | the upstream's own `total_count`, when it reports one |
+| `truncated` | **true when the run did not reach the end of the list** — a safety limit, a depth ceiling, or a page that kept failing |
+| `stopped_reason` | `exhausted` (complete), `safety_limit`, `page_ceiling`, or `page_error` |
+| `slices` | per-pass counts when one pass wasn't enough |
+
+The fetcher pages `lastUpdated desc` with a ≥1s gap between requests, retries
+429/5xx with exponential backoff (honouring `Retry-After`), and stops at a
+200,000-row safety limit that reports `truncated: true` rather than quietly
+returning a short catalog. If the API ever does impose a depth ceiling, the
+run re-reads the list in the other sort orders and unions by canonical URL,
+recording each slice. Knobs: `X402SCAN_PAGE_SIZE`, `X402SCAN_GAP_MS`,
+`X402SCAN_SAFETY_MAX`.
+
+`.github/workflows/verify-fetch.yml` runs the live fetchers and diffs the
+result against the committed catalog **without committing or deploying**, for
+checking a fetcher change before the daily job pushes it.
 
 ## Agent access (API + MCP)
 
@@ -179,6 +224,16 @@ endpoint, open a pull request — everything is PR-based.
 Connect the repo to Vercel with **Production Branch = `main`**. The daily GitHub
 Actions job (`.github/workflows/daily-fetch.yml`) fetches, writes a stats
 snapshot, and commits `data/endpoints.json` + `data/stats/` to `main`.
+
+> **Page weight, since the 20,000-row cap came off.** `src/app/page.tsx` passes
+> the whole catalog to `<CatalogExplorer>`, a client component, so every
+> endpoint is serialized into the page payload. That is what the old
+> `MAX_ENDPOINTS = 20000` was really protecting: ~19k endpoints was proven safe
+> against Vercel's ~19 MB ISR limit, at roughly 490 bytes per endpoint. A full
+> x402scan catalog is several times that, so **the homepage needs to stop
+> embedding the full set before a full catalog is deployed** — serve search
+> from `/api/search` and paginate the list server-side. The fetch layer is
+> already complete; this is the remaining piece.
 
 Because the site imports `data/endpoints.json` **at build time**, the front only
 updates on a fresh deploy — ISR revalidation alone won't change the numbers. To

@@ -1,7 +1,9 @@
 // Lightweight test runner (tsx + node:assert, no test framework dep).
 // Run with: npm test
 import assert from "node:assert/strict";
+import { createServer, type Server } from "node:http";
 import { mergeEndpoints } from "../util";
+import { fetchX402scan, getLastX402scanRun } from "../fetchers/x402scan";
 import { defaultOrder, isFeatured } from "../../src/lib/featured";
 import { aggregateHosts, hostOf } from "../../src/lib/hosts";
 import { buildRankRows, type RankArtifact } from "../../src/lib/rank";
@@ -135,4 +137,243 @@ test("buildRankRows re-lists artifact rows as-is and joins the catalog by host",
   assert.deepEqual(r.rows[0].networks, ["Base"]);
 });
 
-console.log(`\n${passed} passed`);
+// ── Stage 4 — x402scan paging ────────────────────────
+// The fetcher is exercised against a local fake that reproduces x402scan's
+// server semantics exactly (verified against Merit-Systems/x402scan):
+//   skip: page * page_size, take: page_size + 1
+//   → { items, hasNextPage, total_count, total_pages, page }
+// wrapped in the non-batched superjson envelope { result: { data: { json } } }.
+
+type FakeSorting = { id: string; desc: boolean };
+type FakeRow = { resource: string };
+
+type FakeOptions = {
+  // Rows the fake holds, in the order the given sorting would return them.
+  rowsFor: (sorting: FakeSorting) => FakeRow[];
+  // Rows past this offset come back empty while hasNextPage stays true —
+  // i.e. an API-side depth ceiling.
+  depthLimit?: (sorting: FakeSorting) => number;
+  // Reply 429 (with Retry-After) to the first N requests.
+  failFirst?: number;
+  // total_count the fake advertises; defaults to the sorted row count.
+  totalCount?: number;
+};
+
+type Fake = { url: string; requests: number; close: () => Promise<void> };
+
+function startFake(opts: FakeOptions): Promise<Fake> {
+  let requests = 0;
+  const server: Server = createServer((req, res) => {
+    requests++;
+    const url = new URL(req.url ?? "/", "http://localhost");
+    const input = JSON.parse(url.searchParams.get("input") ?? "{}").json ?? {};
+    const sorting: FakeSorting = input.sorting ?? { id: "lastUpdated", desc: true };
+    const { page = 0, page_size = 10 } = input.pagination ?? {};
+
+    if (opts.failFirst && requests <= opts.failFirst) {
+      res.writeHead(429, { "retry-after": "0" });
+      res.end("rate limited");
+      return;
+    }
+
+    const rows = opts.rowsFor(sorting);
+    const limit = opts.depthLimit?.(sorting) ?? rows.length;
+    const skip = page * page_size;
+    // take page_size + 1 and peek, exactly like the upstream query.
+    const window = rows.slice(skip, Math.min(skip + page_size + 1, limit));
+    const total_count = opts.totalCount ?? rows.length;
+    const payload = {
+      items: window.slice(0, page_size),
+      // hasNextPage is computed from the real total, so a depth ceiling shows
+      // up as "empty page while more was promised" — the case we detect.
+      hasNextPage: skip + page_size < total_count,
+      total_count,
+      total_pages: Math.ceil(total_count / page_size),
+      page,
+    };
+    res.writeHead(200, { "content-type": "application/json" });
+    res.end(JSON.stringify({ result: { data: { json: payload } } }));
+  });
+
+  return new Promise((resolve) => {
+    server.listen(0, "127.0.0.1", () => {
+      const addr = server.address();
+      const port = typeof addr === "object" && addr ? addr.port : 0;
+      resolve({
+        url: `http://127.0.0.1:${port}`,
+        get requests() {
+          return requests;
+        },
+        close: () =>
+          new Promise<void>((done) => server.close(() => done())),
+      } as Fake);
+    });
+  });
+}
+
+function rows(n: number, prefix = "https://e"): FakeRow[] {
+  return Array.from({ length: n }, (_, i) => ({
+    resource: `${prefix}${i}.example/api`,
+  }));
+}
+
+// The fetcher reads its knobs from the environment on every run, so a
+// scenario just sets them before calling it.
+function configure(env: Record<string, string>) {
+  for (const k of [
+    "X402SCAN_BASE_URL",
+    "X402SCAN_PAGE_SIZE",
+    "X402SCAN_GAP_MS",
+    "X402SCAN_SAFETY_MAX",
+  ]) {
+    delete process.env[k];
+  }
+  for (const [k, v] of Object.entries(env)) process.env[k] = v;
+}
+
+async function asyncTest(name: string, fn: () => Promise<void>) {
+  await fn();
+  passed++;
+  console.log(`  ✓ ${name}`);
+}
+
+async function stage4() {
+  console.log("\nStage 4 — x402scan paging");
+
+  await asyncTest(
+    "pages past 20,000 rows — the old MAX_ENDPOINTS cap is gone",
+    async () => {
+      const all = rows(25_000);
+      const fake = await startFake({ rowsFor: () => all });
+      try {
+        configure({
+          X402SCAN_BASE_URL: fake.url,
+          X402SCAN_PAGE_SIZE: "5000",
+          X402SCAN_GAP_MS: "0",
+          X402SCAN_SAFETY_MAX: "200000",
+        });
+        const eps = await fetchX402scan();
+        const run = getLastX402scanRun()!;
+        assert.equal(eps.length, 25_000);
+        assert.equal(run.rows, 25_000);
+        assert.equal(run.api_total, 25_000);
+        assert.equal(run.pages, 5);
+        assert.equal(run.truncated, false);
+        assert.equal(run.sliced, false);
+        assert.equal(run.stopped_reason, "exhausted");
+      } finally {
+        await fake.close();
+      }
+    },
+  );
+
+  await asyncTest(
+    "rows repeating a URL (upstream keys by URL+method) collapse in unique_urls",
+    async () => {
+      const dup = [...rows(10), ...rows(10)]; // every URL served twice
+      const fake = await startFake({ rowsFor: () => dup });
+      try {
+        configure({
+          X402SCAN_BASE_URL: fake.url,
+          X402SCAN_PAGE_SIZE: "20",
+          X402SCAN_GAP_MS: "0",
+        });
+        const eps = await fetchX402scan();
+        const run = getLastX402scanRun()!;
+        assert.equal(run.rows, 20);
+        assert.equal(run.unique_urls, 10);
+        assert.equal(eps.length, 10);
+      } finally {
+        await fake.close();
+      }
+    },
+  );
+
+  await asyncTest(
+    "a depth ceiling triggers the slice fallback and the union completes",
+    async () => {
+      const all = rows(1000);
+      const reversed = [...all].reverse();
+      const fake = await startFake({
+        // desc serves the list head-first, asc serves it tail-first.
+        rowsFor: (s) => (s.desc ? all : reversed),
+        // Neither order serves past 600 rows deep, but together they cover
+        // all 1000 — exactly the shape the fallback exists for.
+        depthLimit: () => 600,
+      });
+      try {
+        configure({
+          X402SCAN_BASE_URL: fake.url,
+          X402SCAN_PAGE_SIZE: "100",
+          X402SCAN_GAP_MS: "0",
+        });
+        const eps = await fetchX402scan();
+        const run = getLastX402scanRun()!;
+        assert.equal(run.sliced, true);
+        assert.equal(run.unique_urls, 1000); // full coverage via both orders
+        assert.equal(eps.length, 1000);
+        assert.ok(
+          run.slices.length > 1,
+          "every slice that ran is recorded in fetch_report",
+        );
+        assert.equal(run.slices[0].stopped_reason, "page_ceiling");
+        // No single pass ever reached the end of the list, so coverage is not
+        // provable even though the union happens to be complete here. The run
+        // stays flagged rather than claiming a clean sweep.
+        assert.equal(run.truncated, true);
+      } finally {
+        await fake.close();
+      }
+    },
+  );
+
+  await asyncTest(
+    "the safety limit records truncated: true instead of stopping quietly",
+    async () => {
+      const all = rows(5000);
+      const fake = await startFake({ rowsFor: () => all });
+      try {
+        configure({
+          X402SCAN_BASE_URL: fake.url,
+          X402SCAN_PAGE_SIZE: "100",
+          X402SCAN_GAP_MS: "0",
+          X402SCAN_SAFETY_MAX: "300",
+        });
+        await fetchX402scan();
+        const run = getLastX402scanRun()!;
+        assert.equal(run.truncated, true);
+        assert.equal(run.stopped_reason, "safety_limit");
+        assert.equal(run.api_total, 5000);
+      } finally {
+        await fake.close();
+      }
+    },
+  );
+
+  await asyncTest("429 with Retry-After is retried, not dropped", async () => {
+    const all = rows(50);
+    const fake = await startFake({ rowsFor: () => all, failFirst: 2 });
+    try {
+      configure({
+        X402SCAN_BASE_URL: fake.url,
+        X402SCAN_PAGE_SIZE: "50",
+        X402SCAN_GAP_MS: "0",
+      });
+      const eps = await fetchX402scan();
+      const run = getLastX402scanRun()!;
+      assert.equal(eps.length, 50);
+      assert.equal(run.truncated, false);
+    } finally {
+      await fake.close();
+    }
+  });
+}
+
+stage4()
+  .then(() => {
+    console.log(`\n${passed} passed`);
+  })
+  .catch((err) => {
+    console.error(err);
+    process.exit(1);
+  });

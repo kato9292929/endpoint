@@ -83,6 +83,25 @@ export type FetchReportEntry = {
   status: FetchStatus;
   count: number;
   error?: string;
+  // Paging detail. Optional: only sources that page through an upstream API
+  // report these, and catalogs written before they existed still load.
+  // `rows` is what the upstream API actually served (a URL can appear more
+  // than once — x402scan keys rows by URL+method); `count` is the endpoints
+  // the fetcher returned; `unique_after_dedup` is how many distinct canonical
+  // URLs those hold, before cross-source merging.
+  rows?: number;
+  pages?: number;
+  unique_after_dedup?: number;
+  // true when the run did NOT reach the end of the upstream list (a safety
+  // limit, a depth ceiling, or a page that kept failing). Never silently 0.
+  truncated?: boolean;
+  // The upstream's own total, when it reports one — lets `count` be checked
+  // against what the source says it holds. null when the API doesn't say.
+  api_total?: number | null;
+  stopped_reason?: string;
+  // Per-slice counts when a source had to be read in several passes.
+  slices?: { label: string; rows: number; added: number; pages: number }[];
+  elapsed_ms?: number;
 };
 
 export type Catalog = {

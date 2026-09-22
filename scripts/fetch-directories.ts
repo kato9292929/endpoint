@@ -23,7 +23,7 @@ import type {
 import { canonicalUrl, hashId, mergeEndpoints } from "./util";
 
 import { fetchX402Inc } from "./fetchers/x402-inc";
-import { fetchX402scan } from "./fetchers/x402scan";
+import { fetchX402scan, getLastX402scanRun } from "./fetchers/x402scan";
 import { fetchOnyxBazaar } from "./fetchers/onyx-bazaar";
 import { fetchAgenticMarket } from "./fetchers/agentic-market";
 import { fetchPaySh } from "./fetchers/pay-sh";
@@ -40,11 +40,39 @@ type NamedFetcher = {
   // Implemented fetchers set this true: a 0 result is then "empty" (a bug to
   // surface), not silently accepted. Stub fetchers set it false → "stub".
   expectNonEmpty: boolean;
+  // Paging fetchers expose how the run went (pages, upstream total, whether it
+  // reached the end) so `fetch_report` can carry it. Read after `run`.
+  meta?: () => Partial<FetchReportEntry> | undefined;
 };
 
 const FETCHERS: NamedFetcher[] = [
   { name: "x402-inc", run: fetchX402Inc, expectNonEmpty: true },
-  { name: "x402scan", run: fetchX402scan, expectNonEmpty: true },
+  {
+    name: "x402scan",
+    run: fetchX402scan,
+    expectNonEmpty: true,
+    meta: () => {
+      const r = getLastX402scanRun();
+      if (!r) return undefined;
+      return {
+        rows: r.rows,
+        pages: r.pages,
+        truncated: r.truncated,
+        api_total: r.api_total,
+        stopped_reason: r.stopped_reason,
+        elapsed_ms: r.elapsed_ms,
+        // Only worth recording when more than the primary pass ran.
+        slices: r.sliced
+          ? r.slices.map(({ label, rows, added, pages }) => ({
+              label,
+              rows,
+              added,
+              pages,
+            }))
+          : undefined,
+      };
+    },
+  },
   { name: "onyx-bazaar", run: fetchOnyxBazaar, expectNonEmpty: true },
   { name: "pay-sh", run: fetchPaySh, expectNonEmpty: true },
   { name: "agentic-market", run: fetchAgenticMarket, expectNonEmpty: false },
@@ -69,13 +97,31 @@ async function collect(): Promise<CollectResult> {
       let status: FetchStatus;
       if (items.length > 0) status = "ok";
       else status = f.expectNonEmpty ? "empty" : "stub";
-      report.push({ source: f.name, status, count: items.length });
+      // Distinct canonical URLs this source contributed, before the
+      // cross-source merge — so "20,000 rows" vs "18,400 endpoints" is
+      // visible per source rather than only in the final count.
+      const unique_after_dedup = new Set(
+        items.map((e) => canonicalUrl(e.url)),
+      ).size;
+      report.push({
+        source: f.name,
+        status,
+        count: items.length,
+        unique_after_dedup,
+        ...(f.meta?.() ?? {}),
+      });
       const flag = status === "empty" ? "⚠" : status === "stub" ? "·" : "✓";
       console.log(`  ${flag} ${f.name}: ${items.length} (${status})`);
       endpoints.push(...items);
     } catch (err) {
       const error = (err as Error).message;
-      report.push({ source: f.name, status: "failed", count: 0, error });
+      report.push({
+        source: f.name,
+        status: "failed",
+        count: 0,
+        error,
+        ...(f.meta?.() ?? {}),
+      });
       console.warn(`  ✗ ${f.name}: failed — ${error}`);
     }
   }
@@ -132,6 +178,18 @@ async function main() {
     `Wrote ${endpoints.length} endpoint(s); popularity coverage ${popularity_coverage}.`,
   );
   console.table(report);
+
+  // A short catalog must never look like a healthy one. Say so on stdout as
+  // well as in fetch_report.
+  for (const r of report) {
+    if (!r.truncated) continue;
+    console.warn(
+      `::warning::${r.source} did NOT reach the end of its list (${r.stopped_reason}): ` +
+        `${r.rows ?? r.count} row(s)` +
+        (r.api_total != null ? ` of ${r.api_total} reported upstream` : "") +
+        ". fetch_report records truncated: true.",
+    );
+  }
 }
 
 main().catch((err) => {
