@@ -344,6 +344,10 @@ async function stage4() {
         assert.equal(run.truncated, true);
         assert.equal(run.stopped_reason, "safety_limit");
         assert.equal(run.api_total, 5000);
+        // Our own budget is spent, so re-reading in other sort orders would
+        // only burn requests against the same ceiling.
+        assert.equal(run.sliced, false);
+        assert.equal(run.pages, 3);
       } finally {
         await fake.close();
       }

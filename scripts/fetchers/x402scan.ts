@@ -361,9 +361,14 @@ export async function fetchX402scan(): Promise<Endpoint[]> {
   // rows well short of the total x402scan reports. Either way, re-read the
   // list in other sort orders and union by canonical URL — a depth ceiling in
   // one order exposes the far end of the list in the reverse order.
+  //
+  // The safety limit is the exception: that budget is ours and is already
+  // spent, so more passes would only burn requests against the same ceiling.
   const shortfall =
     union.apiTotal != null && union.rows < union.apiTotal - cfg.pageSize;
-  const needsSlices = primary.stopped_reason !== "exhausted" || shortfall;
+  const needsSlices =
+    primary.stopped_reason !== "safety_limit" &&
+    (primary.stopped_reason !== "exhausted" || shortfall);
 
   if (needsSlices) {
     console.warn(
