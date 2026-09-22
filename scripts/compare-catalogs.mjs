@@ -10,7 +10,8 @@
 // Dependency-free Node ESM. Also appends the same summary to
 // $GITHUB_STEP_SUMMARY when running in Actions.
 
-import { readFileSync, appendFileSync, statSync } from "node:fs";
+import { appendFileSync, statSync } from "node:fs";
+import { readCatalog } from "./read-catalog.mjs";
 
 const [, , baselinePath, candidatePath] = process.argv;
 if (!baselinePath || !candidatePath) {
@@ -20,11 +21,11 @@ if (!baselinePath || !candidatePath) {
   process.exit(2);
 }
 
-const read = (p) => JSON.parse(readFileSync(p, "utf8"));
 const mb = (p) => (statSync(p).size / 1048576).toFixed(2);
+const onDisk = (p) => `${mb(p)} MB${p.endsWith(".gz") ? " gzipped" : ""}`;
 
-const base = read(baselinePath);
-const cand = read(candidatePath);
+const base = readCatalog(baselinePath);
+const cand = readCatalog(candidatePath);
 
 function hostOf(url) {
   try {
@@ -59,8 +60,8 @@ const say = (line = "") => {
 
 say("## Full-fetch verification");
 say();
-say(`baseline:  ${baselinePath} — ${base.count} endpoints, ${mb(baselinePath)} MB`);
-say(`candidate: ${candidatePath} — ${cand.count} endpoints, ${mb(candidatePath)} MB`);
+say(`baseline:  ${baselinePath} — ${base.count} endpoints, ${onDisk(baselinePath)}`);
+say(`candidate: ${candidatePath} — ${cand.count} endpoints, ${onDisk(candidatePath)}`);
 say();
 
 // ── fetch_report, side by side ──

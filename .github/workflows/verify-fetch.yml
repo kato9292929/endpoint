@@ -55,7 +55,7 @@ jobs:
       - name: Compare against the baseline
         run: |
           node scripts/compare-catalogs.mjs \
-            "$RUNNER_TEMP/baseline.json" data/endpoints_full.json
+            "$RUNNER_TEMP/baseline.json" data/endpoints_full.json.gz
 
       # The page file is the only one the site bundles, so it is the only one
       # whose weight can break the build. The full file is reported next to it
@@ -64,18 +64,24 @@ jobs:
         run: |
           node -e '
             const fs = require("fs");
-            const rows = ["data/endpoints.json", "data/endpoints_full.json"]
+            const rows = ["data/endpoints.json", "data/endpoints_full.json.gz"]
               .filter((f) => fs.existsSync(f))
               .map((f) => {
-                const j = JSON.parse(fs.readFileSync(f, "utf8"));
+                const raw = fs.readFileSync(f);
+                const j = JSON.parse(
+                  f.endsWith(".gz")
+                    ? require("zlib").gunzipSync(raw).toString("utf8")
+                    : raw.toString("utf8"),
+                );
                 const bytes = Buffer.byteLength(JSON.stringify(j.endpoints));
                 return `| \`${f}\` | ${j.endpoints.length} | ` +
                   `${(bytes / 1048576).toFixed(2)} MB | ` +
+                  `${(raw.length / 1048576).toFixed(2)} MB | ` +
                   `${Math.round(bytes / (j.endpoints.length || 1))} B |`;
               });
             const table = [
-              "| file | endpoints | array size | per endpoint |",
-              "| --- | --- | --- | --- |",
+              "| file | endpoints | array size | on disk | per endpoint |",
+              "| --- | --- | --- | --- | --- |",
               ...rows,
             ].join("\n");
             console.log(table);
@@ -87,12 +93,44 @@ jobs:
             }
           '
 
+      # Also proves the stats path end to end: it must read the gzipped full
+      # catalog, not the capped page file.
+      - name: Write a stats snapshot from the full catalog
+        run: |
+          node scripts/write-stats-snapshot.mjs
+          node -e '
+            const fs = require("fs");
+            const d = new Date().toISOString().slice(0, 10);
+            const s = JSON.parse(fs.readFileSync(`data/stats/${d}.json`, "utf8"));
+            const tbl = (title, obj) =>
+              [`\n#### ${title}\n`, "| key | count |", "| --- | --- |"]
+                .concat(
+                  Object.entries(obj)
+                    .sort((a, b) => b[1] - a[1])
+                    .map(([k, v]) => `| ${k} | ${v} |`),
+                )
+                .join("\n");
+            const body = [
+              `\n### Stats snapshot ${d} (from the FULL catalog)\n`,
+              `total: **${s.total}** · hosts: **${s.hostCount}**`,
+              tbl("By category", s.byCategory),
+              tbl("By chain", s.byChain),
+              tbl("By source", s.bySource),
+              tbl("By price tier", s.byPriceTier),
+            ].join("\n");
+            console.log(body);
+            if (process.env.GITHUB_STEP_SUMMARY) {
+              fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, body + "\n");
+            }
+          '
+
       - name: Upload the fetched catalogs
         uses: actions/upload-artifact@v4
         with:
           name: endpoints-full
           path: |
             data/endpoints.json
-            data/endpoints_full.json
+            data/endpoints_full.json.gz
+            data/stats
           retention-days: 7
           compression-level: 9

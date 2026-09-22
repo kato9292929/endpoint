@@ -40,7 +40,7 @@ Static site + daily batch fetch:
 1. **`scripts/fetch-directories.ts`** runs each per-directory fetcher, dedupes
    by canonical URL, merges cross-directory duplicates, and writes **two**
    files (see [Two catalog files](#two-catalog-files)):
-   **`data/endpoints_full.json`** (everything) and **`data/endpoints.json`**
+   **`data/endpoints_full.json.gz`** (everything) and **`data/endpoints.json`**
    (the capped subset the site bundles). Every run records a per-source
    `fetch_report` (see [Fetch coverage](#fetch-coverage-and-the-2026-09-22-break)).
 2. **Next.js pages** read `data/endpoints.json` in server components and render
@@ -52,6 +52,7 @@ Static site + daily batch fetch:
 scripts/
   fetch-directories.ts      # orchestrator: collect → dedupe → write both files
   page-subset.ts            # which endpoints the bundled file may carry
+  read-catalog.mjs          # reads a catalog file, gunzipping a .gz
   compare-catalogs.mjs      # before/after diff of two catalogs
   util.ts                   # canonical URL, hashing, merge, throttle
   fetchers/
@@ -71,9 +72,9 @@ src/
   components/               # cards, grid, filters, stats, footer
   lib/                      # types + data-access helpers
 data/
-  endpoints_full.json       # every endpoint — the real catalog, not bundled
+  endpoints_full.json.gz    # every endpoint — the real catalog, not bundled
   endpoints.json            # the capped subset the site imports at build time
-  stats/                    # daily snapshots, counted from endpoints_full.json
+  stats/                    # daily snapshots, counted from the full catalog
 ```
 
 ## Two catalog files
@@ -82,7 +83,7 @@ The fetch writes both of these on every run:
 
 | file | holds | who reads it |
 | --- | --- | --- |
-| `data/endpoints_full.json` | **every** endpoint | `scripts/write-stats-snapshot.mjs`; anyone asking how big x402 actually is. **Nothing under `src/` imports it.** |
+| `data/endpoints_full.json.gz` | **every** endpoint, gzipped | `scripts/write-stats-snapshot.mjs`; anyone asking how big x402 actually is. **Nothing under `src/` imports it.** |
 | `data/endpoints.json` | a subset, at most `subset_limit` (20,000) | `src/lib/data.ts` — the site, its pages and its REST API |
 
 They exist separately because of how the site is built. `src/lib/data.ts`
@@ -105,6 +106,15 @@ is never dropped as "just x402scan".
 and `full_count` are all present, so its `count` can never be mistaken for an
 ecosystem total. `write-stats-snapshot.mjs` refuses to count a file carrying
 `subset_of`.
+
+**Why the full file is gzipped.** It is committed on every daily run, and at
+~66 MB of pretty-printed JSON a day that would outgrow the repository within
+months. `gzip -9` takes it to ~5 MB (~7%) in a fraction of a second, and Node
+zeroes the gzip header's mtime, so identical data still compresses to identical
+bytes and an unchanged catalog produces no diff. Read it with
+`scripts/read-catalog.mjs` (or `gunzip -c data/endpoints_full.json.gz | jq .`);
+an uncompressed `data/endpoints_full.json` is still accepted if present, so a
+checkout from before the change keeps working.
 
 **Two consequences to know about.** `data/stats/*.json` is computed from the
 full file while the site shows the subset, so the site's own counter and the
@@ -270,7 +280,7 @@ endpoint, open a pull request — everything is PR-based.
 
 Connect the repo to Vercel with **Production Branch = `main`**. The daily GitHub
 Actions job (`.github/workflows/daily-fetch.yml`) fetches, writes a stats
-snapshot, and commits `data/endpoints.json`, `data/endpoints_full.json` and
+snapshot, and commits `data/endpoints.json`, `data/endpoints_full.json.gz` and
 `data/stats/` to `main`.
 
 Because the site imports `data/endpoints.json` **at build time**, the front only

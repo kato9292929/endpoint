@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // Writes a daily stats snapshot from the aggregator output.
 //
-// Reads data/endpoints_full.json and writes data/stats/YYYY-MM-DD.json (UTC
+// Reads data/endpoints_full.json.gz and writes data/stats/YYYY-MM-DD.json (UTC
 // date), one file per day. Re-running the same day overwrites it (latest value
 // wins).
 //
@@ -16,14 +16,20 @@
 // `price.amount`; we also absorb common aliases (chain/network, provider,
 // priceUsd, numeric price) so the writer survives schema drift.
 
-import { readFileSync, writeFileSync, mkdirSync, existsSync } from "node:fs";
+import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { join } from "node:path";
+import { readCatalog, firstExisting } from "./read-catalog.mjs";
 
 const ROOT = process.cwd();
-const FULL = join(ROOT, "data", "endpoints_full.json");
-const PAGE = join(ROOT, "data", "endpoints.json");
-const INPUT = existsSync(FULL) ? FULL : PAGE;
 const OUT_DIR = join(ROOT, "data", "stats");
+// Gzipped full catalog first, then its uncompressed predecessor, then the page
+// file — which is a subset and is rejected below rather than counted.
+const INPUT =
+  firstExisting(
+    join(ROOT, "data", "endpoints_full.json.gz"),
+    join(ROOT, "data", "endpoints_full.json"),
+    join(ROOT, "data", "endpoints.json"),
+  ) ?? join(ROOT, "data", "endpoints_full.json.gz");
 
 // ── Price-tier buckets (USD). Edit these edges to retune; order matters. ──
 // Each endpoint's price falls into the first bucket whose `max` it is under
@@ -78,7 +84,7 @@ function tally(into, key) {
 }
 
 function main() {
-  const catalog = JSON.parse(readFileSync(INPUT, "utf8"));
+  const catalog = readCatalog(INPUT);
   const endpoints = Array.isArray(catalog.endpoints) ? catalog.endpoints : [];
 
   // Counting the capped page file would silently under-report. Say which file
@@ -86,7 +92,7 @@ function main() {
   if (catalog.subset_of) {
     throw new Error(
       `${INPUT} is a subset (${catalog.count} of ${catalog.full_count}); ` +
-        "stats must be computed from data/endpoints_full.json. Run `npm run fetch` first.",
+        "stats must be computed from data/endpoints_full.json.gz. Run `npm run fetch` first.",
     );
   }
   console.log(`stats: counting ${endpoints.length} endpoint(s) from ${INPUT}`);

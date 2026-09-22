@@ -2,6 +2,11 @@
 // Run with: npm test
 import assert from "node:assert/strict";
 import { createServer, type Server } from "node:http";
+import { execFileSync } from "node:child_process";
+import { gzipSync } from "node:zlib";
+import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, rmSync } from "node:fs";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
 import { mergeEndpoints } from "../util";
 import { fetchX402scan, getLastX402scanRun } from "../fetchers/x402scan";
 import { pageSubset } from "../page-subset";
@@ -197,6 +202,110 @@ test("pageSubset keeps a URL that several directories list", () => {
 test("pageSubset is a no-op under the cap", () => {
   const eps = [ep({ id: "a" }), ep({ id: "b" })];
   assert.equal(pageSubset(eps, 10).length, 2);
+});
+
+console.log("\nStage 3c — stats snapshot input");
+
+// The stats writer is a separate process reading files, so drive it that way:
+// build a data/ directory, run it with that cwd, read back what it wrote.
+const STATS_SCRIPT = join(__dirname, "..", "write-stats-snapshot.mjs");
+
+function statsFixture(files: Record<string, string | Buffer>): string {
+  const dir = mkdtempSync(join(tmpdir(), "x402-stats-"));
+  mkdirSync(join(dir, "data"), { recursive: true });
+  for (const [name, body] of Object.entries(files)) {
+    writeFileSync(join(dir, "data", name), body);
+  }
+  return dir;
+}
+
+function catalogFixture(n: number) {
+  return {
+    generated_at: "2026-09-22T00:00:00.000Z",
+    count: n,
+    fetch_report: [],
+    popularity_coverage: 0,
+    endpoints: Array.from({ length: n }, (_, i) => ({
+      id: `id${i}`,
+      url: `https://h${i % 7}.example/r${i}`,
+      name: `E${i}`,
+      description: "",
+      category: "other",
+      networks: ["Base"],
+      protocols: ["x402"],
+      source: ["x402scan"],
+      source_url: "",
+      last_seen: "2026-09-22T00:00:00.000Z",
+    })),
+  };
+}
+
+test("write-stats-snapshot counts the GZIPPED full catalog", () => {
+  const full = catalogFixture(40);
+  const dir = statsFixture({
+    "endpoints_full.json.gz": gzipSync(Buffer.from(JSON.stringify(full))),
+    // A capped page file sits beside it and must be ignored.
+    "endpoints.json": JSON.stringify({
+      ...full,
+      count: 10,
+      subset_of: "endpoints_full.json.gz",
+      full_count: 40,
+      endpoints: full.endpoints.slice(0, 10),
+    }),
+  });
+  try {
+    const out = execFileSync("node", [STATS_SCRIPT], {
+      cwd: dir,
+      encoding: "utf8",
+    });
+    assert.match(out, /endpoints_full\.json\.gz/, "reads the .gz, not the page file");
+    const day = new Date().toISOString().slice(0, 10);
+    const snap = JSON.parse(
+      readFileSync(join(dir, "data", "stats", `${day}.json`), "utf8"),
+    );
+    assert.equal(snap.total, 40, "counts the full catalog, not the subset");
+    assert.equal(snap.hostCount, 7);
+  } finally {
+    rmSync(dir, { recursive: true, force: true });
+  }
+});
+
+test("write-stats-snapshot still reads an uncompressed full catalog", () => {
+  const dir = statsFixture({
+    "endpoints_full.json": JSON.stringify(catalogFixture(12)),
+  });
+  try {
+    execFileSync("node", [STATS_SCRIPT], { cwd: dir, encoding: "utf8" });
+    const day = new Date().toISOString().slice(0, 10);
+    const snap = JSON.parse(
+      readFileSync(join(dir, "data", "stats", `${day}.json`), "utf8"),
+    );
+    assert.equal(snap.total, 12);
+  } finally {
+    rmSync(dir, { recursive: true, force: true });
+  }
+});
+
+test("write-stats-snapshot REFUSES to count a subset as a total", () => {
+  const full = catalogFixture(30);
+  const dir = statsFixture({
+    "endpoints.json": JSON.stringify({
+      ...full,
+      count: 10,
+      subset_of: "endpoints_full.json.gz",
+      full_count: 30,
+      endpoints: full.endpoints.slice(0, 10),
+    }),
+  });
+  try {
+    assert.throws(
+      () => execFileSync("node", [STATS_SCRIPT], { cwd: dir, stdio: "pipe" }),
+      /is a subset \(10 of 30\)/,
+      "a subset must fail loudly, never be counted",
+    );
+  } finally {
+    rmSync(dir, { recursive: true, force: true });
+  }
 });
 
 // ── Stage 4 — x402scan paging ────────────────────────

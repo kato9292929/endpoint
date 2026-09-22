@@ -12,6 +12,7 @@
 //  - `fetch_report` and `popularity_coverage` are ALWAYS written.
 
 import { writeFile, readFile } from "node:fs/promises";
+import { gzipSync, gunzipSync } from "node:zlib";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 import type {
@@ -36,7 +37,14 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const DATA = join(__dirname, "..", "data");
 // Every endpoint. Nothing in src/ imports this — it is the input to
 // scripts/write-stats-snapshot.mjs and the answer to "how big is x402 really".
-const OUT_FULL = join(DATA, "endpoints_full.json");
+//
+// Stored gzipped because it is committed daily: ~66 MB of pretty-printed JSON
+// per day would outgrow the repo within months, and gzip -9 takes it to ~5 MB
+// (~7%) in a fraction of a second. Node zeroes the gzip header's mtime, so the
+// bytes are deterministic and an unchanged catalog still produces no diff.
+const OUT_FULL = join(DATA, "endpoints_full.json.gz");
+// Read-only fallback for a checkout written before the file was gzipped.
+const OUT_FULL_LEGACY = join(DATA, "endpoints_full.json");
 // The subset the site bundles. src/lib/data.ts imports this at build time and
 // src/app/page.tsx hands it to a client component, so every byte here lands in
 // the page payload — hence the cap.
@@ -165,10 +173,13 @@ async function main() {
     // Fall back to the full catalog, then to the page file for a checkout
     // predating the split.
     endpoints = [];
-    for (const path of [OUT_FULL, OUT_PAGE]) {
+    for (const path of [OUT_FULL, OUT_FULL_LEGACY, OUT_PAGE]) {
       try {
-        endpoints = (JSON.parse(await readFile(path, "utf8")) as Catalog)
-          .endpoints;
+        const raw = await readFile(path);
+        const text = path.endsWith(".gz")
+          ? gunzipSync(raw).toString("utf8")
+          : raw.toString("utf8");
+        endpoints = (JSON.parse(text) as Catalog).endpoints;
         break;
       } catch {
         // try the next one
@@ -188,7 +199,12 @@ async function main() {
     popularity_coverage,
     endpoints,
   };
-  await writeFile(OUT_FULL, JSON.stringify(full, null, 2) + "\n", "utf8");
+  await writeFile(
+    OUT_FULL,
+    gzipSync(Buffer.from(JSON.stringify(full, null, 2) + "\n", "utf8"), {
+      level: 9,
+    }),
+  );
 
   // The page file carries the same report and the same shape, plus the
   // subset markers, so nothing downstream can mistake its `count` for a total.
@@ -207,7 +223,7 @@ async function main() {
   await writeFile(OUT_PAGE, JSON.stringify(page, null, 2) + "\n", "utf8");
 
   console.log(
-    `Wrote ${endpoints.length} endpoint(s) to endpoints_full.json; ` +
+    `Wrote ${endpoints.length} endpoint(s) to endpoints_full.json.gz; ` +
       `popularity coverage ${popularity_coverage}.`,
   );
   console.log(
