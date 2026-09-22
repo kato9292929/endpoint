@@ -112,6 +112,17 @@ export type Catalog = {
   // How many endpoints carry a `popularity` value (ranking-signal coverage).
   popularity_coverage: number;
   endpoints: Endpoint[];
+  // ── Set only on data/endpoints.json, which is a SUBSET ──
+  // The site imports data/endpoints.json at build time and passes it to a
+  // client component, so the whole file lands in the page payload. It is
+  // therefore capped; data/endpoints_full.json holds every endpoint and is
+  // what data/stats/*.json is computed from. When these are present, `count`
+  // is the subset's size and `full_count` is the real one — never read
+  // `count` here as an ecosystem total.
+  subset_of?: string;
+  subset_limit?: number;
+  subset_rule?: string;
+  full_count?: number;
 };
 
 export const CATEGORIES: Category[] = [

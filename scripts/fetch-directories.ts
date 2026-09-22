@@ -21,6 +21,7 @@ import type {
   FetchStatus,
 } from "../src/lib/types";
 import { canonicalUrl, hashId, mergeEndpoints } from "./util";
+import { PAGE_SUBSET_MAX, SUBSET_RULE, pageSubset } from "./page-subset";
 
 import { fetchX402Inc } from "./fetchers/x402-inc";
 import { fetchX402scan, getLastX402scanRun } from "./fetchers/x402scan";
@@ -32,7 +33,14 @@ import { fetchVisaCli } from "./fetchers/visa-cli";
 import { fetchCircleMarketplace } from "./fetchers/circle-marketplace";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const OUT = join(__dirname, "..", "data", "endpoints.json");
+const DATA = join(__dirname, "..", "data");
+// Every endpoint. Nothing in src/ imports this — it is the input to
+// scripts/write-stats-snapshot.mjs and the answer to "how big is x402 really".
+const OUT_FULL = join(DATA, "endpoints_full.json");
+// The subset the site bundles. src/lib/data.ts imports this at build time and
+// src/app/page.tsx hands it to a client component, so every byte here lands in
+// the page payload — hence the cap.
+const OUT_PAGE = join(DATA, "endpoints.json");
 
 type NamedFetcher = {
   name: string;
@@ -154,28 +162,59 @@ async function main() {
     console.warn(
       "No endpoints collected — preserving existing catalog, recording the failure in fetch_report.",
     );
-    try {
-      endpoints = (JSON.parse(await readFile(OUT, "utf8")) as Catalog).endpoints;
-    } catch {
-      endpoints = [];
+    // Fall back to the full catalog, then to the page file for a checkout
+    // predating the split.
+    endpoints = [];
+    for (const path of [OUT_FULL, OUT_PAGE]) {
+      try {
+        endpoints = (JSON.parse(await readFile(path, "utf8")) as Catalog)
+          .endpoints;
+        break;
+      } catch {
+        // try the next one
+      }
     }
   }
 
   const popularity_coverage = endpoints.filter(
     (e) => e.popularity != null,
   ).length;
+  const generated_at = new Date().toISOString();
 
-  const catalog: Catalog = {
-    generated_at: new Date().toISOString(),
+  const full: Catalog = {
+    generated_at,
     count: endpoints.length,
     fetch_report: report,
     popularity_coverage,
     endpoints,
   };
+  await writeFile(OUT_FULL, JSON.stringify(full, null, 2) + "\n", "utf8");
 
-  await writeFile(OUT, JSON.stringify(catalog, null, 2) + "\n", "utf8");
+  // The page file carries the same report and the same shape, plus the
+  // subset markers, so nothing downstream can mistake its `count` for a total.
+  const subset = pageSubset(endpoints);
+  const page: Catalog = {
+    generated_at,
+    count: subset.length,
+    fetch_report: report,
+    popularity_coverage: subset.filter((e) => e.popularity != null).length,
+    subset_of: "endpoints_full.json",
+    subset_limit: PAGE_SUBSET_MAX,
+    subset_rule: SUBSET_RULE,
+    full_count: endpoints.length,
+    endpoints: subset,
+  };
+  await writeFile(OUT_PAGE, JSON.stringify(page, null, 2) + "\n", "utf8");
+
   console.log(
-    `Wrote ${endpoints.length} endpoint(s); popularity coverage ${popularity_coverage}.`,
+    `Wrote ${endpoints.length} endpoint(s) to endpoints_full.json; ` +
+      `popularity coverage ${popularity_coverage}.`,
+  );
+  console.log(
+    subset.length < endpoints.length
+      ? `Wrote ${subset.length} of them to endpoints.json (the page bundle's ` +
+          `${PAGE_SUBSET_MAX} cap); stats are computed from the full file.`
+      : `Wrote all ${subset.length} to endpoints.json (under the ${PAGE_SUBSET_MAX} cap).`,
   );
   console.table(report);
 

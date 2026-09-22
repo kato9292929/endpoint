@@ -1,8 +1,13 @@
 #!/usr/bin/env node
 // Writes a daily stats snapshot from the aggregator output.
 //
-// Reads data/endpoints.json and writes data/stats/YYYY-MM-DD.json (UTC date),
-// one file per day. Re-running the same day overwrites it (latest value wins).
+// Reads data/endpoints_full.json and writes data/stats/YYYY-MM-DD.json (UTC
+// date), one file per day. Re-running the same day overwrites it (latest value
+// wins).
+//
+// The FULL catalog is the input on purpose: data/endpoints.json is only the
+// capped subset the site bundles, so counting it would under-report the
+// ecosystem. Older checkouts without the full file fall back to it.
 //
 // Dependency-free Node ESM — no tsx/ts-node. The cron runs:
 //   node scripts/write-stats-snapshot.mjs
@@ -11,11 +16,13 @@
 // `price.amount`; we also absorb common aliases (chain/network, provider,
 // priceUsd, numeric price) so the writer survives schema drift.
 
-import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
+import { readFileSync, writeFileSync, mkdirSync, existsSync } from "node:fs";
 import { join } from "node:path";
 
 const ROOT = process.cwd();
-const INPUT = join(ROOT, "data", "endpoints.json");
+const FULL = join(ROOT, "data", "endpoints_full.json");
+const PAGE = join(ROOT, "data", "endpoints.json");
+const INPUT = existsSync(FULL) ? FULL : PAGE;
 const OUT_DIR = join(ROOT, "data", "stats");
 
 // ── Price-tier buckets (USD). Edit these edges to retune; order matters. ──
@@ -73,6 +80,16 @@ function tally(into, key) {
 function main() {
   const catalog = JSON.parse(readFileSync(INPUT, "utf8"));
   const endpoints = Array.isArray(catalog.endpoints) ? catalog.endpoints : [];
+
+  // Counting the capped page file would silently under-report. Say which file
+  // this snapshot came from, and refuse to pass a subset off as a total.
+  if (catalog.subset_of) {
+    throw new Error(
+      `${INPUT} is a subset (${catalog.count} of ${catalog.full_count}); ` +
+        "stats must be computed from data/endpoints_full.json. Run `npm run fetch` first.",
+    );
+  }
+  console.log(`stats: counting ${endpoints.length} endpoint(s) from ${INPUT}`);
 
   const byCategory = {};
   const byChain = {};

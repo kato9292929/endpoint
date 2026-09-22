@@ -38,9 +38,11 @@ Aggregated directories:
 Static site + daily batch fetch:
 
 1. **`scripts/fetch-directories.ts`** runs each per-directory fetcher, dedupes
-   by canonical URL, merges cross-directory duplicates, and writes the unified
-   **`data/endpoints.json`**. Every run records a per-source `fetch_report`
-   (see [Fetch coverage](#fetch-coverage-and-the-2026-09-22-break)).
+   by canonical URL, merges cross-directory duplicates, and writes **two**
+   files (see [Two catalog files](#two-catalog-files)):
+   **`data/endpoints_full.json`** (everything) and **`data/endpoints.json`**
+   (the capped subset the site bundles). Every run records a per-source
+   `fetch_report` (see [Fetch coverage](#fetch-coverage-and-the-2026-09-22-break)).
 2. **Next.js pages** read `data/endpoints.json` in server components and render
    it. Pages use ISR (`revalidate = 86400`) so they refresh at most once a day.
 3. **GitHub Actions** (`.github/workflows/daily-fetch.yml`) runs the fetch on a
@@ -48,7 +50,9 @@ Static site + daily batch fetch:
 
 ```
 scripts/
-  fetch-directories.ts      # orchestrator: collect → dedupe → write
+  fetch-directories.ts      # orchestrator: collect → dedupe → write both files
+  page-subset.ts            # which endpoints the bundled file may carry
+  compare-catalogs.mjs      # before/after diff of two catalogs
   util.ts                   # canonical URL, hashing, merge, throttle
   fetchers/
     x402scan.ts             # one fetcher per directory (currently stubs)
@@ -67,8 +71,51 @@ src/
   components/               # cards, grid, filters, stats, footer
   lib/                      # types + data-access helpers
 data/
-  endpoints.json            # the published unified catalog
+  endpoints_full.json       # every endpoint — the real catalog, not bundled
+  endpoints.json            # the capped subset the site imports at build time
+  stats/                    # daily snapshots, counted from endpoints_full.json
 ```
+
+## Two catalog files
+
+The fetch writes both of these on every run:
+
+| file | holds | who reads it |
+| --- | --- | --- |
+| `data/endpoints_full.json` | **every** endpoint | `scripts/write-stats-snapshot.mjs`; anyone asking how big x402 actually is. **Nothing under `src/` imports it.** |
+| `data/endpoints.json` | a subset, at most `subset_limit` (20,000) | `src/lib/data.ts` — the site, its pages and its REST API |
+
+They exist separately because of how the site is built. `src/lib/data.ts`
+imports `data/endpoints.json` **at build time** and `src/app/page.tsx` passes
+the result to `<CatalogExplorer>`, a client component — so every endpoint in
+that file is serialized into the page payload. ~19k endpoints (~490 bytes
+each) is the proven-safe figure against Vercel's ~19 MB ISR limit, and that is
+what the x402scan fetcher's old `MAX_ENDPOINTS = 20000` was really protecting.
+Removing the fetch cap without splitting the files would have broken the build.
+
+The subset is `every non-x402scan endpoint, then the most recently updated
+x402scan ones (last_seen desc) up to the limit` — the old behaviour was
+"the first 20,000 x402scan rows by lastUpdated desc", so the freshest 20,000
+keeps the deployed page equivalent. The other directories are always kept
+(there are under a hundred, and the x402-inc seed is featured in the UI), and
+selection runs after the cross-source merge so a URL several directories list
+is never dropped as "just x402scan".
+
+`data/endpoints.json` marks itself: `subset_of`, `subset_limit`, `subset_rule`
+and `full_count` are all present, so its `count` can never be mistaken for an
+ecosystem total. `write-stats-snapshot.mjs` refuses to count a file carrying
+`subset_of`.
+
+**Two consequences to know about.** `data/stats/*.json` is computed from the
+full file while the site shows the subset, so the site's own counter and the
+snapshots will disagree — the snapshots are the true ones. And the REST API
+under `src/app/api/` reads the same bundled subset, so it serves the subset
+too; making it serve all of x402 means reading the full file at request time
+(or a database), which is a front-end/runtime change and is deliberately not
+done here.
+
+To raise the cap, move the homepage's search to `/api/search` and paginate the
+list server-side, then change `PAGE_SUBSET_MAX` in `scripts/page-subset.ts`.
 
 ## Unified data format
 
@@ -223,17 +270,8 @@ endpoint, open a pull request — everything is PR-based.
 
 Connect the repo to Vercel with **Production Branch = `main`**. The daily GitHub
 Actions job (`.github/workflows/daily-fetch.yml`) fetches, writes a stats
-snapshot, and commits `data/endpoints.json` + `data/stats/` to `main`.
-
-> **Page weight, since the 20,000-row cap came off.** `src/app/page.tsx` passes
-> the whole catalog to `<CatalogExplorer>`, a client component, so every
-> endpoint is serialized into the page payload. That is what the old
-> `MAX_ENDPOINTS = 20000` was really protecting: ~19k endpoints was proven safe
-> against Vercel's ~19 MB ISR limit, at roughly 490 bytes per endpoint. A full
-> x402scan catalog is several times that, so **the homepage needs to stop
-> embedding the full set before a full catalog is deployed** — serve search
-> from `/api/search` and paginate the list server-side. The fetch layer is
-> already complete; this is the remaining piece.
+snapshot, and commits `data/endpoints.json`, `data/endpoints_full.json` and
+`data/stats/` to `main`.
 
 Because the site imports `data/endpoints.json` **at build time**, the front only
 updates on a fresh deploy — ISR revalidation alone won't change the numbers. To

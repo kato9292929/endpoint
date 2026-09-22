@@ -42,7 +42,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/endpoints.json data/stats data/rank.json
+          git add data/endpoints.json data/endpoints_full.json data/stats data/rank.json
           if git diff --cached --quiet; then
             echo "No changes to commit"
             echo "changed=false" >> "$GITHUB_OUTPUT"

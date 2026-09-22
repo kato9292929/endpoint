@@ -4,6 +4,7 @@ import assert from "node:assert/strict";
 import { createServer, type Server } from "node:http";
 import { mergeEndpoints } from "../util";
 import { fetchX402scan, getLastX402scanRun } from "../fetchers/x402scan";
+import { pageSubset } from "../page-subset";
 import { defaultOrder, isFeatured } from "../../src/lib/featured";
 import { aggregateHosts, hostOf } from "../../src/lib/hosts";
 import { buildRankRows, type RankArtifact } from "../../src/lib/rank";
@@ -135,6 +136,67 @@ test("buildRankRows re-lists artifact rows as-is and joins the catalog by host",
   assert.equal(r.rows[0].tx_count, 900);
   assert.equal(r.rows[0].category, "data"); // joined from catalog
   assert.deepEqual(r.rows[0].networks, ["Base"]);
+});
+
+console.log("\nStage 3b — page subset");
+
+test("pageSubset keeps every non-x402scan endpoint, even a stale featured one", () => {
+  const seed = ep({
+    id: "seed",
+    url: "https://x402jp.com/a",
+    name: "Seed",
+    source: ["x402-inc"],
+    last_seen: "2020-01-01T00:00:00.000Z", // oldest in the set
+  });
+  const scan = Array.from({ length: 5 }, (_, i) =>
+    ep({
+      id: `s${i}`,
+      url: `https://s${i}.example/a`,
+      name: `S${i}`,
+      source: ["x402scan"],
+      last_seen: `2026-09-${10 + i}T00:00:00.000Z`,
+    }),
+  );
+  const picked = pageSubset([seed, ...scan], 3);
+  assert.equal(picked.length, 3);
+  assert.ok(
+    picked.some((e) => e.id === "seed"),
+    "the featured seed survives the cap despite being the oldest",
+  );
+  // The two freshest x402scan rows fill the remaining room.
+  assert.deepEqual(
+    picked
+      .filter((e) => e.id !== "seed")
+      .map((e) => e.id)
+      .sort(),
+    ["s3", "s4"],
+  );
+});
+
+test("pageSubset keeps a URL that several directories list", () => {
+  const shared = ep({
+    id: "shared",
+    url: "https://both.example/a",
+    name: "Both",
+    source: ["x402scan", "pay-sh"], // merged across directories
+    last_seen: "2020-01-01T00:00:00.000Z",
+  });
+  const scan = Array.from({ length: 3 }, (_, i) =>
+    ep({
+      id: `s${i}`,
+      url: `https://s${i}.example/a`,
+      name: `S${i}`,
+      source: ["x402scan"],
+      last_seen: `2026-09-${10 + i}T00:00:00.000Z`,
+    }),
+  );
+  const picked = pageSubset([shared, ...scan], 2);
+  assert.ok(picked.some((e) => e.id === "shared"));
+});
+
+test("pageSubset is a no-op under the cap", () => {
+  const eps = [ep({ id: "a" }), ep({ id: "b" })];
+  assert.equal(pageSubset(eps, 10).length, 2);
 });
 
 // ── Stage 4 — x402scan paging ────────────────────────

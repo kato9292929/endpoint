@@ -121,6 +121,35 @@ const movers = [...ch.entries()]
   .filter((r) => r.delta > 0)
   .sort((a, b) => b.delta - a.delta);
 
+// The biggest hosts in the candidate, regardless of whether they moved —
+// "what does the catalog actually look like now", and which of those the
+// baseline had never seen.
+const biggest = [...ch.entries()]
+  .map(([host, after]) => ({ host, after, before: bh.get(host) ?? 0 }))
+  .sort((a, b) => b.after - a.after);
+
+say("### Top 20 hosts by endpoint count (candidate)");
+say();
+say("| # | host | endpoints | in baseline | share |");
+say("| --- | --- | --- | --- | --- |");
+biggest.slice(0, 20).forEach((r, i) => {
+  const share = ((r.after / cand.count) * 100).toFixed(2);
+  say(
+    `| ${i + 1} | ${r.host} | ${r.after} | ${r.before || "—"} | ${share}% |`,
+  );
+});
+say();
+
+const unseen = biggest.filter((r) => r.before === 0);
+say(`### Top 20 hosts absent from the baseline (${unseen.length} in total)`);
+say();
+say("| # | host | endpoints |");
+say("| --- | --- | --- |");
+unseen.slice(0, 20).forEach((r, i) => {
+  say(`| ${i + 1} | ${r.host} | ${r.after} |`);
+});
+say();
+
 say(`### Top 20 hosts gained (of ${movers.length} hosts with more endpoints)`);
 say();
 say("| # | host | before | after | gained | new host |");
