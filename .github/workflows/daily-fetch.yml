@@ -37,12 +37,17 @@ jobs:
       - name: Write stats snapshot
         run: node scripts/write-stats-snapshot.mjs
 
+      # Named providers, derived from the FULL catalog — the site imports the
+      # artifact because the file it bundles is capped and would understate.
+      - name: Write named-providers artifact
+        run: node scripts/write-providers.mjs
+
       - name: Commit updated catalog and snapshot
         id: commit
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/endpoints.json data/endpoints_full.json.gz data/stats data/rank.json
+          git add data/endpoints.json data/endpoints_full.json.gz data/stats data/rank.json data/providers.json
           if git diff --cached --quiet; then
             echo "No changes to commit"
             echo "changed=false" >> "$GITHUB_OUTPUT"

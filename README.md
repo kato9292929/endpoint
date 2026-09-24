@@ -53,6 +53,9 @@ scripts/
   fetch-directories.ts      # orchestrator: collect → dedupe → write both files
   page-subset.ts            # which endpoints the bundled file may carry
   read-catalog.mjs          # reads a catalog file, gunzipping a .gz
+  brands.mjs                # is this host really the company's, or just named after it
+  write-providers.mjs       # data/providers.json — named providers, from the full catalog
+  find-brands.mjs           # the same check as a report
   compare-catalogs.mjs      # before/after diff of two catalogs
   util.ts                   # canonical URL, hashing, merge, throttle
   fetchers/
@@ -74,6 +77,7 @@ src/
 data/
   endpoints_full.json.gz    # every endpoint — the real catalog, not bundled
   endpoints.json            # the capped subset the site imports at build time
+  providers.json            # named providers, derived from the full catalog
   stats/                    # daily snapshots, counted from the full catalog
 ```
 
@@ -126,6 +130,38 @@ done here.
 
 To raise the cap, move the homepage's search to `/api/search` and paginate the
 list server-side, then change `PAGE_SUBSET_MAX` in `scripts/page-subset.ts`.
+
+## Named providers
+
+The homepage leads with **who serves x402 under their own name**, above the
+ranking, from `data/providers.json`.
+
+The list exists because the catalog cannot tell you this by itself. Anyone can
+publish an endpoint titled "CoinGecko Price API" on their own domain, and the
+catalog records it as faithfully as the real one — so reading endpoint titles
+for "which companies are on x402" produces claims that do not survive a reader
+clicking the link. `scripts/brands.mjs` applies one rule instead: a host counts
+as a company's own **only when it sits under a domain that company controls**.
+
+Three kinds of host are therefore excluded, however they are titled:
+
+- **Gateway operators** that resell someone else's API — PaySponge, Locus,
+  x402 Atlas, PayWeave, fetcher.sh, and `gateway-402.com` (the Solana
+  Foundation's own gateway, which fronts Google Cloud and Alibaba Cloud APIs).
+  `coingecko.x402.paywithlocus.com` is Locus's endpoint, not CoinGecko's.
+- **Shared hosting** — `*.vercel.app`, `*.trycloudflare.com`,
+  `*.supabase.co`, `ec2-….amazonaws.com` and friends say nothing about who
+  operates the endpoint, including for the platform itself.
+- **Names merely contained in a host**, e.g. `x402nansen….vercel.app`.
+
+`scripts/find-brands.mjs` prints both sides of that split for a catalog, with
+the excluded hosts named so they can be checked rather than taken on trust.
+
+The artifact is built from **`data/endpoints_full.json.gz`**, not from the file
+the site bundles: the bundled subset is capped at 20,000 of ~105,000 endpoints,
+and deriving the list from it finds 8 companies where the full catalog has 13.
+`providers.json` records `scanned` and `subset` so the page can state what its
+counts came from.
 
 ## Unified data format
 

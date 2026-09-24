@@ -2,6 +2,7 @@ import { CatalogExplorer } from "@/components/CatalogExplorer";
 import { StatsBar } from "@/components/StatsBar";
 import { TotalSparkline } from "@/components/TotalSparkline";
 import {
+  NamedProvidersSection,
   MostCalledSection,
   HostsSection,
   AboutSection,
@@ -63,6 +64,9 @@ export default function HomePage() {
                 The catalog — what&apos;s live, and where it&apos;s called
               </h2>
             </header>
+
+            {/* Who serves x402 under their own name */}
+            <NamedProvidersSection />
 
             {/* Most-called endpoints (x402scan ranking) */}
             <MostCalledSection />

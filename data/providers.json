@@ -1,0 +1,409 @@
+{
+  "generated_at": "2026-09-24T11:36:48.205Z",
+  "status": "ok",
+  "source": "data/endpoints.json",
+  "scanned": 18513,
+  "subset": false,
+  "firstParty": [
+    {
+      "host": "api.exa.ai",
+      "name": "Exa | Search API for AI Agents — Real-Time Web Data",
+      "count": 43,
+      "priced": 2,
+      "priceMedian": 0.0035,
+      "topCategory": "search",
+      "networks": [
+        "Base",
+        "Solana"
+      ],
+      "sources": [
+        "pay-sh",
+        "x402scan"
+      ],
+      "sampleId": "e51fc7d85d1162e1",
+      "url": "https://api.exa.ai",
+      "brand": "Exa"
+    },
+    {
+      "host": "api.nansen.ai",
+      "name": "Nansen API",
+      "count": 1,
+      "priced": 0,
+      "priceMedian": null,
+      "topCategory": "data",
+      "networks": [
+        "Solana"
+      ],
+      "sources": [
+        "pay-sh"
+      ],
+      "sampleId": "3a6171a6a9dadabc",
+      "url": "https://api.nansen.ai",
+      "brand": "Nansen"
+    },
+    {
+      "host": "api.venice.ai",
+      "name": "Venice.ai — Private AI Inference",
+      "count": 1,
+      "priced": 0,
+      "priceMedian": null,
+      "topCategory": "compute",
+      "networks": [
+        "Solana"
+      ],
+      "sources": [
+        "pay-sh"
+      ],
+      "sampleId": "515a5e8e9bde8621",
+      "url": "https://api.venice.ai/api/v1",
+      "brand": "Venice.ai"
+    },
+    {
+      "host": "app.dynamicauth.com",
+      "name": "Dynamic Wallets API",
+      "count": 1,
+      "priced": 0,
+      "priceMedian": null,
+      "topCategory": "compliance",
+      "networks": [
+        "Solana"
+      ],
+      "sources": [
+        "pay-sh"
+      ],
+      "sampleId": "a88800ca31c41358",
+      "url": "https://app.dynamicauth.com/api/v0",
+      "brand": "Dynamic"
+    },
+    {
+      "host": "pro-api.coingecko.com",
+      "name": "CoinGecko Onchain DEX API",
+      "count": 1,
+      "priced": 1,
+      "priceMedian": 0.01,
+      "topCategory": "data",
+      "networks": [
+        "Solana"
+      ],
+      "sources": [
+        "pay-sh"
+      ],
+      "sampleId": "7dbd1623c29af0b0",
+      "url": "https://pro-api.coingecko.com/api/v3/x402/onchain",
+      "brand": "CoinGecko"
+    },
+    {
+      "host": "public-api.birdeye.so",
+      "name": "Birdeye Data",
+      "count": 1,
+      "priced": 1,
+      "priceMedian": 0.01,
+      "topCategory": "data",
+      "networks": [
+        "Solana"
+      ],
+      "sources": [
+        "pay-sh"
+      ],
+      "sampleId": "0f2d22009a03ec4d",
+      "url": "https://public-api.birdeye.so",
+      "brand": "Birdeye"
+    },
+    {
+      "host": "x402-api.vybenetwork.xyz",
+      "name": "Vybe Solana Analytics API (x402)",
+      "count": 1,
+      "priced": 0,
+      "priceMedian": null,
+      "topCategory": "data",
+      "networks": [
+        "Solana"
+      ],
+      "sources": [
+        "pay-sh"
+      ],
+      "sampleId": "691bbe39ccea26f0",
+      "url": "https://x402-api.vybenetwork.xyz",
+      "brand": "Vybe Network"
+    },
+    {
+      "host": "x402.quicknode.com",
+      "name": "Quicknode",
+      "count": 1,
+      "priced": 1,
+      "priceMedian": 0.001,
+      "topCategory": "compute",
+      "networks": [
+        "Solana"
+      ],
+      "sources": [
+        "pay-sh"
+      ],
+      "sampleId": "0a8a1a2ed6f52daf",
+      "url": "https://x402.quicknode.com",
+      "brand": "QuickNode"
+    }
+  ],
+  "selfHosted": [
+    {
+      "host": "sol.blockrun.ai",
+      "name": "BlockRun on Solana — pay-per-request AI, settled in USDC",
+      "count": 22,
+      "priced": 12,
+      "priceMedian": 0.03,
+      "topCategory": "compute",
+      "networks": [
+        "Solana"
+      ],
+      "sources": [
+        "pay-sh",
+        "x402scan"
+      ],
+      "sampleId": "08879bfc9fc4f4ee",
+      "url": "https://sol.blockrun.ai",
+      "brand": null
+    },
+    {
+      "host": "mcp.blocksize.info",
+      "name": "Blocksize Agentic Market Intelligence | MCP Market Data for AI Agents",
+      "count": 6,
+      "priced": 5,
+      "priceMedian": 1,
+      "topCategory": "trading",
+      "networks": [
+        "Base",
+        "Solana"
+      ],
+      "sources": [
+        "pay-sh",
+        "x402scan"
+      ],
+      "sampleId": "332a31b6ae29a304",
+      "url": "https://mcp.blocksize.info/v1/signals/trader-alpha-pack",
+      "brand": null
+    },
+    {
+      "host": "dripstack.xyz",
+      "name": "Financial Newsletters & Podcasts for AI Agents | Drip",
+      "count": 4,
+      "priced": 3,
+      "priceMedian": 0.5,
+      "topCategory": "trading",
+      "networks": [
+        "Base",
+        "Solana"
+      ],
+      "sources": [
+        "pay-sh",
+        "x402scan"
+      ],
+      "sampleId": "c6f3d0798dfd336c",
+      "url": "https://dripstack.xyz",
+      "brand": null
+    },
+    {
+      "host": "agentres.dev",
+      "name": "Agentic Reservations",
+      "count": 1,
+      "priced": 1,
+      "priceMedian": 0.01,
+      "topCategory": "other",
+      "networks": [
+        "Solana"
+      ],
+      "sources": [
+        "pay-sh"
+      ],
+      "sampleId": "c524f732f5ebf89f",
+      "url": "https://agentres.dev",
+      "brand": null
+    },
+    {
+      "host": "api.purch.xyz",
+      "name": "Purch",
+      "count": 1,
+      "priced": 0,
+      "priceMedian": null,
+      "topCategory": "other",
+      "networks": [
+        "Solana"
+      ],
+      "sources": [
+        "pay-sh"
+      ],
+      "sampleId": "389a3a1d23df6a11",
+      "url": "https://api.purch.xyz",
+      "brand": null
+    },
+    {
+      "host": "api.socialintel.dev",
+      "name": "Social Intel",
+      "count": 1,
+      "priced": 0,
+      "priceMedian": null,
+      "topCategory": "data",
+      "networks": [
+        "Solana"
+      ],
+      "sources": [
+        "pay-sh"
+      ],
+      "sampleId": "89b9e4594512210f",
+      "url": "https://api.socialintel.dev",
+      "brand": null
+    },
+    {
+      "host": "api.syntalic.com",
+      "name": "Syntalic",
+      "count": 1,
+      "priced": 0,
+      "priceMedian": null,
+      "topCategory": "other",
+      "networks": [
+        "Solana"
+      ],
+      "sources": [
+        "pay-sh"
+      ],
+      "sampleId": "0ca72311d849badc",
+      "url": "https://api.syntalic.com",
+      "brand": null
+    },
+    {
+      "host": "app.earnfi.fun",
+      "name": "EarnFi Agent API",
+      "count": 1,
+      "priced": 0,
+      "priceMedian": null,
+      "topCategory": "other",
+      "networks": [
+        "Solana"
+      ],
+      "sources": [
+        "pay-sh"
+      ],
+      "sampleId": "b769bc8f6f98e908",
+      "url": "https://app.earnfi.fun/api/ai-agent/v1",
+      "brand": null
+    },
+    {
+      "host": "glim.sh",
+      "name": "glim.sh",
+      "count": 1,
+      "priced": 1,
+      "priceMedian": 0.015,
+      "topCategory": "data",
+      "networks": [
+        "Solana"
+      ],
+      "sources": [
+        "pay-sh"
+      ],
+      "sampleId": "043ddab819fabf99",
+      "url": "https://glim.sh",
+      "brand": null
+    },
+    {
+      "host": "pay.smartmoney.market",
+      "name": "smartmoney.market",
+      "count": 1,
+      "priced": 0,
+      "priceMedian": null,
+      "topCategory": "data",
+      "networks": [
+        "Solana"
+      ],
+      "sources": [
+        "pay-sh"
+      ],
+      "sampleId": "fd1c5072140864a8",
+      "url": "https://pay.smartmoney.market",
+      "brand": null
+    },
+    {
+      "host": "solana.x402.cryptorefills.com",
+      "name": "CryptoRefills",
+      "count": 1,
+      "priced": 0,
+      "priceMedian": null,
+      "topCategory": "other",
+      "networks": [
+        "Solana"
+      ],
+      "sources": [
+        "pay-sh"
+      ],
+      "sampleId": "b158f0ff25d6bed2",
+      "url": "https://solana.x402.cryptorefills.com",
+      "brand": null
+    },
+    {
+      "host": "tip.clustly.ai",
+      "name": "Clustly",
+      "count": 1,
+      "priced": 0,
+      "priceMedian": null,
+      "topCategory": "data",
+      "networks": [
+        "Solana"
+      ],
+      "sources": [
+        "pay-sh"
+      ],
+      "sampleId": "1338abc6909f6dc9",
+      "url": "https://tip.clustly.ai",
+      "brand": null
+    },
+    {
+      "host": "travel.brij.fi",
+      "name": "BRIJ Flight API",
+      "count": 1,
+      "priced": 0,
+      "priceMedian": null,
+      "topCategory": "other",
+      "networks": [
+        "Solana"
+      ],
+      "sources": [
+        "pay-sh"
+      ],
+      "sampleId": "846b7a758ffdc302",
+      "url": "https://travel.brij.fi",
+      "brand": null
+    },
+    {
+      "host": "x402.api.agentmail.to",
+      "name": "AgentMail",
+      "count": 1,
+      "priced": 0,
+      "priceMedian": null,
+      "topCategory": "messaging",
+      "networks": [
+        "Solana"
+      ],
+      "sources": [
+        "pay-sh"
+      ],
+      "sampleId": "c0c6a4d4904a5653",
+      "url": "https://x402.api.agentmail.to",
+      "brand": null
+    },
+    {
+      "host": "x402.dtelecom.org",
+      "name": "dTelecom",
+      "count": 1,
+      "priced": 0,
+      "priceMedian": null,
+      "topCategory": "compute",
+      "networks": [
+        "Solana"
+      ],
+      "sources": [
+        "pay-sh"
+      ],
+      "sampleId": "943ac243243e50c1",
+      "url": "https://x402.dtelecom.org",
+      "brand": null
+    }
+  ]
+}

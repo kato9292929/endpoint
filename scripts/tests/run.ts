@@ -308,6 +308,106 @@ test("write-stats-snapshot REFUSES to count a subset as a total", () => {
   }
 });
 
+console.log("\nStage 3d — named providers");
+
+const PROVIDERS_SCRIPT = join(__dirname, "..", "write-providers.mjs");
+
+function providerFixture(endpoints: unknown[], extra: Record<string, unknown> = {}) {
+  const dir = mkdtempSync(join(tmpdir(), "x402-prov-"));
+  mkdirSync(join(dir, "data"), { recursive: true });
+  writeFileSync(
+    join(dir, "data", "endpoints_full.json"),
+    JSON.stringify({
+      generated_at: "2026-09-24T00:00:00.000Z",
+      count: endpoints.length,
+      fetch_report: [],
+      popularity_coverage: 0,
+      endpoints,
+      ...extra,
+    }),
+  );
+  execFileSync("node", [PROVIDERS_SCRIPT], { cwd: dir, stdio: "pipe" });
+  const out = JSON.parse(
+    readFileSync(join(dir, "data", "providers.json"), "utf8"),
+  );
+  rmSync(dir, { recursive: true, force: true });
+  return out;
+}
+
+function pe(url: string, over: Partial<Endpoint> = {}) {
+  return ep({ url, id: url, name: over.name ?? "Svc", ...over });
+}
+
+test("a company on its own domain is first-party; the same name elsewhere is not", () => {
+  const out = providerFixture([
+    pe("https://pro-api.coingecko.com/api/v3/x402/onchain", {
+      price: { amount: 0.01, currency: "USDC", unit: "per-call" },
+    }),
+    // A gateway reselling CoinGecko — the endpoint is the gateway's.
+    pe("https://coingecko.x402.paywithlocus.com/a"),
+    // Shared hosting borrowing the name.
+    pe("https://coingecko-prices.vercel.app/a"),
+    // Someone else's EC2 box is not AWS serving x402.
+    pe("https://ec2-1-2-3-4.ap-northeast-1.compute.amazonaws.com/a"),
+  ]);
+  assert.deepEqual(
+    out.firstParty.map((r: { host: string }) => r.host),
+    ["pro-api.coingecko.com"],
+    "only the company's own domain counts",
+  );
+  assert.equal(out.firstParty[0].brand, "CoinGecko");
+  assert.equal(out.selfHosted.length, 0);
+});
+
+test("pay-skills providers count as self-hosted only off a gateway", () => {
+  const out = providerFixture([
+    pe("https://agentres.dev/x", { source: ["pay-sh"], name: "Agentic Reservations" }),
+    pe("https://x402.dtelecom.org/x", { source: ["pay-sh"], name: "dTelecom" }),
+    // Published by a gateway operator, so not the provider's own endpoint.
+    pe("https://vision.google.gateway-402.com/x", { source: ["pay-sh"] }),
+    pe("https://wolframalpha.x402.paysponge.com/x", { source: ["pay-sh"] }),
+    // An x402scan-only host is not a pay-skills provider.
+    pe("https://random.example/x", { source: ["x402scan"] }),
+  ]);
+  assert.deepEqual(
+    out.selfHosted.map((r: { host: string }) => r.host).sort(),
+    ["agentres.dev", "x402.dtelecom.org"],
+  );
+  assert.equal(out.firstParty.length, 0);
+});
+
+test("a recognized brand is not listed twice as a self-hosted provider", () => {
+  const out = providerFixture([
+    pe("https://x402.quicknode.com/x", { source: ["pay-sh"], name: "Quicknode" }),
+  ]);
+  assert.equal(out.firstParty.length, 1);
+  assert.equal(out.firstParty[0].brand, "QuickNode");
+  assert.equal(out.selfHosted.length, 0, "first-party wins; no duplicate row");
+});
+
+test("counts aggregate per host and the artifact flags a subset source", () => {
+  const out = providerFixture(
+    [
+      pe("https://api.messari.io/a", {
+        price: { amount: 0.02, currency: "USDC", unit: "per-call" },
+        category: "data",
+      }),
+      pe("https://api.messari.io/b", {
+        price: { amount: 0.04, currency: "USDC", unit: "per-call" },
+        category: "data",
+      }),
+      pe("https://api.messari.io/c", { category: "search" }),
+    ],
+    { subset_of: "endpoints_full.json.gz", full_count: 999 },
+  );
+  const m = out.firstParty[0];
+  assert.equal(m.count, 3);
+  assert.equal(m.priced, 2);
+  assert.equal(m.priceMedian, 0.03);
+  assert.equal(m.topCategory, "data");
+  assert.equal(out.subset, true, "a subset source must be declared, not hidden");
+});
+
 // ── Stage 4 — x402scan paging ────────────────────────
 // The fetcher is exercised against a local fake that reproduces x402scan's
 // server semantics exactly (verified against Merit-Systems/x402scan):
