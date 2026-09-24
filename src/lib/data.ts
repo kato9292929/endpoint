@@ -30,6 +30,27 @@ export function getEndpoints(): Endpoint[] {
   return catalog.endpoints;
 }
 
+// How many endpoints the catalog actually holds.
+//
+// NOT the same as getEndpoints().length. data/endpoints.json is the capped
+// subset the site bundles (at most `subset_limit`), so its array length would
+// under-report the catalog — permanently pinned at the cap once the directory
+// grows past it. The fetch records the real figure as `full_count`; use this
+// anywhere a total is shown or served.
+export function getTotalEndpoints(): number {
+  return catalog.full_count ?? catalog.count ?? catalog.endpoints.length;
+}
+
+/** How many endpoints are bundled into the page — the browsable set. */
+export function getBundledCount(): number {
+  return catalog.endpoints.length;
+}
+
+/** True when the bundled file is a subset of the full catalog. */
+export function isBundledSubset(): boolean {
+  return Boolean(catalog.subset_of) && getBundledCount() < getTotalEndpoints();
+}
+
 export function getEndpointById(id: string): Endpoint | undefined {
   return catalog.endpoints.find((e) => e.id === id);
 }

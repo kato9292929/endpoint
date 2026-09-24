@@ -11,11 +11,13 @@ import {
 import { HeroVideo } from "@/components/hero/HeroVideo";
 import { Hero } from "@/components/hero/Hero";
 import {
+  getBundledCount,
   getCatalog,
   getCategoryCounts,
   getNetworks,
   getProtocols,
   getSourceCounts,
+  getTotalEndpoints,
 } from "@/lib/data";
 
 // Rebuild at most once per day; the daily fetch job pushes fresh data.
@@ -27,6 +29,10 @@ const HERO_VIDEO =
 
 export default function HomePage() {
   const { endpoints, generated_at } = getCatalog();
+  // The catalog's real size. `endpoints` is the capped subset the page
+  // bundles, so its length is the browsable count, not the total.
+  const totalEndpoints = getTotalEndpoints();
+  const bundled = getBundledCount();
   const networks = getNetworks();
   const protocols = getProtocols();
   const categoryCounts = getCategoryCounts();
@@ -43,7 +49,7 @@ export default function HomePage() {
   const directoriesCount = Object.keys(sourceCounts).length;
 
   const heroStats = [
-    { value: endpoints.length, label: "ENDPOINTS\nINDEXED", plus: true },
+    { value: totalEndpoints, label: "ENDPOINTS\nINDEXED", plus: true },
     { value: nonEmptyCategories, label: "CATEGORIES\nTRACKED" },
     { value: directoriesCount, label: "SOURCE\nDIRECTORIES" },
   ];
@@ -74,7 +80,8 @@ export default function HomePage() {
             {/* Aggregate stats + trend */}
             <div className="space-y-3">
               <StatsBar
-                total={endpoints.length}
+                total={totalEndpoints}
+                browsable={bundled}
                 networks={networks.length}
                 categories={nonEmptyCategories}
                 directories={directoriesCount}
