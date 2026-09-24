@@ -1,0 +1,136 @@
+name: Verify full fetch (read-only)
+
+# Runs the real fetchers and reports what they collected WITHOUT committing
+# anything or triggering a deploy. Use it to check a fetcher change against the
+# live directories before letting the daily job push the result.
+#
+# The daily job (daily-fetch.yml) is the one that writes; this one never does.
+
+on:
+  workflow_dispatch: {}
+  push:
+    branches: ["claude/**"]
+    paths:
+      - "scripts/**"
+      - ".github/workflows/verify-fetch.yml"
+
+# Read-only: no commit, no push, no deploy hook.
+permissions:
+  contents: read
+
+# One live crawl per branch at a time — a second push should not send a second
+# crawl at the same directory.
+concurrency:
+  group: verify-fetch-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    # The full x402scan crawl pages politely (>=1s between requests), so give
+    # it far more room than it should need. The run prints its own elapsed time
+    # so we can see how close the daily job would come to this.
+    timeout-minutes: 90
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Keep the committed catalog as the baseline
+        run: cp data/endpoints.json "$RUNNER_TEMP/baseline.json"
+
+      - name: Fetch directories (live)
+        run: npm run fetch
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Compare against the baseline
+        run: |
+          node scripts/compare-catalogs.mjs \
+            "$RUNNER_TEMP/baseline.json" data/endpoints_full.json.gz
+
+      # The page file is the only one the site bundles, so it is the only one
+      # whose weight can break the build. The full file is reported next to it
+      # to show what the split is holding back.
+      - name: Report the build-time weight of the page bundle
+        run: |
+          node -e '
+            const fs = require("fs");
+            const rows = ["data/endpoints.json", "data/endpoints_full.json.gz"]
+              .filter((f) => fs.existsSync(f))
+              .map((f) => {
+                const raw = fs.readFileSync(f);
+                const j = JSON.parse(
+                  f.endsWith(".gz")
+                    ? require("zlib").gunzipSync(raw).toString("utf8")
+                    : raw.toString("utf8"),
+                );
+                const bytes = Buffer.byteLength(JSON.stringify(j.endpoints));
+                return `| \`${f}\` | ${j.endpoints.length} | ` +
+                  `${(bytes / 1048576).toFixed(2)} MB | ` +
+                  `${(raw.length / 1048576).toFixed(2)} MB | ` +
+                  `${Math.round(bytes / (j.endpoints.length || 1))} B |`;
+              });
+            const table = [
+              "| file | endpoints | array size | on disk | per endpoint |",
+              "| --- | --- | --- | --- | --- |",
+              ...rows,
+            ].join("\n");
+            console.log(table);
+            if (process.env.GITHUB_STEP_SUMMARY) {
+              fs.appendFileSync(
+                process.env.GITHUB_STEP_SUMMARY,
+                `\n### Build-time weight\n\n${table}\n`,
+              );
+            }
+          '
+
+      # Also proves the stats path end to end: it must read the gzipped full
+      # catalog, not the capped page file.
+      - name: Write a stats snapshot from the full catalog
+        run: |
+          node scripts/write-stats-snapshot.mjs
+          node -e '
+            const fs = require("fs");
+            const d = new Date().toISOString().slice(0, 10);
+            const s = JSON.parse(fs.readFileSync(`data/stats/${d}.json`, "utf8"));
+            const tbl = (title, obj) =>
+              [`\n#### ${title}\n`, "| key | count |", "| --- | --- |"]
+                .concat(
+                  Object.entries(obj)
+                    .sort((a, b) => b[1] - a[1])
+                    .map(([k, v]) => `| ${k} | ${v} |`),
+                )
+                .join("\n");
+            const body = [
+              `\n### Stats snapshot ${d} (from the FULL catalog)\n`,
+              `total: **${s.total}** · hosts: **${s.hostCount}**`,
+              tbl("By category", s.byCategory),
+              tbl("By chain", s.byChain),
+              tbl("By source", s.bySource),
+              tbl("By price tier", s.byPriceTier),
+            ].join("\n");
+            console.log(body);
+            if (process.env.GITHUB_STEP_SUMMARY) {
+              fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, body + "\n");
+            }
+          '
+
+      - name: Upload the fetched catalogs
+        uses: actions/upload-artifact@v4
+        with:
+          name: endpoints-full
+          path: |
+            data/endpoints.json
+            data/endpoints_full.json.gz
+            data/stats
+          retention-days: 7
+          compression-level: 9

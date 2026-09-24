@@ -12,6 +12,7 @@
 //  - `fetch_report` and `popularity_coverage` are ALWAYS written.
 
 import { writeFile, readFile } from "node:fs/promises";
+import { gzipSync, gunzipSync } from "node:zlib";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 import type {
@@ -21,9 +22,10 @@ import type {
   FetchStatus,
 } from "../src/lib/types";
 import { canonicalUrl, hashId, mergeEndpoints } from "./util";
+import { PAGE_SUBSET_MAX, SUBSET_RULE, pageSubset } from "./page-subset";
 
 import { fetchX402Inc } from "./fetchers/x402-inc";
-import { fetchX402scan } from "./fetchers/x402scan";
+import { fetchX402scan, getLastX402scanRun } from "./fetchers/x402scan";
 import { fetchOnyxBazaar } from "./fetchers/onyx-bazaar";
 import { fetchAgenticMarket } from "./fetchers/agentic-market";
 import { fetchPaySh } from "./fetchers/pay-sh";
@@ -32,7 +34,21 @@ import { fetchVisaCli } from "./fetchers/visa-cli";
 import { fetchCircleMarketplace } from "./fetchers/circle-marketplace";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const OUT = join(__dirname, "..", "data", "endpoints.json");
+const DATA = join(__dirname, "..", "data");
+// Every endpoint. Nothing in src/ imports this — it is the input to
+// scripts/write-stats-snapshot.mjs and the answer to "how big is x402 really".
+//
+// Stored gzipped because it is committed daily: ~66 MB of pretty-printed JSON
+// per day would outgrow the repo within months, and gzip -9 takes it to ~5 MB
+// (~7%) in a fraction of a second. Node zeroes the gzip header's mtime, so the
+// bytes are deterministic and an unchanged catalog still produces no diff.
+const OUT_FULL = join(DATA, "endpoints_full.json.gz");
+// Read-only fallback for a checkout written before the file was gzipped.
+const OUT_FULL_LEGACY = join(DATA, "endpoints_full.json");
+// The subset the site bundles. src/lib/data.ts imports this at build time and
+// src/app/page.tsx hands it to a client component, so every byte here lands in
+// the page payload — hence the cap.
+const OUT_PAGE = join(DATA, "endpoints.json");
 
 type NamedFetcher = {
   name: string;
@@ -40,11 +56,39 @@ type NamedFetcher = {
   // Implemented fetchers set this true: a 0 result is then "empty" (a bug to
   // surface), not silently accepted. Stub fetchers set it false → "stub".
   expectNonEmpty: boolean;
+  // Paging fetchers expose how the run went (pages, upstream total, whether it
+  // reached the end) so `fetch_report` can carry it. Read after `run`.
+  meta?: () => Partial<FetchReportEntry> | undefined;
 };
 
 const FETCHERS: NamedFetcher[] = [
   { name: "x402-inc", run: fetchX402Inc, expectNonEmpty: true },
-  { name: "x402scan", run: fetchX402scan, expectNonEmpty: true },
+  {
+    name: "x402scan",
+    run: fetchX402scan,
+    expectNonEmpty: true,
+    meta: () => {
+      const r = getLastX402scanRun();
+      if (!r) return undefined;
+      return {
+        rows: r.rows,
+        pages: r.pages,
+        truncated: r.truncated,
+        api_total: r.api_total,
+        stopped_reason: r.stopped_reason,
+        elapsed_ms: r.elapsed_ms,
+        // Only worth recording when more than the primary pass ran.
+        slices: r.sliced
+          ? r.slices.map(({ label, rows, added, pages }) => ({
+              label,
+              rows,
+              added,
+              pages,
+            }))
+          : undefined,
+      };
+    },
+  },
   { name: "onyx-bazaar", run: fetchOnyxBazaar, expectNonEmpty: true },
   { name: "pay-sh", run: fetchPaySh, expectNonEmpty: true },
   { name: "agentic-market", run: fetchAgenticMarket, expectNonEmpty: false },
@@ -69,13 +113,31 @@ async function collect(): Promise<CollectResult> {
       let status: FetchStatus;
       if (items.length > 0) status = "ok";
       else status = f.expectNonEmpty ? "empty" : "stub";
-      report.push({ source: f.name, status, count: items.length });
+      // Distinct canonical URLs this source contributed, before the
+      // cross-source merge — so "20,000 rows" vs "18,400 endpoints" is
+      // visible per source rather than only in the final count.
+      const unique_after_dedup = new Set(
+        items.map((e) => canonicalUrl(e.url)),
+      ).size;
+      report.push({
+        source: f.name,
+        status,
+        count: items.length,
+        unique_after_dedup,
+        ...(f.meta?.() ?? {}),
+      });
       const flag = status === "empty" ? "⚠" : status === "stub" ? "·" : "✓";
       console.log(`  ${flag} ${f.name}: ${items.length} (${status})`);
       endpoints.push(...items);
     } catch (err) {
       const error = (err as Error).message;
-      report.push({ source: f.name, status: "failed", count: 0, error });
+      report.push({
+        source: f.name,
+        status: "failed",
+        count: 0,
+        error,
+        ...(f.meta?.() ?? {}),
+      });
       console.warn(`  ✗ ${f.name}: failed — ${error}`);
     }
   }
@@ -108,30 +170,81 @@ async function main() {
     console.warn(
       "No endpoints collected — preserving existing catalog, recording the failure in fetch_report.",
     );
-    try {
-      endpoints = (JSON.parse(await readFile(OUT, "utf8")) as Catalog).endpoints;
-    } catch {
-      endpoints = [];
+    // Fall back to the full catalog, then to the page file for a checkout
+    // predating the split.
+    endpoints = [];
+    for (const path of [OUT_FULL, OUT_FULL_LEGACY, OUT_PAGE]) {
+      try {
+        const raw = await readFile(path);
+        const text = path.endsWith(".gz")
+          ? gunzipSync(raw).toString("utf8")
+          : raw.toString("utf8");
+        endpoints = (JSON.parse(text) as Catalog).endpoints;
+        break;
+      } catch {
+        // try the next one
+      }
     }
   }
 
   const popularity_coverage = endpoints.filter(
     (e) => e.popularity != null,
   ).length;
+  const generated_at = new Date().toISOString();
 
-  const catalog: Catalog = {
-    generated_at: new Date().toISOString(),
+  const full: Catalog = {
+    generated_at,
     count: endpoints.length,
     fetch_report: report,
     popularity_coverage,
     endpoints,
   };
+  await writeFile(
+    OUT_FULL,
+    gzipSync(Buffer.from(JSON.stringify(full, null, 2) + "\n", "utf8"), {
+      level: 9,
+    }),
+  );
 
-  await writeFile(OUT, JSON.stringify(catalog, null, 2) + "\n", "utf8");
+  // The page file carries the same report and the same shape, plus the
+  // subset markers, so nothing downstream can mistake its `count` for a total.
+  const subset = pageSubset(endpoints);
+  const page: Catalog = {
+    generated_at,
+    count: subset.length,
+    fetch_report: report,
+    popularity_coverage: subset.filter((e) => e.popularity != null).length,
+    subset_of: "endpoints_full.json",
+    subset_limit: PAGE_SUBSET_MAX,
+    subset_rule: SUBSET_RULE,
+    full_count: endpoints.length,
+    endpoints: subset,
+  };
+  await writeFile(OUT_PAGE, JSON.stringify(page, null, 2) + "\n", "utf8");
+
   console.log(
-    `Wrote ${endpoints.length} endpoint(s); popularity coverage ${popularity_coverage}.`,
+    `Wrote ${endpoints.length} endpoint(s) to endpoints_full.json.gz; ` +
+      `popularity coverage ${popularity_coverage}.`,
+  );
+  console.log(
+    subset.length < endpoints.length
+      ? `Wrote ${subset.length} of them to endpoints.json (the page bundle's ` +
+          `${PAGE_SUBSET_MAX} cap); stats are computed from the full file.`
+      : `Wrote all ${subset.length} to endpoints.json (under the ${PAGE_SUBSET_MAX} cap).`,
   );
   console.table(report);
+
+  // A short catalog must never look like a healthy one. Say so on stdout as
+  // well as in fetch_report.
+  for (const r of report) {
+    if (!r.truncated) continue;
+    console.warn(
+      `::warning::${r.source} did NOT reach the end of its list (${r.stopped_reason}): ` +
+        `${r.rows ?? r.count} row(s)` +
+        (r.api_total != null ? ` of ${r.api_total} reported upstream` : "") +
+        ". fetch_report records truncated: true.",
+    );
+  }
 }
 
 main().catch((err) => {

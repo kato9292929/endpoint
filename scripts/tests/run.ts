@@ -1,7 +1,15 @@
 // Lightweight test runner (tsx + node:assert, no test framework dep).
 // Run with: npm test
 import assert from "node:assert/strict";
+import { createServer, type Server } from "node:http";
+import { execFileSync } from "node:child_process";
+import { gzipSync } from "node:zlib";
+import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, rmSync } from "node:fs";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
 import { mergeEndpoints } from "../util";
+import { fetchX402scan, getLastX402scanRun } from "../fetchers/x402scan";
+import { pageSubset } from "../page-subset";
 import { defaultOrder, isFeatured } from "../../src/lib/featured";
 import { aggregateHosts, hostOf } from "../../src/lib/hosts";
 import { buildRankRows, type RankArtifact } from "../../src/lib/rank";
@@ -135,4 +143,412 @@ test("buildRankRows re-lists artifact rows as-is and joins the catalog by host",
   assert.deepEqual(r.rows[0].networks, ["Base"]);
 });
 
-console.log(`\n${passed} passed`);
+console.log("\nStage 3b — page subset");
+
+test("pageSubset keeps every non-x402scan endpoint, even a stale featured one", () => {
+  const seed = ep({
+    id: "seed",
+    url: "https://x402jp.com/a",
+    name: "Seed",
+    source: ["x402-inc"],
+    last_seen: "2020-01-01T00:00:00.000Z", // oldest in the set
+  });
+  const scan = Array.from({ length: 5 }, (_, i) =>
+    ep({
+      id: `s${i}`,
+      url: `https://s${i}.example/a`,
+      name: `S${i}`,
+      source: ["x402scan"],
+      last_seen: `2026-09-${10 + i}T00:00:00.000Z`,
+    }),
+  );
+  const picked = pageSubset([seed, ...scan], 3);
+  assert.equal(picked.length, 3);
+  assert.ok(
+    picked.some((e) => e.id === "seed"),
+    "the featured seed survives the cap despite being the oldest",
+  );
+  // The two freshest x402scan rows fill the remaining room.
+  assert.deepEqual(
+    picked
+      .filter((e) => e.id !== "seed")
+      .map((e) => e.id)
+      .sort(),
+    ["s3", "s4"],
+  );
+});
+
+test("pageSubset keeps a URL that several directories list", () => {
+  const shared = ep({
+    id: "shared",
+    url: "https://both.example/a",
+    name: "Both",
+    source: ["x402scan", "pay-sh"], // merged across directories
+    last_seen: "2020-01-01T00:00:00.000Z",
+  });
+  const scan = Array.from({ length: 3 }, (_, i) =>
+    ep({
+      id: `s${i}`,
+      url: `https://s${i}.example/a`,
+      name: `S${i}`,
+      source: ["x402scan"],
+      last_seen: `2026-09-${10 + i}T00:00:00.000Z`,
+    }),
+  );
+  const picked = pageSubset([shared, ...scan], 2);
+  assert.ok(picked.some((e) => e.id === "shared"));
+});
+
+test("pageSubset is a no-op under the cap", () => {
+  const eps = [ep({ id: "a" }), ep({ id: "b" })];
+  assert.equal(pageSubset(eps, 10).length, 2);
+});
+
+console.log("\nStage 3c — stats snapshot input");
+
+// The stats writer is a separate process reading files, so drive it that way:
+// build a data/ directory, run it with that cwd, read back what it wrote.
+const STATS_SCRIPT = join(__dirname, "..", "write-stats-snapshot.mjs");
+
+function statsFixture(files: Record<string, string | Buffer>): string {
+  const dir = mkdtempSync(join(tmpdir(), "x402-stats-"));
+  mkdirSync(join(dir, "data"), { recursive: true });
+  for (const [name, body] of Object.entries(files)) {
+    writeFileSync(join(dir, "data", name), body);
+  }
+  return dir;
+}
+
+function catalogFixture(n: number) {
+  return {
+    generated_at: "2026-09-22T00:00:00.000Z",
+    count: n,
+    fetch_report: [],
+    popularity_coverage: 0,
+    endpoints: Array.from({ length: n }, (_, i) => ({
+      id: `id${i}`,
+      url: `https://h${i % 7}.example/r${i}`,
+      name: `E${i}`,
+      description: "",
+      category: "other",
+      networks: ["Base"],
+      protocols: ["x402"],
+      source: ["x402scan"],
+      source_url: "",
+      last_seen: "2026-09-22T00:00:00.000Z",
+    })),
+  };
+}
+
+test("write-stats-snapshot counts the GZIPPED full catalog", () => {
+  const full = catalogFixture(40);
+  const dir = statsFixture({
+    "endpoints_full.json.gz": gzipSync(Buffer.from(JSON.stringify(full))),
+    // A capped page file sits beside it and must be ignored.
+    "endpoints.json": JSON.stringify({
+      ...full,
+      count: 10,
+      subset_of: "endpoints_full.json.gz",
+      full_count: 40,
+      endpoints: full.endpoints.slice(0, 10),
+    }),
+  });
+  try {
+    const out = execFileSync("node", [STATS_SCRIPT], {
+      cwd: dir,
+      encoding: "utf8",
+    });
+    assert.match(out, /endpoints_full\.json\.gz/, "reads the .gz, not the page file");
+    const day = new Date().toISOString().slice(0, 10);
+    const snap = JSON.parse(
+      readFileSync(join(dir, "data", "stats", `${day}.json`), "utf8"),
+    );
+    assert.equal(snap.total, 40, "counts the full catalog, not the subset");
+    assert.equal(snap.hostCount, 7);
+  } finally {
+    rmSync(dir, { recursive: true, force: true });
+  }
+});
+
+test("write-stats-snapshot still reads an uncompressed full catalog", () => {
+  const dir = statsFixture({
+    "endpoints_full.json": JSON.stringify(catalogFixture(12)),
+  });
+  try {
+    execFileSync("node", [STATS_SCRIPT], { cwd: dir, encoding: "utf8" });
+    const day = new Date().toISOString().slice(0, 10);
+    const snap = JSON.parse(
+      readFileSync(join(dir, "data", "stats", `${day}.json`), "utf8"),
+    );
+    assert.equal(snap.total, 12);
+  } finally {
+    rmSync(dir, { recursive: true, force: true });
+  }
+});
+
+test("write-stats-snapshot REFUSES to count a subset as a total", () => {
+  const full = catalogFixture(30);
+  const dir = statsFixture({
+    "endpoints.json": JSON.stringify({
+      ...full,
+      count: 10,
+      subset_of: "endpoints_full.json.gz",
+      full_count: 30,
+      endpoints: full.endpoints.slice(0, 10),
+    }),
+  });
+  try {
+    assert.throws(
+      () => execFileSync("node", [STATS_SCRIPT], { cwd: dir, stdio: "pipe" }),
+      /is a subset \(10 of 30\)/,
+      "a subset must fail loudly, never be counted",
+    );
+  } finally {
+    rmSync(dir, { recursive: true, force: true });
+  }
+});
+
+// ── Stage 4 — x402scan paging ────────────────────────
+// The fetcher is exercised against a local fake that reproduces x402scan's
+// server semantics exactly (verified against Merit-Systems/x402scan):
+//   skip: page * page_size, take: page_size + 1
+//   → { items, hasNextPage, total_count, total_pages, page }
+// wrapped in the non-batched superjson envelope { result: { data: { json } } }.
+
+type FakeSorting = { id: string; desc: boolean };
+type FakeRow = { resource: string };
+
+type FakeOptions = {
+  // Rows the fake holds, in the order the given sorting would return them.
+  rowsFor: (sorting: FakeSorting) => FakeRow[];
+  // Rows past this offset come back empty while hasNextPage stays true —
+  // i.e. an API-side depth ceiling.
+  depthLimit?: (sorting: FakeSorting) => number;
+  // Reply 429 (with Retry-After) to the first N requests.
+  failFirst?: number;
+  // total_count the fake advertises; defaults to the sorted row count.
+  totalCount?: number;
+};
+
+type Fake = { url: string; requests: number; close: () => Promise<void> };
+
+function startFake(opts: FakeOptions): Promise<Fake> {
+  let requests = 0;
+  const server: Server = createServer((req, res) => {
+    requests++;
+    const url = new URL(req.url ?? "/", "http://localhost");
+    const input = JSON.parse(url.searchParams.get("input") ?? "{}").json ?? {};
+    const sorting: FakeSorting = input.sorting ?? { id: "lastUpdated", desc: true };
+    const { page = 0, page_size = 10 } = input.pagination ?? {};
+
+    if (opts.failFirst && requests <= opts.failFirst) {
+      res.writeHead(429, { "retry-after": "0" });
+      res.end("rate limited");
+      return;
+    }
+
+    const rows = opts.rowsFor(sorting);
+    const limit = opts.depthLimit?.(sorting) ?? rows.length;
+    const skip = page * page_size;
+    // take page_size + 1 and peek, exactly like the upstream query.
+    const window = rows.slice(skip, Math.min(skip + page_size + 1, limit));
+    const total_count = opts.totalCount ?? rows.length;
+    const payload = {
+      items: window.slice(0, page_size),
+      // hasNextPage is computed from the real total, so a depth ceiling shows
+      // up as "empty page while more was promised" — the case we detect.
+      hasNextPage: skip + page_size < total_count,
+      total_count,
+      total_pages: Math.ceil(total_count / page_size),
+      page,
+    };
+    res.writeHead(200, { "content-type": "application/json" });
+    res.end(JSON.stringify({ result: { data: { json: payload } } }));
+  });
+
+  return new Promise((resolve) => {
+    server.listen(0, "127.0.0.1", () => {
+      const addr = server.address();
+      const port = typeof addr === "object" && addr ? addr.port : 0;
+      resolve({
+        url: `http://127.0.0.1:${port}`,
+        get requests() {
+          return requests;
+        },
+        close: () =>
+          new Promise<void>((done) => server.close(() => done())),
+      } as Fake);
+    });
+  });
+}
+
+function rows(n: number, prefix = "https://e"): FakeRow[] {
+  return Array.from({ length: n }, (_, i) => ({
+    resource: `${prefix}${i}.example/api`,
+  }));
+}
+
+// The fetcher reads its knobs from the environment on every run, so a
+// scenario just sets them before calling it.
+function configure(env: Record<string, string>) {
+  for (const k of [
+    "X402SCAN_BASE_URL",
+    "X402SCAN_PAGE_SIZE",
+    "X402SCAN_GAP_MS",
+    "X402SCAN_SAFETY_MAX",
+  ]) {
+    delete process.env[k];
+  }
+  for (const [k, v] of Object.entries(env)) process.env[k] = v;
+}
+
+async function asyncTest(name: string, fn: () => Promise<void>) {
+  await fn();
+  passed++;
+  console.log(`  ✓ ${name}`);
+}
+
+async function stage4() {
+  console.log("\nStage 4 — x402scan paging");
+
+  await asyncTest(
+    "pages past 20,000 rows — the old MAX_ENDPOINTS cap is gone",
+    async () => {
+      const all = rows(25_000);
+      const fake = await startFake({ rowsFor: () => all });
+      try {
+        configure({
+          X402SCAN_BASE_URL: fake.url,
+          X402SCAN_PAGE_SIZE: "5000",
+          X402SCAN_GAP_MS: "0",
+          X402SCAN_SAFETY_MAX: "200000",
+        });
+        const eps = await fetchX402scan();
+        const run = getLastX402scanRun()!;
+        assert.equal(eps.length, 25_000);
+        assert.equal(run.rows, 25_000);
+        assert.equal(run.api_total, 25_000);
+        assert.equal(run.pages, 5);
+        assert.equal(run.truncated, false);
+        assert.equal(run.sliced, false);
+        assert.equal(run.stopped_reason, "exhausted");
+      } finally {
+        await fake.close();
+      }
+    },
+  );
+
+  await asyncTest(
+    "rows repeating a URL (upstream keys by URL+method) collapse in unique_urls",
+    async () => {
+      const dup = [...rows(10), ...rows(10)]; // every URL served twice
+      const fake = await startFake({ rowsFor: () => dup });
+      try {
+        configure({
+          X402SCAN_BASE_URL: fake.url,
+          X402SCAN_PAGE_SIZE: "20",
+          X402SCAN_GAP_MS: "0",
+        });
+        const eps = await fetchX402scan();
+        const run = getLastX402scanRun()!;
+        assert.equal(run.rows, 20);
+        assert.equal(run.unique_urls, 10);
+        assert.equal(eps.length, 10);
+      } finally {
+        await fake.close();
+      }
+    },
+  );
+
+  await asyncTest(
+    "a depth ceiling triggers the slice fallback and the union completes",
+    async () => {
+      const all = rows(1000);
+      const reversed = [...all].reverse();
+      const fake = await startFake({
+        // desc serves the list head-first, asc serves it tail-first.
+        rowsFor: (s) => (s.desc ? all : reversed),
+        // Neither order serves past 600 rows deep, but together they cover
+        // all 1000 — exactly the shape the fallback exists for.
+        depthLimit: () => 600,
+      });
+      try {
+        configure({
+          X402SCAN_BASE_URL: fake.url,
+          X402SCAN_PAGE_SIZE: "100",
+          X402SCAN_GAP_MS: "0",
+        });
+        const eps = await fetchX402scan();
+        const run = getLastX402scanRun()!;
+        assert.equal(run.sliced, true);
+        assert.equal(run.unique_urls, 1000); // full coverage via both orders
+        assert.equal(eps.length, 1000);
+        assert.ok(
+          run.slices.length > 1,
+          "every slice that ran is recorded in fetch_report",
+        );
+        assert.equal(run.slices[0].stopped_reason, "page_ceiling");
+        // No single pass ever reached the end of the list, so coverage is not
+        // provable even though the union happens to be complete here. The run
+        // stays flagged rather than claiming a clean sweep.
+        assert.equal(run.truncated, true);
+      } finally {
+        await fake.close();
+      }
+    },
+  );
+
+  await asyncTest(
+    "the safety limit records truncated: true instead of stopping quietly",
+    async () => {
+      const all = rows(5000);
+      const fake = await startFake({ rowsFor: () => all });
+      try {
+        configure({
+          X402SCAN_BASE_URL: fake.url,
+          X402SCAN_PAGE_SIZE: "100",
+          X402SCAN_GAP_MS: "0",
+          X402SCAN_SAFETY_MAX: "300",
+        });
+        await fetchX402scan();
+        const run = getLastX402scanRun()!;
+        assert.equal(run.truncated, true);
+        assert.equal(run.stopped_reason, "safety_limit");
+        assert.equal(run.api_total, 5000);
+        // Our own budget is spent, so re-reading in other sort orders would
+        // only burn requests against the same ceiling.
+        assert.equal(run.sliced, false);
+        assert.equal(run.pages, 3);
+      } finally {
+        await fake.close();
+      }
+    },
+  );
+
+  await asyncTest("429 with Retry-After is retried, not dropped", async () => {
+    const all = rows(50);
+    const fake = await startFake({ rowsFor: () => all, failFirst: 2 });
+    try {
+      configure({
+        X402SCAN_BASE_URL: fake.url,
+        X402SCAN_PAGE_SIZE: "50",
+        X402SCAN_GAP_MS: "0",
+      });
+      const eps = await fetchX402scan();
+      const run = getLastX402scanRun()!;
+      assert.equal(eps.length, 50);
+      assert.equal(run.truncated, false);
+    } finally {
+      await fake.close();
+    }
+  });
+}
+
+stage4()
+  .then(() => {
+    console.log(`\n${passed} passed`);
+  })
+  .catch((err) => {
+    console.error(err);
+    process.exit(1);
+  });

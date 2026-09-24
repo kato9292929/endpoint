@@ -1,8 +1,13 @@
 #!/usr/bin/env node
 // Writes a daily stats snapshot from the aggregator output.
 //
-// Reads data/endpoints.json and writes data/stats/YYYY-MM-DD.json (UTC date),
-// one file per day. Re-running the same day overwrites it (latest value wins).
+// Reads data/endpoints_full.json.gz and writes data/stats/YYYY-MM-DD.json (UTC
+// date), one file per day. Re-running the same day overwrites it (latest value
+// wins).
+//
+// The FULL catalog is the input on purpose: data/endpoints.json is only the
+// capped subset the site bundles, so counting it would under-report the
+// ecosystem. Older checkouts without the full file fall back to it.
 //
 // Dependency-free Node ESM — no tsx/ts-node. The cron runs:
 //   node scripts/write-stats-snapshot.mjs
@@ -13,10 +18,18 @@
 
 import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { join } from "node:path";
+import { readCatalog, firstExisting } from "./read-catalog.mjs";
 
 const ROOT = process.cwd();
-const INPUT = join(ROOT, "data", "endpoints.json");
 const OUT_DIR = join(ROOT, "data", "stats");
+// Gzipped full catalog first, then its uncompressed predecessor, then the page
+// file — which is a subset and is rejected below rather than counted.
+const INPUT =
+  firstExisting(
+    join(ROOT, "data", "endpoints_full.json.gz"),
+    join(ROOT, "data", "endpoints_full.json"),
+    join(ROOT, "data", "endpoints.json"),
+  ) ?? join(ROOT, "data", "endpoints_full.json.gz");
 
 // ── Price-tier buckets (USD). Edit these edges to retune; order matters. ──
 // Each endpoint's price falls into the first bucket whose `max` it is under
@@ -71,8 +84,18 @@ function tally(into, key) {
 }
 
 function main() {
-  const catalog = JSON.parse(readFileSync(INPUT, "utf8"));
+  const catalog = readCatalog(INPUT);
   const endpoints = Array.isArray(catalog.endpoints) ? catalog.endpoints : [];
+
+  // Counting the capped page file would silently under-report. Say which file
+  // this snapshot came from, and refuse to pass a subset off as a total.
+  if (catalog.subset_of) {
+    throw new Error(
+      `${INPUT} is a subset (${catalog.count} of ${catalog.full_count}); ` +
+        "stats must be computed from data/endpoints_full.json.gz. Run `npm run fetch` first.",
+    );
+  }
+  console.log(`stats: counting ${endpoints.length} endpoint(s) from ${INPUT}`);
 
   const byCategory = {};
   const byChain = {};

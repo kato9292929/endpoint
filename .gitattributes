@@ -1,0 +1,3 @@
+# The full catalog is committed gzipped. Mark it binary so git never applies
+# text or line-ending normalization to it — that would corrupt the archive.
+*.gz binary
