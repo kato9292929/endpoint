@@ -124,6 +124,9 @@ jobs:
             }
           '
 
+      - name: Find recognizable companies in the full catalog
+        run: node scripts/find-brands.mjs data/endpoints_full.json.gz
+
       - name: Upload the fetched catalogs
         uses: actions/upload-artifact@v4
         with:
