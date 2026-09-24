@@ -1,13 +1,19 @@
 import Link from "next/link";
 import { getRank } from "@/lib/rank";
 import { getHosts, hostStats } from "@/lib/hosts";
+import { latestSnapshot } from "@/lib/stats-history";
 import { getCatalog } from "@/lib/data";
 import {
   formatProviderPrice,
   getProviders,
   type ProviderRow,
 } from "@/lib/providers";
-import { CATEGORY_LABELS, DIRECTORY_META, DIRECTORY_SOURCES } from "@/lib/types";
+import {
+  CATEGORY_LABELS,
+  DIRECTORY_META,
+  DIRECTORY_SOURCES,
+  type Category,
+} from "@/lib/types";
 import { SITE_URL } from "@/lib/site";
 
 // All former standalone pages, inlined as sections of the single top page.
@@ -264,10 +270,34 @@ function Stat({ label, value }: { label: string; value: string | number }) {
 }
 
 export function HostsSection() {
-  const hosts = getHosts();
-  const s = hostStats();
+  // Prefer the daily snapshot: it is counted from the FULL catalog, while this
+  // page bundles only the capped subset. Without it the host figures would
+  // contradict the endpoint total shown above them.
+  const snap = latestSnapshot();
+  const fromSnapshot = Boolean(snap?.byHost?.length && snap?.hostCount);
+
+  const local = hostStats();
+  const s = fromSnapshot
+    ? {
+        hostCount: snap!.hostCount!,
+        totalRoutes: snap!.total,
+        routesPerHostMedian: local.routesPerHostMedian,
+        singleRouteHosts: local.singleRouteHosts,
+      }
+    : local;
+
+  const hosts = fromSnapshot
+    ? snap!.byHost!.map((h) => ({
+        host: h.host,
+        serviceName: h.name,
+        count: h.count,
+        share: snap!.total ? h.count / snap!.total : 0,
+        priceMedian: h.priceMedian,
+        topCategory: (h.topCategory ?? null) as Category | null,
+      }))
+    : getHosts();
   const shown = hosts.slice(0, TOP_N);
-  const hidden = hosts.length - shown.length;
+  const hidden = fromSnapshot ? s.hostCount - shown.length : hosts.length - shown.length;
 
   return (
     <section id="hosts" className="scroll-mt-6 space-y-4">
@@ -286,9 +316,16 @@ export function HostsSection() {
       <div className="grid grid-cols-2 gap-4 rounded-lg border border-border bg-surface p-4 shadow-sm sm:grid-cols-4">
         <Stat label="routes" value={s.totalRoutes.toLocaleString()} />
         <Stat label="hosts" value={s.hostCount.toLocaleString()} />
-        <Stat label="median routes / host" value={s.routesPerHostMedian ?? "—"} />
         <Stat
-          label="hosts with 1 route"
+          label={
+            fromSnapshot ? "median routes / host (browsable)" : "median routes / host"
+          }
+          value={s.routesPerHostMedian ?? "—"}
+        />
+        <Stat
+          label={
+            fromSnapshot ? "hosts with 1 route (browsable)" : "hosts with 1 route"
+          }
           value={s.singleRouteHosts.toLocaleString()}
         />
       </div>
@@ -338,8 +375,8 @@ export function HostsSection() {
         </div>
         {hidden > 0 ? (
           <div className="px-3 py-2 text-[11px] text-muted">
-            Showing the top {TOP_N} of {hosts.length.toLocaleString()} hosts. The
-            rest are in{" "}
+            Showing the top {shown.length} of {s.hostCount.toLocaleString()}{" "}
+            hosts. The rest are in{" "}
             <Link href="/api/hosts" className="text-accent hover:underline">
               /api/hosts
             </Link>
