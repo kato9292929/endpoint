@@ -127,6 +127,32 @@ jobs:
       - name: Find recognizable companies in the full catalog
         run: node scripts/find-brands.mjs data/endpoints_full.json.gz
 
+      - name: Build the named-providers artifact the site renders
+        run: |
+          node scripts/write-providers.mjs
+          node -e '
+            const fs = require("fs");
+            const p = JSON.parse(fs.readFileSync("data/providers.json", "utf8"));
+            const tbl = (title, rows) =>
+              [`\n#### ${title} (${rows.length})\n`,
+               "| provider | host | endpoints | priced | median | category |",
+               "| --- | --- | --- | --- | --- | --- |"]
+                .concat(rows.map((r) =>
+                  `| ${r.brand ?? r.name} | ${r.host} | ${r.count} | ${r.priced} | ` +
+                  `${r.priceMedian ?? "—"} | ${r.topCategory ?? "—"} |`))
+                .join("\n");
+            const body = [
+              `\n### Named providers (from ${p.scanned} endpoints)\n`,
+              tbl("Recognizable companies, own domain", p.firstParty),
+              tbl("Other providers, own domain", p.selfHosted),
+            ].join("\n");
+            console.log(body);
+            if (process.env.GITHUB_STEP_SUMMARY) {
+              fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, body + "\n");
+            }
+          '
+
+
       - name: Upload the fetched catalogs
         uses: actions/upload-artifact@v4
         with:
@@ -134,6 +160,7 @@ jobs:
           path: |
             data/endpoints.json
             data/endpoints_full.json.gz
+            data/providers.json
             data/stats
           retention-days: 7
           compression-level: 9
