@@ -32,6 +32,7 @@ import { fetchPaySh } from "./fetchers/pay-sh";
 import { fetchAmpersend } from "./fetchers/ampersend";
 import { fetchVisaCli } from "./fetchers/visa-cli";
 import { fetchCircleMarketplace } from "./fetchers/circle-marketplace";
+import { fetchCommunity } from "./fetchers/community";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const DATA = join(__dirname, "..", "data");
@@ -99,6 +100,7 @@ const FETCHERS: NamedFetcher[] = [
     run: fetchCircleMarketplace,
     expectNonEmpty: false,
   },
+  { name: "community", run: fetchCommunity, expectNonEmpty: true },
 ];
 
 type CollectResult = { report: FetchReportEntry[]; endpoints: Endpoint[] };
