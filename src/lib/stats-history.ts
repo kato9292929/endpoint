@@ -6,6 +6,14 @@
 import { readdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 
+export type SnapshotHost = {
+  host: string;
+  name: string;
+  count: number;
+  priceMedian: number | null;
+  topCategory: string | null;
+};
+
 export type Snapshot = {
   date: string;
   generatedAt: string;
@@ -14,6 +22,11 @@ export type Snapshot = {
   byChain: Record<string, number>;
   bySource: Record<string, number>;
   byPriceTier: Record<string, number>;
+  // Present on snapshots written since host aggregation was added. Counted
+  // from the FULL catalog, so these are the real figures — the site's own
+  // aggregation only sees the capped file it bundles.
+  hostCount?: number;
+  byHost?: SnapshotHost[];
 };
 
 export type SeriesPoint =
@@ -42,6 +55,19 @@ function loadSnapshots(): Map<string, Snapshot> {
     }
   }
   return map;
+}
+
+/**
+ * The most recent committed snapshot, or null when there are none.
+ *
+ * Snapshots are computed from the full catalog, so this is where the site gets
+ * host figures that are not limited to the subset it bundles.
+ */
+export function latestSnapshot(): Snapshot | null {
+  const snaps = [...loadSnapshots().entries()].sort((a, b) =>
+    a[0].localeCompare(b[0]),
+  );
+  return snaps.length ? snaps[snaps.length - 1][1] : null;
 }
 
 // "14d" / "30d" → number of days; "all" → "all"; anything else → default 14.

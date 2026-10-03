@@ -1,8 +1,19 @@
 import Link from "next/link";
 import { getRank } from "@/lib/rank";
 import { getHosts, hostStats } from "@/lib/hosts";
+import { latestSnapshot } from "@/lib/stats-history";
 import { getCatalog } from "@/lib/data";
-import { CATEGORY_LABELS, DIRECTORY_META, DIRECTORY_SOURCES } from "@/lib/types";
+import {
+  formatProviderPrice,
+  getProviders,
+  type ProviderRow,
+} from "@/lib/providers";
+import {
+  CATEGORY_LABELS,
+  DIRECTORY_META,
+  DIRECTORY_SOURCES,
+  type Category,
+} from "@/lib/types";
 import { SITE_URL } from "@/lib/site";
 
 // All former standalone pages, inlined as sections of the single top page.
@@ -11,6 +22,154 @@ function usd(n: number): string {
   return n >= 1
     ? `$${n.toLocaleString(undefined, { maximumFractionDigits: 0 })}`
     : `$${n.toFixed(2)}`;
+}
+
+
+/* ---------------- Named providers (above the ranking) ---------------- */
+
+// One row of the two provider tables. `rank` is display order only.
+function ProviderRowView({ row, rank }: { row: ProviderRow; rank: number }) {
+  return (
+    <div className="grid grid-cols-[2.5rem_1fr_auto] items-baseline gap-x-4 border-b border-border px-3 py-2 text-sm md:grid-cols-[2.5rem_minmax(0,2.4fr)_5rem_6rem_minmax(0,1fr)]">
+      <span className="tabular-nums text-muted">{rank}</span>
+      <span className="min-w-0">
+        <span className="block truncate font-medium">
+          {row.brand ?? (row.name || row.host)}
+        </span>
+        <a
+          href={`https://${row.host}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="block truncate text-xs text-muted hover:text-accent"
+        >
+          {row.host}
+        </a>
+      </span>
+      <span className="text-right tabular-nums">
+        {row.count.toLocaleString()}
+      </span>
+      <span className="hidden text-right tabular-nums text-muted md:block">
+        {formatProviderPrice(row)}
+      </span>
+      <span className="hidden text-[11px] uppercase tracking-wide text-muted md:block">
+        {row.topCategory ? CATEGORY_LABELS[row.topCategory] : "—"}
+      </span>
+    </div>
+  );
+}
+
+function ProviderTable({
+  caption,
+  rows,
+}: {
+  caption: React.ReactNode;
+  rows: ProviderRow[];
+}) {
+  if (rows.length === 0) return null;
+  return (
+    <div className="space-y-2">
+      <p className="text-sm text-muted">{caption}</p>
+      <div className="overflow-hidden rounded-lg border border-border bg-surface">
+        <div className="hidden grid-cols-[2.5rem_minmax(0,2.4fr)_5rem_6rem_minmax(0,1fr)] gap-x-4 border-b border-border px-3 py-2 text-[10px] uppercase tracking-wider text-muted md:grid">
+          <span>#</span>
+          <span>Provider</span>
+          <span className="text-right">Endpoints</span>
+          <span className="text-right">Median price</span>
+          <span>Top category</span>
+        </div>
+        {rows.map((r, i) => (
+          <ProviderRowView key={r.host} row={r} rank={i + 1} />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+export function NamedProvidersSection() {
+  const p = getProviders();
+  const firstParty = p.firstParty;
+  const selfHosted = p.selfHosted;
+  const brands = new Set(firstParty.map((r) => r.brand)).size;
+
+  return (
+    <section id="providers" className="scroll-mt-6 space-y-4">
+      <header className="space-y-2">
+        <h2 className="text-2xl font-semibold tracking-tight">
+          Who serves x402 under their own name
+        </h2>
+        <p className="max-w-3xl text-sm text-muted">
+          Anyone can publish an endpoint titled &ldquo;CoinGecko Price
+          API&rdquo; on their own domain, and this catalog lists it as
+          faithfully as the real one. So a provider is listed here only when the
+          host sits under a{" "}
+          <span className="text-black">domain that company controls</span>.
+          Endpoints served through a gateway operator that resells someone
+          else&apos;s API, or from shared hosting, are deliberately excluded —
+          whatever the listing calls itself.
+        </p>
+      </header>
+
+      {p.status !== "ok" || firstParty.length + selfHosted.length === 0 ? (
+        <div className="rounded-lg border border-border bg-surface p-4 text-sm text-muted">
+          Provider list is{" "}
+          <span className="font-medium text-black">unavailable</span> — the
+          artifact could not be built from the catalog. We show{" "}
+          <span className="font-medium text-black">no substitute list</span>.
+        </div>
+      ) : (
+        <>
+          <div className="grid grid-cols-2 gap-4 rounded-lg border border-border bg-surface p-4 shadow-sm sm:grid-cols-4">
+            <Stat label="recognizable companies" value={brands} />
+            <Stat label="their hosts" value={firstParty.length} />
+            <Stat label="other named providers" value={selfHosted.length} />
+            <Stat
+              label="endpoints scanned"
+              value={p.scanned.toLocaleString()}
+            />
+          </div>
+
+          <ProviderTable
+            caption={
+              <>
+                <span className="font-medium text-black">
+                  Companies you already know
+                </span>{" "}
+                — serving x402 from their own domain.
+              </>
+            }
+            rows={firstParty}
+          />
+
+          <ProviderTable
+            caption={
+              <>
+                <span className="font-medium text-black">
+                  Other providers on their own domain
+                </span>{" "}
+                — listed in the Solana Foundation pay-skills catalog and served
+                directly, not through a gateway.
+              </>
+            }
+            rows={selfHosted}
+          />
+
+          <p className="text-[11px] text-muted">
+            Counted from {p.scanned.toLocaleString()} endpoints in{" "}
+            <code>{p.source}</code>
+            {p.subset ? (
+              <>
+                {" "}
+                — a <span className="text-black">capped subset</span>, so these
+                counts understate
+              </>
+            ) : null}
+            . A company appearing here means it serves x402 from its own domain;
+            it does not imply any relationship with x402 Inc.
+          </p>
+        </>
+      )}
+    </section>
+  );
 }
 
 /* ---------------- Most-called endpoints (was /rank) ---------------- */
@@ -111,10 +270,34 @@ function Stat({ label, value }: { label: string; value: string | number }) {
 }
 
 export function HostsSection() {
-  const hosts = getHosts();
-  const s = hostStats();
+  // Prefer the daily snapshot: it is counted from the FULL catalog, while this
+  // page bundles only the capped subset. Without it the host figures would
+  // contradict the endpoint total shown above them.
+  const snap = latestSnapshot();
+  const fromSnapshot = Boolean(snap?.byHost?.length && snap?.hostCount);
+
+  const local = hostStats();
+  const s = fromSnapshot
+    ? {
+        hostCount: snap!.hostCount!,
+        totalRoutes: snap!.total,
+        routesPerHostMedian: local.routesPerHostMedian,
+        singleRouteHosts: local.singleRouteHosts,
+      }
+    : local;
+
+  const hosts = fromSnapshot
+    ? snap!.byHost!.map((h) => ({
+        host: h.host,
+        serviceName: h.name,
+        count: h.count,
+        share: snap!.total ? h.count / snap!.total : 0,
+        priceMedian: h.priceMedian,
+        topCategory: (h.topCategory ?? null) as Category | null,
+      }))
+    : getHosts();
   const shown = hosts.slice(0, TOP_N);
-  const hidden = hosts.length - shown.length;
+  const hidden = fromSnapshot ? s.hostCount - shown.length : hosts.length - shown.length;
 
   return (
     <section id="hosts" className="scroll-mt-6 space-y-4">
@@ -133,9 +316,16 @@ export function HostsSection() {
       <div className="grid grid-cols-2 gap-4 rounded-lg border border-border bg-surface p-4 shadow-sm sm:grid-cols-4">
         <Stat label="routes" value={s.totalRoutes.toLocaleString()} />
         <Stat label="hosts" value={s.hostCount.toLocaleString()} />
-        <Stat label="median routes / host" value={s.routesPerHostMedian ?? "—"} />
         <Stat
-          label="hosts with 1 route"
+          label={
+            fromSnapshot ? "median routes / host (browsable)" : "median routes / host"
+          }
+          value={s.routesPerHostMedian ?? "—"}
+        />
+        <Stat
+          label={
+            fromSnapshot ? "hosts with 1 route (browsable)" : "hosts with 1 route"
+          }
           value={s.singleRouteHosts.toLocaleString()}
         />
       </div>
@@ -185,8 +375,8 @@ export function HostsSection() {
         </div>
         {hidden > 0 ? (
           <div className="px-3 py-2 text-[11px] text-muted">
-            Showing the top {TOP_N} of {hosts.length.toLocaleString()} hosts. The
-            rest are in{" "}
+            Showing the top {shown.length} of {s.hostCount.toLocaleString()}{" "}
+            hosts. The rest are in{" "}
             <Link href="/api/hosts" className="text-accent hover:underline">
               /api/hosts
             </Link>

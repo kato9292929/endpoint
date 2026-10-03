@@ -11,7 +11,8 @@
     "fetch": "tsx scripts/fetch-directories.ts",
     "typecheck": "tsc --noEmit",
     "test": "tsx scripts/tests/run.ts",
-    "fetch:rank": "tsx scripts/fetch-ranking.ts"
+    "fetch:rank": "tsx scripts/fetch-ranking.ts",
+    "providers": "node scripts/write-providers.mjs"
   },
   "dependencies": {
     "fuse.js": "^7.0.0",

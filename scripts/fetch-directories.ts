@@ -23,6 +23,7 @@ import type {
 } from "../src/lib/types";
 import { canonicalUrl, hashId, mergeEndpoints } from "./util";
 import { PAGE_SUBSET_MAX, SUBSET_RULE, pageSubset } from "./page-subset";
+import { assessRun } from "./catalog-guard";
 
 import { fetchX402Inc } from "./fetchers/x402-inc";
 import { fetchX402scan, getLastX402scanRun } from "./fetchers/x402scan";
@@ -77,6 +78,9 @@ const FETCHERS: NamedFetcher[] = [
         api_total: r.api_total,
         stopped_reason: r.stopped_reason,
         elapsed_ms: r.elapsed_ms,
+        // Without these a failed run says "page_error" and nothing else, which
+        // is not enough to tell a 429 from a 5xx a week later.
+        errors: r.errors.length ? r.errors.slice(0, 10) : undefined,
         // Only worth recording when more than the primary pass ran.
         slices: r.sliced
           ? r.slices.map(({ label, rows, added, pages }) => ({
@@ -157,34 +161,48 @@ function dedupe(endpoints: Endpoint[]): Endpoint[] {
   return [...byUrl.values()].sort((a, b) => a.name.localeCompare(b.name));
 }
 
+/** The previous catalog, from whichever of the three files exists. */
+async function readPreviousCatalog(): Promise<Catalog | null> {
+  for (const path of [OUT_FULL, OUT_FULL_LEGACY, OUT_PAGE]) {
+    try {
+      const raw = await readFile(path);
+      const text = path.endsWith(".gz")
+        ? gunzipSync(raw).toString("utf8")
+        : raw.toString("utf8");
+      return JSON.parse(text) as Catalog;
+    } catch {
+      // try the next one
+    }
+  }
+  return null;
+}
+
 async function main() {
   console.log("Fetching x402 directories…");
   const { report, endpoints: collected } = await collect();
 
-  // Preserve existing endpoints if a run collected nothing (e.g. everything
-  // failed), but still write the report so the failure is visible.
-  let endpoints: Endpoint[];
-  if (collected.length > 0) {
-    endpoints = dedupe(collected);
-  } else {
+  const previous = await readPreviousCatalog();
+  const previousEndpoints = previous?.endpoints ?? [];
+  const previousCount = previous?.full_count ?? previousEndpoints.length;
+
+  const fresh = collected.length > 0 ? dedupe(collected) : [];
+  const { publish, degraded } = assessRun({
+    freshCount: fresh.length,
+    previousCount,
+    report,
+  });
+
+  // A partial fetch must never replace a complete catalog (see
+  // scripts/catalog-guard.ts). Keep the previous one and leave the reason in
+  // the artifact, where it is committed rather than lost with the run log.
+  const endpoints = publish ? fresh : previousEndpoints;
+  if (!publish) {
     console.warn(
-      "No endpoints collected — preserving existing catalog, recording the failure in fetch_report.",
+      `::error::Refusing to publish this run: ${degraded?.reason}. ` +
+        `Collected ${degraded?.collected ?? 0} endpoint(s) against ${previousCount} ` +
+        `previously${degraded?.sources.length ? ` (${degraded.sources.join(", ")})` : ""}. ` +
+        "Keeping the previous catalog.",
     );
-    // Fall back to the full catalog, then to the page file for a checkout
-    // predating the split.
-    endpoints = [];
-    for (const path of [OUT_FULL, OUT_FULL_LEGACY, OUT_PAGE]) {
-      try {
-        const raw = await readFile(path);
-        const text = path.endsWith(".gz")
-          ? gunzipSync(raw).toString("utf8")
-          : raw.toString("utf8");
-        endpoints = (JSON.parse(text) as Catalog).endpoints;
-        break;
-      } catch {
-        // try the next one
-      }
-    }
   }
 
   const popularity_coverage = endpoints.filter(
@@ -197,6 +215,7 @@ async function main() {
     count: endpoints.length,
     fetch_report: report,
     popularity_coverage,
+    ...(degraded ? { degraded } : {}),
     endpoints,
   };
   await writeFile(
@@ -218,6 +237,7 @@ async function main() {
     subset_limit: PAGE_SUBSET_MAX,
     subset_rule: SUBSET_RULE,
     full_count: endpoints.length,
+    ...(degraded ? { degraded } : {}),
     endpoints: subset,
   };
   await writeFile(OUT_PAGE, JSON.stringify(page, null, 2) + "\n", "utf8");
@@ -242,7 +262,14 @@ async function main() {
       `::warning::${r.source} did NOT reach the end of its list (${r.stopped_reason}): ` +
         `${r.rows ?? r.count} row(s)` +
         (r.api_total != null ? ` of ${r.api_total} reported upstream` : "") +
-        ". fetch_report records truncated: true.",
+        ". fetch_report records truncated: true." +
+        (r.errors?.length ? ` First error: ${r.errors[0]}` : ""),
+    );
+  }
+  if (degraded?.kept_previous) {
+    console.warn(
+      `::warning::Catalog NOT updated this run — kept the previous ` +
+        `${degraded.previous} endpoint(s). Downstream artifacts are stale on purpose.`,
     );
   }
 }

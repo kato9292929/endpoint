@@ -53,6 +53,18 @@ type Config = {
   pageSize: number;
   gapMs: number;
   safetyMaxRows: number;
+  /**
+   * Page by a `lastUpdated` cursor instead of a growing `skip`.
+   *
+   * The upstream query is `skip: page * page_size`, so plain offset paging
+   * asks for `OFFSET 125000` by the end of a 500-page crawl. That is what
+   * broke on 2026-10-01..03: the crawl died mid-run (`page_error`) earlier
+   * each day as the directory grew, after years of working. A cursor keeps
+   * every request at `skip: 0` and filters with
+   * `where: { lastUpdated: { lte: cursor } }` instead — the `where` field is
+   * a pass-through Prisma filter on the upstream procedure.
+   */
+  keyset: boolean;
 };
 
 // Read per run, not at import time, so a caller (and the tests) can change
@@ -73,6 +85,7 @@ function readConfig(): Config {
     // NOT a product cap: if it ever trips, the run is reported as
     // `truncated: true` rather than quietly returning a short catalog.
     safetyMaxRows: num(process.env.X402SCAN_SAFETY_MAX, 200_000),
+    keyset: process.env.X402SCAN_PAGING !== "offset",
   };
 }
 
@@ -170,29 +183,43 @@ function retryAfterMs(header: string | null): number | undefined {
 }
 
 // Build a tRPC v11 (non-batched) GET URL with a superjson-wrapped input.
-function trpcUrl(cfg: Config, page: number, sorting: Sorting): string {
+type PageRequest = { page: number; where?: Record<string, unknown> };
+
+function trpcUrl(cfg: Config, req: PageRequest, sorting: Sorting): string {
   const input = {
     json: {
-      pagination: { page, page_size: cfg.pageSize },
+      pagination: { page: req.page, page_size: cfg.pageSize },
       sorting: { id: sorting.id, desc: sorting.desc },
+      ...(req.where ? { where: req.where } : {}),
     },
   };
   const q = new URLSearchParams({ input: JSON.stringify(input) });
   return `${cfg.base}/api/trpc/${PROCEDURE}?${q.toString()}`;
 }
 
+/** A stable identity for a row — the upstream keys rows by URL + method. */
+function str(v: unknown): string | undefined {
+  return typeof v === "string" && v.trim() ? v : undefined;
+}
+
+function rowKey(item: ScanItem): string {
+  const url = item.resource ?? item.url ?? "";
+  const method = (item as { method?: string }).method ?? "";
+  return `${url}\u0000${method}`;
+}
+
 async function fetchPageOnce(
   cfg: Config,
-  page: number,
+  req: PageRequest,
   sorting: Sorting,
 ): Promise<Paginated> {
-  const res = await fetch(trpcUrl(cfg, page, sorting), {
+  const res = await fetch(trpcUrl(cfg, req, sorting), {
     headers: { accept: "application/json", "user-agent": UA },
   });
   if (!res.ok) {
     throw new HttpError(
       res.status,
-      `tRPC ${PROCEDURE} page ${page} (${sliceLabel(sorting)}) returned HTTP ${res.status}`,
+      `tRPC ${PROCEDURE} page ${req.page} (${sliceLabel(sorting)}) returned HTTP ${res.status}`,
       retryAfterMs(res.headers.get("retry-after")),
     );
   }
@@ -201,7 +228,7 @@ async function fetchPageOnce(
   const err = (body as { error?: { message?: string } })?.error;
   if (err) {
     throw new Error(
-      `tRPC ${PROCEDURE} page ${page} returned an error: ${err.message ?? "unknown"}`,
+      `tRPC ${PROCEDURE} page ${req.page} returned an error: ${err.message ?? "unknown"}`,
     );
   }
   // Non-batched superjson response: { result: { data: { json, meta } } }
@@ -215,13 +242,13 @@ async function fetchPageOnce(
 
 async function fetchPage(
   cfg: Config,
-  page: number,
+  req: PageRequest,
   sorting: Sorting,
 ): Promise<Paginated> {
   let lastErr: unknown;
   for (let attempt = 0; attempt < MAX_ATTEMPTS; attempt++) {
     try {
-      return await fetchPageOnce(cfg, page, sorting);
+      return await fetchPageOnce(cfg, req, sorting);
     } catch (err) {
       lastErr = err;
       // A network error has no status; treat it as retryable.
@@ -236,7 +263,7 @@ async function fetchPage(
           ? Math.max(err.retryAfterMs, backoff)
           : backoff;
       console.warn(
-        `x402scan: page ${page} (${sliceLabel(sorting)}) failed — ${(err as Error).message}; retrying in ${wait}ms`,
+        `x402scan: page ${req.page} (${sliceLabel(sorting)}) failed — ${(err as Error).message}; retrying in ${wait}ms`,
       );
       await sleep(wait);
     }
@@ -254,6 +281,8 @@ function sourceUrl(cfg: Config, item: ScanItem): string {
 type Union = {
   endpoints: Endpoint[];
   seen: Set<string>;
+  /** Row identities (URL + method), for keyset progress detection. */
+  seenRows: Set<string>;
   rows: number;
   mapped: number;
   pages: number;
@@ -275,12 +304,25 @@ async function collectSlice(
   let expectingMore = false;
   let reason: StopReason = "exhausted";
 
+  // Keyset state. `cursor` is the lastUpdated of the last row we accepted;
+  // `tiePage` walks offsets *within* one timestamp when more rows share it
+  // than fit in a page, which is the only case a cursor cannot advance past.
+  let cursor: string | null = null;
+  let tiePage = 0;
+
   for (let page = 0; ; page++) {
+    // In keyset mode every request is page 0 of a filtered set, so `skip`
+    // stays at 0 (or at a small tie offset) no matter how deep we are.
+    const req: PageRequest =
+      cfg.keyset && cursor
+        ? { page: tiePage, where: { lastUpdated: { lte: cursor } } }
+        : { page: cfg.keyset ? 0 : page };
+
     let res: Paginated;
     try {
-      res = await fetchPage(cfg, page, sorting);
+      res = await fetchPage(cfg, req, sorting);
     } catch (err) {
-      const message = `${label} page ${page}: ${(err as Error).message}`;
+      const message = `${label} page ${page} (skip ${req.page * cfg.pageSize}${cursor ? `, cursor ${cursor}` : ""}): ${(err as Error).message}`;
       // A page-0 failure on the primary slice is a true failure — the caller
       // needs to see it. Anything deeper must not discard what we already
       // collected (a single deep-page 500 once collapsed the catalog to ~84).
@@ -294,7 +336,12 @@ async function collectSlice(
     union.pages++;
 
     const items = res.items ?? [];
-    if (typeof res.total_count === "number") union.apiTotal = res.total_count;
+    // `total_count` counts the rows matching `where`, so once we are paging by
+    // a cursor it is the REMAINING count, not the directory's size. Only the
+    // unfiltered request can tell us the total.
+    if (typeof res.total_count === "number" && !req.where) {
+      union.apiTotal = res.total_count;
+    }
 
     if (items.length === 0) {
       // Empty while the previous page promised more = the API stopped serving
@@ -306,7 +353,12 @@ async function collectSlice(
     rows += items.length;
     union.rows += items.length;
 
+    let freshRows = 0;
     for (const item of items) {
+      if (!union.seenRows.has(rowKey(item))) {
+        union.seenRows.add(rowKey(item));
+        freshRows++;
+      }
       const mapped = mapDiscoveryResource(item, {
         source: "x402scan",
         sourceUrl: () => sourceUrl(cfg, item),
@@ -318,6 +370,25 @@ async function collectSlice(
       union.seen.add(key);
       union.endpoints.push(mapped);
       added++;
+    }
+
+    if (cfg.keyset) {
+      const last = items[items.length - 1];
+      const nextCursor = str(last?.lastUpdated);
+      if (!nextCursor) {
+        // No cursor field to page by — fall back to offset for the rest.
+        console.warn(
+          `x402scan: ${label} has no lastUpdated to page by; falling back to offset paging.`,
+        );
+        cfg = { ...cfg, keyset: false };
+      } else if (freshRows === 0) {
+        // Every row on this page was already seen: more rows share this exact
+        // timestamp than fit in a page. Step the offset within that tie only.
+        tiePage++;
+      } else {
+        cursor = nextCursor;
+        tiePage = 0;
+      }
     }
 
     if (union.rows >= cfg.safetyMaxRows) {
@@ -345,6 +416,7 @@ export async function fetchX402scan(): Promise<Endpoint[]> {
   const union: Union = {
     endpoints: [],
     seen: new Set(),
+    seenRows: new Set(),
     rows: 0,
     mapped: 0,
     pages: 0,
@@ -366,9 +438,14 @@ export async function fetchX402scan(): Promise<Endpoint[]> {
   // spent, so more passes would only burn requests against the same ceiling.
   const shortfall =
     union.apiTotal != null && union.rows < union.apiTotal - cfg.pageSize;
+  // Only a depth ceiling is worth re-reading in another sort order. On a
+  // page_error the server is refusing requests — on 2026-10-03 all three
+  // fallback slices died on their own first page, adding nothing but load to
+  // an endpoint that was already failing. The safety limit is our own budget
+  // and is already spent.
   const needsSlices =
-    primary.stopped_reason !== "safety_limit" &&
-    (primary.stopped_reason !== "exhausted" || shortfall);
+    primary.stopped_reason === "page_ceiling" ||
+    (primary.stopped_reason === "exhausted" && shortfall);
 
   if (needsSlices) {
     console.warn(
