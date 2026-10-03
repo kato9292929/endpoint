@@ -95,6 +95,8 @@ export type FetchReportEntry = {
   // class; these are the messages, so a failure is diagnosable from the
   // committed artifact rather than only from a run log that has rotated away.
   errors?: string[];
+  /** Pages that stayed broken and were stepped over rather than abandoned. */
+  skipped_pages?: number;
   unique_after_dedup?: number;
   // true when the run did NOT reach the end of the upstream list (a safety
   // limit, a depth ceiling, or a page that kept failing). Never silently 0.

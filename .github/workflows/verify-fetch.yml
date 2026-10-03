@@ -101,7 +101,14 @@ jobs:
           node -e '
             const fs = require("fs");
             const d = new Date().toISOString().slice(0, 10);
-            const s = JSON.parse(fs.readFileSync(`data/stats/${d}.json`, "utf8"));
+            const f = `data/stats/${d}.json`;
+            if (!fs.existsSync(f)) {
+              // The writer refuses a degraded catalog on purpose; that is a
+              // correct outcome for this step, not a failure.
+              console.log(`No snapshot for ${d} — the catalog was degraded.`);
+              process.exit(0);
+            }
+            const s = JSON.parse(fs.readFileSync(f, "utf8"));
             const tbl = (title, obj) =>
               [`\n#### ${title}\n`, "| key | count |", "| --- | --- |"]
                 .concat(
