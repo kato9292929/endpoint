@@ -44,9 +44,28 @@ const PROCEDURE = "public.resources.list.paginated";
 const UA = "x402-endpoint catalog (+https://github.com/kato9292929/endpoint)";
 
 // Retry budget per page: 429 and 5xx back off exponentially, other 4xx do not.
-const MAX_ATTEMPTS = 5;
+//
+// Patient on purpose. x402scan has been answering some requests with HTTP 500
+// since early October — not a rate limit, and not depth-related (the failures
+// arrive at `skip 0`). A burst can outlast a short budget, and giving up on
+// one page used to abandon the whole crawl: 4,105 endpoints collected out of
+// 133,429 on 2026-10-03.
+const MAX_ATTEMPTS = 8;
 const BACKOFF_BASE_MS = 1000;
-const BACKOFF_CAP_MS = 30_000;
+const BACKOFF_CAP_MS = 60_000;
+
+// A page that stays broken is a hole, not the end of the list. Step over it and
+// keep going; only give up once the holes say the source itself is down.
+const MAX_SKIPPED_PAGES = 20;
+
+// Retry budget per page, patient on purpose. x402scan has been answering some
+// requests with HTTP 500 since early October — not a rate limit, and not
+// depth-related (the failures arrive at `skip 0`). A burst can outlast a short
+// budget, and giving up on one page used to abandon the whole crawl: 4,105
+// endpoints collected out of 133,429 on 2026-10-03.
+const DEFAULT_MAX_ATTEMPTS = 8;
+const DEFAULT_BACKOFF_BASE_MS = 1000;
+const DEFAULT_BACKOFF_CAP_MS = 60_000;
 
 type Config = {
   base: string;
@@ -65,6 +84,9 @@ type Config = {
    * a pass-through Prisma filter on the upstream procedure.
    */
   keyset: boolean;
+  maxAttempts: number;
+  backoffBaseMs: number;
+  backoffCapMs: number;
 };
 
 // Read per run, not at import time, so a caller (and the tests) can change
@@ -86,6 +108,12 @@ function readConfig(): Config {
     // `truncated: true` rather than quietly returning a short catalog.
     safetyMaxRows: num(process.env.X402SCAN_SAFETY_MAX, 200_000),
     keyset: process.env.X402SCAN_PAGING !== "offset",
+    maxAttempts: num(process.env.X402SCAN_MAX_ATTEMPTS, DEFAULT_MAX_ATTEMPTS),
+    backoffBaseMs: num(process.env.X402SCAN_BACKOFF_MS, DEFAULT_BACKOFF_BASE_MS),
+    backoffCapMs: num(
+      process.env.X402SCAN_BACKOFF_CAP_MS,
+      DEFAULT_BACKOFF_CAP_MS,
+    ),
   };
 }
 
@@ -140,6 +168,8 @@ export type X402scanSlice = {
 
 export type X402scanRunMeta = {
   rows: number; // raw rows served across all slices
+  /** Pages that stayed broken and were stepped over rather than aborted on. */
+  skipped_pages: number;
   mapped: number; // rows that survived mapping into an Endpoint
   pages: number;
   unique_urls: number; // distinct canonical URLs returned
@@ -246,17 +276,17 @@ async function fetchPage(
   sorting: Sorting,
 ): Promise<Paginated> {
   let lastErr: unknown;
-  for (let attempt = 0; attempt < MAX_ATTEMPTS; attempt++) {
+  for (let attempt = 0; attempt < cfg.maxAttempts; attempt++) {
     try {
       return await fetchPageOnce(cfg, req, sorting);
     } catch (err) {
       lastErr = err;
       // A network error has no status; treat it as retryable.
       const retryable = err instanceof HttpError ? err.retryable : true;
-      if (!retryable || attempt === MAX_ATTEMPTS - 1) break;
+      if (!retryable || attempt === cfg.maxAttempts - 1) break;
       const backoff = Math.min(
-        BACKOFF_BASE_MS * 2 ** attempt,
-        BACKOFF_CAP_MS,
+        cfg.backoffBaseMs * 2 ** attempt,
+        cfg.backoffCapMs,
       );
       const wait =
         err instanceof HttpError && err.retryAfterMs != null
@@ -279,6 +309,7 @@ function sourceUrl(cfg: Config, item: ScanItem): string {
 }
 
 type Union = {
+  skippedPages: number;
   endpoints: Endpoint[];
   seen: Set<string>;
   /** Row identities (URL + method), for keyset progress detection. */
@@ -328,6 +359,31 @@ async function collectSlice(
       // collected (a single deep-page 500 once collapsed the catalog to ~84).
       if (isFirstSlice && page === 0 && union.endpoints.length === 0) throw err;
       union.errors.push(message);
+
+      // One broken page is a hole in the list, not its end. Step over it and
+      // carry on: abandoning the crawl here is what turned a handful of 500s
+      // into a catalog of 4,105 against an upstream total of 133,429.
+      if (union.skippedPages < MAX_SKIPPED_PAGES) {
+        union.skippedPages++;
+        console.warn(
+          `x402scan: skipping a broken page on ${label} (${union.skippedPages}/${MAX_SKIPPED_PAGES}) — ${message}`,
+        );
+        if (cfg.keyset && cursor) {
+          // Step the cursor just past the failing window. Rows sharing that
+          // exact millisecond are lost; the rest of the list is not.
+          const t = Date.parse(cursor);
+          if (Number.isFinite(t)) {
+            cursor = new Date(t - 1).toISOString();
+            tiePage = 0;
+            await sleep(cfg.gapMs);
+            continue;
+          }
+        } else if (!cfg.keyset) {
+          await sleep(cfg.gapMs);
+          continue; // the loop's own page++ steps over it
+        }
+      }
+
       console.warn(`x402scan: stopping ${label} — ${message}`);
       reason = "page_error";
       break;
@@ -414,6 +470,7 @@ export async function fetchX402scan(): Promise<Endpoint[]> {
   const started = Date.now();
   const cfg = readConfig();
   const union: Union = {
+    skippedPages: 0,
     endpoints: [],
     seen: new Set(),
     seenRows: new Set(),
@@ -470,6 +527,7 @@ export async function fetchX402scan(): Promise<Endpoint[]> {
 
   lastRun = {
     rows: union.rows,
+    skipped_pages: union.skippedPages,
     mapped: union.mapped,
     pages: union.pages,
     unique_urls: union.seen.size,

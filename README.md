@@ -269,6 +269,24 @@ three corrupted snapshots from 2026-10-01..03 were deleted for the same reason
 — they could not be recomputed, because no complete catalog exists for those
 dates.
 
+### Nothing reviewed is left outside `main`
+
+PR #24 was squash-merged. Squashing rewrites a branch into one new commit, so
+three commits pushed to that branch *after* the merge button were never in
+`main` — and nobody noticed for nine days, during which the daily job ran older
+code than had been reviewed.
+
+`.github/workflows/unmerged-check.yml` runs `scripts/check-unmerged.mjs` on
+every push to `main`, when a PR closes, and daily at 06:30 UTC. For each
+recently merged PR it compares the branch against `head.sha` — the commit the
+branch pointed at when it was merged — and fails if the branch gained anything
+after that.
+
+It stays quiet about the cases that are fine: a branch with an open PR (work in
+progress), a branch already deleted (the normal resolution), and commits whose
+patch is already on `main` via a later squash (`git cherry` compares by patch
+id, not by SHA).
+
 ## Agent access (API + MCP)
 
 The catalog is readable programmatically — no auth, CORS-open, edge-cached.

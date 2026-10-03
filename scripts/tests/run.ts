@@ -227,12 +227,47 @@ test("the 2026-10-03 run is refused — 7,995 must not replace 118,470", () => {
   assert.equal(a.degraded?.previous, 118470);
 });
 
+test("the 2026-10-03 verify run is refused — 88 endpoints must not replace 118,470", () => {
+  // x402scan threw on its first page, so its entry was `failed`, NOTHING was
+  // truncated, and the run carried only pay-sh and the seed. The first version
+  // of this guard published it.
+  const a = assessRun({
+    freshCount: 88,
+    previousCount: 118470,
+    report: [
+      rep({ source: "x402-inc", status: "ok", count: 15 }),
+      rep({ source: "x402scan", status: "failed", count: 0, error: "HTTP 500" }),
+      rep({ source: "onyx-bazaar", status: "empty", count: 0 }),
+      rep({ source: "pay-sh", status: "ok", count: 73 }),
+      rep({ source: "agentic-market", status: "stub", count: 0 }),
+    ],
+  });
+  assert.equal(a.publish, false, "a failed source is as incomplete as a truncated one");
+  assert.equal(a.degraded?.kept_previous, true);
+  assert.ok(a.degraded?.sources.includes("x402scan"));
+});
+
+test("an implemented source returning zero rows also blocks a shrinking run", () => {
+  const a = assessRun({
+    freshCount: 100,
+    previousCount: 118470,
+    report: [
+      rep({ source: "x402scan", status: "empty", count: 0 }),
+      rep({ source: "pay-sh", status: "ok", count: 100 }),
+    ],
+  });
+  assert.equal(a.publish, false, "`empty` is the same hole wearing another status");
+});
+
 test("a complete run publishes, even when the catalog shrinks", () => {
   // Real deprecations upstream — not our problem to second-guess.
   const a = assessRun({
     freshCount: 90000,
     previousCount: 118470,
-    report: [rep({ truncated: false, stopped_reason: "exhausted" })],
+    report: [
+      rep({ truncated: false, stopped_reason: "exhausted" }),
+      rep({ source: "agentic-market", status: "stub", count: 0 }),
+    ],
   });
   assert.equal(a.publish, true);
   assert.equal(a.degraded, undefined);
@@ -498,6 +533,10 @@ type FakeOptions = {
   // OFFSET 100000 on a growing table, and what broke production on
   // 2026-10-01..03.
   failDeeperThan?: number;
+  // Reply 500 to every request numbered in this set — an unhealthy server
+  // failing a few requests regardless of how shallow they are, which is what
+  // x402scan actually started doing.
+  failRequests?: Set<number>;
 };
 
 type Fake = {
@@ -517,6 +556,12 @@ function startFake(opts: FakeOptions): Promise<Fake> {
     const input = JSON.parse(url.searchParams.get("input") ?? "{}").json ?? {};
     const sorting: FakeSorting = input.sorting ?? { id: "lastUpdated", desc: true };
     const { page = 0, page_size = 10 } = input.pagination ?? {};
+
+    if (opts.failRequests?.has(requests)) {
+      res.writeHead(500, { "content-type": "text/plain" });
+      res.end("internal error");
+      return;
+    }
 
     if (opts.failFirst && requests <= opts.failFirst) {
       res.writeHead(429, { "retry-after": "0" });
@@ -601,6 +646,11 @@ function configure(env: Record<string, string>) {
   ]) {
     delete process.env[k];
   }
+  // Production retries patiently (8 attempts, backing off to a minute). Tests
+  // exercise the same paths, so collapse the waiting unless a scenario is
+  // specifically about timing.
+  process.env.X402SCAN_BACKOFF_MS = "1";
+  process.env.X402SCAN_BACKOFF_CAP_MS = "2";
   for (const [k, v] of Object.entries(env)) process.env[k] = v;
 }
 
@@ -694,6 +744,36 @@ async function stage4() {
         assert.ok(run.errors.length > 0, "the HTTP error is recorded, not just the class");
         assert.match(run.errors[0], /HTTP 500/);
         assert.equal(run.sliced, false, "a failing server must not be re-crawled");
+      } finally {
+        await fake.close();
+      }
+    },
+  );
+
+  await asyncTest(
+    "a page that stays broken costs that page, not the whole crawl",
+    async () => {
+      const all = rows(2000);
+      // Requests 5..12 fail outright — eight consecutive 500s outlast any
+      // retry budget, exactly the shape seen on 2026-10-03.
+      const fake = await startFake({
+        rowsFor: () => all,
+        failRequests: new Set([5, 6, 7, 8, 9, 10, 11, 12]),
+      });
+      try {
+        configure({
+          X402SCAN_BASE_URL: fake.url,
+          X402SCAN_PAGE_SIZE: "100",
+          X402SCAN_GAP_MS: "0",
+        });
+        const eps = await fetchX402scan();
+        const run = getLastX402scanRun()!;
+        assert.ok(
+          eps.length > 1900,
+          `collected ${eps.length} of 2000 — a broken page must not abandon the sweep`,
+        );
+        assert.ok(run.skipped_pages > 0, "the hole is counted");
+        assert.ok(run.errors.length > 0, "and the HTTP error is kept");
       } finally {
         await fake.close();
       }

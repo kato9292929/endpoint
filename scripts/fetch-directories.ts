@@ -81,6 +81,7 @@ const FETCHERS: NamedFetcher[] = [
         // Without these a failed run says "page_error" and nothing else, which
         // is not enough to tell a 429 from a 5xx a week later.
         errors: r.errors.length ? r.errors.slice(0, 10) : undefined,
+        skipped_pages: r.skipped_pages || undefined,
         // Only worth recording when more than the primary pass ran.
         slices: r.sliced
           ? r.slices.map(({ label, rows, added, pages }) => ({
