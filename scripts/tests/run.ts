@@ -227,12 +227,47 @@ test("the 2026-10-03 run is refused — 7,995 must not replace 118,470", () => {
   assert.equal(a.degraded?.previous, 118470);
 });
 
+test("the 2026-10-03 verify run is refused — 88 endpoints must not replace 118,470", () => {
+  // x402scan threw on its first page, so its entry was `failed`, NOTHING was
+  // truncated, and the run carried only pay-sh and the seed. The first version
+  // of this guard published it.
+  const a = assessRun({
+    freshCount: 88,
+    previousCount: 118470,
+    report: [
+      rep({ source: "x402-inc", status: "ok", count: 15 }),
+      rep({ source: "x402scan", status: "failed", count: 0, error: "HTTP 500" }),
+      rep({ source: "onyx-bazaar", status: "empty", count: 0 }),
+      rep({ source: "pay-sh", status: "ok", count: 73 }),
+      rep({ source: "agentic-market", status: "stub", count: 0 }),
+    ],
+  });
+  assert.equal(a.publish, false, "a failed source is as incomplete as a truncated one");
+  assert.equal(a.degraded?.kept_previous, true);
+  assert.ok(a.degraded?.sources.includes("x402scan"));
+});
+
+test("an implemented source returning zero rows also blocks a shrinking run", () => {
+  const a = assessRun({
+    freshCount: 100,
+    previousCount: 118470,
+    report: [
+      rep({ source: "x402scan", status: "empty", count: 0 }),
+      rep({ source: "pay-sh", status: "ok", count: 100 }),
+    ],
+  });
+  assert.equal(a.publish, false, "`empty` is the same hole wearing another status");
+});
+
 test("a complete run publishes, even when the catalog shrinks", () => {
   // Real deprecations upstream — not our problem to second-guess.
   const a = assessRun({
     freshCount: 90000,
     previousCount: 118470,
-    report: [rep({ truncated: false, stopped_reason: "exhausted" })],
+    report: [
+      rep({ truncated: false, stopped_reason: "exhausted" }),
+      rep({ source: "agentic-market", status: "stub", count: 0 }),
+    ],
   });
   assert.equal(a.publish, true);
   assert.equal(a.degraded, undefined);

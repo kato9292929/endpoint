@@ -33,9 +33,24 @@ export function assessRun(input: {
   report: FetchReportEntry[];
 }): RunAssessment {
   const { freshCount, previousCount, report } = input;
-  const truncated = report.filter((r) => r.truncated).map((r) => r.source);
   const failed = report
     .filter((r) => r.status === "failed")
+    .map((r) => r.source);
+
+  // Every way a run can come back short. Guarding only `truncated` left the
+  // hole that mattered: when x402scan threw on its first page the entry was
+  // `status: "failed"`, nothing was truncated, and a catalog of 88 endpoints
+  // (pay-sh and the seed, with x402scan contributing nothing) sailed through
+  // as if it were complete.
+  //
+  // `empty` counts too — an implemented source returning 0 rows is the same
+  // hole wearing a different status. onyx-bazaar sits at `empty` every day, so
+  // this is usually true and the shrink test below is what actually decides.
+  // That is the intended shape: a healthy run grows or holds steady and
+  // publishes regardless, while anything that would gut the catalog has to
+  // get past a second question.
+  const incomplete = report
+    .filter((r) => r.truncated || r.status === "failed" || r.status === "empty")
     .map((r) => r.source);
 
   if (freshCount === 0) {
@@ -43,7 +58,7 @@ export function assessRun(input: {
       publish: false,
       degraded: {
         reason: "no endpoints collected",
-        sources: failed.length ? failed : truncated,
+        sources: failed.length ? failed : incomplete,
         kept_previous: true,
         collected: 0,
         previous: previousCount,
@@ -51,7 +66,7 @@ export function assessRun(input: {
     };
   }
 
-  if (truncated.length === 0) return { publish: true };
+  if (incomplete.length === 0) return { publish: true };
 
   // Incomplete. Publish only if it would not shrink the catalog — a first run
   // (previousCount 0) therefore still publishes what it managed to get.
@@ -59,8 +74,8 @@ export function assessRun(input: {
     return {
       publish: false,
       degraded: {
-        reason: "truncated fetch would have shrunk the catalog",
-        sources: truncated,
+        reason: "an incomplete fetch would have shrunk the catalog",
+        sources: incomplete,
         kept_previous: true,
         collected: freshCount,
         previous: previousCount,
@@ -73,8 +88,8 @@ export function assessRun(input: {
   return {
     publish: true,
     degraded: {
-      reason: "a source did not reach the end of its list",
-      sources: truncated,
+      reason: "a source did not return a complete list",
+      sources: incomplete,
       kept_previous: false,
       collected: freshCount,
       previous: previousCount,
