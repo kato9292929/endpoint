@@ -174,6 +174,15 @@ function main() {
   }
 
   const catalog = readCatalog(INPUT);
+  if (catalog.degraded) {
+    // Rebuilding from a short catalog would drop providers that exist. Leave
+    // the previous artifact in place; it is stale, not wrong.
+    console.warn(
+      `::warning::providers: NOT rebuilding — the catalog is degraded ` +
+        `(${catalog.degraded.reason}). Keeping the previous data/providers.json.`,
+    );
+    return;
+  }
   if (catalog.subset_of) {
     console.warn(
       `providers: WARNING — ${INPUT} is a subset (${catalog.count} of ${catalog.full_count}); ` +

@@ -91,6 +91,10 @@ export type FetchReportEntry = {
   // URLs those hold, before cross-source merging.
   rows?: number;
   pages?: number;
+  // What actually went wrong, when something did. `stopped_reason` names the
+  // class; these are the messages, so a failure is diagnosable from the
+  // committed artifact rather than only from a run log that has rotated away.
+  errors?: string[];
   unique_after_dedup?: number;
   // true when the run did NOT reach the end of the upstream list (a safety
   // limit, a depth ceiling, or a page that kept failing). Never silently 0.
@@ -123,6 +127,18 @@ export type Catalog = {
   subset_limit?: number;
   subset_rule?: string;
   full_count?: number;
+  // Set when a run did not collect a complete catalog. A partial fetch must
+  // never silently replace a complete one: `kept_previous` says the endpoints
+  // below are the PREVIOUS run's, carried forward on purpose. Consumers that
+  // report totals (the stats snapshot, the providers artifact) refuse to
+  // recompute from a degraded catalog.
+  degraded?: {
+    reason: string;
+    sources: string[];
+    kept_previous: boolean;
+    collected: number;
+    previous: number;
+  };
 };
 
 export const CATEGORIES: Category[] = [

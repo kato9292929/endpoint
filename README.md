@@ -218,6 +218,17 @@ never look like a healthy one:
 | `stopped_reason` | `exhausted` (complete), `safety_limit`, `page_ceiling`, or `page_error` |
 | `slices` | per-pass counts when one pass wasn't enough |
 
+The fetcher pages by a **`lastUpdated` cursor**, not by a growing offset. The
+upstream query is `skip: page * page_size`, so plain offset paging asks for
+`OFFSET 125000` by the end of a 500-page crawl — and on 2026-10-01..03 that is
+exactly what started failing, the crawl dying earlier each day as the directory
+grew. A cursor keeps every request at `skip: 0` and filters with
+`where: { lastUpdated: { lte: cursor } }` instead (`where` is a pass-through
+Prisma filter upstream). The filter is `lte`, not `lt`, so rows sharing one
+timestamp are never skipped; the cost is one duplicate row per page, which
+dedupe absorbs. `X402SCAN_PAGING=offset` restores the old behaviour for
+comparison.
+
 The fetcher pages `lastUpdated desc` with a ≥1s gap between requests, retries
 429/5xx with exponential backoff (honouring `Retry-After`), and stops at a
 200,000-row safety limit that reports `truncated: true` rather than quietly
@@ -229,6 +240,34 @@ recording each slice. Knobs: `X402SCAN_PAGE_SIZE`, `X402SCAN_GAP_MS`,
 `.github/workflows/verify-fetch.yml` runs the live fetchers and diffs the
 result against the committed catalog **without committing or deploying**, for
 checking a fetcher change before the daily job pushes it.
+
+### A partial fetch never replaces a complete catalog
+
+**2026-10-01 to 10-03: three runs published gutted catalogs** — 19,402, then
+17,812, then 7,995 endpoints, against a directory of ~132,000. The site, the
+daily stats and the providers list all followed them down. Each run recorded
+`truncated: true` correctly. Nothing acted on it.
+
+`scripts/catalog-guard.ts` now decides whether a run may be published:
+
+| run | verdict |
+| --- | --- |
+| complete | publish, even if the catalog shrank (upstream deprecations are real) |
+| truncated, and below 98% of the previous count | **refuse** — keep the previous catalog, record `degraded` |
+| truncated, but not smaller | publish, still marked `degraded` |
+| collected nothing | keep the previous catalog |
+
+A refused run still commits its `fetch_report`, so the failure is visible in
+the artifact rather than only in a run log that rotates away — and
+`fetch_report.errors` now carries the actual HTTP errors, not just
+`stopped_reason: "page_error"`.
+
+When a catalog is `degraded`, `write-stats-snapshot.mjs` writes **no snapshot
+for that day** and `write-providers.mjs` leaves the previous artifact alone. A
+missing day is already a supported state in the series; a wrong day is not. The
+three corrupted snapshots from 2026-10-01..03 were deleted for the same reason
+— they could not be recomputed, because no complete catalog exists for those
+dates.
 
 ## Agent access (API + MCP)
 

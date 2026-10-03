@@ -87,6 +87,21 @@ function main() {
   const catalog = readCatalog(INPUT);
   const endpoints = Array.isArray(catalog.endpoints) ? catalog.endpoints : [];
 
+  // A degraded run did not collect a complete catalog. Writing a snapshot from
+  // it records a dip that never happened and permanently skews the series --
+  // exactly what 2026-10-01..03 did. A missing day is already a supported
+  // state (`missing` in the series), a wrong day is not.
+  if (catalog.degraded) {
+    const d = catalog.degraded;
+    console.warn(
+      `::warning::stats: NOT writing a snapshot — the catalog is degraded ` +
+        `(${d.reason}; sources: ${d.sources.join(", ")}; ` +
+        `collected ${d.collected} against ${d.previous} previously). ` +
+        "Today is left as a missing day rather than recorded wrong.",
+    );
+    return;
+  }
+
   // Counting the capped page file would silently under-report. Say which file
   // this snapshot came from, and refuse to pass a subset off as a total.
   if (catalog.subset_of) {

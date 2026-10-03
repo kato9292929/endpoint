@@ -10,10 +10,11 @@ import { join } from "node:path";
 import { mergeEndpoints } from "../util";
 import { fetchX402scan, getLastX402scanRun } from "../fetchers/x402scan";
 import { pageSubset } from "../page-subset";
+import { assessRun } from "../catalog-guard";
 import { defaultOrder, isFeatured } from "../../src/lib/featured";
 import { aggregateHosts, hostOf } from "../../src/lib/hosts";
 import { buildRankRows, type RankArtifact } from "../../src/lib/rank";
-import type { Endpoint } from "../../src/lib/types";
+import type { Endpoint, FetchReportEntry } from "../../src/lib/types";
 
 let passed = 0;
 function test(name: string, fn: () => void) {
@@ -202,6 +203,71 @@ test("pageSubset keeps a URL that several directories list", () => {
 test("pageSubset is a no-op under the cap", () => {
   const eps = [ep({ id: "a" }), ep({ id: "b" })];
   assert.equal(pageSubset(eps, 10).length, 2);
+});
+
+console.log("\nStage 3a — catalog guard");
+
+const rep = (over: Partial<FetchReportEntry> = {}): FetchReportEntry => ({
+  source: over.source ?? "x402scan",
+  status: over.status ?? "ok",
+  count: over.count ?? 0,
+  ...over,
+});
+
+test("the 2026-10-03 run is refused — 7,995 must not replace 118,470", () => {
+  const a = assessRun({
+    freshCount: 7995,
+    previousCount: 118470,
+    report: [rep({ truncated: true, stopped_reason: "page_error", rows: 8250 })],
+  });
+  assert.equal(a.publish, false, "a truncated run that guts the catalog is refused");
+  assert.equal(a.degraded?.kept_previous, true);
+  assert.deepEqual(a.degraded?.sources, ["x402scan"]);
+  assert.equal(a.degraded?.collected, 7995);
+  assert.equal(a.degraded?.previous, 118470);
+});
+
+test("a complete run publishes, even when the catalog shrinks", () => {
+  // Real deprecations upstream — not our problem to second-guess.
+  const a = assessRun({
+    freshCount: 90000,
+    previousCount: 118470,
+    report: [rep({ truncated: false, stopped_reason: "exhausted" })],
+  });
+  assert.equal(a.publish, true);
+  assert.equal(a.degraded, undefined);
+});
+
+test("a truncated run that still grew publishes, but is marked degraded", () => {
+  const a = assessRun({
+    freshCount: 130000,
+    previousCount: 118470,
+    report: [rep({ truncated: true, stopped_reason: "page_error" })],
+  });
+  assert.equal(a.publish, true, "it is more than we had; withholding it helps nobody");
+  assert.equal(a.degraded?.kept_previous, false);
+  assert.ok(a.degraded, "still flagged, so stats and providers skip the day");
+});
+
+test("collecting nothing keeps the previous catalog", () => {
+  const a = assessRun({
+    freshCount: 0,
+    previousCount: 118470,
+    report: [rep({ status: "failed", error: "boom" })],
+  });
+  assert.equal(a.publish, false);
+  assert.equal(a.degraded?.kept_previous, true);
+  assert.deepEqual(a.degraded?.sources, ["x402scan"]);
+});
+
+test("a first run publishes what it got, with nothing to compare against", () => {
+  const a = assessRun({
+    freshCount: 5000,
+    previousCount: 0,
+    report: [rep({ truncated: true, stopped_reason: "page_error" })],
+  });
+  assert.equal(a.publish, true);
+  assert.equal(a.degraded?.kept_previous, false);
 });
 
 console.log("\nStage 3c — stats snapshot input");
@@ -416,7 +482,7 @@ test("counts aggregate per host and the artifact flags a subset source", () => {
 // wrapped in the non-batched superjson envelope { result: { data: { json } } }.
 
 type FakeSorting = { id: string; desc: boolean };
-type FakeRow = { resource: string };
+type FakeRow = { resource: string; lastUpdated?: string };
 
 type FakeOptions = {
   // Rows the fake holds, in the order the given sorting would return them.
@@ -428,12 +494,23 @@ type FakeOptions = {
   failFirst?: number;
   // total_count the fake advertises; defaults to the sorted row count.
   totalCount?: number;
+  // Reply 500 once `skip` reaches this — what a database does when asked for
+  // OFFSET 100000 on a growing table, and what broke production on
+  // 2026-10-01..03.
+  failDeeperThan?: number;
 };
 
-type Fake = { url: string; requests: number; close: () => Promise<void> };
+type Fake = {
+  url: string;
+  requests: number;
+  /** The deepest `skip` the fake was ever asked for. */
+  maxSkip: number;
+  close: () => Promise<void>;
+};
 
 function startFake(opts: FakeOptions): Promise<Fake> {
   let requests = 0;
+  let maxSkip = 0;
   const server: Server = createServer((req, res) => {
     requests++;
     const url = new URL(req.url ?? "/", "http://localhost");
@@ -447,11 +524,28 @@ function startFake(opts: FakeOptions): Promise<Fake> {
       return;
     }
 
-    const rows = opts.rowsFor(sorting);
-    const limit = opts.depthLimit?.(sorting) ?? rows.length;
+    const all = opts.rowsFor(sorting);
     const skip = page * page_size;
+
+    if (opts.failDeeperThan != null && skip >= opts.failDeeperThan) {
+      maxSkip = Math.max(maxSkip, skip);
+      res.writeHead(500, { "content-type": "text/plain" });
+      res.end("statement timeout");
+      return;
+    }
+    maxSkip = Math.max(maxSkip, skip);
+
+    // `where: { lastUpdated: { lte } }` — the cursor filter, applied before
+    // paging, exactly as Prisma would.
+    const cursor = input.where?.lastUpdated?.lte;
+    const rows = cursor
+      ? all.filter((r) => String(r.lastUpdated ?? "") <= String(cursor))
+      : all;
+
+    const limit = opts.depthLimit?.(sorting) ?? rows.length;
     // take page_size + 1 and peek, exactly like the upstream query.
     const window = rows.slice(skip, Math.min(skip + page_size + 1, limit));
+    // total_count counts what matches `where`, not the whole table.
     const total_count = opts.totalCount ?? rows.length;
     const payload = {
       items: window.slice(0, page_size),
@@ -475,6 +569,9 @@ function startFake(opts: FakeOptions): Promise<Fake> {
         get requests() {
           return requests;
         },
+        get maxSkip() {
+          return maxSkip;
+        },
         close: () =>
           new Promise<void>((done) => server.close(() => done())),
       } as Fake);
@@ -482,9 +579,13 @@ function startFake(opts: FakeOptions): Promise<Fake> {
   });
 }
 
-function rows(n: number, prefix = "https://e"): FakeRow[] {
+// Descending lastUpdated, newest first — the order the fetcher pages in.
+// `tie` makes that many consecutive rows share one timestamp.
+function rows(n: number, prefix = "https://e", tie = 1): FakeRow[] {
   return Array.from({ length: n }, (_, i) => ({
     resource: `${prefix}${i}.example/api`,
+    lastUpdated: new Date(Date.UTC(2026, 0, 1) - Math.floor(i / tie) * 1000)
+      .toISOString(),
   }));
 }
 
@@ -496,6 +597,7 @@ function configure(env: Record<string, string>) {
     "X402SCAN_PAGE_SIZE",
     "X402SCAN_GAP_MS",
     "X402SCAN_SAFETY_MAX",
+    "X402SCAN_PAGING",
   ]) {
     delete process.env[k];
   }
@@ -526,12 +628,95 @@ async function stage4() {
         const eps = await fetchX402scan();
         const run = getLastX402scanRun()!;
         assert.equal(eps.length, 25_000);
-        assert.equal(run.rows, 25_000);
-        assert.equal(run.api_total, 25_000);
-        assert.equal(run.pages, 5);
+        assert.equal(run.unique_urls, 25_000);
+        assert.equal(run.api_total, 25_000, "api_total comes from the UNFILTERED request");
+        // The cursor filter is `lte`, so each page re-serves its boundary row
+        // rather than risk skipping rows that share a timestamp. One duplicate
+        // per page is the whole cost.
+        assert.ok(
+          run.rows >= 25_000 && run.rows <= 25_000 + run.pages,
+          `rows ${run.rows} should exceed 25000 by at most one per page`,
+        );
         assert.equal(run.truncated, false);
         assert.equal(run.sliced, false);
         assert.equal(run.stopped_reason, "exhausted");
+      } finally {
+        await fake.close();
+      }
+    },
+  );
+
+  await asyncTest(
+    "keyset paging never asks for a deep offset — the 2026-10-01 failure",
+    async () => {
+      const all = rows(5000);
+      // The server refuses anything past OFFSET 1000, exactly as production
+      // started doing as the directory grew.
+      const fake = await startFake({ rowsFor: () => all, failDeeperThan: 1000 });
+      try {
+        configure({
+          X402SCAN_BASE_URL: fake.url,
+          X402SCAN_PAGE_SIZE: "250",
+          X402SCAN_GAP_MS: "0",
+        });
+        const eps = await fetchX402scan();
+        const run = getLastX402scanRun()!;
+        assert.equal(eps.length, 5000, "the whole list is still collected");
+        assert.equal(run.truncated, false);
+        assert.equal(run.stopped_reason, "exhausted");
+        assert.ok(
+          fake.maxSkip < 1000,
+          `deepest skip was ${fake.maxSkip}; keyset must stay shallow`,
+        );
+      } finally {
+        await fake.close();
+      }
+    },
+  );
+
+  await asyncTest(
+    "offset paging on the same server fails — proving the fix is the paging",
+    async () => {
+      const all = rows(5000);
+      const fake = await startFake({ rowsFor: () => all, failDeeperThan: 1000 });
+      try {
+        configure({
+          X402SCAN_BASE_URL: fake.url,
+          X402SCAN_PAGE_SIZE: "250",
+          X402SCAN_GAP_MS: "0",
+          X402SCAN_PAGING: "offset",
+        });
+        const eps = await fetchX402scan();
+        const run = getLastX402scanRun()!;
+        assert.ok(eps.length < 5000, "offset paging cannot finish");
+        assert.equal(run.truncated, true);
+        assert.equal(run.stopped_reason, "page_error");
+        assert.ok(run.errors.length > 0, "the HTTP error is recorded, not just the class");
+        assert.match(run.errors[0], /HTTP 500/);
+        assert.equal(run.sliced, false, "a failing server must not be re-crawled");
+      } finally {
+        await fake.close();
+      }
+    },
+  );
+
+  await asyncTest(
+    "rows sharing one lastUpdated do not stall the cursor",
+    async () => {
+      // 600 rows across only 6 distinct timestamps: every page is a tie block
+      // bigger than the page size, the one case a cursor cannot step past.
+      const all = rows(600, "https://t", 100);
+      const fake = await startFake({ rowsFor: () => all });
+      try {
+        configure({
+          X402SCAN_BASE_URL: fake.url,
+          X402SCAN_PAGE_SIZE: "50",
+          X402SCAN_GAP_MS: "0",
+        });
+        const eps = await fetchX402scan();
+        const run = getLastX402scanRun()!;
+        assert.equal(eps.length, 600, "no rows lost to the tie");
+        assert.equal(run.truncated, false);
       } finally {
         await fake.close();
       }
@@ -561,7 +746,7 @@ async function stage4() {
   );
 
   await asyncTest(
-    "a depth ceiling triggers the slice fallback and the union completes",
+    "in offset mode a depth ceiling still triggers the slice fallback",
     async () => {
       const all = rows(1000);
       const reversed = [...all].reverse();
@@ -573,10 +758,13 @@ async function stage4() {
         depthLimit: () => 600,
       });
       try {
+        // Forced to offset paging: keyset never reaches a depth ceiling, so
+        // this fallback only exists for the offset path.
         configure({
           X402SCAN_BASE_URL: fake.url,
           X402SCAN_PAGE_SIZE: "100",
           X402SCAN_GAP_MS: "0",
+          X402SCAN_PAGING: "offset",
         });
         const eps = await fetchX402scan();
         const run = getLastX402scanRun()!;
