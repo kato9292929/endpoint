@@ -1,0 +1,46 @@
+name: Stranded commits
+
+# Catches work that was reviewed but never reached `main`.
+#
+# PR #24 was squash-merged, and three commits pushed to the branch after the
+# merge button were silently left out. `main` ran older code than had been
+# reviewed for nine days before anyone noticed. This job notices the same day.
+#
+# Deleting a branch after its PR merges is the normal resolution and clears
+# the finding, so a green run means "nothing reviewed is sitting outside main".
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    types: [closed]
+  schedule:
+    # 06:30 UTC, just after the daily fetch.
+    - cron: "30 6 * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout (full history — ancestry is the whole point)
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Fetch every branch so ancestry can be computed
+        run: git fetch origin "+refs/heads/*:refs/remotes/origin/*" --prune
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Look for stranded commits
+        run: node scripts/check-unmerged.mjs
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
