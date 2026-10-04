@@ -285,6 +285,53 @@ test("a truncated run that still grew publishes, but is marked degraded", () => 
   assert.ok(a.degraded, "still flagged, so stats and providers skip the day");
 });
 
+test("a long-dead side source does not flag a healthy growing run", () => {
+  // onyx-bazaar has returned 0 rows every day since 2026-08-28. Counting that
+  // as "this run is degraded" flagged EVERY run, and data/stats/*.json stopped
+  // being written — 2026-10-04 published 127,036 endpoints and still recorded
+  // no snapshot. A dead side source is not a half-count.
+  const a = assessRun({
+    freshCount: 127036,
+    previousCount: 118470,
+    report: [
+      rep({ source: "x402-inc", status: "ok", count: 15 }),
+      rep({
+        source: "x402scan",
+        status: "ok",
+        count: 126948,
+        truncated: false,
+        stopped_reason: "exhausted",
+      }),
+      rep({ source: "onyx-bazaar", status: "empty", count: 0 }),
+      rep({ source: "pay-sh", status: "ok", count: 73 }),
+      rep({ source: "agentic-market", status: "stub", count: 0 }),
+    ],
+  });
+  assert.equal(a.publish, true);
+  assert.equal(
+    a.degraded,
+    undefined,
+    "no degraded flag, so stats and providers rebuild",
+  );
+});
+
+test("a dead side source still blocks a run that would gut the catalog", () => {
+  // Same `empty` onyx-bazaar, but now x402scan came back empty too. The
+  // shrink test must still catch this: `empty` keeps its blocking role.
+  const a = assessRun({
+    freshCount: 88,
+    previousCount: 118470,
+    report: [
+      rep({ source: "x402scan", status: "empty", count: 0 }),
+      rep({ source: "onyx-bazaar", status: "empty", count: 0 }),
+      rep({ source: "pay-sh", status: "ok", count: 73 }),
+    ],
+  });
+  assert.equal(a.publish, false);
+  assert.equal(a.degraded?.kept_previous, true);
+  assert.ok(a.degraded?.sources.includes("x402scan"));
+});
+
 test("collecting nothing keeps the previous catalog", () => {
   const a = assessRun({
     freshCount: 0,
