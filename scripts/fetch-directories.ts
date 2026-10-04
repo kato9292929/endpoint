@@ -24,6 +24,7 @@ import type {
 import { canonicalUrl, hashId, mergeEndpoints } from "./util";
 import { PAGE_SUBSET_MAX, SUBSET_RULE, pageSubset } from "./page-subset";
 import { assessRun } from "./catalog-guard";
+import { appendAll } from "./append-all";
 
 import { fetchX402Inc } from "./fetchers/x402-inc";
 import { fetchX402scan, getLastX402scanRun } from "./fetchers/x402scan";
@@ -113,27 +114,13 @@ async function collect(): Promise<CollectResult> {
   const endpoints: Endpoint[] = [];
 
   for (const f of FETCHERS) {
+    // Only the fetch itself may fail. Everything after it is bookkeeping, and
+    // when bookkeeping threw inside this `try` the source got TWO report
+    // entries — an `ok` one and a `failed` one — while its endpoints were
+    // dropped. One entry per source, always.
+    let items: Endpoint[];
     try {
-      const items = await f.run();
-      let status: FetchStatus;
-      if (items.length > 0) status = "ok";
-      else status = f.expectNonEmpty ? "empty" : "stub";
-      // Distinct canonical URLs this source contributed, before the
-      // cross-source merge — so "20,000 rows" vs "18,400 endpoints" is
-      // visible per source rather than only in the final count.
-      const unique_after_dedup = new Set(
-        items.map((e) => canonicalUrl(e.url)),
-      ).size;
-      report.push({
-        source: f.name,
-        status,
-        count: items.length,
-        unique_after_dedup,
-        ...(f.meta?.() ?? {}),
-      });
-      const flag = status === "empty" ? "⚠" : status === "stub" ? "·" : "✓";
-      console.log(`  ${flag} ${f.name}: ${items.length} (${status})`);
-      endpoints.push(...items);
+      items = await f.run();
     } catch (err) {
       const error = (err as Error).message;
       report.push({
@@ -144,7 +131,29 @@ async function collect(): Promise<CollectResult> {
         ...(f.meta?.() ?? {}),
       });
       console.warn(`  ✗ ${f.name}: failed — ${error}`);
+      continue;
     }
+
+    let status: FetchStatus;
+    if (items.length > 0) status = "ok";
+    else status = f.expectNonEmpty ? "empty" : "stub";
+    // Distinct canonical URLs this source contributed, before the
+    // cross-source merge — so "20,000 rows" vs "18,400 endpoints" is
+    // visible per source rather than only in the final count.
+    const unique_after_dedup = new Set(
+      items.map((e) => canonicalUrl(e.url)),
+    ).size;
+    report.push({
+      source: f.name,
+      status,
+      count: items.length,
+      unique_after_dedup,
+      ...(f.meta?.() ?? {}),
+    });
+    const flag = status === "empty" ? "⚠" : status === "stub" ? "·" : "✓";
+    console.log(`  ${flag} ${f.name}: ${items.length} (${status})`);
+    // NOT `endpoints.push(...items)` — see scripts/append-all.ts.
+    appendAll(endpoints, items);
   }
 
   return { report, endpoints };

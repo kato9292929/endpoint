@@ -11,6 +11,7 @@ import { mergeEndpoints } from "../util";
 import { fetchX402scan, getLastX402scanRun } from "../fetchers/x402scan";
 import { pageSubset } from "../page-subset";
 import { assessRun } from "../catalog-guard";
+import { appendAll } from "../append-all";
 import { defaultOrder, isFeatured } from "../../src/lib/featured";
 import { aggregateHosts, hostOf } from "../../src/lib/hosts";
 import { buildRankRows, type RankArtifact } from "../../src/lib/rank";
@@ -507,6 +508,62 @@ test("counts aggregate per host and the artifact flags a subset source", () => {
   assert.equal(m.priceMedian, 0.03);
   assert.equal(m.topCategory, "data");
   assert.equal(out.subset, true, "a subset source must be declared, not hidden");
+});
+
+// ── appendAll — the 125k spread cliff ────────────────
+//
+// The orchestrator used `endpoints.push(...items)`. V8's argument limit is a
+// stack-size budget, so this worked at 118,383 endpoints and threw
+// "Maximum call stack size exceeded" at 125,922 — after the crawl had
+// succeeded. The catalog collapsed to 88 endpoints. These tests pin the fix
+// above whatever that machine's cliff actually is.
+
+test("push(...items) really does blow up above the cliff — this is not theoretical", () => {
+  // Find this machine's limit rather than hard-coding one: it moves with the
+  // stack, which is exactly why the bug slipped through at a smaller size.
+  const survives = (n: number) => {
+    try {
+      const t: number[] = [];
+      t.push(...new Array(n).fill(0));
+      return true;
+    } catch {
+      return false;
+    }
+  };
+  let lo = 1_000;
+  let hi = 4_000_000;
+  if (survives(hi)) {
+    // No reachable cliff on this engine; nothing to prove here.
+    return;
+  }
+  while (lo < hi - 1) {
+    const mid = (lo + hi) >> 1;
+    if (survives(mid)) lo = mid;
+    else hi = mid;
+  }
+  // The cliff exists and sits in the range a real catalog reaches.
+  assert.ok(lo < 4_000_000, `expected a spread cliff, found none below 4M`);
+  assert.ok(!survives(lo + 1), `expected ${lo + 1} to overflow`);
+});
+
+test("appendAll carries a catalog-sized array that a spread cannot", () => {
+  // 300,000 is comfortably past any cliff we have measured (~125k) and past
+  // the ~133,000 the directory holds today.
+  const items = new Array(300_000).fill(0).map((_, i) => i);
+  const target: number[] = [];
+  appendAll(target, items);
+  assert.equal(target.length, 300_000);
+  assert.equal(target[0], 0);
+  assert.equal(target[299_999], 299_999);
+});
+
+test("appendAll keeps order and appends rather than replacing", () => {
+  const target = [1, 2];
+  const out = appendAll(target, [3, 4]);
+  assert.deepEqual(target, [1, 2, 3, 4]);
+  assert.equal(out, target, "appends in place and returns the same array");
+  appendAll(target, []);
+  assert.deepEqual(target, [1, 2, 3, 4], "an empty append is a no-op");
 });
 
 // ── Stage 4 — x402scan paging ────────────────────────
