@@ -37,20 +37,25 @@ export function assessRun(input: {
     .filter((r) => r.status === "failed")
     .map((r) => r.source);
 
-  // Every way a run can come back short. Guarding only `truncated` left the
-  // hole that mattered: when x402scan threw on its first page the entry was
-  // `status: "failed"`, nothing was truncated, and a catalog of 88 endpoints
-  // (pay-sh and the seed, with x402scan contributing nothing) sailed through
-  // as if it were complete.
+  // Two different questions, and conflating them cost us the daily stats.
   //
-  // `empty` counts too — an implemented source returning 0 rows is the same
-  // hole wearing a different status. onyx-bazaar sits at `empty` every day, so
-  // this is usually true and the shrink test below is what actually decides.
-  // That is the intended shape: a healthy run grows or holds steady and
-  // publishes regardless, while anything that would gut the catalog has to
-  // get past a second question.
-  const incomplete = report
+  // `blocking` is what may NOT quietly gut the catalog. `empty` belongs here:
+  // when x402scan returns 0 rows without throwing, nothing is truncated and
+  // nothing failed, yet the run carries 88 endpoints. That is the hole that
+  // published a gutted catalog once already.
+  //
+  // `unfinished` is what makes the numbers un-citable — a source that was cut
+  // off mid-list, so the total is an unknown fraction of the real one.
+  // `empty` does NOT belong here: onyx-bazaar has returned 0 rows every day
+  // since 2026-08-28, and treating that as "this run is degraded" flagged
+  // every single run, which stopped data/stats/*.json being written at all.
+  // A chronically dead side source does not make 127,036 endpoints a
+  // half-count; a truncated x402scan does.
+  const blocking = report
     .filter((r) => r.truncated || r.status === "failed" || r.status === "empty")
+    .map((r) => r.source);
+  const unfinished = report
+    .filter((r) => r.truncated || r.status === "failed")
     .map((r) => r.source);
 
   if (freshCount === 0) {
@@ -58,7 +63,7 @@ export function assessRun(input: {
       publish: false,
       degraded: {
         reason: "no endpoints collected",
-        sources: failed.length ? failed : incomplete,
+        sources: failed.length ? failed : blocking,
         kept_previous: true,
         collected: 0,
         previous: previousCount,
@@ -66,16 +71,18 @@ export function assessRun(input: {
     };
   }
 
-  if (incomplete.length === 0) return { publish: true };
-
-  // Incomplete. Publish only if it would not shrink the catalog — a first run
-  // (previousCount 0) therefore still publishes what it managed to get.
-  if (freshCount < previousCount * DEGRADED_SHRINK_TOLERANCE) {
+  // Would this run shrink the catalog, and did anything come back short? Then
+  // the shrinkage is far more likely to be our fetch than an upstream purge.
+  // A first run (previousCount 0) still publishes what it managed to get.
+  if (
+    blocking.length > 0 &&
+    freshCount < previousCount * DEGRADED_SHRINK_TOLERANCE
+  ) {
     return {
       publish: false,
       degraded: {
         reason: "an incomplete fetch would have shrunk the catalog",
-        sources: incomplete,
+        sources: blocking,
         kept_previous: true,
         collected: freshCount,
         previous: previousCount,
@@ -83,13 +90,17 @@ export function assessRun(input: {
     };
   }
 
-  // Published, but still incomplete — downstream must not read these numbers
-  // as a full census.
+  // Grew, or shrank for reasons nothing flagged. Publishable either way; the
+  // only remaining question is whether the total can be cited as a census.
+  if (unfinished.length === 0) return { publish: true };
+
+  // Published, but a source was cut off mid-list — downstream must not read
+  // these numbers as a full census.
   return {
     publish: true,
     degraded: {
       reason: "a source did not return a complete list",
-      sources: incomplete,
+      sources: unfinished,
       kept_previous: false,
       collected: freshCount,
       previous: previousCount,
