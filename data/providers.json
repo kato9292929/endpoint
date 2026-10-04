@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-10-03T16:18:26.658Z",
+  "generated_at": "2026-10-04T09:12:31.760Z",
   "status": "ok",
   "source": "data/endpoints_full.json.gz",
-  "scanned": 118470,
+  "scanned": 127161,
   "subset": false,
   "firstParty": [
     {
@@ -241,12 +241,12 @@
   ],
   "selfHosted": [
     {
-      "host": "x402.api.agentmail.to",
-      "name": "AgentMail | Email Inbox API for AI Agents",
-      "count": 52,
-      "priced": 51,
-      "priceMedian": 0,
-      "topCategory": "messaging",
+      "host": "api.arkm.com",
+      "name": "Arkham API",
+      "count": 92,
+      "priced": 88,
+      "priceMedian": 0.4,
+      "topCategory": "data",
       "networks": [
         "Base",
         "Solana"
@@ -255,8 +255,8 @@
         "pay-sh",
         "x402scan"
       ],
-      "sampleId": "c0c6a4d4904a5653",
-      "url": "https://x402.api.agentmail.to",
+      "sampleId": "14e0b44a8f847731",
+      "url": "https://api.arkm.com/x402/ws/session-info",
       "brand": null
     },
     {
@@ -276,6 +276,25 @@
       ],
       "sampleId": "043ddab819fabf99",
       "url": "https://glim.sh",
+      "brand": null
+    },
+    {
+      "host": "x402.api.agentmail.to",
+      "name": "AgentMail | Email Inbox API for AI Agents",
+      "count": 33,
+      "priced": 32,
+      "priceMedian": 0,
+      "topCategory": "messaging",
+      "networks": [
+        "Base",
+        "Solana"
+      ],
+      "sources": [
+        "pay-sh",
+        "x402scan"
+      ],
+      "sampleId": "c0c6a4d4904a5653",
+      "url": "https://x402.api.agentmail.to",
       "brand": null
     },
     {
