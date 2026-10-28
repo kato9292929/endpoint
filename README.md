@@ -18,6 +18,7 @@ Aggregated directories:
 | Source | Site | Fetcher |
 | --- | --- | --- |
 | x402 Inc. (self-curated) | https://x402jp.com | ✅ seed (`data/seed/x402-inc.json`) |
+| 402Mob (provider-submitted via 402 Index) | https://402index.io | ✅ seed (`data/seed/402index-provider.json`) |
 | x402scan (Merit Systems) | https://x402scan.com | ✅ implemented |
 | Onyx Bazaar (CDP discovery) | https://onyx-actions.onrender.com/bazaar | ✅ implemented |
 | Pay.sh (Solana) | https://pay.sh | ✅ implemented (pay-skills catalog) |

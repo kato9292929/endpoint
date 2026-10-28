@@ -1,0 +1,15 @@
+[
+  {
+    "id": "48028eeec56a2d24",
+    "url": "https://evidence.contact/v1/reports/base-invoice-v1",
+    "name": "402Mob Base USDC Invoice Verification",
+    "description": "Verify a Base USDC invoice by transaction confirmation, sender, recipient, and exact amount; paid via x402 with durable operation recovery.",
+    "category": "other",
+    "price": { "amount": 0.02, "currency": "USDC", "unit": "per-call" },
+    "networks": ["Base"],
+    "protocols": ["x402"],
+    "source": ["402index"],
+    "source_url": "https://402index.io/service/37dbd450-b909-411a-bba2-e51cb6f85b92",
+    "last_seen": "2026-10-28T15:31:00.000Z"
+  }
+]
