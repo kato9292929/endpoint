@@ -191,5 +191,44 @@
     "source": ["x402-inc"],
     "source_url": "https://apijapan.vercel.app/kyc",
     "last_seen": "2026-05-30T00:00:00.000Z"
+  },
+  {
+    "id": "agentkit-data-markdown",
+    "url": "https://x402-apis-production.up.railway.app/v1/markdown",
+    "name": "AgentKit Data — Markdown",
+    "description": "Fetch any public web page and return clean Markdown of the main content plus title, byline, site name, language, publish date and word count. Optional absolute link list. $0.005 USDC on Base via x402 v2.",
+    "category": "search-web",
+    "price": { "amount": 0.005, "currency": "USDC", "unit": "per-call" },
+    "networks": ["Base"],
+    "protocols": ["x402"],
+    "source": ["x402-inc"],
+    "source_url": "https://x402-apis-production.up.railway.app",
+    "last_seen": "2026-10-30T15:05:41.000Z"
+  },
+  {
+    "id": "agentkit-data-solana-token-risk",
+    "url": "https://x402-apis-production.up.railway.app/v1/solana/token-risk",
+    "name": "AgentKit Data — Solana token risk",
+    "description": "Solana SPL/Token-2022 mint safety check: authorities, risky extensions, holder concentration, price/liquidity, 0-100 score and flags. $0.02 USDC on Base via x402 v2.",
+    "category": "onchain",
+    "price": { "amount": 0.02, "currency": "USDC", "unit": "per-call" },
+    "networks": ["Base"],
+    "protocols": ["x402"],
+    "source": ["x402-inc"],
+    "source_url": "https://x402-apis-production.up.railway.app",
+    "last_seen": "2026-10-30T15:05:41.000Z"
+  },
+  {
+    "id": "agentkit-data-solana-wallet",
+    "url": "https://x402-apis-production.up.railway.app/v1/solana/wallet",
+    "name": "AgentKit Data — Solana wallet",
+    "description": "Solana wallet portfolio snapshot: SOL plus SPL/Token-2022 holdings with USD values. $0.01 USDC on Base via x402 v2.",
+    "category": "onchain",
+    "price": { "amount": 0.01, "currency": "USDC", "unit": "per-call" },
+    "networks": ["Base"],
+    "protocols": ["x402"],
+    "source": ["x402-inc"],
+    "source_url": "https://x402-apis-production.up.railway.app",
+    "last_seen": "2026-10-30T15:05:41.000Z"
   }
 ]
