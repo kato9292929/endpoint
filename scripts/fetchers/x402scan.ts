@@ -72,6 +72,7 @@ type Config = {
   pageSize: number;
   gapMs: number;
   safetyMaxRows: number;
+  safetyAbsoluteMax: number;
   /**
    * Page by a `lastUpdated` cursor instead of a growing `skip`.
    *
@@ -103,10 +104,18 @@ function readConfig(): Config {
     pageSize: num(process.env.X402SCAN_PAGE_SIZE, 250),
     // Politeness: minimum gap between requests. 0 is allowed for local tests.
     gapMs: num(process.env.X402SCAN_GAP_MS, 1000, 0),
-    // Safety net so a pathological response can never loop forever. This is
-    // NOT a product cap: if it ever trips, the run is reported as
-    // `truncated: true` rather than quietly returning a short catalog.
-    safetyMaxRows: num(process.env.X402SCAN_SAFETY_MAX, 200_000),
+    // Floor for the safety net. Once the API reports its own total this is
+    // raised to scale with it (see effectiveSafetyMax), because a fixed
+    // number is a cap wearing a safety net's name: 200,000 was the default
+    // here, the directory reached 199,735 rows on 2026-10-28, and from 10-29
+    // every run stopped at exactly 200,000 rows / 800 pages and was recorded
+    // `truncated` — which correctly blocked four days of stats snapshots
+    // while api_total climbed to 203,323. Same shape as the 20,000-endpoint
+    // cap removed in September.
+    safetyMaxRows: num(process.env.X402SCAN_SAFETY_MAX, 250_000),
+    // Hard stop regardless of what the API claims — the thing a safety net
+    // is actually for. Only a pathological response reaches this.
+    safetyAbsoluteMax: num(process.env.X402SCAN_SAFETY_ABSOLUTE, 5_000_000),
     keyset: process.env.X402SCAN_PAGING !== "offset",
     maxAttempts: num(process.env.X402SCAN_MAX_ATTEMPTS, DEFAULT_MAX_ATTEMPTS),
     backoffBaseMs: num(process.env.X402SCAN_BACKOFF_MS, DEFAULT_BACKOFF_BASE_MS),
@@ -322,6 +331,32 @@ type Union = {
 };
 
 // Page one sort order to exhaustion, adding anything new to the union.
+/**
+ * How many rows this run may read before we call it pathological.
+ *
+ * The API reports its own `total_count`, so the net can be tied to reality
+ * instead of to a number someone picked. Rows exceed that total legitimately —
+ * a URL appears once per method, and a `lastUpdated` cursor re-serves one
+ * boundary row per page — so the allowance is generous; anything past twice
+ * the reported total plus a page-boundary margin is a paging fault, not data.
+ *
+ * Before the first unfiltered response `apiTotal` is null and the floor
+ * applies. `safetyAbsoluteMax` bounds the result either way.
+ */
+export function effectiveSafetyMax(
+  cfg: { safetyMaxRows: number; safetyAbsoluteMax: number },
+  apiTotal: number | null | undefined,
+): number {
+  const fromApi =
+    typeof apiTotal === "number" && Number.isFinite(apiTotal) && apiTotal > 0
+      ? apiTotal * 2 + 10_000
+      : 0;
+  return Math.min(
+    Math.max(cfg.safetyMaxRows, fromApi),
+    cfg.safetyAbsoluteMax,
+  );
+}
+
 async function collectSlice(
   cfg: Config,
   sorting: Sorting,
@@ -447,9 +482,11 @@ async function collectSlice(
       }
     }
 
-    if (union.rows >= cfg.safetyMaxRows) {
+    const limit = effectiveSafetyMax(cfg, union.apiTotal);
+    if (union.rows >= limit) {
       console.warn(
-        `x402scan: hit the ${cfg.safetyMaxRows}-row safety limit on ${label}; recording the run as truncated.`,
+        `x402scan: hit the ${limit}-row safety limit on ${label} ` +
+          `(api_total ${union.apiTotal ?? "unknown"}); recording the run as truncated.`,
       );
       reason = "safety_limit";
       break;

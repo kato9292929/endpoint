@@ -8,7 +8,11 @@ import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, rmSync } from "nod
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { mergeEndpoints } from "../util";
-import { fetchX402scan, getLastX402scanRun } from "../fetchers/x402scan";
+import {
+  fetchX402scan,
+  getLastX402scanRun,
+  effectiveSafetyMax,
+} from "../fetchers/x402scan";
 import { pageSubset } from "../page-subset";
 import { assessRun } from "../catalog-guard";
 import { appendAll } from "../append-all";
@@ -557,6 +561,45 @@ test("counts aggregate per host and the artifact flags a subset source", () => {
   assert.equal(out.subset, true, "a subset source must be declared, not hidden");
 });
 
+// ── the safety net must not become a cap ─────────────
+//
+// X402SCAN_SAFETY_MAX defaulted to a flat 200,000 rows. The directory served
+// 199,735 rows on 2026-10-28 and from 10-29 every run stopped at exactly
+// 200,000 / 800 pages, recorded `truncated`, and so blocked the stats snapshot
+// four days running while api_total climbed to 203,323. A net tied to a
+// constant becomes a cap the moment the data passes it.
+
+test("the safety limit scales with the total the API reports", () => {
+  const cfg = { safetyMaxRows: 250_000, safetyAbsoluteMax: 5_000_000 };
+  // The size that broke it: 203,323 reported must leave room to finish.
+  const limit = effectiveSafetyMax(cfg, 203_323);
+  assert.ok(
+    limit > 203_323 * 1.5,
+    `expected generous headroom over api_total, got ${limit}`,
+  );
+  // And ten times that size still is not a cliff.
+  assert.ok(effectiveSafetyMax(cfg, 2_000_000) > 2_000_000);
+});
+
+test("the floor applies before the API has reported a total", () => {
+  const cfg = { safetyMaxRows: 250_000, safetyAbsoluteMax: 5_000_000 };
+  for (const t of [null, undefined, 0, -1, NaN]) {
+    assert.equal(
+      effectiveSafetyMax(cfg, t as number | null),
+      250_000,
+      `api_total ${String(t)} should fall back to the floor`,
+    );
+  }
+  // A small directory never lowers the floor below the configured one.
+  assert.equal(effectiveSafetyMax(cfg, 100), 250_000);
+});
+
+test("the absolute maximum still stops a pathological response", () => {
+  const cfg = { safetyMaxRows: 250_000, safetyAbsoluteMax: 1_000_000 };
+  // A nonsense api_total must not buy an unbounded crawl.
+  assert.equal(effectiveSafetyMax(cfg, 10_000_000_000), 1_000_000);
+});
+
 // ── appendAll — the 125k spread cliff ────────────────
 //
 // The orchestrator used `endpoints.push(...items)`. V8's argument limit is a
@@ -746,6 +789,7 @@ function configure(env: Record<string, string>) {
     "X402SCAN_PAGE_SIZE",
     "X402SCAN_GAP_MS",
     "X402SCAN_SAFETY_MAX",
+    "X402SCAN_SAFETY_ABSOLUTE",
     "X402SCAN_PAGING",
   ]) {
     delete process.env[k];
@@ -971,6 +1015,33 @@ async function stage4() {
   );
 
   await asyncTest(
+    "a crawl larger than the floor still finishes — the 2026-10-29 failure",
+    async () => {
+      // The exact shape of the four lost days: more rows than the configured
+      // floor, and an API that says so. Before the fix this stopped at the
+      // floor and was recorded `truncated`, which blocked the stats snapshot.
+      const all = rows(5000);
+      const fake = await startFake({ rowsFor: () => all });
+      try {
+        configure({
+          X402SCAN_BASE_URL: fake.url,
+          X402SCAN_PAGE_SIZE: "100",
+          X402SCAN_GAP_MS: "0",
+          X402SCAN_SAFETY_MAX: "300",
+        });
+        const eps = await fetchX402scan();
+        const run = getLastX402scanRun()!;
+        assert.equal(run.truncated, false, "must not stop at the floor");
+        assert.equal(run.stopped_reason, "exhausted");
+        assert.equal(run.unique_urls, 5000);
+        assert.equal(eps.length, 5000);
+      } finally {
+        await fake.close();
+      }
+    },
+  );
+
+  await asyncTest(
     "the safety limit records truncated: true instead of stopping quietly",
     async () => {
       const all = rows(5000);
@@ -980,7 +1051,11 @@ async function stage4() {
           X402SCAN_BASE_URL: fake.url,
           X402SCAN_PAGE_SIZE: "100",
           X402SCAN_GAP_MS: "0",
+          // The floor alone no longer stops a crawl the API says is bigger
+          // (api_total 5000 raises it well past 300) — that override is the
+          // 2026-10-29 fix. Bind the absolute stop to exercise this path.
           X402SCAN_SAFETY_MAX: "300",
+          X402SCAN_SAFETY_ABSOLUTE: "300",
         });
         await fetchX402scan();
         const run = getLastX402scanRun()!;
