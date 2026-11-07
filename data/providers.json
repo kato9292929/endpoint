@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-11-06T14:30:24.528Z",
+  "generated_at": "2026-11-07T13:15:17.104Z",
   "status": "ok",
   "source": "data/endpoints_full.json.gz",
-  "scanned": 196768,
+  "scanned": 197234,
   "subset": false,
   "firstParty": [
     {
@@ -117,6 +117,24 @@
       "brand": "Venice.ai"
     },
     {
+      "host": "agent.api.0x.org",
+      "name": "0x",
+      "count": 10,
+      "priced": 10,
+      "priceMedian": 0.01,
+      "topCategory": "trading",
+      "networks": [
+        "Base",
+        "Solana"
+      ],
+      "sources": [
+        "x402scan"
+      ],
+      "sampleId": "29efe269ba9c035c",
+      "url": "https://agent.api.0x.org/v1/x402/gasless-chains/%7Bpath%7D",
+      "brand": "0x"
+    },
+    {
       "host": "pro-api.coingecko.com",
       "name": "Query prices & market data of coins listed on CoinGecko, by coin IDs, names, or symbols.",
       "count": 9,
@@ -134,24 +152,6 @@
       "sampleId": "7dbd1623c29af0b0",
       "url": "https://pro-api.coingecko.com/api/v3/x402/onchain",
       "brand": "CoinGecko"
-    },
-    {
-      "host": "agent.api.0x.org",
-      "name": "0x",
-      "count": 6,
-      "priced": 6,
-      "priceMedian": 0.01,
-      "topCategory": "trading",
-      "networks": [
-        "Base",
-        "Solana"
-      ],
-      "sources": [
-        "x402scan"
-      ],
-      "sampleId": "de64b3840270a24e",
-      "url": "https://agent.api.0x.org/v1/x402/cross-chain-quotes-stream/%7Bpath%7D",
-      "brand": "0x"
     },
     {
       "host": "agi.apify.com",
