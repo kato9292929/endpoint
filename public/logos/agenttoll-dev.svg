@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title desc">
+  <title id="title">Rupture Gate</title>
+  <desc id="desc">An amber payment request breaks through an angular teal protocol boundary.</desc>
+  <defs>
+    <linearGradient id="tile" x1="10" y1="4" x2="54" y2="60" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0c2027"/>
+      <stop offset="1" stop-color="#06080c"/>
+    </linearGradient>
+    <linearGradient id="boundary" x1="13" y1="14" x2="48" y2="49" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#2dd4bf"/>
+      <stop offset="1" stop-color="#0ea5e9"/>
+    </linearGradient>
+  </defs>
+
+  <rect x="2" y="2" width="60" height="60" rx="14" fill="url(#tile)"/>
+
+  <!-- protocol boundary: thick diamond frame -->
+  <path d="M32 11 L53 32 L32 53 L11 32 Z" fill="none" stroke="url(#boundary)" stroke-width="5" stroke-linejoin="round"/>
+
+  <!-- breach: open the right corner -->
+  <path d="M41 14 L62 32 L41 50 L33 32 Z" fill="url(#tile)"/>
+
+  <!-- amber payment request through the gate -->
+  <path d="M37 25 L48 25 L58 32 L48 39 L37 39 L43 32 Z" fill="#f59e0b"/>
+  <path d="M38 27 L47 27 L52 30.5 L40 30.5 Z" fill="#ffd97a" fill-opacity="0.7"/>
+</svg>

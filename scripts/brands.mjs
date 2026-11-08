@@ -91,7 +91,7 @@ export const BRANDS = {
 // anyone — including for the platform itself. `*.supabase.co` is a customer's
 // project, not Supabase; `ec2-….amazonaws.com` is somebody's instance, not AWS.
 export const HOSTING =
-  /(^|\.)(vercel\.app|netlify\.app|onrender\.com|render\.com|railway\.app|up\.railway\.app|fly\.dev|herokuapp\.com|workers\.dev|pages\.dev|trycloudflare\.com|pythonanywhere\.com|supabase\.co|amazonaws\.com|azurewebsites\.net|appspot\.com|firebaseapp\.com|web\.app|repl\.co|replit\.dev|ngrok\.io|ngrok-free\.app|glitch\.me|surge\.sh|duckdns\.org|serveo\.net|loca\.lt)$/i;
+  /(^|\.)(vercel\.app|netlify\.app|onrender\.com|render\.com|railway\.app|up\.railway\.app|fly\.dev|herokuapp\.com|workers\.dev|pages\.dev|trycloudflare\.com|pythonanywhere\.com|supabase\.co|amazonaws\.com|azurewebsites\.net|appspot\.com|firebaseapp\.com|web\.app|repl\.co|replit\.dev|ngrok\.io|ngrok-free\.app|glitch\.me|surge\.sh|duckdns\.org|serveo\.net|loca\.lt|lhr\.life|localhost\.run|pinggy\.net|pinggy\.link|pinggy-free\.link|pinggy\.online|serveousercontent\.com|sslip\.io|nip\.io|traefik\.me|tunnelto\.dev|bore\.pub|cfargotunnel\.com|zeabur\.app|koyeb\.app|deno\.dev|cyclic\.app|northflank\.app|clever-cloud\.com|run\.app)$/i;
 
 // Operators that put OTHER companies' APIs behind x402. An endpoint here is
 // the gateway's, not the named company's, however the listing is titled.

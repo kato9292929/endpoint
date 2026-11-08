@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title id="title">DELX Commerce</title>
+  <rect width="64" height="64" rx="8" fill="#090a0c"/>
+  <path d="M14 13h17c13 0 21 7 21 19S44 51 31 51H14V13Zm11 10v18h6c7 0 10-3 10-9s-3-9-10-9h-6Z" fill="#85d8ff"/>
+  <path d="M14 55h38" stroke="#a99bff" stroke-width="3"/>
+</svg>

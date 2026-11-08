@@ -42,12 +42,27 @@ jobs:
       - name: Write named-providers artifact
         run: node scripts/write-providers.mjs
 
+      - name: Write the services artifact
+        run: node --max-old-space-size=4096 scripts/write-services.mjs
+
+      # Icons come from each service's own site and are committed, so visitors
+      # never fetch a third party and we do not depend on a logo API that can
+      # disappear (Clearbit's did). Only new services are fetched, so this is a
+      # handful of requests on a normal day. It never fails the run.
+      - name: Fetch logos for services that have none
+        run: node scripts/fetch-logos.mjs --concurrency 8
+
+      # The artifact records which logo file each service got, so it has to be
+      # rewritten after the fetch.
+      - name: Re-write the services artifact with the new logos
+        run: node --max-old-space-size=4096 scripts/write-services.mjs
+
       - name: Commit updated catalog and snapshot
         id: commit
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/endpoints.json data/endpoints_full.json.gz data/stats data/rank.json data/providers.json
+          git add data/endpoints.json data/endpoints_full.json.gz data/stats data/rank.json data/providers.json data/services.json public/logos
           if git diff --cached --quiet; then
             echo "No changes to commit"
             echo "changed=false" >> "$GITHUB_OUTPUT"
