@@ -1,5 +1,6 @@
 import { CatalogExplorer } from "@/components/CatalogExplorer";
 import { StatsBar } from "@/components/StatsBar";
+import { ServicesSection } from "@/components/ServicesSection";
 import { TotalSparkline } from "@/components/TotalSparkline";
 import {
   NamedProvidersSection,
@@ -84,6 +85,8 @@ export default async function HomePage() {
             </header>
 
             {/* Who serves x402 under their own name */}
+            <ServicesSection />
+
             <NamedProvidersSection />
 
             {/* Most-called endpoints (x402scan ranking) */}

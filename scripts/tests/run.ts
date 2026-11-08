@@ -15,6 +15,7 @@ import {
 } from "../fetchers/x402scan";
 import { pageSubset } from "../page-subset";
 import { assessRun } from "../catalog-guard";
+import { buildServices, cleanName, registrable } from "../write-services.mjs";
 import { appendAll } from "../append-all";
 import { defaultOrder, isFeatured } from "../../src/lib/featured";
 import { aggregateHosts, hostOf } from "../../src/lib/hosts";
@@ -559,6 +560,113 @@ test("counts aggregate per host and the artifact flags a subset source", () => {
   assert.equal(m.priceMedian, 0.03);
   assert.equal(m.topCategory, "data");
   assert.equal(out.subset, true, "a subset source must be declared, not hidden");
+});
+
+// ── services: what earns a place on the front page ───
+
+const svcEp = (over: Record<string, unknown> = {}) => ({
+  id: String(over.id ?? "x"),
+  url: String(over.url ?? "https://api.example.com/a"),
+  name: String(over.name ?? "Example"),
+  description: "",
+  category: String(over.category ?? "data"),
+  networks: ["Base"],
+  protocols: ["x402"],
+  source: (over.source as string[]) ?? ["x402scan"],
+  source_url: "https://x402scan.com/x",
+  last_seen: "2026-11-08T00:00:00.000Z",
+  ...over,
+});
+
+test("volume alone never earns a listing", () => {
+  // lhr.life carried 46,444 endpoints and is a tunnel service. Scale was a
+  // reason once; it let in 625 of 716 entries.
+  const endpoints = Array.from({ length: 500 }, (_, i) =>
+    svcEp({ id: `n${i}`, url: `https://nobody-vouches.example/${i}` }),
+  );
+  const out = buildServices({ endpoints, count: endpoints.length });
+  assert.equal(out.services.length, 0, "no vouch, no row");
+});
+
+test("each qualifying reason is enough on its own", () => {
+  const cases: [string, Record<string, unknown>, string][] = [
+    ["brand", { url: "https://api.nansen.ai/a" }, "brand"],
+    ["pay-sh listing", { source: ["pay-sh"] }, "pay-sh"],
+    ["ever ranked", { url: "https://called.example/a" }, "ranked"],
+  ];
+  for (const [label, over, reason] of cases) {
+    const out = buildServices(
+      { endpoints: [svcEp(over)], count: 1 },
+      { rankedHosts: ["called.example"] },
+    );
+    assert.equal(out.services.length, 1, `${label} should qualify`);
+    assert.ok(
+      out.services[0].reasons.includes(reason),
+      `${label} should record reason "${reason}"`,
+    );
+  }
+});
+
+test("a company's own domain is 1P; the same company via a gateway is 3P", () => {
+  const out = buildServices({
+    endpoints: [
+      svcEp({ id: "a", url: "https://api.nansen.ai/a" }),
+      svcEp({ id: "b", url: "https://coingecko.x402.paywithlocus.com/b" }),
+    ],
+    count: 2,
+  });
+  const own = out.services.find((s: { name: string }) => s.name === "Nansen");
+  const via = out.services.find((s: { name: string }) => s.name === "CoinGecko");
+  assert.equal(own?.party, "1P");
+  assert.equal(via?.party, "3P");
+  assert.deepEqual(via?.via, ["Locus"]);
+  // The slugs must differ, or the gateway's row would claim the company's logo.
+  assert.notEqual(own?.slug, via?.slug);
+});
+
+test("shared hosting and tunnels are not services", () => {
+  for (const host of [
+    "someone.vercel.app",
+    "x.trycloudflare.com",
+    "lhr.life",
+    "a.sslip.io",
+    "svc.run.app",
+  ]) {
+    const out = buildServices(
+      { endpoints: [svcEp({ url: `https://${host}/a` })], count: 1 },
+      { rankedHosts: [host] },
+    );
+    assert.equal(out.services.length, 0, `${host} must not be listed`);
+  }
+});
+
+test("subdomains of one service collapse into one row", () => {
+  const out = buildServices(
+    {
+      endpoints: [
+        svcEp({ id: "a", url: "https://api.agentmail.to/a", source: ["pay-sh"] }),
+        svcEp({ id: "b", url: "https://x402.api.agentmail.to/b", source: ["pay-sh"] }),
+      ],
+      count: 2,
+    },
+  );
+  assert.equal(out.services.length, 1);
+  assert.equal(out.services[0].endpoints, 2);
+  assert.equal(registrable("x402.api.agentmail.to"), "agentmail.to");
+  assert.equal(registrable("foo.bar.co.uk"), "bar.co.uk");
+});
+
+test("a name field holding a whole pitch is cut back to the subject", () => {
+  assert.equal(cleanName("Agent402: 500+ pay-per-call tools for AI agents"), "Agent402");
+  assert.equal(cleanName("K-2SO · Autonomous x402 Agent Merchant on Base"), "K-2SO");
+  assert.equal(cleanName("AgentMail | Email Inbox API for AI Agents"), "AgentMail");
+  assert.equal(cleanName("BlockRun on Solana — pay-per-request AI"), "BlockRun on Solana");
+  // Hyphens inside a word survive; only " - " separates.
+  assert.equal(cleanName("Pay-per-call"), "Pay-per-call");
+  // Entities are decoded rather than shown raw.
+  assert.equal(cleanName("EARNFI &#8211; Hire Humans"), "EARNFI");
+  // A sentence with no subject to find gives nothing, so the domain shows.
+  assert.equal(cleanName("Caution you are about to visit a site we cannot"), "");
 });
 
 // ── the safety net must not become a cap ─────────────
