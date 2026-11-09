@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" fill="#000"/>
+  <defs>
+    <radialGradient id="corona" cx="50%" cy="50%" r="50%">
+      <stop offset="60%" stop-color="#FFD700" stop-opacity="1"/>
+      <stop offset="75%" stop-color="#FFA500" stop-opacity="0.8"/>
+      <stop offset="90%" stop-color="#FF6600" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#FF6600" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="innerglow" cx="50%" cy="50%" r="38%">
+      <stop offset="80%" stop-color="#FFFFFF" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#FFD700" stop-opacity="1"/>
+    </radialGradient>
+  </defs>
+  <!-- Outer corona rays -->
+  <circle cx="256" cy="256" r="210" fill="url(#corona)" opacity="0.6"/>
+  <!-- Sun body behind moon -->
+  <circle cx="256" cy="256" r="195" fill="url(#innerglow)"/>
+  <!-- Moon (eclipse) - centered, black -->
+  <circle cx="256" cy="256" r="165" fill="#0a0a0f"/>
+  <!-- Subtle moon surface texture -->
+  <circle cx="230" cy="235" r="15" fill="#111118" opacity="0.5"/>
+  <circle cx="280" cy="270" r="10" fill="#111118" opacity="0.4"/>
+  <circle cx="245" cy="285" r="8" fill="#111118" opacity="0.3"/>
+</svg>

@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-11-08T13:03:27.648Z",
+  "generated_at": "2026-11-09T16:34:24.140Z",
   "status": "ok",
-  "scanned": 197234,
+  "scanned": 202355,
   "subset": false,
   "qualifying_reasons": [
     "brand",
@@ -9,11 +9,11 @@
     "ranked"
   ],
   "counts": {
-    "services": 356,
-    "endpoints": 33881,
-    "first_party": 333,
+    "services": 364,
+    "endpoints": 36008,
+    "first_party": 341,
     "third_party": 23,
-    "with_logo": 133
+    "with_logo": 309
   },
   "services": [
     {
@@ -432,7 +432,7 @@
         "brand"
       ],
       "logo": "/logos/coingecko-via.ico",
-      "url": "https://coingecko.use.x402atlas.com/trending"
+      "url": "https://coingecko.use.x402atlas.com/price"
     },
     {
       "slug": "cloudflare-via",
@@ -652,7 +652,7 @@
         "brand"
       ],
       "logo": "/logos/brave-via.ico",
-      "url": "https://brave.x402.paywithlocus.com/brave/llm-context"
+      "url": "https://brave.x402.paywithlocus.com/brave/answers"
     },
     {
       "slug": "tripadvisor-via",
@@ -731,7 +731,7 @@
         "brand"
       ],
       "logo": "/logos/deepgram-via.ico",
-      "url": "https://deepgram.x402.paywithlocus.com/deepgram/analyze"
+      "url": "https://deepgram.x402.paywithlocus.com/deepgram/list-models"
     },
     {
       "slug": "perplexity-via",
@@ -1011,6 +1011,31 @@
       "url": "https://api.delx.ai/api/v1/x402/kebab-case"
     },
     {
+      "slug": "southpow-media",
+      "name": "SouthPow Media",
+      "party": "1P",
+      "domain": "southpow.media",
+      "category": "compute",
+      "endpoints": 1932,
+      "priced": 1932,
+      "priceMin": 0.002,
+      "priceMedian": 0.01,
+      "networks": [
+        "Base",
+        "Solana"
+      ],
+      "hosts": [
+        "southpow.media"
+      ],
+      "hostCount": 1,
+      "via": [],
+      "reasons": [
+        "ranked"
+      ],
+      "logo": null,
+      "url": "https://southpow.media/v1/yields/top"
+    },
+    {
       "slug": "edge-agents-ai",
       "name": "Edge Agents AI",
       "party": "1P",
@@ -1066,31 +1091,6 @@
       ],
       "logo": "/logos/halowerk-medienwerk.svg",
       "url": "https://dns.halowerk.com/domain/articles/ns-hetzner"
-    },
-    {
-      "slug": "southpow-media",
-      "name": "SouthPow Media",
-      "party": "1P",
-      "domain": "southpow.media",
-      "category": "compute",
-      "endpoints": 1027,
-      "priced": 1027,
-      "priceMin": 0.002,
-      "priceMedian": 0.01,
-      "networks": [
-        "Base",
-        "Solana"
-      ],
-      "hosts": [
-        "southpow.media"
-      ],
-      "hostCount": 1,
-      "via": [],
-      "reasons": [
-        "ranked"
-      ],
-      "logo": null,
-      "url": "https://southpow.media/v1/yields/top"
     },
     {
       "slug": "m2mcent",
@@ -1334,6 +1334,55 @@
       "url": "https://web.x402node.dev/api/social-lookup"
     },
     {
+      "slug": "minia2a-uk",
+      "name": "minia2a.uk",
+      "party": "1P",
+      "domain": "minia2a.uk",
+      "category": "search",
+      "endpoints": 547,
+      "priced": 547,
+      "priceMin": 0.001,
+      "priceMedian": 0.01,
+      "networks": [
+        "Base"
+      ],
+      "hosts": [
+        "minia2a.uk"
+      ],
+      "hostCount": 1,
+      "via": [],
+      "reasons": [
+        "ranked"
+      ],
+      "logo": "/logos/minia2a-uk.svg",
+      "url": "https://minia2a.uk/x402/bubbleSort"
+    },
+    {
+      "slug": "taifoon",
+      "name": "Taifoon",
+      "party": "1P",
+      "domain": "taifoon.dev",
+      "category": "data",
+      "endpoints": 528,
+      "priced": 88,
+      "priceMin": 0.000195,
+      "priceMedian": 0.0012,
+      "networks": [
+        "Base",
+        "Solana"
+      ],
+      "hosts": [
+        "coord.taifoon.dev"
+      ],
+      "hostCount": 1,
+      "via": [],
+      "reasons": [
+        "ranked"
+      ],
+      "logo": "/logos/taifoon.png",
+      "url": "https://coord.taifoon.dev/v1/x402/class/tee.typed.compile"
+    },
+    {
       "slug": "jarvisclaw-api",
       "name": "JarvisClaw API",
       "party": "1P",
@@ -1497,6 +1546,38 @@
       "url": "https://api.hergertsynthora.com/v1/stablecoin-supply"
     },
     {
+      "slug": "pyfile-x402-api",
+      "name": "Pyfile x402 API",
+      "party": "1P",
+      "domain": "ts.net",
+      "category": "compute",
+      "endpoints": 350,
+      "priced": 329,
+      "priceMin": 0.001,
+      "priceMedian": 0.01,
+      "networks": [
+        "Base",
+        "Solana"
+      ],
+      "hosts": [
+        "pyfile-agent.taile3ff35.ts.net",
+        "vps-fc89c157-1.taila28d02.ts.net",
+        "ari001.tailb4ac3a.ts.net",
+        "desktop-suts94d.tail0b188d.ts.net",
+        "elon.tail49499f.ts.net",
+        "pop-os.tail08831d.ts.net",
+        "velux.taild4d007.ts.net",
+        "aniccanomac-mini-1.tail7a0ba4.ts.net"
+      ],
+      "hostCount": 38,
+      "via": [],
+      "reasons": [
+        "ranked"
+      ],
+      "logo": "/logos/pyfile-x402-api.svg",
+      "url": "https://vps-fc89c157-1.taila28d02.ts.net:10000/api/toolchain-cost-plan"
+    },
+    {
       "slug": "manylives-me",
       "name": "manylives.me",
       "party": "1P",
@@ -1629,8 +1710,8 @@
       "party": "1P",
       "domain": "chatgpt.site",
       "category": "data",
-      "endpoints": 305,
-      "priced": 254,
+      "endpoints": 306,
+      "priced": 255,
       "priceMin": 0.001,
       "priceMedian": 0.03,
       "networks": [
@@ -1654,38 +1735,6 @@
       ],
       "logo": "/logos/tableproof.svg",
       "url": "https://agent-json-utility.pablovph.chatgpt.site/v1/launch-report"
-    },
-    {
-      "slug": "100btc-agent-services",
-      "name": "100BTC Agent Services",
-      "party": "1P",
-      "domain": "ts.net",
-      "category": "compute",
-      "endpoints": 303,
-      "priced": 282,
-      "priceMin": 0.001,
-      "priceMedian": 0.01,
-      "networks": [
-        "Base",
-        "Solana"
-      ],
-      "hosts": [
-        "vps-fc89c157-1.taila28d02.ts.net",
-        "ari001.tailb4ac3a.ts.net",
-        "desktop-suts94d.tail0b188d.ts.net",
-        "pyfile-agent.taile3ff35.ts.net",
-        "elon.tail49499f.ts.net",
-        "pop-os.tail08831d.ts.net",
-        "velux.taild4d007.ts.net",
-        "aniccanomac-mini-1.tail7a0ba4.ts.net"
-      ],
-      "hostCount": 38,
-      "via": [],
-      "reasons": [
-        "ranked"
-      ],
-      "logo": "/logos/100btc-agent-services.png",
-      "url": "https://vps-fc89c157-1.taila28d02.ts.net:10000/api/toolchain-cost-plan"
     },
     {
       "slug": "tanod",
@@ -2225,30 +2274,6 @@
       "url": "https://rotaryagency.uk/api/crypto/price"
     },
     {
-      "slug": "minia2a-uk",
-      "name": "minia2a.uk",
-      "party": "1P",
-      "domain": "minia2a.uk",
-      "category": "messaging",
-      "endpoints": 158,
-      "priced": 158,
-      "priceMin": 0.001,
-      "priceMedian": 0.01,
-      "networks": [
-        "Base"
-      ],
-      "hosts": [
-        "minia2a.uk"
-      ],
-      "hostCount": 1,
-      "via": [],
-      "reasons": [
-        "ranked"
-      ],
-      "logo": "/logos/minia2a-uk.svg",
-      "url": "https://minia2a.uk/x402/poly-quote"
-    },
-    {
       "slug": "api-direct",
       "name": "API Direct",
       "party": "1P",
@@ -2528,6 +2553,31 @@
       ],
       "logo": "/logos/netzhandwerker-agent-tools.svg",
       "url": "https://mailcheck.netzhandwerker.de/email/batch"
+    },
+    {
+      "slug": "automatic",
+      "name": "Automatic",
+      "party": "1P",
+      "domain": "ssh.autos",
+      "category": "messaging",
+      "endpoints": 122,
+      "priced": 122,
+      "priceMin": 0.01,
+      "priceMedian": 0.02,
+      "networks": [
+        "Base",
+        "Solana"
+      ],
+      "hosts": [
+        "api.ssh.autos"
+      ],
+      "hostCount": 1,
+      "via": [],
+      "reasons": [
+        "ranked"
+      ],
+      "logo": "/logos/automatic.svg",
+      "url": "https://api.ssh.autos/v1/jobs/tender-scout"
     },
     {
       "slug": "scout",
@@ -2986,6 +3036,30 @@
       "url": "https://api.arkm.com/x402/ws/session-info"
     },
     {
+      "slug": "agentreader",
+      "name": "AgentReader",
+      "party": "1P",
+      "domain": "axiomworks.co.uk",
+      "category": "messaging",
+      "endpoints": 91,
+      "priced": 91,
+      "priceMin": 0.001,
+      "priceMedian": 0.002,
+      "networks": [
+        "Base"
+      ],
+      "hosts": [
+        "api.axiomworks.co.uk"
+      ],
+      "hostCount": 1,
+      "via": [],
+      "reasons": [
+        "ranked"
+      ],
+      "logo": "/logos/agentreader.svg",
+      "url": "https://api.axiomworks.co.uk/kyb"
+    },
+    {
       "slug": "otto-ai-x402",
       "name": "Otto AI x402",
       "party": "1P",
@@ -3035,30 +3109,6 @@
       ],
       "logo": "/logos/x402-agent-apis.png",
       "url": "https://b20.scriptmasterlabs.com/v1/report/%7Baddress%7D"
-    },
-    {
-      "slug": "agentreader",
-      "name": "AgentReader",
-      "party": "1P",
-      "domain": "axiomworks.co.uk",
-      "category": "messaging",
-      "endpoints": 90,
-      "priced": 90,
-      "priceMin": 0.001,
-      "priceMedian": 0.002,
-      "networks": [
-        "Base"
-      ],
-      "hosts": [
-        "api.axiomworks.co.uk"
-      ],
-      "hostCount": 1,
-      "via": [],
-      "reasons": [
-        "ranked"
-      ],
-      "logo": "/logos/agentreader.svg",
-      "url": "https://api.axiomworks.co.uk/company-full"
     },
     {
       "slug": "greeneris-data",
@@ -3158,31 +3208,6 @@
       "url": "https://apiacre.com/llms.txt"
     },
     {
-      "slug": "maxwellinternational-ai",
-      "name": "maxwellinternational.ai",
-      "party": "1P",
-      "domain": "maxwellinternational.ai",
-      "category": "search",
-      "endpoints": 84,
-      "priced": 84,
-      "priceMin": 0.002,
-      "priceMedian": 0.005,
-      "networks": [
-        "Base",
-        "Solana"
-      ],
-      "hosts": [
-        "api.maxwellinternational.ai"
-      ],
-      "hostCount": 1,
-      "via": [],
-      "reasons": [
-        "ranked"
-      ],
-      "logo": "/logos/maxwellinternational-ai.svg",
-      "url": "https://api.maxwellinternational.ai/v1/x402/endpoint/check"
-    },
-    {
       "slug": "oblique-markets",
       "name": "Oblique Markets",
       "party": "1P",
@@ -3254,6 +3279,31 @@
       ],
       "logo": "/logos/onesource.ico",
       "url": "https://api.onesource.io/standard/v1/addresses"
+    },
+    {
+      "slug": "maxwellinternational-ai",
+      "name": "maxwellinternational.ai",
+      "party": "1P",
+      "domain": "maxwellinternational.ai",
+      "category": "search",
+      "endpoints": 83,
+      "priced": 83,
+      "priceMin": 0.002,
+      "priceMedian": 0.005,
+      "networks": [
+        "Base",
+        "Solana"
+      ],
+      "hosts": [
+        "api.maxwellinternational.ai"
+      ],
+      "hostCount": 1,
+      "via": [],
+      "reasons": [
+        "ranked"
+      ],
+      "logo": "/logos/maxwellinternational-ai.svg",
+      "url": "https://api.maxwellinternational.ai/v1/x402/endpoint/check"
     },
     {
       "slug": "sirenic",
@@ -3428,8 +3478,32 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/agentbit.png",
       "url": "https://agentbit.app/v1/finance/stock-price"
+    },
+    {
+      "slug": "lordevo-shop",
+      "name": "Lordevo Shop",
+      "party": "1P",
+      "domain": "lordevo.com",
+      "category": "compute",
+      "endpoints": 76,
+      "priced": 66,
+      "priceMin": 0.002,
+      "priceMedian": 0.002,
+      "networks": [
+        "Base"
+      ],
+      "hosts": [
+        "shop.lordevo.com"
+      ],
+      "hostCount": 1,
+      "via": [],
+      "reasons": [
+        "ranked"
+      ],
+      "logo": "/logos/lordevo-shop.svg",
+      "url": "https://shop.lordevo.com/a2a"
     },
     {
       "slug": "duo-data-utilities",
@@ -3508,6 +3582,30 @@
       "url": "https://api.relayshield.net/v1/passport/%7Bpassport_id%7D/status"
     },
     {
+      "slug": "x402-gateway",
+      "name": "x402-gateway",
+      "party": "1P",
+      "domain": "freeq.one",
+      "category": "messaging",
+      "endpoints": 74,
+      "priced": 70,
+      "priceMin": 0,
+      "priceMedian": 0.005,
+      "networks": [
+        "Base"
+      ],
+      "hosts": [
+        "x402.freeq.one"
+      ],
+      "hostCount": 1,
+      "via": [],
+      "reasons": [
+        "ranked"
+      ],
+      "logo": "/logos/x402-gateway.png",
+      "url": "https://x402.freeq.one/tools"
+    },
+    {
       "slug": "webbersites",
       "name": "WebberSites",
       "party": "1P",
@@ -3557,30 +3655,6 @@
       "url": "https://hubvibe-io.com/work/video/generate"
     },
     {
-      "slug": "x402-gateway",
-      "name": "x402-gateway",
-      "party": "1P",
-      "domain": "freeq.one",
-      "category": "messaging",
-      "endpoints": 72,
-      "priced": 68,
-      "priceMin": 0,
-      "priceMedian": 0.005,
-      "networks": [
-        "Base"
-      ],
-      "hosts": [
-        "x402.freeq.one"
-      ],
-      "hostCount": 1,
-      "via": [],
-      "reasons": [
-        "ranked"
-      ],
-      "logo": "/logos/x402-gateway.png",
-      "url": "https://x402.freeq.one/tools"
-    },
-    {
       "slug": "agent-hub",
       "name": "Agent Hub",
       "party": "1P",
@@ -3603,6 +3677,31 @@
       ],
       "logo": "/logos/agent-hub.png",
       "url": "https://agents.torbrooknews.com/v1/large/chat/completions"
+    },
+    {
+      "slug": "financial-data-x402",
+      "name": "Financial Data x402",
+      "party": "1P",
+      "domain": "x402financialdata.com",
+      "category": "data",
+      "endpoints": 71,
+      "priced": 71,
+      "priceMin": 0.005,
+      "priceMedian": 0.01,
+      "networks": [
+        "Base",
+        "Solana"
+      ],
+      "hosts": [
+        "x402financialdata.com"
+      ],
+      "hostCount": 1,
+      "via": [],
+      "reasons": [
+        "ranked"
+      ],
+      "logo": "/logos/financial-data-x402.svg",
+      "url": "https://x402financialdata.com/signal/market-brief"
     },
     {
       "slug": "laso-finance",
@@ -3691,30 +3790,6 @@
       "url": "https://surf.cascade.fyi/api/v1/twitter/trends"
     },
     {
-      "slug": "x402-gateway",
-      "name": "x402 gateway",
-      "party": "1P",
-      "domain": "donnyautomation.com",
-      "category": "trading",
-      "endpoints": 69,
-      "priced": 68,
-      "priceMin": 0.005,
-      "priceMedian": 0.01,
-      "networks": [
-        "Base"
-      ],
-      "hosts": [
-        "x402.donnyautomation.com"
-      ],
-      "hostCount": 1,
-      "via": [],
-      "reasons": [
-        "ranked"
-      ],
-      "logo": "/logos/x402-gateway.png",
-      "url": "https://x402.donnyautomation.com/edgar/dossier"
-    },
-    {
       "slug": "1gateway",
       "name": "1gateway",
       "party": "1P",
@@ -3738,6 +3813,56 @@
       ],
       "logo": "/logos/1gateway.svg",
       "url": "https://1gateway.dev/agents.md"
+    },
+    {
+      "slug": "sift-web-tools",
+      "name": "Sift Web Tools",
+      "party": "1P",
+      "domain": "hstgr.cloud",
+      "category": "search",
+      "endpoints": 67,
+      "priced": 59,
+      "priceMin": 0.001,
+      "priceMedian": 0.005,
+      "networks": [
+        "Base",
+        "Solana"
+      ],
+      "hosts": [
+        "sift.srv1996466.hstgr.cloud",
+        "srv2072903.hstgr.cloud"
+      ],
+      "hostCount": 2,
+      "via": [],
+      "reasons": [
+        "ranked"
+      ],
+      "logo": null,
+      "url": "https://srv2072903.hstgr.cloud/v1/score"
+    },
+    {
+      "slug": "arch-tools",
+      "name": "Arch Tools",
+      "party": "1P",
+      "domain": "archtools.dev",
+      "category": "compute",
+      "endpoints": 66,
+      "priced": 61,
+      "priceMin": 0.01,
+      "priceMedian": 0.01,
+      "networks": [
+        "Base"
+      ],
+      "hosts": [
+        "archtools.dev"
+      ],
+      "hostCount": 1,
+      "via": [],
+      "reasons": [
+        "ranked"
+      ],
+      "logo": "/logos/arch-tools.png",
+      "url": "https://archtools.dev/v1/billing/checkout"
     },
     {
       "slug": "grov",
@@ -3814,31 +3939,6 @@
       "url": "https://x402.shizu.me/sandbox"
     },
     {
-      "slug": "sift-web-tools",
-      "name": "Sift Web Tools",
-      "party": "1P",
-      "domain": "hstgr.cloud",
-      "category": "search",
-      "endpoints": 66,
-      "priced": 58,
-      "priceMin": 0.001,
-      "priceMedian": 0.005,
-      "networks": [
-        "Base",
-        "Solana"
-      ],
-      "hosts": [
-        "sift.srv1996466.hstgr.cloud"
-      ],
-      "hostCount": 1,
-      "via": [],
-      "reasons": [
-        "ranked"
-      ],
-      "logo": null,
-      "url": "https://sift.srv1996466.hstgr.cloud/.well-known/x402"
-    },
-    {
       "slug": "v3",
       "name": "V3",
       "party": "1P",
@@ -3886,31 +3986,6 @@
       ],
       "logo": "/logos/x402-farm.png",
       "url": "https://api.x-402.online/v1/sms/inbox"
-    },
-    {
-      "slug": "financial-data-x402",
-      "name": "Financial Data x402",
-      "party": "1P",
-      "domain": "x402financialdata.com",
-      "category": "data",
-      "endpoints": 62,
-      "priced": 62,
-      "priceMin": 0.001,
-      "priceMedian": 0.01,
-      "networks": [
-        "Base",
-        "Solana"
-      ],
-      "hosts": [
-        "x402financialdata.com"
-      ],
-      "hostCount": 1,
-      "via": [],
-      "reasons": [
-        "ranked"
-      ],
-      "logo": "/logos/financial-data-x402.svg",
-      "url": "https://x402financialdata.com/aviation/airport-check"
     },
     {
       "slug": "uk-property-data-api",
@@ -4123,7 +4198,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/apex-runner.svg",
       "url": "https://apexrunner.ai/signals/whale-sentiment"
     },
     {
@@ -4173,7 +4248,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/twit-sh.ico",
       "url": "https://x402.twit.sh/tweets/mediaUpload"
     },
     {
@@ -4197,7 +4272,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/datakoot-x402.svg",
       "url": "https://x402.datakoot.com/api/brief_stack"
     },
     {
@@ -4221,7 +4296,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/chainhilt.ico",
       "url": "https://chainhilt.ai/api/v1/actions/%7Bnonce%7D/%7Bhash%7D"
     },
     {
@@ -4270,7 +4345,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/cloudworldmodel-ai.ico",
       "url": "https://www.cloudworldmodel.ai/api/failures/%7BfailureId%7D"
     },
     {
@@ -4294,7 +4369,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/cryptyx.ico",
       "url": "https://cryptyx.ai/api/v1/ai/trade-ideas"
     },
     {
@@ -4318,7 +4393,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/fiatdock.svg",
       "url": "https://fiatdock.com/s/svc_de77343e-086c-4fa8-b979-3b4f7e156d94"
     },
     {
@@ -4342,7 +4417,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/x402-professorsausages-com.svg",
       "url": "https://x402.professorsausages.com/swap-quote/quote/base/0x4200000000000000000000000000000000000006/0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
     },
     {
@@ -4367,7 +4442,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/solenrich.svg",
       "url": "https://api.solenrich.com/entrypoints/stonk-alerts/invoke"
     },
     {
@@ -4423,7 +4498,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/coil.png",
       "url": "https://coil.trade/api/research"
     },
     {
@@ -4447,7 +4522,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/geekvault.ico",
       "url": "https://api.geekvault.dev/web-tools/v1/tech-detect"
     },
     {
@@ -4472,7 +4547,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/true402.svg",
       "url": "https://true402.dev/api/openapi.json"
     },
     {
@@ -4496,7 +4571,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/vibe-springs.svg",
       "url": "https://vibesprings.net/api/trends/competitors"
     },
     {
@@ -4521,7 +4596,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/stabletravel.ico",
       "url": "https://stabletravel.dev/api/flightaware/disruption-counts/entity_type"
     },
     {
@@ -4545,7 +4620,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/toll402.svg",
       "url": "https://toll402.dev/v1/t/github_release_commits"
     },
     {
@@ -4569,7 +4644,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/santyvv-data.png",
       "url": "https://x402.santyvv.com/.well-known/x402"
     },
     {
@@ -4594,7 +4669,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/tzkt-api.ico",
       "url": "https://x402.tzkt.io/v1/statistics/daily"
     },
     {
@@ -4619,7 +4694,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/agishub.png",
       "url": "https://api.agishub.com/v1/crawl/%7Bjob_id%7D"
     },
     {
@@ -4646,7 +4721,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/chainverdict-api.ico",
       "url": "https://chainverdict.xyz/v1/data/portfolio/%7Baddress%7D"
     },
     {
@@ -4699,7 +4774,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/tollkit-data.png",
       "url": "https://extract.tollkit.dev/health"
     },
     {
@@ -4723,7 +4798,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/afriref.png",
       "url": "https://afriref.dev/v1/balance"
     },
     {
@@ -4747,7 +4822,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/agmsg.svg",
       "url": "https://api.agmsg.world/health"
     },
     {
@@ -4771,7 +4846,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/asiaref.png",
       "url": "https://asiaref.dev/v1/balance"
     },
     {
@@ -4796,7 +4871,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/degenscan-intel.png",
       "url": "https://intel.degenscan.io/v1/keys/me"
     },
     {
@@ -4820,7 +4895,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/euroref.svg",
       "url": "https://euroref.dev/v1/balance"
     },
     {
@@ -4844,7 +4919,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/globalapi-x402.ico",
       "url": "https://globalapi.dev/fr/company/%7Bsiren%7D"
     },
     {
@@ -4869,7 +4944,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/loophole-tape.svg",
       "url": "https://api.loopholetape.com/v1/token_check/%7Bmint%7D"
     },
     {
@@ -4895,7 +4970,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/readx.svg",
       "url": "https://readx.1x402.sh/api/articles/%7Bid%7D"
     },
     {
@@ -4943,7 +5018,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/vaaya.ico",
       "url": "https://vaaya.ai/api/run/firecrawl/search"
     },
     {
@@ -4968,7 +5043,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/singit-ask.svg",
       "url": "https://ask.singitai.app/pricing.json"
     },
     {
@@ -4993,7 +5068,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/stableenrich.png",
       "url": "https://stableenrich.dev/api/hunter/email-verifier"
     },
     {
@@ -5017,7 +5092,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/corpusai-cloud-pricing.ico",
       "url": "https://cloud.trycorpus.ai/v1/tokens/models"
     },
     {
@@ -5041,7 +5116,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/x402pulse.svg",
       "url": "https://www.x402pulse.dev/v1/whales"
     },
     {
@@ -5065,7 +5140,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/lion.svg",
       "url": "https://lionx402.com/api/x402/credits-purchase-json"
     },
     {
@@ -5114,7 +5189,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/402registry.svg",
       "url": "https://402registry.com/api/check"
     },
     {
@@ -5164,7 +5239,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/quant-agent-shop.ico",
       "url": "https://quantagentshop.com/llms.txt"
     },
     {
@@ -5189,8 +5264,33 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/readx.svg",
       "url": "https://readx.sh/api/search/tweets"
+    },
+    {
+      "slug": "stablestudio",
+      "name": "StableStudio",
+      "party": "1P",
+      "domain": "stablestudio.io",
+      "category": "compute",
+      "endpoints": 35,
+      "priced": 32,
+      "priceMin": 0.01,
+      "priceMedian": 10,
+      "networks": [
+        "Base",
+        "Solana"
+      ],
+      "hosts": [
+        "stablestudio.io"
+      ],
+      "hostCount": 1,
+      "via": [],
+      "reasons": [
+        "ranked"
+      ],
+      "logo": "/logos/stablestudio.png",
+      "url": "https://stablestudio.io/api/upload"
     },
     {
       "slug": "agentservices",
@@ -5238,7 +5338,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/aispace-x402-marketplace.svg",
       "url": "https://x402.aispace.bot/api/v1/video/complete"
     },
     {
@@ -5263,7 +5363,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/syra.png",
       "url": "https://api.syraa.fun/info"
     },
     {
@@ -5288,7 +5388,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/zerion-api.png",
       "url": "https://api.zerion.io/v1/wallets/%7Baddress%7D/transactions"
     },
     {
@@ -5314,7 +5414,7 @@
         "pay-sh",
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/agentmail.ico",
       "url": "https://x402.api.agentmail.to"
     },
     {
@@ -5363,7 +5463,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/news-gurus.ico",
       "url": "https://api.newsgurus.ai/x402/agents/status"
     },
     {
@@ -5394,7 +5494,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/pricing-state-api.svg",
       "url": "https://changelog-state-api.replit.app/api/site/changelog/%7Bslug%7D"
     },
     {
@@ -5421,33 +5521,8 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/crypto-market-data.svg",
       "url": "https://products.openverbs.com/health"
-    },
-    {
-      "slug": "stablestudio",
-      "name": "StableStudio",
-      "party": "1P",
-      "domain": "stablestudio.io",
-      "category": "compute",
-      "endpoints": 31,
-      "priced": 28,
-      "priceMin": 0.01,
-      "priceMedian": 10,
-      "networks": [
-        "Base",
-        "Solana"
-      ],
-      "hosts": [
-        "stablestudio.io"
-      ],
-      "hostCount": 1,
-      "via": [],
-      "reasons": [
-        "ranked"
-      ],
-      "logo": null,
-      "url": "https://stablestudio.io/api/upload/confirm"
     },
     {
       "slug": "stablestudio",
@@ -5471,7 +5546,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/stablestudio.png",
       "url": "https://stablestudio.dev/api/upload"
     },
     {
@@ -5495,7 +5570,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/getapi.svg",
       "url": "https://api.getapi.nl/api/v1/scraping/email"
     },
     {
@@ -5520,7 +5595,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/paidapis-net.png",
       "url": "https://hlrisk.paidapis.net/api/hl-liquidation-risk"
     },
     {
@@ -5549,7 +5624,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/tbs-weather-climate-api.svg",
       "url": "https://company-x402.tbs-digital.com/health"
     },
     {
@@ -5574,7 +5649,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/palmyr.svg",
       "url": "https://palmyr.ai/social/twitter/post-thread"
     },
     {
@@ -5599,7 +5674,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/twitr-sh.svg",
       "url": "https://twitr.sh/api/tools/x_community"
     },
     {
@@ -5623,7 +5698,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/dyoe.svg",
       "url": "https://agents.dyoeway.org/credential/agent"
     },
     {
@@ -5647,7 +5722,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/kronos.ico",
       "url": "https://kronossignals.com/api/v1/sample/eth"
     },
     {
@@ -5679,7 +5754,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/asn-lookup.ico",
       "url": "https://asn-lookup.underscoredone.com/lookup"
     },
     {
@@ -5703,7 +5778,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/pokt-agent.svg",
       "url": "https://x402.pokt-agent.com/kr-names/romanize"
     },
     {
@@ -5728,7 +5803,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/x402scan.ico",
       "url": "https://resources.x402scan.com/find-tool"
     },
     {
@@ -5759,7 +5834,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/apitoll.png",
       "url": "https://gas.apitoll.cloud/v1/base/gas"
     },
     {
@@ -5784,7 +5859,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/imgnai-katana-api.ico",
       "url": "https://kat.imgnai.com/v1/x402"
     },
     {
@@ -5808,7 +5883,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/robinx.svg",
       "url": "https://api.robinx.io/structure/%7Btoken%7D/history"
     },
     {
@@ -5832,7 +5907,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/xona-agent.ico",
       "url": "https://api.xona-agent.com/ai/x-persona"
     },
     {
@@ -5863,7 +5938,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/deepai.png",
       "url": "https://actionlayer.pay.zeroclick.io/zeroclick/tasks"
     },
     {
@@ -5887,7 +5962,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/agent-ia-api.jpg",
       "url": "https://api.api-agent-ia.ch/profil-adresse"
     },
     {
@@ -5911,7 +5986,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/boon.svg",
       "url": "https://api.boonprotocol.com/api/v1/workflows/cost-preview"
     },
     {
@@ -5936,7 +6011,7 @@
       "reasons": [
         "pay-sh"
       ],
-      "logo": null,
+      "logo": "/logos/cpg-analytics.ico",
       "url": "https://api.syntalic.com/v1/public/stats"
     },
     {
@@ -5960,7 +6035,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/eckari-capability-api.ico",
       "url": "https://api.eckari.com/v1/weather/us/observation"
     },
     {
@@ -5987,7 +6062,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/human-desk.svg",
       "url": "https://human.reversecaptcha.fun/v1/human/status"
     },
     {
@@ -6011,7 +6086,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/mayim-agent-gigs.svg",
       "url": "https://kari.mayim-mayim.com/api/agent/activity-map/v1/purchases/%7Bid%7D/replacement"
     },
     {
@@ -6036,7 +6111,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/stableemail.ico",
       "url": "https://stableemail.dev/api/subdomain/inbox/update"
     },
     {
@@ -6061,7 +6136,7 @@
       "reasons": [
         "pay-sh"
       ],
-      "logo": null,
+      "logo": "/logos/agentic-reservations.svg",
       "url": "https://agentres.dev"
     },
     {
@@ -6086,7 +6161,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/crypto-financial-forecast-api.webp",
       "url": "https://kronos.seshat.markets/api/feeds/kronos/market-context/%7BsymbolKey%7D"
     },
     {
@@ -6110,7 +6185,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/massive-x402-api.png",
       "url": "https://agent.massive.com/v3/reference/tickers/%7Bticker%7D"
     },
     {
@@ -6134,7 +6209,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/polls-karbach-digital.ico",
       "url": "https://api.polls.karbach.digital/v1/bundestag/documents"
     },
     {
@@ -6159,7 +6234,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/anchor-x402.png",
       "url": "https://api.anchor-x402.com/health"
     },
     {
@@ -6183,7 +6258,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/crypto-etf-sentinel.jpg",
       "url": "https://api.cryptoetfsentinel.com/v1/agent/snapshot"
     },
     {
@@ -6239,7 +6314,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/botpay.png",
       "url": "https://api.botpay.network/llmtoken/status"
     },
     {
@@ -6288,7 +6363,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/telnyx-x402-gateway.png",
       "url": "https://x402.telnyx.com/v1/audio/voices"
     },
     {
@@ -6312,7 +6387,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/x-pay.png",
       "url": "https://www.api-xpay.com/x402/outline"
     },
     {
@@ -6368,7 +6443,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/x402factory-ai.jpg",
       "url": "https://x402factory.ai/base/coinprice"
     },
     {
@@ -6416,7 +6491,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/live-us-weather-and-alerts.ico",
       "url": "https://stormstation247.com/radar/now.json"
     },
     {
@@ -6441,7 +6516,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/microtap.ico",
       "url": "https://x402tap.com/api/ens-resolve"
     },
     {
@@ -6465,7 +6540,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/sniperx-fun.png",
       "url": "https://x402.sniperx.fun/api/v1/smarttraders/activities"
     },
     {
@@ -6491,7 +6566,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/ipintel-ai-x402-tools-api.svg",
       "url": "https://api.ipintel.ai/x402v2"
     },
     {
@@ -6547,7 +6622,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/scry-wallet-intelligence.png",
       "url": "https://scry.solanahub.de/x402/mint/%7Bmint%7D/risk"
     },
     {
@@ -6572,7 +6647,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/aubrai-x402-service.ico",
       "url": "https://x402-api.aubr.ai/api/analysis"
     },
     {
@@ -6596,7 +6671,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/autobus.svg",
       "url": "https://witness.holoweave.org/v1/keys-witness"
     },
     {
@@ -6620,7 +6695,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/csno.svg",
       "url": "https://csno.cc/api/csno/chips"
     },
     {
@@ -6645,7 +6720,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/cult-os.ico",
       "url": "https://www.cultos.dev/services/network-latency"
     },
     {
@@ -6669,7 +6744,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/deepnets-ai.svg",
       "url": "https://api.deepnets.ai/api/network-details/wallets"
     },
     {
@@ -6717,7 +6792,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/spraay-app.jpg",
       "url": "https://gateway.spraay.app/api/v1/chat/completions"
     },
     {
@@ -6742,7 +6817,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/vishwa.ico",
       "url": "https://api.vishwalab.com/v1/prediction/history"
     },
     {
@@ -6790,7 +6865,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/17711-smart-services.ico",
       "url": "https://api.17711.xyz/registry/catalog/v1/catalog/find_services_by_capability"
     },
     {
@@ -6816,7 +6891,7 @@
         "pay-sh",
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/dtelecom-x402-gateway.svg",
       "url": "https://x402.dtelecom.org"
     },
     {
@@ -6847,6 +6922,54 @@
       "url": "https://sol.onhub.ai/v1/url-context"
     },
     {
+      "slug": "tolca",
+      "name": "Tolca",
+      "party": "1P",
+      "domain": "tonbot.ca",
+      "category": "messaging",
+      "endpoints": 15,
+      "priced": 15,
+      "priceMin": 0.002,
+      "priceMedian": 0.02,
+      "networks": [
+        "Base"
+      ],
+      "hosts": [
+        "tolca.tonbot.ca"
+      ],
+      "hostCount": 1,
+      "via": [],
+      "reasons": [
+        "ranked"
+      ],
+      "logo": "/logos/tolca.ico",
+      "url": "https://tolca.tonbot.ca/v1/payment-check"
+    },
+    {
+      "slug": "x402-gateway",
+      "name": "x402 gateway",
+      "party": "1P",
+      "domain": "donnyautomation.com",
+      "category": "search",
+      "endpoints": 15,
+      "priced": 15,
+      "priceMin": 0.005,
+      "priceMedian": 0.02,
+      "networks": [
+        "Base"
+      ],
+      "hosts": [
+        "x402.donnyautomation.com"
+      ],
+      "hostCount": 1,
+      "via": [],
+      "reasons": [
+        "ranked"
+      ],
+      "logo": "/logos/x402-gateway.png",
+      "url": "https://x402.donnyautomation.com/federal-register"
+    },
+    {
       "slug": "brij-travel",
       "name": "BRIJ Travel",
       "party": "1P",
@@ -6869,7 +6992,7 @@
         "pay-sh",
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/brij-travel.png",
       "url": "https://travel.brij.fi"
     },
     {
@@ -6893,7 +7016,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/builtwith-api.svg",
       "url": "https://api.builtwith.com/x402/list-pass/pro"
     },
     {
@@ -6967,7 +7090,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/crushrewards-dev.ico",
       "url": "https://api.crushrewards.dev/v1/analyst/category-summary"
     },
     {
@@ -6991,7 +7114,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/linked-panda.svg",
       "url": "https://api.linkedpanda.com/agent/v1/posts/reactions"
     },
     {
@@ -7015,7 +7138,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/macaroon-network.png",
       "url": "https://api.macaroonnetwork.com/execute/polymathica-cfd-simulation-validator-v1"
     },
     {
@@ -7040,7 +7163,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/farout.svg",
       "url": "https://farouter.tech/v1/messages"
     },
     {
@@ -7088,8 +7211,33 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/strait-of-hormuz-closed.svg",
       "url": "https://straits.live/api/premium/risk-premium"
+    },
+    {
+      "slug": "aptu-dev",
+      "name": "aptu.dev",
+      "party": "1P",
+      "domain": "aptu.dev",
+      "category": "other",
+      "endpoints": 11,
+      "priced": 7,
+      "priceMin": 0.003,
+      "priceMedian": 0.01,
+      "networks": [
+        "Base",
+        "Solana"
+      ],
+      "hosts": [
+        "aptu.dev"
+      ],
+      "hostCount": 1,
+      "via": [],
+      "reasons": [
+        "ranked"
+      ],
+      "logo": "/logos/aptu-dev.svg",
+      "url": "https://aptu.dev/v1/openapi.json"
     },
     {
       "slug": "deepline-gtm-api",
@@ -7112,7 +7260,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/deepline-gtm-api.png",
       "url": "https://stable-deepline.dev/api/ads/search"
     },
     {
@@ -7136,7 +7284,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/gblin-protocol.png",
       "url": "https://gblin.digital/api/x402/governance"
     },
     {
@@ -7162,7 +7310,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/witness.svg",
       "url": "https://witness.outbid.sh/.well-known/x402"
     },
     {
@@ -7187,7 +7335,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/21-million-pixels.svg",
       "url": "https://21millionpixels.art/api/snapshot"
     },
     {
@@ -7236,7 +7384,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/cybercentry.png",
       "url": "https://centry.cybercentry.co.uk/api/services/web_application_verification"
     },
     {
@@ -7260,7 +7408,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/stabledomains.ico",
       "url": "https://stabledomains.dev/api/domain/renew"
     },
     {
@@ -7286,25 +7434,24 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/3route.png",
       "url": "https://3route.agents.bakingbad.dev/openapi.json"
     },
     {
-      "slug": "aptu-dev",
-      "name": "aptu.dev",
+      "slug": "api-wild",
+      "name": "API WILD",
       "party": "1P",
-      "domain": "aptu.dev",
-      "category": "other",
+      "domain": "techswitch.ca",
+      "category": "search",
       "endpoints": 9,
-      "priced": 5,
-      "priceMin": 0.003,
-      "priceMedian": 0.01,
+      "priced": 9,
+      "priceMin": 0.01,
+      "priceMedian": 1,
       "networks": [
-        "Base",
-        "Solana"
+        "Base"
       ],
       "hosts": [
-        "aptu.dev"
+        "api.techswitch.ca"
       ],
       "hostCount": 1,
       "via": [],
@@ -7312,7 +7459,7 @@
         "ranked"
       ],
       "logo": null,
-      "url": "https://aptu.dev/.well-known/x402"
+      "url": "https://api.techswitch.ca/v1/wildtools/%7Bid%7D/run"
     },
     {
       "slug": "ax1",
@@ -7336,7 +7483,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/ax1.ico",
       "url": "https://www.ax1.vc/api/q-verdict/operations/%7BoperationId%7D"
     },
     {
@@ -7360,7 +7507,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/clash-of-coins.ico",
       "url": "https://x402.clashofcoins.com/craft/x402/config"
     },
     {
@@ -7384,7 +7531,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/clawfetch-ai.svg",
       "url": "https://api.clawfetch.ai/health"
     },
     {
@@ -7408,7 +7555,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/octav-pro.ico",
       "url": "https://api.octav.fi/v1/agent/chains/%7BchainKey%7D/protocols"
     },
     {
@@ -7435,7 +7582,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/polymer-zone.ico",
       "url": "http://api.polymer.zone/x402/v1"
     },
     {
@@ -7460,7 +7607,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/stableupload.ico",
       "url": "https://stableupload.dev/api/site/domain/preview"
     },
     {
@@ -7485,7 +7632,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/bitrefill-x402.ico",
       "url": "https://api.bitrefill.com/x402/invoice/status"
     },
     {
@@ -7510,7 +7657,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/rng-sociologic-ai.svg",
       "url": "https://rng.sociologic.ai/coin"
     },
     {
@@ -7534,7 +7681,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/snowpack-fyi.ico",
       "url": "https://snowpack.fyi/api/features"
     },
     {
@@ -7558,7 +7705,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/url2md.png",
       "url": "https://url2md.io/icon.svg"
     },
     {
@@ -7631,7 +7778,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/cluster-protocol.ico",
       "url": "https://api.clusterprotocol.ai/v1/agents/execute"
     },
     {
@@ -7655,7 +7802,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/fetchx402.svg",
       "url": "https://api.fetchx402.com/v1/tools/whois"
     },
     {
@@ -7679,7 +7826,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/keyring-agent.ico",
       "url": "https://keyring-agent.blockchhub.link/api/buy-token"
     },
     {
@@ -7703,7 +7850,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/korus.png",
       "url": "https://www.korusmusic.co/api/v1/payments/config"
     },
     {
@@ -7727,7 +7874,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/milliapi.svg",
       "url": "https://milliapi.com/api/ai-robots-check"
     },
     {
@@ -7751,7 +7898,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/modelprices-xyz.ico",
       "url": "https://modelprices.xyz/llm/price-changes"
     },
     {
@@ -7775,7 +7922,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/signalbound-api.png",
       "url": "https://api.signalbound.art/offer-radar"
     },
     {
@@ -7799,7 +7946,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/welcome-to-nginx.png",
       "url": "https://api.myceliasignal.com/sho/oracle/btcusd/vwap"
     },
     {
@@ -7824,7 +7971,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/3route.png",
       "url": "https://api.3route.io/openapi.json"
     },
     {
@@ -7849,7 +7996,7 @@
       "reasons": [
         "pay-sh"
       ],
-      "logo": null,
+      "logo": "/logos/blocksize-info.ico",
       "url": "https://mcp.blocksize.info/v1/signals/trader-alpha-pack"
     },
     {
@@ -7873,7 +8020,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/neurodynamic.svg",
       "url": "https://api.neurodynamic.tech/v1/audio/transcript-packages"
     },
     {
@@ -7898,7 +8045,7 @@
       "reasons": [
         "pay-sh"
       ],
-      "logo": null,
+      "logo": "/logos/purch.ico",
       "url": "https://x402.purch.xyz/orders/solana"
     },
     {
@@ -7922,7 +8069,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/tokensense-x402-api.ico",
       "url": "https://x402.wach.ai/buyToken"
     },
     {
@@ -7944,7 +8091,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/zfinia.svg",
       "url": "https://api.zfinia.com/v1/router/quote"
     },
     {
@@ -7968,7 +8115,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/200-technical-indicators-rsi.ico",
       "url": "https://x402.anyspend.com/api/taapi"
     },
     {
@@ -8016,7 +8163,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/arysphere.png",
       "url": "https://api.arysphere.com/v1/ventures/x402_q_verdict_v1/dao_proposal_verdict"
     },
     {
@@ -8041,7 +8188,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/hypernatt.svg",
       "url": "https://hypernatt.com/api/m2m/agent/manifest"
     },
     {
@@ -8090,7 +8237,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/padel-maps.svg",
       "url": "https://padelmaps.org/api/x402/matches"
     },
     {
@@ -8114,7 +8261,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/superhighway.svg",
       "url": "https://superhighway.walls.sh/search"
     },
     {
@@ -8139,7 +8286,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/taifoon.png",
       "url": "https://www.taifoon.io/api/x402/settlement-proof"
     },
     {
@@ -8167,7 +8314,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/wdh-sh.png",
       "url": "https://charts.wdh.sh/chart"
     },
     {
@@ -8192,7 +8339,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/digitaldon.png",
       "url": "https://api.digitaldon.net/health"
     },
     {
@@ -8217,7 +8364,7 @@
       "reasons": [
         "pay-sh"
       ],
-      "logo": null,
+      "logo": "/logos/dripstack-xyz.ico",
       "url": "https://dripstack.xyz"
     },
     {
@@ -8241,7 +8388,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/gondola.ico",
       "url": "https://api.gondola-ai.com/v1/models"
     },
     {
@@ -8289,8 +8436,32 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/people-data-labs-api.png",
       "url": "https://stablepeopledata.dev/api/pdl/person/search"
+    },
+    {
+      "slug": "search",
+      "name": "Search",
+      "party": "1P",
+      "domain": "minifetch.com",
+      "category": "search",
+      "endpoints": 4,
+      "priced": 4,
+      "priceMin": 0.001,
+      "priceMedian": 0.0015,
+      "networks": [
+        "Base"
+      ],
+      "hosts": [
+        "minifetch.com"
+      ],
+      "hostCount": 1,
+      "via": [],
+      "reasons": [
+        "ranked"
+      ],
+      "logo": "/logos/search.png",
+      "url": "https://minifetch.com/api/v1/x402/extract/url-metadata"
     },
     {
       "slug": "skim",
@@ -8313,7 +8484,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/skim.svg",
       "url": "https://skim402.com/api/v2/read/batch"
     },
     {
@@ -8339,7 +8510,7 @@
       "reasons": [
         "pay-sh"
       ],
-      "logo": null,
+      "logo": "/logos/social-intel-api.svg",
       "url": "https://api.socialintel.dev"
     },
     {
@@ -8363,7 +8534,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/surplus-intelligence.ico",
       "url": "https://www.surplusintelligence.ai/x402/api/inference/v1/completions"
     },
     {
@@ -8387,7 +8558,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/teppi.svg",
       "url": "https://api.teppi.xyz/v1/research/brief"
     },
     {
@@ -8412,7 +8583,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/acp.ico",
       "url": "https://acp-x402.virtuals.io/acp-budget/v2"
     },
     {
@@ -8436,7 +8607,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/quantum-shield.svg",
       "url": "https://quantumsshield.com/api/resource-preview/wallet-overview"
     },
     {
@@ -8460,7 +8631,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/adex-network.png",
       "url": "https://aura.adex.network/api/x402/portfolio/strategies"
     },
     {
@@ -8485,7 +8656,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/agents-trust.svg",
       "url": "https://api.agents-trust.com/recommend"
     },
     {
@@ -8509,7 +8680,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/botsmith.svg",
       "url": "https://x402.botsmith.dev/x/dossier"
     },
     {
@@ -8534,7 +8705,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/card-bin-lookup-x402.png",
       "url": "https://binx402.com/v1/verify"
     },
     {
@@ -8558,7 +8729,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/domainref.ico",
       "url": "https://domainref.dev/v1/domain/age"
     },
     {
@@ -8582,7 +8753,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/driftflight.svg",
       "url": "https://agents.driftflight.com/v1/images/generate"
     },
     {
@@ -8607,7 +8778,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/payment-service.png",
       "url": "https://payment.ardrive.io/x402/top-up"
     },
     {
@@ -8631,7 +8802,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/svm402-service.ico",
       "url": "https://svm402.com/v1/echo"
     },
     {
@@ -8656,7 +8827,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/tokens.svg",
       "url": "https://api.openzoo.fun/v1/models"
     },
     {
@@ -8729,7 +8900,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/auteng-x402-compute.ico",
       "url": "https://x402.auteng.ai/api/x402/compute"
     },
     {
@@ -8801,7 +8972,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/craig-brown.svg",
       "url": "https://api.craigmbrown.com/v1/reputation/budget-tracker-agent"
     },
     {
@@ -8825,7 +8996,7 @@
       "reasons": [
         "pay-sh"
       ],
-      "logo": null,
+      "logo": "/logos/cryptorefills.png",
       "url": "https://solana.x402.cryptorefills.com"
     },
     {
@@ -8849,7 +9020,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/datastore-api.png",
       "url": "https://fileshareforagents.online/v1/items"
     },
     {
@@ -8873,7 +9044,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/is-this-token-junk.svg",
       "url": "https://nojunkcrypto.com/check"
     },
     {
@@ -8897,7 +9068,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/machina-sports.png",
       "url": "https://agents.machina.gg/zeroclick/agent/quote"
     },
     {
@@ -8945,7 +9116,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/post-quantum-ai-attestation.ico",
       "url": "https://rubric-protocol.com/v1/x402/tiered-attest"
     },
     {
@@ -8969,7 +9140,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/safe4.svg",
       "url": "https://api.safe4.ai/v1/authorize"
     },
     {
@@ -8993,8 +9164,32 @@
       "reasons": [
         "pay-sh"
       ],
-      "logo": null,
+      "logo": "/logos/smartmoney-market.ico",
       "url": "https://pay.smartmoney.market"
+    },
+    {
+      "slug": "strainchain",
+      "name": "StrainChain",
+      "party": "1P",
+      "domain": "strainchain.io",
+      "category": "compute",
+      "endpoints": 1,
+      "priced": 1,
+      "priceMin": 0.05,
+      "priceMedian": 0.05,
+      "networks": [
+        "Base"
+      ],
+      "hosts": [
+        "strainchain.io"
+      ],
+      "hostCount": 1,
+      "via": [],
+      "reasons": [
+        "ranked"
+      ],
+      "logo": "/logos/strainchain.svg",
+      "url": "https://strainchain.io/api/x402"
     },
     {
       "slug": "token4u",
@@ -9017,7 +9212,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/token4u.png",
       "url": "https://token4u.ai/v1/chat/completions"
     },
     {
@@ -9041,7 +9236,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/vaults-fyi.png",
       "url": "https://api.vaults.fyi/v2/detailed-vaults/%7Bnetwork%7D/%7Baddress%7D"
     }
   ]

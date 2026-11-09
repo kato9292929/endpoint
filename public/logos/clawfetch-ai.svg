@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 400 400">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0c1017"/>
+      <stop offset="100%" stop-color="#0c1017"/>
+    </linearGradient>
+    <linearGradient id="c1" x1="0.5" y1="0" x2="0.5" y2="1">
+      <stop offset="0%" stop-color="#ffaa55"/>
+      <stop offset="40%" stop-color="#f06530"/>
+      <stop offset="100%" stop-color="#cc4420"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="400" height="400" rx="80" fill="url(#bg)"/>
+  
+  <!-- Three claw slashes - clean sharp polygons -->
+  <!-- Left claw -->
+  <polygon points="108,48 116,48 148,310 130,310" fill="url(#c1)"/>
+  <!-- Tip hook curving left -->
+  <polygon points="108,48 116,48 96,22 88,28" fill="#ffaa55"/>
+  
+  <!-- Center claw - tallest, widest -->
+  <polygon points="188,30 204,30 216,320 184,320" fill="url(#c1)"/>
+  <!-- Tip -->
+  <polygon points="188,30 204,30 200,6 188,8" fill="#ffaa55"/>
+  
+  <!-- Right claw -->
+  <polygon points="276,48 284,48 300,310 282,310" fill="url(#c1)"/>
+  <!-- Tip hook curving right -->
+  <polygon points="276,48 284,48 302,22 310,28" fill="#ffaa55"/>
+  
+  <!-- Thin highlight lines on each claw for depth -->
+  <line x1="118" y1="60" x2="134" y2="290" stroke="#ffcc88" stroke-width="2" opacity="0.35"/>
+  <line x1="192" y1="40" x2="192" y2="300" stroke="#ffcc88" stroke-width="3" opacity="0.4"/>
+  <line x1="278" y1="60" x2="286" y2="290" stroke="#ffcc88" stroke-width="2" opacity="0.35"/>
+</svg>

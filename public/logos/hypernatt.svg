@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none" role="img" aria-label="HyperNatt"><rect width="512" height="512" fill="#0a0a0f"/><g transform="translate(-104 -104) scale(1.8)"><defs>
+    <linearGradient id="hn-face" x1="171" y1="109" x2="227" y2="285" gradientUnits="userSpaceOnUse"><stop stop-color="#242e2d"/><stop offset="1" stop-color="#080d10"/></linearGradient>
+    <linearGradient id="hn-rim" x1="167" y1="91" x2="241" y2="305" gradientUnits="userSpaceOnUse"><stop stop-color="#62f8ad"/><stop offset=".42" stop-color="#22d491"/><stop offset="1" stop-color="#07936b"/></linearGradient>
+    <linearGradient id="hn-h" x1="152" y1="134" x2="168" y2="254" gradientUnits="userSpaceOnUse"><stop stop-color="#4fefa5"/><stop offset=".55" stop-color="#18b77d"/><stop offset="1" stop-color="#008f69"/></linearGradient>
+    <linearGradient id="hn-n" x1="220" y1="132" x2="252" y2="250" gradientUnits="userSpaceOnUse"><stop stop-color="#ffffff"/><stop offset=".55" stop-color="#f3f7f2"/><stop offset="1" stop-color="#d2ddd4"/></linearGradient>
+    <linearGradient id="hn-fusion" x1="198" y1="210" x2="181" y2="222" gradientUnits="userSpaceOnUse"><stop stop-color="#c8efda"/><stop offset=".27" stop-color="#51cfa1"/><stop offset="1" stop-color="#079e74"/></linearGradient>
+    <linearGradient id="hn-leg" x1="209" y1="219" x2="224" y2="273" gradientUnits="userSpaceOnUse"><stop stop-color="#f8fbf6"/><stop offset="1" stop-color="#cad6ce"/></linearGradient>
+  </defs>
+  <path d="M200 90 295 145 295 255 201 310 106 255 106 145Z" fill="url(#hn-face)"/>
+  <path d="M200 90 295 145 295 255 201 310 106 255 106 145Z M200 103 118 152 118 248 201 297 283 248 283 152Z" fill="url(#hn-rim)" fill-rule="evenodd"/>
+  <path d="M200 90 295 145 295 255 201 310 106 255 106 145Z" stroke="#49e7a5" stroke-opacity=".62" stroke-width="1.2"/>
+  <path d="M200 103 283 152 283 248 201 297 118 248 118 152Z" stroke="#68e4ab" stroke-opacity=".55" stroke-width=".9"/>
+  <path d="M132 159 148 150 148 191 177 191 177 134 192 125 192 193 C183 198 176 202 171 209 L148 209 148 249 132 239Z" fill="url(#hn-h)" stroke="#59dca5" stroke-opacity=".42" stroke-width=".85"/>
+  <path d="M209 125 225 135 253 211 253 151 269 161 269 239 253 248 225 179 225 185 C224 202 215 211 201 219 C192 224 192 232 192 240 L192 276 177 267 177 239 C176 221 184 211 197 203 C207 197 209 193 209 181Z" fill="url(#hn-n)"/>
+  <path d="M195 204.2 C182.7 212.1 176 221.9 177 239 L177 267 192 276 192 240 C192 232 192 224 201 219 L202 218.4Z" fill="url(#hn-fusion)"/>
+  <path d="M209 223 C214 220 220 217 225 211 L225 266 209 276Z" fill="url(#hn-leg)" stroke="#ffffff" stroke-opacity=".55" stroke-width=".85"/>
+  <path d="M210 127 210 181 C210 195 208 199 198 205 C183 214 179 223 179 240 L179 266" stroke="#ffffff" stroke-opacity=".26" stroke-width="1.1"/></g></svg>

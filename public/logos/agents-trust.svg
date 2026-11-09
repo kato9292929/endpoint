@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <!--
+    Pillars, on the tile — the chosen mark (logo/round3/pillars-live.svg).
+
+    White ground, so the tile reads as the nav mark rather than as a second,
+    inverted lockup. On a light browser the ground merges into the tab strip and
+    the three bars read as floating; on a dark browser it reads as a white chip.
+    Both are intended.
+
+    Geometry is the bare nav glyph at 0.9 about centre, which is a little larger
+    than the 12-tier-bars house grid. That grid sized itself to breathe inside a
+    visible navy tile; a white tile is invisible half the time, so the padding
+    was buying nothing and the bars get it instead.
+
+    One colour differs from the bare glyph: the faint bar darkens from #c9ccfb
+    to #9ea3f0. At 16px on white, #c9ccfb falls below the threshold where a 2px
+    bar is visible at all, which turns a three-tick mark into a two-tick one.
+  -->
+  <rect width="64" height="64" rx="14" fill="#ffffff"/>
+  <rect x="12.2" y="19.4" width="9.9" height="25.2" rx="3.15" fill="#9ea3f0"/>
+  <rect x="27.05" y="10.4" width="9.9" height="43.2" rx="3.15" fill="#4f46e5"/>
+  <rect x="41.9" y="22.55" width="9.9" height="18.9" rx="3.15" fill="#10b981"/>
+</svg>
