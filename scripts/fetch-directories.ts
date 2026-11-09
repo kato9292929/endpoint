@@ -27,7 +27,6 @@ import { assessRun } from "./catalog-guard";
 import { appendAll } from "./append-all";
 
 import { fetchX402Inc } from "./fetchers/x402-inc";
-import { fetch402IndexProvider } from "./fetchers/402index-provider";
 import { fetchX402scan, getLastX402scanRun } from "./fetchers/x402scan";
 import { fetchOnyxBazaar } from "./fetchers/onyx-bazaar";
 import { fetchAgenticMarket } from "./fetchers/agentic-market";
@@ -66,7 +65,6 @@ type NamedFetcher = {
 
 const FETCHERS: NamedFetcher[] = [
   { name: "x402-inc", run: fetchX402Inc, expectNonEmpty: true },
-  { name: "402index-provider", run: fetch402IndexProvider, expectNonEmpty: true },
   {
     name: "x402scan",
     run: fetchX402scan,
