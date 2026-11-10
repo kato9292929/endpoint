@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-11-09T16:34:24.140Z",
+  "generated_at": "2026-11-10T15:09:23.964Z",
   "status": "ok",
-  "scanned": 202355,
+  "scanned": 203670,
   "subset": false,
   "qualifying_reasons": [
     "brand",
@@ -9,11 +9,11 @@
     "ranked"
   ],
   "counts": {
-    "services": 364,
-    "endpoints": 36008,
-    "first_party": 341,
+    "services": 365,
+    "endpoints": 36099,
+    "first_party": 342,
     "third_party": 23,
-    "with_logo": 309
+    "with_logo": 310
   },
   "services": [
     {
@@ -432,7 +432,7 @@
         "brand"
       ],
       "logo": "/logos/coingecko-via.ico",
-      "url": "https://coingecko.use.x402atlas.com/price"
+      "url": "https://coingecko.use.x402atlas.com/ohlc"
     },
     {
       "slug": "cloudflare-via",
@@ -652,7 +652,7 @@
         "brand"
       ],
       "logo": "/logos/brave-via.ico",
-      "url": "https://brave.x402.paywithlocus.com/brave/answers"
+      "url": "https://brave.x402.paywithlocus.com/brave/llm-context"
     },
     {
       "slug": "tripadvisor-via",
@@ -783,7 +783,7 @@
         "brand"
       ],
       "logo": "/logos/tavily-via.ico",
-      "url": "https://tavily.x402.paywithlocus.com/tavily/map"
+      "url": "https://tavily.x402.paywithlocus.com/tavily/extract"
     },
     {
       "slug": "alchemy-via",
@@ -1263,10 +1263,10 @@
       "party": "1P",
       "domain": "agent402.tools",
       "category": "messaging",
-      "endpoints": 630,
-      "priced": 627,
+      "endpoints": 593,
+      "priced": 593,
       "priceMin": 0.001,
-      "priceMedian": 0.003,
+      "priceMedian": 0.002,
       "networks": [
         "Base",
         "Solana"
@@ -1280,7 +1280,7 @@
         "ranked"
       ],
       "logo": "/logos/agent402.svg",
-      "url": "https://agent402.tools/api/skill-packs.json"
+      "url": "https://agent402.tools/api/skill/ssl-audit"
     },
     {
       "slug": "2s",
@@ -1363,8 +1363,8 @@
       "party": "1P",
       "domain": "taifoon.dev",
       "category": "data",
-      "endpoints": 528,
-      "priced": 88,
+      "endpoints": 531,
+      "priced": 91,
       "priceMin": 0.000195,
       "priceMedian": 0.0012,
       "networks": [
@@ -1465,6 +1465,38 @@
       "url": "https://agents.daedalusdevelopmentgroup.com/wallets.md"
     },
     {
+      "slug": "pyfile-x402-api",
+      "name": "Pyfile x402 API",
+      "party": "1P",
+      "domain": "ts.net",
+      "category": "compute",
+      "endpoints": 372,
+      "priced": 351,
+      "priceMin": 0.001,
+      "priceMedian": 0.01,
+      "networks": [
+        "Base",
+        "Solana"
+      ],
+      "hosts": [
+        "pyfile-agent.taile3ff35.ts.net",
+        "diamond.tail1b5f86.ts.net",
+        "vps-fc89c157-1.taila28d02.ts.net",
+        "ari001.tailb4ac3a.ts.net",
+        "desktop-suts94d.tail0b188d.ts.net",
+        "elon.tail49499f.ts.net",
+        "pop-os.tail08831d.ts.net",
+        "velux.taild4d007.ts.net"
+      ],
+      "hostCount": 39,
+      "via": [],
+      "reasons": [
+        "ranked"
+      ],
+      "logo": "/logos/pyfile-x402-api.svg",
+      "url": "https://vps-fc89c157-1.taila28d02.ts.net:10000/api/toolchain-cost-plan"
+    },
+    {
       "slug": "unykorn-genesis402-rail",
       "name": "UnyKorn Genesis402 rail",
       "party": "1P",
@@ -1544,38 +1576,6 @@
       ],
       "logo": "/logos/hergert-synthora.svg",
       "url": "https://api.hergertsynthora.com/v1/stablecoin-supply"
-    },
-    {
-      "slug": "pyfile-x402-api",
-      "name": "Pyfile x402 API",
-      "party": "1P",
-      "domain": "ts.net",
-      "category": "compute",
-      "endpoints": 350,
-      "priced": 329,
-      "priceMin": 0.001,
-      "priceMedian": 0.01,
-      "networks": [
-        "Base",
-        "Solana"
-      ],
-      "hosts": [
-        "pyfile-agent.taile3ff35.ts.net",
-        "vps-fc89c157-1.taila28d02.ts.net",
-        "ari001.tailb4ac3a.ts.net",
-        "desktop-suts94d.tail0b188d.ts.net",
-        "elon.tail49499f.ts.net",
-        "pop-os.tail08831d.ts.net",
-        "velux.taild4d007.ts.net",
-        "aniccanomac-mini-1.tail7a0ba4.ts.net"
-      ],
-      "hostCount": 38,
-      "via": [],
-      "reasons": [
-        "ranked"
-      ],
-      "logo": "/logos/pyfile-x402-api.svg",
-      "url": "https://vps-fc89c157-1.taila28d02.ts.net:10000/api/toolchain-cost-plan"
     },
     {
       "slug": "manylives-me",
@@ -1710,8 +1710,8 @@
       "party": "1P",
       "domain": "chatgpt.site",
       "category": "data",
-      "endpoints": 306,
-      "priced": 255,
+      "endpoints": 307,
+      "priced": 256,
       "priceMin": 0.001,
       "priceMedian": 0.03,
       "networks": [
@@ -1728,7 +1728,7 @@
         "moneypilot-c6f8c4.joedyermens.chatgpt.site",
         "moneytest-x402-api.indierepo.chatgpt.site"
       ],
-      "hostCount": 81,
+      "hostCount": 82,
       "via": [],
       "reasons": [
         "ranked"
@@ -2382,7 +2382,7 @@
       "party": "1P",
       "domain": "loyalspark.online",
       "category": "data",
-      "endpoints": 132,
+      "endpoints": 133,
       "priced": 83,
       "priceMin": 0.001,
       "priceMedian": 0.005,
@@ -2690,6 +2690,33 @@
       ],
       "logo": "/logos/tradepilotusa.ico",
       "url": "https://www.tradepilotusa.com/api/agent-commerce/v1/doorplace/quote"
+    },
+    {
+      "slug": "seo-and-keyword-data-api",
+      "name": "SEO and Keyword Data API",
+      "party": "1P",
+      "domain": "duoleads.com",
+      "category": "search",
+      "endpoints": 113,
+      "priced": 113,
+      "priceMin": 0.003,
+      "priceMedian": 0.04,
+      "networks": [
+        "Base"
+      ],
+      "hosts": [
+        "keywords.duoleads.com",
+        "api.duoleads.com",
+        "social.duoleads.com",
+        "derivs.duoleads.com"
+      ],
+      "hostCount": 4,
+      "via": [],
+      "reasons": [
+        "ranked"
+      ],
+      "logo": "/logos/seo-and-keyword-data-api.png",
+      "url": "https://derivs.duoleads.com/v1/options"
     },
     {
       "slug": "blockchain-money-map",
@@ -3010,6 +3037,30 @@
       "url": "https://wurkapi.fun/base/agenthelp-100"
     },
     {
+      "slug": "agentreader",
+      "name": "AgentReader",
+      "party": "1P",
+      "domain": "axiomworks.co.uk",
+      "category": "messaging",
+      "endpoints": 92,
+      "priced": 92,
+      "priceMin": 0.001,
+      "priceMedian": 0.0025,
+      "networks": [
+        "Base"
+      ],
+      "hosts": [
+        "api.axiomworks.co.uk"
+      ],
+      "hostCount": 1,
+      "via": [],
+      "reasons": [
+        "ranked"
+      ],
+      "logo": "/logos/agentreader.svg",
+      "url": "https://api.axiomworks.co.uk/adverse-media"
+    },
+    {
       "slug": "arkham-api",
       "name": "Arkham API",
       "party": "1P",
@@ -3034,30 +3085,6 @@
       ],
       "logo": "/logos/arkham-api.png",
       "url": "https://api.arkm.com/x402/ws/session-info"
-    },
-    {
-      "slug": "agentreader",
-      "name": "AgentReader",
-      "party": "1P",
-      "domain": "axiomworks.co.uk",
-      "category": "messaging",
-      "endpoints": 91,
-      "priced": 91,
-      "priceMin": 0.001,
-      "priceMedian": 0.002,
-      "networks": [
-        "Base"
-      ],
-      "hosts": [
-        "api.axiomworks.co.uk"
-      ],
-      "hostCount": 1,
-      "via": [],
-      "reasons": [
-        "ranked"
-      ],
-      "logo": "/logos/agentreader.svg",
-      "url": "https://api.axiomworks.co.uk/kyb"
     },
     {
       "slug": "otto-ai-x402",
@@ -3281,31 +3308,6 @@
       "url": "https://api.onesource.io/standard/v1/addresses"
     },
     {
-      "slug": "maxwellinternational-ai",
-      "name": "maxwellinternational.ai",
-      "party": "1P",
-      "domain": "maxwellinternational.ai",
-      "category": "search",
-      "endpoints": 83,
-      "priced": 83,
-      "priceMin": 0.002,
-      "priceMedian": 0.005,
-      "networks": [
-        "Base",
-        "Solana"
-      ],
-      "hosts": [
-        "api.maxwellinternational.ai"
-      ],
-      "hostCount": 1,
-      "via": [],
-      "reasons": [
-        "ranked"
-      ],
-      "logo": "/logos/maxwellinternational-ai.svg",
-      "url": "https://api.maxwellinternational.ai/v1/x402/endpoint/check"
-    },
-    {
       "slug": "sirenic",
       "name": "Sirenic",
       "party": "1P",
@@ -3352,6 +3354,31 @@
       ],
       "logo": "/logos/x402-apis-for-ai-agents.svg",
       "url": "https://agent.connskill.com/v1/serp-report"
+    },
+    {
+      "slug": "maxwellinternational-ai",
+      "name": "maxwellinternational.ai",
+      "party": "1P",
+      "domain": "maxwellinternational.ai",
+      "category": "search",
+      "endpoints": 82,
+      "priced": 82,
+      "priceMin": 0.002,
+      "priceMedian": 0.005,
+      "networks": [
+        "Base",
+        "Solana"
+      ],
+      "hosts": [
+        "api.maxwellinternational.ai"
+      ],
+      "hostCount": 1,
+      "via": [],
+      "reasons": [
+        "ranked"
+      ],
+      "logo": "/logos/maxwellinternational-ai.svg",
+      "url": "https://api.maxwellinternational.ai/v1/trip/getting-there"
     },
     {
       "slug": "agentrep",
@@ -3506,33 +3533,6 @@
       "url": "https://shop.lordevo.com/a2a"
     },
     {
-      "slug": "duo-data-utilities",
-      "name": "Duo Data Utilities",
-      "party": "1P",
-      "domain": "duoleads.com",
-      "category": "search",
-      "endpoints": 75,
-      "priced": 75,
-      "priceMin": 0.003,
-      "priceMedian": 0.03,
-      "networks": [
-        "Base"
-      ],
-      "hosts": [
-        "api.duoleads.com",
-        "social.duoleads.com",
-        "derivs.duoleads.com",
-        "keywords.duoleads.com"
-      ],
-      "hostCount": 4,
-      "via": [],
-      "reasons": [
-        "ranked"
-      ],
-      "logo": "/logos/duo-data-utilities.png",
-      "url": "https://api.duoleads.com/v1/num/allocate"
-    },
-    {
       "slug": "pay-per-call-apis-for-ai-agents",
       "name": "Pay-per-call APIs for AI agents",
       "party": "1P",
@@ -3653,6 +3653,31 @@
       ],
       "logo": "/logos/hubvibe.svg",
       "url": "https://hubvibe-io.com/work/video/generate"
+    },
+    {
+      "slug": "singit-ask",
+      "name": "SingIt Ask",
+      "party": "1P",
+      "domain": "singitai.app",
+      "category": "compute",
+      "endpoints": 72,
+      "priced": 62,
+      "priceMin": 0.001006,
+      "priceMedian": 0.006171,
+      "networks": [
+        "Base",
+        "Solana"
+      ],
+      "hosts": [
+        "ask.singitai.app"
+      ],
+      "hostCount": 1,
+      "via": [],
+      "reasons": [
+        "ranked"
+      ],
+      "logo": "/logos/singit-ask.svg",
+      "url": "https://ask.singitai.app/health"
     },
     {
       "slug": "agent-hub",
@@ -4421,6 +4446,31 @@
       "url": "https://x402.professorsausages.com/swap-quote/quote/base/0x4200000000000000000000000000000000000006/0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
     },
     {
+      "slug": "coil",
+      "name": "Coil",
+      "party": "1P",
+      "domain": "coil.trade",
+      "category": "trading",
+      "endpoints": 49,
+      "priced": 16,
+      "priceMin": 0.001,
+      "priceMedian": 0.01,
+      "networks": [
+        "Base",
+        "Solana"
+      ],
+      "hosts": [
+        "coil.trade"
+      ],
+      "hostCount": 1,
+      "via": [],
+      "reasons": [
+        "ranked"
+      ],
+      "logo": "/logos/coil.png",
+      "url": "https://coil.trade/api/research"
+    },
+    {
       "slug": "solenrich",
       "name": "SolEnrich",
       "party": "1P",
@@ -4475,31 +4525,6 @@
       ],
       "logo": null,
       "url": "https://superartist.supercapital.fun/short-story"
-    },
-    {
-      "slug": "coil",
-      "name": "Coil",
-      "party": "1P",
-      "domain": "coil.trade",
-      "category": "trading",
-      "endpoints": 48,
-      "priced": 16,
-      "priceMin": 0.001,
-      "priceMedian": 0.01,
-      "networks": [
-        "Base",
-        "Solana"
-      ],
-      "hosts": [
-        "coil.trade"
-      ],
-      "hostCount": 1,
-      "via": [],
-      "reasons": [
-        "ranked"
-      ],
-      "logo": "/logos/coil.png",
-      "url": "https://coil.trade/api/research"
     },
     {
       "slug": "geekvault",
@@ -5020,31 +5045,6 @@
       ],
       "logo": "/logos/vaaya.ico",
       "url": "https://vaaya.ai/api/run/firecrawl/search"
-    },
-    {
-      "slug": "singit-ask",
-      "name": "SingIt Ask",
-      "party": "1P",
-      "domain": "singitai.app",
-      "category": "compute",
-      "endpoints": 38,
-      "priced": 28,
-      "priceMin": 0.001006,
-      "priceMedian": 0.008676,
-      "networks": [
-        "Base",
-        "Solana"
-      ],
-      "hosts": [
-        "ask.singitai.app"
-      ],
-      "hostCount": 1,
-      "via": [],
-      "reasons": [
-        "ranked"
-      ],
-      "logo": "/logos/singit-ask.svg",
-      "url": "https://ask.singitai.app/pricing.json"
     },
     {
       "slug": "stableenrich",
@@ -6066,6 +6066,32 @@
       "url": "https://human.reversecaptcha.fun/v1/human/status"
     },
     {
+      "slug": "linkrra-pearl-pool",
+      "name": "Linkrra Pearl Pool",
+      "party": "1P",
+      "domain": "linkrra.com",
+      "category": "messaging",
+      "endpoints": 24,
+      "priced": 18,
+      "priceMin": 0.001,
+      "priceMedian": 0.001106,
+      "networks": [
+        "Base",
+        "Solana"
+      ],
+      "hosts": [
+        "pool.linkrra.com",
+        "synap.linkrra.com"
+      ],
+      "hostCount": 2,
+      "via": [],
+      "reasons": [
+        "ranked"
+      ],
+      "logo": "/logos/linkrra-pearl-pool.svg",
+      "url": "https://pool.linkrra.com/v1/models"
+    },
+    {
       "slug": "mayim-agent-gigs",
       "name": "mayim Agent Gigs",
       "party": "1P",
@@ -6318,6 +6344,30 @@
       "url": "https://api.botpay.network/llmtoken/status"
     },
     {
+      "slug": "checking-your-browser",
+      "name": "Checking your browser…",
+      "party": "1P",
+      "domain": "api-xpay.com",
+      "category": "data",
+      "endpoints": 21,
+      "priced": 21,
+      "priceMin": 0.005,
+      "priceMedian": 0.005,
+      "networks": [
+        "Base"
+      ],
+      "hosts": [
+        "api-xpay.com"
+      ],
+      "hostCount": 1,
+      "via": [],
+      "reasons": [
+        "ranked"
+      ],
+      "logo": "/logos/checking-your-browser.png",
+      "url": "https://www.api-xpay.com/x402/outline"
+    },
+    {
       "slug": "slinkylayer-api",
       "name": "SlinkyLayer API",
       "party": "1P",
@@ -6365,30 +6415,6 @@
       ],
       "logo": "/logos/telnyx-x402-gateway.png",
       "url": "https://x402.telnyx.com/v1/audio/voices"
-    },
-    {
-      "slug": "x-pay",
-      "name": "X Pay",
-      "party": "1P",
-      "domain": "api-xpay.com",
-      "category": "data",
-      "endpoints": 21,
-      "priced": 21,
-      "priceMin": 0.005,
-      "priceMedian": 0.005,
-      "networks": [
-        "Base"
-      ],
-      "hosts": [
-        "api-xpay.com"
-      ],
-      "hostCount": 1,
-      "via": [],
-      "reasons": [
-        "ranked"
-      ],
-      "logo": "/logos/x-pay.png",
-      "url": "https://www.api-xpay.com/x402/outline"
     },
     {
       "slug": "x402-game-of-chance",
@@ -6970,6 +6996,31 @@
       "url": "https://x402.donnyautomation.com/federal-register"
     },
     {
+      "slug": "aptu-dev",
+      "name": "aptu.dev",
+      "party": "1P",
+      "domain": "aptu.dev",
+      "category": "other",
+      "endpoints": 14,
+      "priced": 8,
+      "priceMin": 0.003,
+      "priceMedian": 0.0075,
+      "networks": [
+        "Base",
+        "Solana"
+      ],
+      "hosts": [
+        "aptu.dev"
+      ],
+      "hostCount": 1,
+      "via": [],
+      "reasons": [
+        "ranked"
+      ],
+      "logo": "/logos/aptu-dev.svg",
+      "url": "https://aptu.dev/v1/x401-probe"
+    },
+    {
       "slug": "brij-travel",
       "name": "BRIJ Travel",
       "party": "1P",
@@ -7215,31 +7266,6 @@
       "url": "https://straits.live/api/premium/risk-premium"
     },
     {
-      "slug": "aptu-dev",
-      "name": "aptu.dev",
-      "party": "1P",
-      "domain": "aptu.dev",
-      "category": "other",
-      "endpoints": 11,
-      "priced": 7,
-      "priceMin": 0.003,
-      "priceMedian": 0.01,
-      "networks": [
-        "Base",
-        "Solana"
-      ],
-      "hosts": [
-        "aptu.dev"
-      ],
-      "hostCount": 1,
-      "via": [],
-      "reasons": [
-        "ranked"
-      ],
-      "logo": "/logos/aptu-dev.svg",
-      "url": "https://aptu.dev/v1/openapi.json"
-    },
-    {
       "slug": "deepline-gtm-api",
       "name": "Deepline GTM API",
       "party": "1P",
@@ -7339,6 +7365,30 @@
       "url": "https://21millionpixels.art/api/snapshot"
     },
     {
+      "slug": "api-wild",
+      "name": "API WILD",
+      "party": "1P",
+      "domain": "techswitch.ca",
+      "category": "search",
+      "endpoints": 10,
+      "priced": 10,
+      "priceMin": 0.01,
+      "priceMedian": 1.5,
+      "networks": [
+        "Base"
+      ],
+      "hosts": [
+        "api.techswitch.ca"
+      ],
+      "hostCount": 1,
+      "via": [],
+      "reasons": [
+        "ranked"
+      ],
+      "logo": null,
+      "url": "https://api.techswitch.ca/v1/orders"
+    },
+    {
       "slug": "api-x402-space",
       "name": "api-x402-space",
       "party": "1P",
@@ -7436,30 +7486,6 @@
       ],
       "logo": "/logos/3route.png",
       "url": "https://3route.agents.bakingbad.dev/openapi.json"
-    },
-    {
-      "slug": "api-wild",
-      "name": "API WILD",
-      "party": "1P",
-      "domain": "techswitch.ca",
-      "category": "search",
-      "endpoints": 9,
-      "priced": 9,
-      "priceMin": 0.01,
-      "priceMedian": 1,
-      "networks": [
-        "Base"
-      ],
-      "hosts": [
-        "api.techswitch.ca"
-      ],
-      "hostCount": 1,
-      "via": [],
-      "reasons": [
-        "ranked"
-      ],
-      "logo": null,
-      "url": "https://api.techswitch.ca/v1/wildtools/%7Bid%7D/run"
     },
     {
       "slug": "ax1",
