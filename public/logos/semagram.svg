@@ -1,0 +1,23 @@
+<svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Semagram">
+	<!--
+		The mark, in the accent, with the four dots on the axes heavier than the
+		four in the corners — the weighting Mark.tsx draws and refactor/05-brand.md
+		describes. Standalone rather than `currentColor`, because a favicon has no
+		inherited colour to take.
+	-->
+	<g fill="#229ed9">
+		<g opacity=".22">
+			<circle cx="6" cy="6" r="1.7" />
+			<circle cx="26" cy="6" r="1.7" />
+			<circle cx="6" cy="26" r="1.7" />
+			<circle cx="26" cy="26" r="1.7" />
+		</g>
+		<g opacity=".45">
+			<circle cx="16" cy="6" r="1.9" />
+			<circle cx="6" cy="16" r="1.9" />
+			<circle cx="26" cy="16" r="1.9" />
+			<circle cx="16" cy="26" r="1.9" />
+		</g>
+		<circle cx="16" cy="16" r="5.3" />
+	</g>
+</svg>

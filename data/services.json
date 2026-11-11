@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-11-10T15:09:23.964Z",
+  "generated_at": "2026-11-11T14:28:58.443Z",
   "status": "ok",
-  "scanned": 203670,
+  "scanned": 206501,
   "subset": false,
   "qualifying_reasons": [
     "brand",
@@ -9,11 +9,11 @@
     "ranked"
   ],
   "counts": {
-    "services": 365,
-    "endpoints": 36099,
-    "first_party": 342,
+    "services": 367,
+    "endpoints": 46024,
+    "first_party": 344,
     "third_party": 23,
-    "with_logo": 310
+    "with_logo": 314
   },
   "services": [
     {
@@ -432,7 +432,7 @@
         "brand"
       ],
       "logo": "/logos/coingecko-via.ico",
-      "url": "https://coingecko.use.x402atlas.com/ohlc"
+      "url": "https://coingecko.use.x402atlas.com/price"
     },
     {
       "slug": "cloudflare-via",
@@ -652,7 +652,7 @@
         "brand"
       ],
       "logo": "/logos/brave-via.ico",
-      "url": "https://brave.x402.paywithlocus.com/brave/llm-context"
+      "url": "https://brave.x402.paywithlocus.com/brave/answers"
     },
     {
       "slug": "tripadvisor-via",
@@ -757,7 +757,7 @@
         "brand"
       ],
       "logo": "/logos/perplexity-via.png",
-      "url": "https://perplexity.x402.paywithlocus.com/perplexity/embed"
+      "url": "https://perplexity.x402.paywithlocus.com/perplexity/context-embed"
     },
     {
       "slug": "tavily-via",
@@ -783,7 +783,7 @@
         "brand"
       ],
       "logo": "/logos/tavily-via.ico",
-      "url": "https://tavily.x402.paywithlocus.com/tavily/extract"
+      "url": "https://tavily.x402.paywithlocus.com/tavily/crawl"
     },
     {
       "slug": "alchemy-via",
@@ -985,6 +985,61 @@
       "url": "https://x402.tavily.com/search"
     },
     {
+      "slug": "unlockbot-api",
+      "name": "UnlockBot API",
+      "party": "1P",
+      "domain": "hostc.app",
+      "category": "data",
+      "endpoints": 7668,
+      "priced": 4556,
+      "priceMin": 0.001,
+      "priceMedian": 0.01,
+      "networks": [
+        "Base"
+      ],
+      "hosts": [
+        "5taxxg66cbm3.hostc.app",
+        "xay6m5pxd4w7.hostc.app",
+        "ht3ssb545pma.hostc.app",
+        "kwbaracvy52b.hostc.app",
+        "dztb7imehvd9.hostc.app",
+        "zwucdrveakxp.hostc.app",
+        "vwhwqqfr95xg.hostc.app",
+        "vj4e2c34m2i7.hostc.app"
+      ],
+      "hostCount": 219,
+      "via": [],
+      "reasons": [
+        "ranked"
+      ],
+      "logo": "/logos/unlockbot-api.ico",
+      "url": "https://97jsr3ezywg4.hostc.app/api/bodacc-health"
+    },
+    {
+      "slug": "m2mcent",
+      "name": "M2MCent",
+      "party": "1P",
+      "domain": "m2mcent.com",
+      "category": "data",
+      "endpoints": 3185,
+      "priced": 1061,
+      "priceMin": 0.01,
+      "priceMedian": 0.025,
+      "networks": [
+        "Base"
+      ],
+      "hosts": [
+        "api.m2mcent.com"
+      ],
+      "hostCount": 1,
+      "via": [],
+      "reasons": [
+        "ranked"
+      ],
+      "logo": "/logos/m2mcent.ico",
+      "url": "https://api.m2mcent.com/edge-anycast-route-latency-scorer-mcp/preview"
+    },
+    {
       "slug": "delx",
       "name": "Delx",
       "party": "1P",
@@ -1091,30 +1146,6 @@
       ],
       "logo": "/logos/halowerk-medienwerk.svg",
       "url": "https://dns.halowerk.com/domain/articles/ns-hetzner"
-    },
-    {
-      "slug": "m2mcent",
-      "name": "M2MCent",
-      "party": "1P",
-      "domain": "m2mcent.com",
-      "category": "trading",
-      "endpoints": 996,
-      "priced": 996,
-      "priceMin": 0.01,
-      "priceMedian": 0.15,
-      "networks": [
-        "Base"
-      ],
-      "hosts": [
-        "api.m2mcent.com"
-      ],
-      "hostCount": 1,
-      "via": [],
-      "reasons": [
-        "ranked"
-      ],
-      "logo": null,
-      "url": "https://api.m2mcent.com/gastor-motherboard-mcp/api/process"
     },
     {
       "slug": "onchainpulse",
@@ -1263,10 +1294,10 @@
       "party": "1P",
       "domain": "agent402.tools",
       "category": "messaging",
-      "endpoints": 593,
-      "priced": 593,
+      "endpoints": 630,
+      "priced": 627,
       "priceMin": 0.001,
-      "priceMedian": 0.002,
+      "priceMedian": 0.003,
       "networks": [
         "Base",
         "Solana"
@@ -1280,7 +1311,7 @@
         "ranked"
       ],
       "logo": "/logos/agent402.svg",
-      "url": "https://agent402.tools/api/skill/ssl-audit"
+      "url": "https://agent402.tools/api/skill-packs.json"
     },
     {
       "slug": "2s",
@@ -1363,8 +1394,8 @@
       "party": "1P",
       "domain": "taifoon.dev",
       "category": "data",
-      "endpoints": 531,
-      "priced": 91,
+      "endpoints": 535,
+      "priced": 93,
       "priceMin": 0.000195,
       "priceMedian": 0.0012,
       "networks": [
@@ -1414,8 +1445,8 @@
       "party": "1P",
       "domain": "ngrok-free.dev",
       "category": "data",
-      "endpoints": 502,
-      "priced": 281,
+      "endpoints": 507,
+      "priced": 286,
       "priceMin": 0.0001,
       "priceMedian": 0.01,
       "networks": [
@@ -1432,7 +1463,7 @@
         "upturned-penniless-obedient.ngrok-free.dev",
         "constructible-interpleural-boris.ngrok-free.dev"
       ],
-      "hostCount": 35,
+      "hostCount": 36,
       "via": [],
       "reasons": [
         "ranked"
@@ -2101,7 +2132,7 @@
       "name": "APEX Faucet",
       "party": "1P",
       "domain": "apexfaucet.xyz",
-      "category": "messaging",
+      "category": "compute",
       "endpoints": 193,
       "priced": 193,
       "priceMin": 0.001,
@@ -2119,7 +2150,7 @@
         "ranked"
       ],
       "logo": "/logos/apex-faucet.ico",
-      "url": "https://apexfaucet.xyz/api/x402/x1-wallet-holdings"
+      "url": "https://apexfaucet.xyz/api/x402/page-extract"
     },
     {
       "slug": "blockscout-com",
@@ -2425,6 +2456,37 @@
       "url": "https://x402-factory.com/v1/forecast/window"
     },
     {
+      "slug": "cyberwarex-com",
+      "name": "cyberwarex.com",
+      "party": "1P",
+      "domain": "cyberwarex.com",
+      "category": "search",
+      "endpoints": 131,
+      "priced": 68,
+      "priceMin": 0.001,
+      "priceMedian": 0.005,
+      "networks": [
+        "Base"
+      ],
+      "hosts": [
+        "chain.cyberwarex.com",
+        "search.cyberwarex.com",
+        "oracle.cyberwarex.com",
+        "web.cyberwarex.com",
+        "stocks.cyberwarex.com",
+        "simulate.cyberwarex.com",
+        "seo.cyberwarex.com",
+        "uptime.cyberwarex.com"
+      ],
+      "hostCount": 16,
+      "via": [],
+      "reasons": [
+        "ranked"
+      ],
+      "logo": "/logos/cyberwarex-com.png",
+      "url": "https://sanctions.cyberwarex.com/"
+    },
+    {
       "slug": "agentsvc-io",
       "name": "agentsvc.io",
       "party": "1P",
@@ -2635,37 +2697,6 @@
       ],
       "logo": "/logos/three-ws.ico",
       "url": "https://three.ws/api/pump/quote-sdk"
-    },
-    {
-      "slug": "contract-abi-api",
-      "name": "Contract ABI API",
-      "party": "1P",
-      "domain": "cyberwarex.com",
-      "category": "search",
-      "endpoints": 115,
-      "priced": 52,
-      "priceMin": 0.001,
-      "priceMedian": 0.003,
-      "networks": [
-        "Base"
-      ],
-      "hosts": [
-        "chain.cyberwarex.com",
-        "oracle.cyberwarex.com",
-        "search.cyberwarex.com",
-        "stocks.cyberwarex.com",
-        "simulate.cyberwarex.com",
-        "seo.cyberwarex.com",
-        "uptime.cyberwarex.com",
-        "weather.cyberwarex.com"
-      ],
-      "hostCount": 16,
-      "via": [],
-      "reasons": [
-        "ranked"
-      ],
-      "logo": "/logos/contract-abi-api.png",
-      "url": "https://sanctions.cyberwarex.com/"
     },
     {
       "slug": "tradepilotusa",
@@ -3460,6 +3491,31 @@
       "url": "https://app.earnfi.fun/api/ai-agent/v1/work/reviews/mine"
     },
     {
+      "slug": "relayshield",
+      "name": "RelayShield",
+      "party": "1P",
+      "domain": "relayshield.net",
+      "category": "compute",
+      "endpoints": 79,
+      "priced": 37,
+      "priceMin": 0.05,
+      "priceMedian": 0.25,
+      "networks": [
+        "Base",
+        "Solana"
+      ],
+      "hosts": [
+        "api.relayshield.net"
+      ],
+      "hostCount": 1,
+      "via": [],
+      "reasons": [
+        "ranked"
+      ],
+      "logo": "/logos/relayshield.svg",
+      "url": "https://api.relayshield.net/v1/passport/%7Bpassport_id%7D/status"
+    },
+    {
       "slug": "cn402",
       "name": "cn402",
       "party": "1P",
@@ -3555,31 +3611,6 @@
       ],
       "logo": "/logos/pay-per-call-apis-for-ai-agents.svg",
       "url": "https://grokzilla.shop/agents.md"
-    },
-    {
-      "slug": "relayshield",
-      "name": "RelayShield",
-      "party": "1P",
-      "domain": "relayshield.net",
-      "category": "compute",
-      "endpoints": 74,
-      "priced": 34,
-      "priceMin": 0.05,
-      "priceMedian": 0.3,
-      "networks": [
-        "Base",
-        "Solana"
-      ],
-      "hosts": [
-        "api.relayshield.net"
-      ],
-      "hostCount": 1,
-      "via": [],
-      "reasons": [
-        "ranked"
-      ],
-      "logo": "/logos/relayshield.svg",
-      "url": "https://api.relayshield.net/v1/passport/%7Bpassport_id%7D/status"
     },
     {
       "slug": "x402-gateway",
@@ -6344,30 +6375,6 @@
       "url": "https://api.botpay.network/llmtoken/status"
     },
     {
-      "slug": "checking-your-browser",
-      "name": "Checking your browser…",
-      "party": "1P",
-      "domain": "api-xpay.com",
-      "category": "data",
-      "endpoints": 21,
-      "priced": 21,
-      "priceMin": 0.005,
-      "priceMedian": 0.005,
-      "networks": [
-        "Base"
-      ],
-      "hosts": [
-        "api-xpay.com"
-      ],
-      "hostCount": 1,
-      "via": [],
-      "reasons": [
-        "ranked"
-      ],
-      "logo": "/logos/checking-your-browser.png",
-      "url": "https://www.api-xpay.com/x402/outline"
-    },
-    {
       "slug": "slinkylayer-api",
       "name": "SlinkyLayer API",
       "party": "1P",
@@ -6389,7 +6396,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/slinkylayer-api.webp",
       "url": "https://dev-api2.slinkylayer.ai/api/v1/premium_signals"
     },
     {
@@ -6415,6 +6422,30 @@
       ],
       "logo": "/logos/telnyx-x402-gateway.png",
       "url": "https://x402.telnyx.com/v1/audio/voices"
+    },
+    {
+      "slug": "x-pay",
+      "name": "X Pay",
+      "party": "1P",
+      "domain": "api-xpay.com",
+      "category": "data",
+      "endpoints": 21,
+      "priced": 21,
+      "priceMin": 0.005,
+      "priceMedian": 0.005,
+      "networks": [
+        "Base"
+      ],
+      "hosts": [
+        "api-xpay.com"
+      ],
+      "hostCount": 1,
+      "via": [],
+      "reasons": [
+        "ranked"
+      ],
+      "logo": "/logos/x-pay.png",
+      "url": "https://www.api-xpay.com/x402/outline"
     },
     {
       "slug": "x402-game-of-chance",
@@ -6958,7 +6989,8 @@
       "priceMin": 0.002,
       "priceMedian": 0.02,
       "networks": [
-        "Base"
+        "Base",
+        "Solana"
       ],
       "hosts": [
         "tolca.tonbot.ca"
@@ -9168,6 +9200,30 @@
       ],
       "logo": "/logos/safe4.svg",
       "url": "https://api.safe4.ai/v1/authorize"
+    },
+    {
+      "slug": "semagram",
+      "name": "Semagram",
+      "party": "1P",
+      "domain": "semagram.io",
+      "category": "search",
+      "endpoints": 1,
+      "priced": 1,
+      "priceMin": 0.01,
+      "priceMedian": 0.01,
+      "networks": [
+        "Base"
+      ],
+      "hosts": [
+        "semagram.io"
+      ],
+      "hostCount": 1,
+      "via": [],
+      "reasons": [
+        "ranked"
+      ],
+      "logo": "/logos/semagram.svg",
+      "url": "https://semagram.io/api/agent/search"
     },
     {
       "slug": "smartmoney-market",
