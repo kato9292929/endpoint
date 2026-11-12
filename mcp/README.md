@@ -4,6 +4,10 @@ An [MCP](https://modelcontextprotocol.io) server for the **x402 Endpoint**
 catalog — a cross-directory index of x402 ecosystem endpoints. Gives an agent
 read-only access to the catalog over four tools.
 
+It does not pay. To pay for an endpoint you find here, use
+[AgentPay402 MCP](https://github.com/kato9292929/x402-wallet-mcp) (`npx -y agentpay402-mcp`, or the Claude Code plugin),
+which checks the seller before paying and confirms the payment on chain.
+
 ## Tools
 
 | Tool | Arguments | Description |

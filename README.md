@@ -307,7 +307,9 @@ no external store; returns `429` + `Retry-After` past the window). See
 
 MCP server: the [`mcp/`](./mcp) package (`x402-endpoint-mcp`) exposes
 `list_endpoints`, `search_endpoints`, `get_endpoint`, and `get_stats`, backed by
-the REST API. See [`mcp/README.md`](./mcp/README.md) for client setup.
+the REST API. See [`mcp/README.md`](./mcp/README.md) for client setup. The catalog is
+read-only; to pay for an endpoint from an agent, use
+[AgentPay402 MCP](https://github.com/kato9292929/x402-wallet-mcp) (npm `agentpay402-mcp`).
 
 ## Development
 
