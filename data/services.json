@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-11-11T14:28:58.443Z",
+  "generated_at": "2026-11-12T15:26:28.701Z",
   "status": "ok",
-  "scanned": 206501,
+  "scanned": 207748,
   "subset": false,
   "qualifying_reasons": [
     "brand",
@@ -9,11 +9,11 @@
     "ranked"
   ],
   "counts": {
-    "services": 367,
-    "endpoints": 46024,
-    "first_party": 344,
+    "services": 369,
+    "endpoints": 46171,
+    "first_party": 346,
     "third_party": 23,
-    "with_logo": 314
+    "with_logo": 316
   },
   "services": [
     {
@@ -432,7 +432,7 @@
         "brand"
       ],
       "logo": "/logos/coingecko-via.ico",
-      "url": "https://coingecko.use.x402atlas.com/price"
+      "url": "https://coingecko.use.x402atlas.com/trending"
     },
     {
       "slug": "cloudflare-via",
@@ -652,7 +652,7 @@
         "brand"
       ],
       "logo": "/logos/brave-via.ico",
-      "url": "https://brave.x402.paywithlocus.com/brave/answers"
+      "url": "https://brave.x402.paywithlocus.com/brave/llm-context"
     },
     {
       "slug": "tripadvisor-via",
@@ -757,7 +757,7 @@
         "brand"
       ],
       "logo": "/logos/perplexity-via.png",
-      "url": "https://perplexity.x402.paywithlocus.com/perplexity/context-embed"
+      "url": "https://perplexity.x402.paywithlocus.com/perplexity/embed"
     },
     {
       "slug": "tavily-via",
@@ -783,7 +783,7 @@
         "brand"
       ],
       "logo": "/logos/tavily-via.ico",
-      "url": "https://tavily.x402.paywithlocus.com/tavily/crawl"
+      "url": "https://tavily.x402.paywithlocus.com/tavily/extract"
     },
     {
       "slug": "alchemy-via",
@@ -1394,7 +1394,7 @@
       "party": "1P",
       "domain": "taifoon.dev",
       "category": "data",
-      "endpoints": 535,
+      "endpoints": 542,
       "priced": 93,
       "priceMin": 0.000195,
       "priceMedian": 0.0012,
@@ -1741,8 +1741,8 @@
       "party": "1P",
       "domain": "chatgpt.site",
       "category": "data",
-      "endpoints": 307,
-      "priced": 256,
+      "endpoints": 308,
+      "priced": 257,
       "priceMin": 0.001,
       "priceMedian": 0.03,
       "networks": [
@@ -1845,31 +1845,6 @@
       "url": "https://apiv2.laevitas.ch/api/v1/options/backtests"
     },
     {
-      "slug": "x402stock",
-      "name": "x402stock",
-      "party": "1P",
-      "domain": "x402stock.xyz",
-      "category": "search",
-      "endpoints": 284,
-      "priced": 281,
-      "priceMin": 0,
-      "priceMedian": 0.02,
-      "networks": [
-        "Base"
-      ],
-      "hosts": [
-        "x402stock.xyz",
-        "agents.x402stock.xyz"
-      ],
-      "hostCount": 2,
-      "via": [],
-      "reasons": [
-        "ranked"
-      ],
-      "logo": "/logos/x402stock.ico",
-      "url": "https://agents.x402stock.xyz/api/v1/xstocks/%7Bticker%7D"
-    },
-    {
       "slug": "gedx402-social",
       "name": "GEDX402 Social",
       "party": "1P",
@@ -1951,6 +1926,31 @@
       "url": "https://api.vextorium.com/v1/g7-policy-rates"
     },
     {
+      "slug": "glianaai",
+      "name": "GlianaAI",
+      "party": "1P",
+      "domain": "glianalabs.com",
+      "category": "messaging",
+      "endpoints": 231,
+      "priced": 213,
+      "priceMin": 0.002,
+      "priceMedian": 0.024,
+      "networks": [
+        "Base",
+        "Solana"
+      ],
+      "hosts": [
+        "api.glianalabs.com"
+      ],
+      "hostCount": 1,
+      "via": [],
+      "reasons": [
+        "ranked"
+      ],
+      "logo": "/logos/glianaai.ico",
+      "url": "https://api.glianalabs.com/v1/media/%7Bkey%7D"
+    },
+    {
       "slug": "locus",
       "name": "Locus",
       "party": "1P",
@@ -1974,31 +1974,6 @@
       ],
       "logo": "/logos/locus.svg",
       "url": "https://api.locus.report/api/property-update-jobs/%7Bid%7D"
-    },
-    {
-      "slug": "glianaai",
-      "name": "GlianaAI",
-      "party": "1P",
-      "domain": "glianalabs.com",
-      "category": "messaging",
-      "endpoints": 225,
-      "priced": 207,
-      "priceMin": 0.002,
-      "priceMedian": 0.024,
-      "networks": [
-        "Base",
-        "Solana"
-      ],
-      "hosts": [
-        "api.glianalabs.com"
-      ],
-      "hostCount": 1,
-      "via": [],
-      "reasons": [
-        "ranked"
-      ],
-      "logo": "/logos/glianaai.ico",
-      "url": "https://api.glianalabs.com/v1/media/%7Bkey%7D"
     },
     {
       "slug": "blockrun",
@@ -2050,6 +2025,56 @@
       ],
       "logo": "/logos/anyapi.ico",
       "url": "https://api.getanyapi.com/v1/run/youtube.video_transcript"
+    },
+    {
+      "slug": "apex-faucet",
+      "name": "APEX Faucet",
+      "party": "1P",
+      "domain": "apexfaucet.xyz",
+      "category": "compute",
+      "endpoints": 215,
+      "priced": 215,
+      "priceMin": 0.001,
+      "priceMedian": 0.003,
+      "networks": [
+        "Base",
+        "Solana"
+      ],
+      "hosts": [
+        "apexfaucet.xyz"
+      ],
+      "hostCount": 1,
+      "via": [],
+      "reasons": [
+        "ranked"
+      ],
+      "logo": "/logos/apex-faucet.ico",
+      "url": "https://apexfaucet.xyz/api/x402/x1-tx-explain"
+    },
+    {
+      "slug": "stablesocial",
+      "name": "StableSocial",
+      "party": "1P",
+      "domain": "socialx402.com",
+      "category": "search",
+      "endpoints": 212,
+      "priced": 208,
+      "priceMin": 0.06,
+      "priceMedian": 0.06,
+      "networks": [
+        "Base",
+        "Solana"
+      ],
+      "hosts": [
+        "socialx402.com"
+      ],
+      "hostCount": 1,
+      "via": [],
+      "reasons": [
+        "ranked"
+      ],
+      "logo": "/logos/stablesocial.ico",
+      "url": "https://socialx402.com/api/sc/linkme"
     },
     {
       "slug": "stablesocial",
@@ -2126,31 +2151,6 @@
       ],
       "logo": "/logos/fastx402.ico",
       "url": "https://lab.fastx402.tools/token-units"
-    },
-    {
-      "slug": "apex-faucet",
-      "name": "APEX Faucet",
-      "party": "1P",
-      "domain": "apexfaucet.xyz",
-      "category": "compute",
-      "endpoints": 193,
-      "priced": 193,
-      "priceMin": 0.001,
-      "priceMedian": 0.003,
-      "networks": [
-        "Base",
-        "Solana"
-      ],
-      "hosts": [
-        "apexfaucet.xyz"
-      ],
-      "hostCount": 1,
-      "via": [],
-      "reasons": [
-        "ranked"
-      ],
-      "logo": "/logos/apex-faucet.ico",
-      "url": "https://apexfaucet.xyz/api/x402/page-extract"
     },
     {
       "slug": "blockscout-com",
@@ -2305,6 +2305,31 @@
       "url": "https://rotaryagency.uk/api/crypto/price"
     },
     {
+      "slug": "x402stock",
+      "name": "x402stock",
+      "party": "1P",
+      "domain": "x402stock.xyz",
+      "category": "search",
+      "endpoints": 144,
+      "priced": 141,
+      "priceMin": 0,
+      "priceMedian": 0.02,
+      "networks": [
+        "Base"
+      ],
+      "hosts": [
+        "x402stock.xyz",
+        "agents.x402stock.xyz"
+      ],
+      "hostCount": 2,
+      "via": [],
+      "reasons": [
+        "ranked"
+      ],
+      "logo": "/logos/x402stock.ico",
+      "url": "https://agents.x402stock.xyz/zeroclick/agent/quote"
+    },
+    {
       "slug": "api-direct",
       "name": "API Direct",
       "party": "1P",
@@ -2429,7 +2454,7 @@
         "ranked"
       ],
       "logo": "/logos/loyal-spark.ico",
-      "url": "https://api.loyalspark.online/agent-register-siwe"
+      "url": "https://api.loyalspark.online/verify-agent-plan-payment"
     },
     {
       "slug": "x402-factory",
@@ -3339,6 +3364,31 @@
       "url": "https://api.onesource.io/standard/v1/addresses"
     },
     {
+      "slug": "maxwellinternational-ai",
+      "name": "maxwellinternational.ai",
+      "party": "1P",
+      "domain": "maxwellinternational.ai",
+      "category": "search",
+      "endpoints": 83,
+      "priced": 83,
+      "priceMin": 0.002,
+      "priceMedian": 0.005,
+      "networks": [
+        "Base",
+        "Solana"
+      ],
+      "hosts": [
+        "api.maxwellinternational.ai"
+      ],
+      "hostCount": 1,
+      "via": [],
+      "reasons": [
+        "ranked"
+      ],
+      "logo": "/logos/maxwellinternational-ai.svg",
+      "url": "https://api.maxwellinternational.ai/v1/weather/point"
+    },
+    {
       "slug": "sirenic",
       "name": "Sirenic",
       "party": "1P",
@@ -3385,31 +3435,6 @@
       ],
       "logo": "/logos/x402-apis-for-ai-agents.svg",
       "url": "https://agent.connskill.com/v1/serp-report"
-    },
-    {
-      "slug": "maxwellinternational-ai",
-      "name": "maxwellinternational.ai",
-      "party": "1P",
-      "domain": "maxwellinternational.ai",
-      "category": "search",
-      "endpoints": 82,
-      "priced": 82,
-      "priceMin": 0.002,
-      "priceMedian": 0.005,
-      "networks": [
-        "Base",
-        "Solana"
-      ],
-      "hosts": [
-        "api.maxwellinternational.ai"
-      ],
-      "hostCount": 1,
-      "via": [],
-      "reasons": [
-        "ranked"
-      ],
-      "logo": "/logos/maxwellinternational-ai.svg",
-      "url": "https://api.maxwellinternational.ai/v1/trip/getting-there"
     },
     {
       "slug": "agentrep",
@@ -3467,6 +3492,31 @@
       "url": "https://hcrb.in/v1/tools/hcrb_verify/call"
     },
     {
+      "slug": "relayshield",
+      "name": "RelayShield",
+      "party": "1P",
+      "domain": "relayshield.net",
+      "category": "compute",
+      "endpoints": 81,
+      "priced": 39,
+      "priceMin": 0.02,
+      "priceMedian": 0.2,
+      "networks": [
+        "Base",
+        "Solana"
+      ],
+      "hosts": [
+        "api.relayshield.net"
+      ],
+      "hostCount": 1,
+      "via": [],
+      "reasons": [
+        "ranked"
+      ],
+      "logo": "/logos/relayshield.svg",
+      "url": "https://api.relayshield.net/v1/passport/%7Bpassport_id%7D/status"
+    },
+    {
       "slug": "earnfi",
       "name": "EarnFi",
       "party": "1P",
@@ -3489,31 +3539,6 @@
       ],
       "logo": "/logos/earnfi.png",
       "url": "https://app.earnfi.fun/api/ai-agent/v1/work/reviews/mine"
-    },
-    {
-      "slug": "relayshield",
-      "name": "RelayShield",
-      "party": "1P",
-      "domain": "relayshield.net",
-      "category": "compute",
-      "endpoints": 79,
-      "priced": 37,
-      "priceMin": 0.05,
-      "priceMedian": 0.25,
-      "networks": [
-        "Base",
-        "Solana"
-      ],
-      "hosts": [
-        "api.relayshield.net"
-      ],
-      "hostCount": 1,
-      "via": [],
-      "reasons": [
-        "ranked"
-      ],
-      "logo": "/logos/relayshield.svg",
-      "url": "https://api.relayshield.net/v1/passport/%7Bpassport_id%7D/status"
     },
     {
       "slug": "cn402",
@@ -4858,6 +4883,30 @@
       "url": "https://afriref.dev/v1/balance"
     },
     {
+      "slug": "apistead",
+      "name": "APIStead",
+      "party": "1P",
+      "domain": "qd.je",
+      "category": "search",
+      "endpoints": 41,
+      "priced": 31,
+      "priceMin": 0.001,
+      "priceMedian": 0.02,
+      "networks": [
+        "Base"
+      ],
+      "hosts": [
+        "apistead.qd.je"
+      ],
+      "hostCount": 1,
+      "via": [],
+      "reasons": [
+        "ranked"
+      ],
+      "logo": "/logos/apistead.ico",
+      "url": "https://apistead.qd.je/llms.txt"
+    },
+    {
       "slug": "agmsg",
       "name": "AgMsg",
       "party": "1P",
@@ -5173,31 +5222,6 @@
       ],
       "logo": "/logos/lion.svg",
       "url": "https://lionx402.com/api/x402/credits-purchase-json"
-    },
-    {
-      "slug": "stablesocial",
-      "name": "StableSocial",
-      "party": "1P",
-      "domain": "socialx402.com",
-      "category": "search",
-      "endpoints": 36,
-      "priced": 36,
-      "priceMin": 0.06,
-      "priceMedian": 0.06,
-      "networks": [
-        "Base",
-        "Solana"
-      ],
-      "hosts": [
-        "socialx402.com"
-      ],
-      "hostCount": 1,
-      "via": [],
-      "reasons": [
-        "ranked"
-      ],
-      "logo": "/logos/stablesocial.ico",
-      "url": "https://socialx402.com/api/reddit/subreddit"
     },
     {
       "slug": "402registry",
@@ -5605,6 +5629,33 @@
       "url": "https://api.getapi.nl/api/v1/scraping/email"
     },
     {
+      "slug": "onhub",
+      "name": "OnHub",
+      "party": "1P",
+      "domain": "onhub.ai",
+      "category": "compute",
+      "endpoints": 30,
+      "priced": 30,
+      "priceMin": 0.001,
+      "priceMedian": 0.01,
+      "networks": [
+        "Base",
+        "Solana"
+      ],
+      "hosts": [
+        "x402.onhub.ai",
+        "sol.onhub.ai",
+        "api.onhub.ai"
+      ],
+      "hostCount": 3,
+      "via": [],
+      "reasons": [
+        "ranked"
+      ],
+      "logo": null,
+      "url": "https://x402.onhub.ai/v1/storage"
+    },
+    {
       "slug": "paidapis-net",
       "name": "paidapis.net",
       "party": "1P",
@@ -5942,35 +5993,29 @@
       "url": "https://api.xona-agent.com/ai/x-persona"
     },
     {
-      "slug": "deepai",
-      "name": "DeepAI",
+      "slug": "munition",
+      "name": "Munition",
       "party": "1P",
-      "domain": "zeroclick.io",
-      "category": "compute",
+      "domain": "munition.io",
+      "category": "search",
       "endpoints": 25,
-      "priced": 25,
-      "priceMin": 0,
-      "priceMedian": 0.01,
+      "priced": 18,
+      "priceMin": 0.001,
+      "priceMedian": 0.0075,
       "networks": [
-        "Base"
+        "Base",
+        "Solana"
       ],
       "hosts": [
-        "deepai.pay.zeroclick.io",
-        "image.pay.zeroclick.io",
-        "zeroclass.pay.zeroclick.io",
-        "actionlayer.pay.zeroclick.io",
-        "bulletinai.pay.zeroclick.io",
-        "driftflight.pay.zeroclick.io",
-        "extract.pay.zeroclick.io",
-        "feed.pay.zeroclick.io"
+        "api.munition.io"
       ],
-      "hostCount": 12,
+      "hostCount": 1,
       "via": [],
       "reasons": [
         "ranked"
       ],
-      "logo": "/logos/deepai.png",
-      "url": "https://actionlayer.pay.zeroclick.io/zeroclick/tasks"
+      "logo": "/logos/munition.ico",
+      "url": "https://api.munition.io/v1/tools/flight-booking-links"
     },
     {
       "slug": "agent-ia-api",
@@ -6683,6 +6728,31 @@
       "url": "https://scry.solanahub.de/x402/mint/%7Bmint%7D/risk"
     },
     {
+      "slug": "aptu-dev",
+      "name": "aptu.dev",
+      "party": "1P",
+      "domain": "aptu.dev",
+      "category": "other",
+      "endpoints": 16,
+      "priced": 10,
+      "priceMin": 0.003,
+      "priceMedian": 0.0075,
+      "networks": [
+        "Base",
+        "Solana"
+      ],
+      "hosts": [
+        "aptu.dev"
+      ],
+      "hostCount": 1,
+      "via": [],
+      "reasons": [
+        "ranked"
+      ],
+      "logo": "/logos/aptu-dev.svg",
+      "url": "https://aptu.dev/v1/x401-probe"
+    },
+    {
       "slug": "aubrai-x402-service",
       "name": "AUBRAI x402 Service",
       "party": "1P",
@@ -6952,31 +7022,35 @@
       "url": "https://x402.dtelecom.org"
     },
     {
-      "slug": "onhub",
-      "name": "OnHub",
+      "slug": "image-via-zeroclick",
+      "name": "Image via ZeroClick",
       "party": "1P",
-      "domain": "onhub.ai",
-      "category": "search",
+      "domain": "zeroclick.io",
+      "category": "compute",
       "endpoints": 15,
       "priced": 15,
-      "priceMin": 0.002,
-      "priceMedian": 0.025,
+      "priceMin": 0,
+      "priceMedian": 0,
       "networks": [
-        "Base",
-        "Solana"
+        "Base"
       ],
       "hosts": [
-        "sol.onhub.ai",
-        "x402.onhub.ai",
-        "api.onhub.ai"
+        "image.pay.zeroclick.io",
+        "actionlayer.pay.zeroclick.io",
+        "bulletinai.pay.zeroclick.io",
+        "deepai.pay.zeroclick.io",
+        "driftflight.pay.zeroclick.io",
+        "extract.pay.zeroclick.io",
+        "feed.pay.zeroclick.io",
+        "lumby-ping.pay.zeroclick.io"
       ],
-      "hostCount": 3,
+      "hostCount": 12,
       "via": [],
       "reasons": [
         "ranked"
       ],
-      "logo": null,
-      "url": "https://sol.onhub.ai/v1/url-context"
+      "logo": "/logos/image-via-zeroclick.svg",
+      "url": "https://actionlayer.pay.zeroclick.io/zeroclick/tasks"
     },
     {
       "slug": "tolca",
@@ -7026,31 +7100,6 @@
       ],
       "logo": "/logos/x402-gateway.png",
       "url": "https://x402.donnyautomation.com/federal-register"
-    },
-    {
-      "slug": "aptu-dev",
-      "name": "aptu.dev",
-      "party": "1P",
-      "domain": "aptu.dev",
-      "category": "other",
-      "endpoints": 14,
-      "priced": 8,
-      "priceMin": 0.003,
-      "priceMedian": 0.0075,
-      "networks": [
-        "Base",
-        "Solana"
-      ],
-      "hosts": [
-        "aptu.dev"
-      ],
-      "hostCount": 1,
-      "via": [],
-      "reasons": [
-        "ranked"
-      ],
-      "logo": "/logos/aptu-dev.svg",
-      "url": "https://aptu.dev/v1/x401-probe"
     },
     {
       "slug": "brij-travel",
@@ -7542,7 +7591,7 @@
         "ranked"
       ],
       "logo": "/logos/ax1.ico",
-      "url": "https://www.ax1.vc/api/q-verdict/operations/%7BoperationId%7D"
+      "url": "https://ax1.vc/api/dashboard/q-verdict/runs/%7BrunId%7D"
     },
     {
       "slug": "clash-of-coins",
@@ -8791,30 +8840,6 @@
       "url": "https://domainref.dev/v1/domain/age"
     },
     {
-      "slug": "driftflight",
-      "name": "Driftflight",
-      "party": "1P",
-      "domain": "driftflight.com",
-      "category": "compute",
-      "endpoints": 2,
-      "priced": 2,
-      "priceMin": 0,
-      "priceMedian": 0.03,
-      "networks": [
-        "Base"
-      ],
-      "hosts": [
-        "agents.driftflight.com"
-      ],
-      "hostCount": 1,
-      "via": [],
-      "reasons": [
-        "ranked"
-      ],
-      "logo": "/logos/driftflight.svg",
-      "url": "https://agents.driftflight.com/v1/images/generate"
-    },
-    {
       "slug": "payment-service",
       "name": "Payment Service",
       "party": "1P",
@@ -9080,6 +9105,30 @@
       ],
       "logo": "/logos/datastore-api.png",
       "url": "https://fileshareforagents.online/v1/items"
+    },
+    {
+      "slug": "driftflight",
+      "name": "Driftflight",
+      "party": "1P",
+      "domain": "driftflight.com",
+      "category": "compute",
+      "endpoints": 1,
+      "priced": 1,
+      "priceMin": 0,
+      "priceMedian": 0,
+      "networks": [
+        "Base"
+      ],
+      "hosts": [
+        "agents.driftflight.com"
+      ],
+      "hostCount": 1,
+      "via": [],
+      "reasons": [
+        "ranked"
+      ],
+      "logo": "/logos/driftflight.svg",
+      "url": "https://agents.driftflight.com/zeroclick/agent/quote"
     },
     {
       "slug": "is-this-token-junk",
