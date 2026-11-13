@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-11-12T15:26:28.701Z",
+  "generated_at": "2026-11-13T14:51:52.224Z",
   "status": "ok",
-  "scanned": 207748,
+  "scanned": 208851,
   "subset": false,
   "qualifying_reasons": [
     "brand",
@@ -10,7 +10,7 @@
   ],
   "counts": {
     "services": 369,
-    "endpoints": 46171,
+    "endpoints": 46229,
     "first_party": 346,
     "third_party": 23,
     "with_logo": 316
@@ -432,7 +432,7 @@
         "brand"
       ],
       "logo": "/logos/coingecko-via.ico",
-      "url": "https://coingecko.use.x402atlas.com/trending"
+      "url": "https://coingecko.use.x402atlas.com/ohlc"
     },
     {
       "slug": "cloudflare-via",
@@ -652,7 +652,7 @@
         "brand"
       ],
       "logo": "/logos/brave-via.ico",
-      "url": "https://brave.x402.paywithlocus.com/brave/llm-context"
+      "url": "https://brave.x402.paywithlocus.com/brave/answers"
     },
     {
       "slug": "tripadvisor-via",
@@ -757,7 +757,7 @@
         "brand"
       ],
       "logo": "/logos/perplexity-via.png",
-      "url": "https://perplexity.x402.paywithlocus.com/perplexity/embed"
+      "url": "https://perplexity.x402.paywithlocus.com/perplexity/context-embed"
     },
     {
       "slug": "tavily-via",
@@ -783,7 +783,7 @@
         "brand"
       ],
       "logo": "/logos/tavily-via.ico",
-      "url": "https://tavily.x402.paywithlocus.com/tavily/extract"
+      "url": "https://tavily.x402.paywithlocus.com/tavily/crawl"
     },
     {
       "slug": "alchemy-via",
@@ -1370,8 +1370,8 @@
       "party": "1P",
       "domain": "minia2a.uk",
       "category": "search",
-      "endpoints": 547,
-      "priced": 547,
+      "endpoints": 548,
+      "priced": 548,
       "priceMin": 0.001,
       "priceMedian": 0.01,
       "networks": [
@@ -1386,7 +1386,7 @@
         "ranked"
       ],
       "logo": "/logos/minia2a-uk.svg",
-      "url": "https://minia2a.uk/x402/bubbleSort"
+      "url": "https://minia2a.uk/x402/sol-report"
     },
     {
       "slug": "taifoon",
@@ -1394,8 +1394,8 @@
       "party": "1P",
       "domain": "taifoon.dev",
       "category": "data",
-      "endpoints": 542,
-      "priced": 93,
+      "endpoints": 543,
+      "priced": 94,
       "priceMin": 0.000195,
       "priceMedian": 0.0012,
       "networks": [
@@ -1711,6 +1711,38 @@
       "url": "https://markets.losbeto.xyz/stake"
     },
     {
+      "slug": "gedx402-social",
+      "name": "GEDX402 Social",
+      "party": "1P",
+      "domain": "gedx402.com",
+      "category": "search",
+      "endpoints": 315,
+      "priced": 270,
+      "priceMin": 0.00222,
+      "priceMedian": 0.014,
+      "networks": [
+        "Base",
+        "Solana"
+      ],
+      "hosts": [
+        "social.gedx402.com",
+        "search.gedx402.com",
+        "browser.gedx402.com",
+        "jobs.gedx402.com",
+        "media.gedx402.com",
+        "embed.gedx402.com",
+        "gateway.gedx402.com",
+        "llm.gedx402.com"
+      ],
+      "hostCount": 16,
+      "via": [],
+      "reasons": [
+        "ranked"
+      ],
+      "logo": "/logos/gedx402-social.svg",
+      "url": "https://gateway.gedx402.com/v1/health"
+    },
+    {
       "slug": "openweb-ninja",
       "name": "OpenWeb Ninja",
       "party": "1P",
@@ -1843,38 +1875,6 @@
       ],
       "logo": "/logos/laevitas-api-v2.ico",
       "url": "https://apiv2.laevitas.ch/api/v1/options/backtests"
-    },
-    {
-      "slug": "gedx402-social",
-      "name": "GEDX402 Social",
-      "party": "1P",
-      "domain": "gedx402.com",
-      "category": "search",
-      "endpoints": 268,
-      "priced": 223,
-      "priceMin": 0.00222,
-      "priceMedian": 0.014,
-      "networks": [
-        "Base",
-        "Solana"
-      ],
-      "hosts": [
-        "social.gedx402.com",
-        "search.gedx402.com",
-        "browser.gedx402.com",
-        "jobs.gedx402.com",
-        "media.gedx402.com",
-        "embed.gedx402.com",
-        "gateway.gedx402.com",
-        "llm.gedx402.com"
-      ],
-      "hostCount": 16,
-      "via": [],
-      "reasons": [
-        "ranked"
-      ],
-      "logo": "/logos/gedx402-social.svg",
-      "url": "https://gateway.gedx402.com/v1/health"
     },
     {
       "slug": "adh",
@@ -3517,6 +3517,30 @@
       "url": "https://api.relayshield.net/v1/passport/%7Bpassport_id%7D/status"
     },
     {
+      "slug": "x402-gateway",
+      "name": "x402-gateway",
+      "party": "1P",
+      "domain": "freeq.one",
+      "category": "messaging",
+      "endpoints": 81,
+      "priced": 77,
+      "priceMin": 0,
+      "priceMedian": 0.005,
+      "networks": [
+        "Base"
+      ],
+      "hosts": [
+        "x402.freeq.one"
+      ],
+      "hostCount": 1,
+      "via": [],
+      "reasons": [
+        "ranked"
+      ],
+      "logo": "/logos/x402-gateway.png",
+      "url": "https://x402.freeq.one/health"
+    },
+    {
       "slug": "earnfi",
       "name": "EarnFi",
       "party": "1P",
@@ -3636,30 +3660,6 @@
       ],
       "logo": "/logos/pay-per-call-apis-for-ai-agents.svg",
       "url": "https://grokzilla.shop/agents.md"
-    },
-    {
-      "slug": "x402-gateway",
-      "name": "x402-gateway",
-      "party": "1P",
-      "domain": "freeq.one",
-      "category": "messaging",
-      "endpoints": 74,
-      "priced": 70,
-      "priceMin": 0,
-      "priceMedian": 0.005,
-      "networks": [
-        "Base"
-      ],
-      "hosts": [
-        "x402.freeq.one"
-      ],
-      "hostCount": 1,
-      "via": [],
-      "reasons": [
-        "ranked"
-      ],
-      "logo": "/logos/x402-gateway.png",
-      "url": "https://x402.freeq.one/tools"
     },
     {
       "slug": "webbersites",
@@ -4381,6 +4381,31 @@
       "url": "https://chainhilt.ai/api/v1/actions/%7Bnonce%7D/%7Bhash%7D"
     },
     {
+      "slug": "coil",
+      "name": "Coil",
+      "party": "1P",
+      "domain": "coil.trade",
+      "category": "trading",
+      "endpoints": 51,
+      "priced": 16,
+      "priceMin": 0.001,
+      "priceMedian": 0.01,
+      "networks": [
+        "Base",
+        "Solana"
+      ],
+      "hosts": [
+        "coil.trade"
+      ],
+      "hostCount": 1,
+      "via": [],
+      "reasons": [
+        "ranked"
+      ],
+      "logo": "/logos/coil.png",
+      "url": "https://coil.trade/api/research"
+    },
+    {
       "slug": "402utils",
       "name": "402utils",
       "party": "1P",
@@ -4500,31 +4525,6 @@
       ],
       "logo": "/logos/x402-professorsausages-com.svg",
       "url": "https://x402.professorsausages.com/swap-quote/quote/base/0x4200000000000000000000000000000000000006/0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
-    },
-    {
-      "slug": "coil",
-      "name": "Coil",
-      "party": "1P",
-      "domain": "coil.trade",
-      "category": "trading",
-      "endpoints": 49,
-      "priced": 16,
-      "priceMin": 0.001,
-      "priceMedian": 0.01,
-      "networks": [
-        "Base",
-        "Solana"
-      ],
-      "hosts": [
-        "coil.trade"
-      ],
-      "hostCount": 1,
-      "via": [],
-      "reasons": [
-        "ranked"
-      ],
-      "logo": "/logos/coil.png",
-      "url": "https://coil.trade/api/research"
     },
     {
       "slug": "solenrich",
@@ -7591,7 +7591,7 @@
         "ranked"
       ],
       "logo": "/logos/ax1.ico",
-      "url": "https://ax1.vc/api/dashboard/q-verdict/runs/%7BrunId%7D"
+      "url": "https://www.ax1.vc/api/q-verdict/operations/%7BoperationId%7D"
     },
     {
       "slug": "clash-of-coins",
