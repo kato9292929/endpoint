@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-11-13T14:51:07.563Z",
+  "generated_at": "2026-11-14T13:54:02.797Z",
   "status": "ok",
   "source": "data/endpoints_full.json.gz",
-  "scanned": 208851,
+  "scanned": 209529,
   "subset": false,
   "firstParty": [
     {
@@ -320,7 +320,7 @@
     {
       "host": "sol.blockrun.ai",
       "name": "BlockRun on Solana — pay-per-request AI, settled in USDC",
-      "count": 28,
+      "count": 30,
       "priced": 18,
       "priceMedian": 0.045,
       "topCategory": "compute",

@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-11-13T14:51:52.224Z",
+  "generated_at": "2026-11-14T13:54:47.602Z",
   "status": "ok",
-  "scanned": 208851,
+  "scanned": 209529,
   "subset": false,
   "qualifying_reasons": [
     "brand",
@@ -9,11 +9,11 @@
     "ranked"
   ],
   "counts": {
-    "services": 369,
-    "endpoints": 46229,
-    "first_party": 346,
+    "services": 370,
+    "endpoints": 46313,
+    "first_party": 347,
     "third_party": 23,
-    "with_logo": 316
+    "with_logo": 317
   },
   "services": [
     {
@@ -493,6 +493,33 @@
       "url": "https://anthropic.x402.paywithlocus.com/anthropic/count-tokens"
     },
     {
+      "slug": "brave-via",
+      "name": "Brave",
+      "party": "3P",
+      "domain": null,
+      "category": "search",
+      "endpoints": 14,
+      "priced": 14,
+      "priceMin": 0.005,
+      "priceMedian": 0.005,
+      "networks": [
+        "Base"
+      ],
+      "hosts": [
+        "search.agent.s.brave.app",
+        "brave.x402.paywithlocus.com"
+      ],
+      "hostCount": 2,
+      "via": [
+        "Locus"
+      ],
+      "reasons": [
+        "brand"
+      ],
+      "logo": "/logos/brave-via.ico",
+      "url": "https://search.agent.s.brave.app/res/v1/local/pois"
+    },
+    {
       "slug": "0x",
       "name": "0x",
       "party": "1P",
@@ -629,32 +656,6 @@
       "url": "https://wolframalpha.x402.paysponge.com/v1/simple"
     },
     {
-      "slug": "brave-via",
-      "name": "Brave",
-      "party": "3P",
-      "domain": null,
-      "category": "search",
-      "endpoints": 6,
-      "priced": 6,
-      "priceMin": 0.035,
-      "priceMedian": 0.035,
-      "networks": [
-        "Base"
-      ],
-      "hosts": [
-        "brave.x402.paywithlocus.com"
-      ],
-      "hostCount": 1,
-      "via": [
-        "Locus"
-      ],
-      "reasons": [
-        "brand"
-      ],
-      "logo": "/logos/brave-via.ico",
-      "url": "https://brave.x402.paywithlocus.com/brave/answers"
-    },
-    {
       "slug": "tripadvisor-via",
       "name": "Tripadvisor",
       "party": "3P",
@@ -757,7 +758,7 @@
         "brand"
       ],
       "logo": "/logos/perplexity-via.png",
-      "url": "https://perplexity.x402.paywithlocus.com/perplexity/context-embed"
+      "url": "https://perplexity.x402.paywithlocus.com/perplexity/embed"
     },
     {
       "slug": "tavily-via",
@@ -783,7 +784,7 @@
         "brand"
       ],
       "logo": "/logos/tavily-via.ico",
-      "url": "https://tavily.x402.paywithlocus.com/tavily/crawl"
+      "url": "https://tavily.x402.paywithlocus.com/tavily/map"
     },
     {
       "slug": "alchemy-via",
@@ -1314,6 +1315,31 @@
       "url": "https://agent402.tools/api/skill-packs.json"
     },
     {
+      "slug": "taifoon",
+      "name": "Taifoon",
+      "party": "1P",
+      "domain": "taifoon.dev",
+      "category": "messaging",
+      "endpoints": 572,
+      "priced": 95,
+      "priceMin": 0.000195,
+      "priceMedian": 0.0012,
+      "networks": [
+        "Base",
+        "Solana"
+      ],
+      "hosts": [
+        "coord.taifoon.dev"
+      ],
+      "hostCount": 1,
+      "via": [],
+      "reasons": [
+        "ranked"
+      ],
+      "logo": "/logos/taifoon.png",
+      "url": "https://coord.taifoon.dev/v1/x402/class/tee.typed.compile"
+    },
+    {
       "slug": "2s",
       "name": "2s",
       "party": "1P",
@@ -1386,32 +1412,7 @@
         "ranked"
       ],
       "logo": "/logos/minia2a-uk.svg",
-      "url": "https://minia2a.uk/x402/sol-report"
-    },
-    {
-      "slug": "taifoon",
-      "name": "Taifoon",
-      "party": "1P",
-      "domain": "taifoon.dev",
-      "category": "data",
-      "endpoints": 543,
-      "priced": 94,
-      "priceMin": 0.000195,
-      "priceMedian": 0.0012,
-      "networks": [
-        "Base",
-        "Solana"
-      ],
-      "hosts": [
-        "coord.taifoon.dev"
-      ],
-      "hostCount": 1,
-      "via": [],
-      "reasons": [
-        "ranked"
-      ],
-      "logo": "/logos/taifoon.png",
-      "url": "https://coord.taifoon.dev/v1/x402/class/tee.typed.compile"
+      "url": "https://minia2a.uk/x402/web-search"
     },
     {
       "slug": "jarvisclaw-api",
@@ -1635,6 +1636,38 @@
       "url": "https://manylives.me/a2a"
     },
     {
+      "slug": "gedx402-social",
+      "name": "GEDX402 Social",
+      "party": "1P",
+      "domain": "gedx402.com",
+      "category": "search",
+      "endpoints": 337,
+      "priced": 289,
+      "priceMin": 0.00222,
+      "priceMedian": 0.014,
+      "networks": [
+        "Base",
+        "Solana"
+      ],
+      "hosts": [
+        "social.gedx402.com",
+        "search.gedx402.com",
+        "browser.gedx402.com",
+        "jobs.gedx402.com",
+        "media.gedx402.com",
+        "embed.gedx402.com",
+        "gateway.gedx402.com",
+        "llm.gedx402.com"
+      ],
+      "hostCount": 16,
+      "via": [],
+      "reasons": [
+        "ranked"
+      ],
+      "logo": "/logos/gedx402-social.svg",
+      "url": "https://gateway.gedx402.com/v1/models"
+    },
+    {
       "slug": "universal-x402-a2a-endpoint",
       "name": "universal x402 & A2A endpoint",
       "party": "1P",
@@ -1709,38 +1742,6 @@
       ],
       "logo": "/logos/losbeto.png",
       "url": "https://markets.losbeto.xyz/stake"
-    },
-    {
-      "slug": "gedx402-social",
-      "name": "GEDX402 Social",
-      "party": "1P",
-      "domain": "gedx402.com",
-      "category": "search",
-      "endpoints": 315,
-      "priced": 270,
-      "priceMin": 0.00222,
-      "priceMedian": 0.014,
-      "networks": [
-        "Base",
-        "Solana"
-      ],
-      "hosts": [
-        "social.gedx402.com",
-        "search.gedx402.com",
-        "browser.gedx402.com",
-        "jobs.gedx402.com",
-        "media.gedx402.com",
-        "embed.gedx402.com",
-        "gateway.gedx402.com",
-        "llm.gedx402.com"
-      ],
-      "hostCount": 16,
-      "via": [],
-      "reasons": [
-        "ranked"
-      ],
-      "logo": "/logos/gedx402-social.svg",
-      "url": "https://gateway.gedx402.com/v1/health"
     },
     {
       "slug": "openweb-ninja",
@@ -1981,7 +1982,7 @@
       "party": "1P",
       "domain": "blockrun.ai",
       "category": "compute",
-      "endpoints": 222,
+      "endpoints": 224,
       "priced": 191,
       "priceMin": 0,
       "priceMedian": 0.0085,
@@ -2642,31 +2643,6 @@
       "url": "https://mailcheck.netzhandwerker.de/email/batch"
     },
     {
-      "slug": "automatic",
-      "name": "Automatic",
-      "party": "1P",
-      "domain": "ssh.autos",
-      "category": "messaging",
-      "endpoints": 122,
-      "priced": 122,
-      "priceMin": 0.01,
-      "priceMedian": 0.02,
-      "networks": [
-        "Base",
-        "Solana"
-      ],
-      "hosts": [
-        "api.ssh.autos"
-      ],
-      "hostCount": 1,
-      "via": [],
-      "reasons": [
-        "ranked"
-      ],
-      "logo": "/logos/automatic.svg",
-      "url": "https://api.ssh.autos/v1/jobs/tender-scout"
-    },
-    {
       "slug": "scout",
       "name": "Scout",
       "party": "1P",
@@ -2697,6 +2673,31 @@
       ],
       "logo": null,
       "url": "https://gotobi.hugen.tokyo/gotobi/today"
+    },
+    {
+      "slug": "automatic",
+      "name": "Automatic",
+      "party": "1P",
+      "domain": "ssh.autos",
+      "category": "messaging",
+      "endpoints": 121,
+      "priced": 121,
+      "priceMin": 0.01,
+      "priceMedian": 0.02,
+      "networks": [
+        "Base",
+        "Solana"
+      ],
+      "hosts": [
+        "api.ssh.autos"
+      ],
+      "hostCount": 1,
+      "via": [],
+      "reasons": [
+        "ranked"
+      ],
+      "logo": "/logos/automatic.svg",
+      "url": "https://api.ssh.autos/v1/jobs/tender-scout"
     },
     {
       "slug": "three-ws",
@@ -3565,6 +3566,31 @@
       "url": "https://app.earnfi.fun/api/ai-agent/v1/work/reviews/mine"
     },
     {
+      "slug": "singit",
+      "name": "SingIt",
+      "party": "1P",
+      "domain": "singitai.app",
+      "category": "compute",
+      "endpoints": 79,
+      "priced": 62,
+      "priceMin": 0.001082,
+      "priceMedian": 0.0056395,
+      "networks": [
+        "Base",
+        "Solana"
+      ],
+      "hosts": [
+        "ask.singitai.app"
+      ],
+      "hostCount": 1,
+      "via": [],
+      "reasons": [
+        "ranked"
+      ],
+      "logo": "/logos/singit.png",
+      "url": "https://ask.singitai.app/pricing.json"
+    },
+    {
       "slug": "cn402",
       "name": "cn402",
       "party": "1P",
@@ -3709,31 +3735,6 @@
       ],
       "logo": "/logos/hubvibe.svg",
       "url": "https://hubvibe-io.com/work/video/generate"
-    },
-    {
-      "slug": "singit-ask",
-      "name": "SingIt Ask",
-      "party": "1P",
-      "domain": "singitai.app",
-      "category": "compute",
-      "endpoints": 72,
-      "priced": 62,
-      "priceMin": 0.001006,
-      "priceMedian": 0.006171,
-      "networks": [
-        "Base",
-        "Solana"
-      ],
-      "hosts": [
-        "ask.singitai.app"
-      ],
-      "hostCount": 1,
-      "via": [],
-      "reasons": [
-        "ranked"
-      ],
-      "logo": "/logos/singit-ask.svg",
-      "url": "https://ask.singitai.app/health"
     },
     {
       "slug": "agent-hub",
@@ -4381,6 +4382,31 @@
       "url": "https://chainhilt.ai/api/v1/actions/%7Bnonce%7D/%7Bhash%7D"
     },
     {
+      "slug": "cloudworldmodel-ai",
+      "name": "cloudworldmodel.ai",
+      "party": "1P",
+      "domain": "cloudworldmodel.ai",
+      "category": "compute",
+      "endpoints": 51,
+      "priced": 22,
+      "priceMin": 0.001,
+      "priceMedian": 0.003,
+      "networks": [
+        "Base",
+        "Solana"
+      ],
+      "hosts": [
+        "cloudworldmodel.ai"
+      ],
+      "hostCount": 1,
+      "via": [],
+      "reasons": [
+        "ranked"
+      ],
+      "logo": "/logos/cloudworldmodel-ai.ico",
+      "url": "https://www.cloudworldmodel.ai/api/failures/%7BfailureId%7D"
+    },
+    {
       "slug": "coil",
       "name": "Coil",
       "party": "1P",
@@ -4428,31 +4454,6 @@
       ],
       "logo": null,
       "url": "https://402utils.com/v1/batch"
-    },
-    {
-      "slug": "cloudworldmodel-ai",
-      "name": "cloudworldmodel.ai",
-      "party": "1P",
-      "domain": "cloudworldmodel.ai",
-      "category": "compute",
-      "endpoints": 50,
-      "priced": 21,
-      "priceMin": 0.001,
-      "priceMedian": 0.003,
-      "networks": [
-        "Base",
-        "Solana"
-      ],
-      "hosts": [
-        "cloudworldmodel.ai"
-      ],
-      "hostCount": 1,
-      "via": [],
-      "reasons": [
-        "ranked"
-      ],
-      "logo": "/logos/cloudworldmodel-ai.ico",
-      "url": "https://www.cloudworldmodel.ai/api/failures/%7BfailureId%7D"
     },
     {
       "slug": "cryptyx",
@@ -5444,7 +5445,7 @@
         "ranked"
       ],
       "logo": "/logos/zerion-api.png",
-      "url": "https://api.zerion.io/v1/wallets/%7Baddress%7D/transactions"
+      "url": "https://api.zerion.io/v1/wallets/%7Baddress%7D/positions"
     },
     {
       "slug": "agentmail",
@@ -7226,6 +7227,30 @@
       "url": "https://api.crushrewards.dev/v1/analyst/category-summary"
     },
     {
+      "slug": "horizon-pulse",
+      "name": "Horizon Pulse",
+      "party": "1P",
+      "domain": "horizonpulse.dev",
+      "category": "data",
+      "endpoints": 13,
+      "priced": 13,
+      "priceMin": 0.005,
+      "priceMedian": 0.015,
+      "networks": [
+        "Base"
+      ],
+      "hosts": [
+        "horizonpulse.dev"
+      ],
+      "hostCount": 1,
+      "via": [],
+      "reasons": [
+        "ranked"
+      ],
+      "logo": "/logos/horizon-pulse.ico",
+      "url": "https://horizonpulse.dev/api/search"
+    },
+    {
       "slug": "linked-panda",
       "name": "Linked Panda",
       "party": "1P",
@@ -7741,6 +7766,31 @@
       ],
       "logo": "/logos/bitrefill-x402.ico",
       "url": "https://api.bitrefill.com/x402/invoice/status"
+    },
+    {
+      "slug": "hypernatt",
+      "name": "HyperNatt",
+      "party": "1P",
+      "domain": "hypernatt.com",
+      "category": "trading",
+      "endpoints": 8,
+      "priced": 5,
+      "priceMin": 0.001,
+      "priceMedian": 0.001,
+      "networks": [
+        "Base",
+        "Solana"
+      ],
+      "hosts": [
+        "hypernatt.com"
+      ],
+      "hostCount": 1,
+      "via": [],
+      "reasons": [
+        "ranked"
+      ],
+      "logo": "/logos/hypernatt.svg",
+      "url": "https://hypernatt.com/mcp/protocol"
     },
     {
       "slug": "rng-sociologic-ai",
@@ -8272,31 +8322,6 @@
       ],
       "logo": "/logos/arysphere.png",
       "url": "https://api.arysphere.com/v1/ventures/x402_q_verdict_v1/dao_proposal_verdict"
-    },
-    {
-      "slug": "hypernatt",
-      "name": "HyperNatt",
-      "party": "1P",
-      "domain": "hypernatt.com",
-      "category": "trading",
-      "endpoints": 5,
-      "priced": 3,
-      "priceMin": 0.001,
-      "priceMedian": 0.001,
-      "networks": [
-        "Base",
-        "Solana"
-      ],
-      "hosts": [
-        "hypernatt.com"
-      ],
-      "hostCount": 1,
-      "via": [],
-      "reasons": [
-        "ranked"
-      ],
-      "logo": "/logos/hypernatt.svg",
-      "url": "https://hypernatt.com/api/m2m/agent/manifest"
     },
     {
       "slug": "naiko-x402-api",
