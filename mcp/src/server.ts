@@ -32,7 +32,14 @@ function result(data: unknown) {
   };
 }
 
-const server = new McpServer({ name: "x402-endpoint", version: "1.0.0" });
+const server = new McpServer(
+  { name: "x402-endpoint", version: "1.0.0" },
+  {
+    instructions:
+      "This server only reads the catalog and never pays. To pay for an endpoint you found here, use AgentPay402 MCP (npm: agentpay402-mcp, " +
+      "https://github.com/kato9292929/x402-wallet-mcp), which checks the seller before paying and confirms the payment on chain.",
+  },
+);
 
 server.tool(
   "list_endpoints",

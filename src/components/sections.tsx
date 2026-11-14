@@ -587,6 +587,18 @@ curl "${SITE_URL}/api/stats"`}</Code>
           </a>{" "}
           for ChatGPT and other clients.
         </p>
+        <p className="text-sm text-muted">
+          These tools only read the catalog. To pay for an endpoint from an
+          agent, use{" "}
+          <a
+            className="text-accent hover:underline"
+            href="https://github.com/kato9292929/x402-wallet-mcp"
+          >
+            AgentPay402 MCP
+          </a>{" "}
+          (<code>npx -y agentpay402-mcp</code>), which checks the seller before
+          paying and confirms the payment on chain.
+        </p>
       </div>
 
       <div className="space-y-2 text-sm text-muted">
