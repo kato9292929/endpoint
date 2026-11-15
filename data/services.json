@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-11-14T13:54:47.602Z",
+  "generated_at": "2026-11-15T14:18:22.837Z",
   "status": "ok",
-  "scanned": 209529,
+  "scanned": 210514,
   "subset": false,
   "qualifying_reasons": [
     "brand",
@@ -9,11 +9,11 @@
     "ranked"
   ],
   "counts": {
-    "services": 370,
-    "endpoints": 46313,
-    "first_party": 347,
+    "services": 374,
+    "endpoints": 46556,
+    "first_party": 351,
     "third_party": 23,
-    "with_logo": 317
+    "with_logo": 322
   },
   "services": [
     {
@@ -732,7 +732,7 @@
         "brand"
       ],
       "logo": "/logos/deepgram-via.ico",
-      "url": "https://deepgram.x402.paywithlocus.com/deepgram/list-models"
+      "url": "https://deepgram.x402.paywithlocus.com/deepgram/analyze"
     },
     {
       "slug": "perplexity-via",
@@ -1072,8 +1072,8 @@
       "party": "1P",
       "domain": "southpow.media",
       "category": "compute",
-      "endpoints": 1932,
-      "priced": 1932,
+      "endpoints": 1942,
+      "priced": 1940,
       "priceMin": 0.002,
       "priceMedian": 0.01,
       "networks": [
@@ -1089,7 +1089,7 @@
         "ranked"
       ],
       "logo": null,
-      "url": "https://southpow.media/v1/yields/top"
+      "url": "https://southpow.media/schema"
     },
     {
       "slug": "edge-agents-ai",
@@ -1320,7 +1320,7 @@
       "party": "1P",
       "domain": "taifoon.dev",
       "category": "messaging",
-      "endpoints": 572,
+      "endpoints": 592,
       "priced": 95,
       "priceMin": 0.000195,
       "priceMedian": 0.0012,
@@ -1774,8 +1774,8 @@
       "party": "1P",
       "domain": "chatgpt.site",
       "category": "data",
-      "endpoints": 308,
-      "priced": 257,
+      "endpoints": 309,
+      "priced": 258,
       "priceMin": 0.001,
       "priceMedian": 0.03,
       "networks": [
@@ -1792,7 +1792,7 @@
         "moneypilot-c6f8c4.joedyermens.chatgpt.site",
         "moneytest-x402-api.indierepo.chatgpt.site"
       ],
-      "hostCount": 82,
+      "hostCount": 83,
       "via": [],
       "reasons": [
         "ranked"
@@ -1900,6 +1900,31 @@
       ],
       "logo": null,
       "url": "https://agentdatum.com/api/v1/ai"
+    },
+    {
+      "slug": "apex-faucet",
+      "name": "APEX Faucet",
+      "party": "1P",
+      "domain": "apexfaucet.xyz",
+      "category": "compute",
+      "endpoints": 249,
+      "priced": 249,
+      "priceMin": 0.001,
+      "priceMedian": 0.004,
+      "networks": [
+        "Base",
+        "Solana"
+      ],
+      "hosts": [
+        "apexfaucet.xyz"
+      ],
+      "hostCount": 1,
+      "via": [],
+      "reasons": [
+        "ranked"
+      ],
+      "logo": "/logos/apex-faucet.ico",
+      "url": "https://apexfaucet.xyz/api/x402/x1-spread-scan"
     },
     {
       "slug": "vextorium",
@@ -2026,31 +2051,6 @@
       ],
       "logo": "/logos/anyapi.ico",
       "url": "https://api.getanyapi.com/v1/run/youtube.video_transcript"
-    },
-    {
-      "slug": "apex-faucet",
-      "name": "APEX Faucet",
-      "party": "1P",
-      "domain": "apexfaucet.xyz",
-      "category": "compute",
-      "endpoints": 215,
-      "priced": 215,
-      "priceMin": 0.001,
-      "priceMedian": 0.003,
-      "networks": [
-        "Base",
-        "Solana"
-      ],
-      "hosts": [
-        "apexfaucet.xyz"
-      ],
-      "hostCount": 1,
-      "via": [],
-      "reasons": [
-        "ranked"
-      ],
-      "logo": "/logos/apex-faucet.ico",
-      "url": "https://apexfaucet.xyz/api/x402/x1-tx-explain"
     },
     {
       "slug": "stablesocial",
@@ -3688,6 +3688,30 @@
       "url": "https://grokzilla.shop/agents.md"
     },
     {
+      "slug": "aipaygen",
+      "name": "AIPayGen",
+      "party": "1P",
+      "domain": "aipaygen.com",
+      "category": "compute",
+      "endpoints": 73,
+      "priced": 70,
+      "priceMin": 0.001,
+      "priceMedian": 0.001,
+      "networks": [
+        "Base"
+      ],
+      "hosts": [
+        "aipaygen.com"
+      ],
+      "hostCount": 1,
+      "via": [],
+      "reasons": [
+        "ranked"
+      ],
+      "logo": "/logos/aipaygen.svg",
+      "url": "https://aipaygen.com/v1/search_marketplace"
+    },
+    {
       "slug": "webbersites",
       "name": "WebberSites",
       "party": "1P",
@@ -4068,6 +4092,30 @@
       ],
       "logo": "/logos/x402-farm.png",
       "url": "https://api.x-402.online/v1/sms/inbox"
+    },
+    {
+      "slug": "",
+      "name": "꿀도구",
+      "party": "1P",
+      "domain": "kkuldogu.com",
+      "category": "data",
+      "endpoints": 63,
+      "priced": 63,
+      "priceMin": 0.01,
+      "priceMedian": 0.01,
+      "networks": [
+        "Base"
+      ],
+      "hosts": [
+        "api.kkuldogu.com"
+      ],
+      "hostCount": 1,
+      "via": [],
+      "reasons": [
+        "ranked"
+      ],
+      "logo": "/logos/.png",
+      "url": "https://api.kkuldogu.com/v1/year-end-tax-batch"
     },
     {
       "slug": "uk-property-data-api",
@@ -5223,6 +5271,31 @@
       ],
       "logo": "/logos/lion.svg",
       "url": "https://lionx402.com/api/x402/credits-purchase-json"
+    },
+    {
+      "slug": "x-ray-pay-per-call",
+      "name": "X-RAY pay-per-call",
+      "party": "1P",
+      "domain": "x-ray.me",
+      "category": "messaging",
+      "endpoints": 36,
+      "priced": 36,
+      "priceMin": 0.001,
+      "priceMedian": 0.005,
+      "networks": [
+        "Base",
+        "Solana"
+      ],
+      "hosts": [
+        "mcp.x-ray.me"
+      ],
+      "hostCount": 1,
+      "via": [],
+      "reasons": [
+        "ranked"
+      ],
+      "logo": "/logos/x-ray-pay-per-call.png",
+      "url": "https://mcp.x-ray.me/x402/list_company_sectors"
     },
     {
       "slug": "402registry",
@@ -6385,7 +6458,7 @@
       "reasons": [
         "ranked"
       ],
-      "logo": null,
+      "logo": "/logos/deltasignal.png",
       "url": "https://api.aitrailblazer.net/v1/top/stressed"
     },
     {
@@ -7076,7 +7149,7 @@
         "ranked"
       ],
       "logo": "/logos/tolca.ico",
-      "url": "https://tolca.tonbot.ca/v1/payment-check"
+      "url": "https://tolca.tonbot.ca/v1/sanctions-check"
     },
     {
       "slug": "x402-gateway",
@@ -8130,6 +8203,30 @@
       ],
       "logo": "/logos/3route.png",
       "url": "https://api.3route.io/openapi.json"
+    },
+    {
+      "slug": "agentsearchhq-com",
+      "name": "agentsearchhq.com",
+      "party": "1P",
+      "domain": "agentsearchhq.com",
+      "category": "search",
+      "endpoints": 6,
+      "priced": 6,
+      "priceMin": 0.004,
+      "priceMedian": 0.0085,
+      "networks": [
+        "Base"
+      ],
+      "hosts": [
+        "api.agentsearchhq.com"
+      ],
+      "hostCount": 1,
+      "via": [],
+      "reasons": [
+        "ranked"
+      ],
+      "logo": "/logos/agentsearchhq-com.ico",
+      "url": "https://api.agentsearchhq.com/x402/v1/search_and_read"
     },
     {
       "slug": "blocksize-info",
