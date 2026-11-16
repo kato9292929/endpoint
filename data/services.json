@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-11-15T14:18:22.837Z",
+  "generated_at": "2026-11-16T16:01:47.255Z",
   "status": "ok",
-  "scanned": 210514,
+  "scanned": 211308,
   "subset": false,
   "qualifying_reasons": [
     "brand",
@@ -9,11 +9,11 @@
     "ranked"
   ],
   "counts": {
-    "services": 374,
-    "endpoints": 46556,
-    "first_party": 351,
+    "services": 376,
+    "endpoints": 46573,
+    "first_party": 353,
     "third_party": 23,
-    "with_logo": 322
+    "with_logo": 324
   },
   "services": [
     {
@@ -732,7 +732,7 @@
         "brand"
       ],
       "logo": "/logos/deepgram-via.ico",
-      "url": "https://deepgram.x402.paywithlocus.com/deepgram/analyze"
+      "url": "https://deepgram.x402.paywithlocus.com/deepgram/list-models"
     },
     {
       "slug": "perplexity-via",
@@ -758,7 +758,7 @@
         "brand"
       ],
       "logo": "/logos/perplexity-via.png",
-      "url": "https://perplexity.x402.paywithlocus.com/perplexity/embed"
+      "url": "https://perplexity.x402.paywithlocus.com/perplexity/context-embed"
     },
     {
       "slug": "tavily-via",
@@ -784,7 +784,7 @@
         "brand"
       ],
       "logo": "/logos/tavily-via.ico",
-      "url": "https://tavily.x402.paywithlocus.com/tavily/map"
+      "url": "https://tavily.x402.paywithlocus.com/tavily/crawl"
     },
     {
       "slug": "alchemy-via",
@@ -1123,8 +1123,8 @@
       "party": "1P",
       "domain": "halowerk.com",
       "category": "other",
-      "endpoints": 1504,
-      "priced": 1504,
+      "endpoints": 1508,
+      "priced": 1508,
       "priceMin": 0.001,
       "priceMedian": 0.009,
       "networks": [
@@ -1140,13 +1140,13 @@
         "handel.halowerk.com",
         "natur.halowerk.com"
       ],
-      "hostCount": 25,
+      "hostCount": 27,
       "via": [],
       "reasons": [
         "ranked"
       ],
       "logo": "/logos/halowerk-medienwerk.svg",
-      "url": "https://dns.halowerk.com/domain/articles/ns-hetzner"
+      "url": "https://mail.halowerk.com/email/batch"
     },
     {
       "slug": "onchainpulse",
@@ -1319,10 +1319,10 @@
       "name": "Taifoon",
       "party": "1P",
       "domain": "taifoon.dev",
-      "category": "messaging",
-      "endpoints": 592,
-      "priced": 95,
-      "priceMin": 0.000195,
+      "category": "data",
+      "endpoints": 584,
+      "priced": 79,
+      "priceMin": 0.000236,
       "priceMedian": 0.0012,
       "networks": [
         "Base",
@@ -1337,7 +1337,7 @@
         "ranked"
       ],
       "logo": "/logos/taifoon.png",
-      "url": "https://coord.taifoon.dev/v1/x402/class/tee.typed.compile"
+      "url": "https://coord.taifoon.dev/v1/exchanges/edge_d083c1bf49238899/call"
     },
     {
       "slug": "2s",
@@ -1396,8 +1396,8 @@
       "party": "1P",
       "domain": "minia2a.uk",
       "category": "search",
-      "endpoints": 548,
-      "priced": 548,
+      "endpoints": 549,
+      "priced": 549,
       "priceMin": 0.001,
       "priceMedian": 0.01,
       "networks": [
@@ -1412,7 +1412,7 @@
         "ranked"
       ],
       "logo": "/logos/minia2a-uk.svg",
-      "url": "https://minia2a.uk/x402/web-search"
+      "url": "https://minia2a.uk/x402/weather"
     },
     {
       "slug": "jarvisclaw-api",
@@ -1586,7 +1586,7 @@
       "endpoints": 354,
       "priced": 336,
       "priceMin": 0.001,
-      "priceMedian": 0.006500000000000001,
+      "priceMedian": 0.008,
       "networks": [
         "Base",
         "Solana"
@@ -3144,6 +3144,33 @@
       "url": "https://api.arkm.com/x402/ws/session-info"
     },
     {
+      "slug": "x402-agent-apis",
+      "name": "x402 Agent APIs",
+      "party": "1P",
+      "domain": "scriptmasterlabs.com",
+      "category": "compute",
+      "endpoints": 92,
+      "priced": 75,
+      "priceMin": 0.001,
+      "priceMedian": 0.01,
+      "networks": [
+        "Base"
+      ],
+      "hosts": [
+        "scriptmasterlabs.com",
+        "verdict.scriptmasterlabs.com",
+        "b20.scriptmasterlabs.com",
+        "humangate.scriptmasterlabs.com"
+      ],
+      "hostCount": 4,
+      "via": [],
+      "reasons": [
+        "ranked"
+      ],
+      "logo": "/logos/x402-agent-apis.png",
+      "url": "https://b20.scriptmasterlabs.com/v1/report/%7Baddress%7D"
+    },
+    {
       "slug": "otto-ai-x402",
       "name": "Otto AI x402",
       "party": "1P",
@@ -3167,32 +3194,6 @@
       ],
       "logo": "/logos/otto-ai-x402.png",
       "url": "https://x402.ottoai.services/crypto-news"
-    },
-    {
-      "slug": "x402-agent-apis",
-      "name": "x402 Agent APIs",
-      "party": "1P",
-      "domain": "scriptmasterlabs.com",
-      "category": "compute",
-      "endpoints": 91,
-      "priced": 74,
-      "priceMin": 0.001,
-      "priceMedian": 0.01,
-      "networks": [
-        "Base"
-      ],
-      "hosts": [
-        "scriptmasterlabs.com",
-        "verdict.scriptmasterlabs.com",
-        "b20.scriptmasterlabs.com"
-      ],
-      "hostCount": 3,
-      "via": [],
-      "reasons": [
-        "ranked"
-      ],
-      "logo": "/logos/x402-agent-apis.png",
-      "url": "https://b20.scriptmasterlabs.com/v1/report/%7Baddress%7D"
     },
     {
       "slug": "greeneris-data",
@@ -3387,7 +3388,7 @@
         "ranked"
       ],
       "logo": "/logos/maxwellinternational-ai.svg",
-      "url": "https://api.maxwellinternational.ai/v1/weather/point"
+      "url": "https://api.maxwellinternational.ai/v1/weather/observation"
     },
     {
       "slug": "sirenic",
@@ -4357,6 +4358,31 @@
       "url": "https://organiccryptoyyc.com:8443/v1/domain-trust/%7Bdomain%7D"
     },
     {
+      "slug": "true402-dev",
+      "name": "true402.dev",
+      "party": "1P",
+      "domain": "true402.dev",
+      "category": "messaging",
+      "endpoints": 54,
+      "priced": 38,
+      "priceMin": 0.0001,
+      "priceMedian": 0.005,
+      "networks": [
+        "Base",
+        "Solana"
+      ],
+      "hosts": [
+        "true402.dev"
+      ],
+      "hostCount": 1,
+      "via": [],
+      "reasons": [
+        "ranked"
+      ],
+      "logo": "/logos/true402-dev.svg",
+      "url": "https://true402.dev/api/openapi.json"
+    },
+    {
       "slug": "twit-sh",
       "name": "twit.sh",
       "party": "1P",
@@ -4654,31 +4680,6 @@
       ],
       "logo": "/logos/geekvault.ico",
       "url": "https://api.geekvault.dev/web-tools/v1/tech-detect"
-    },
-    {
-      "slug": "true402",
-      "name": "true402",
-      "party": "1P",
-      "domain": "true402.dev",
-      "category": "data",
-      "endpoints": 48,
-      "priced": 32,
-      "priceMin": 0.0001,
-      "priceMedian": 0.005,
-      "networks": [
-        "Base",
-        "Solana"
-      ],
-      "hosts": [
-        "true402.dev"
-      ],
-      "hostCount": 1,
-      "via": [],
-      "reasons": [
-        "ranked"
-      ],
-      "logo": "/logos/true402.svg",
-      "url": "https://true402.dev/api/openapi.json"
     },
     {
       "slug": "vibe-springs",
@@ -7421,6 +7422,31 @@
       "url": "https://md.fastdb.in/shot/pdf"
     },
     {
+      "slug": "orioncmd",
+      "name": "OrionCmd",
+      "party": "1P",
+      "domain": "orioncmd.com",
+      "category": "data",
+      "endpoints": 12,
+      "priced": 12,
+      "priceMin": 0.01,
+      "priceMedian": 0.025,
+      "networks": [
+        "Base"
+      ],
+      "hosts": [
+        "api.orioncmd.com",
+        "vendor-safety.orioncmd.com"
+      ],
+      "hostCount": 2,
+      "via": [],
+      "reasons": [
+        "ranked"
+      ],
+      "logo": "/logos/orioncmd.svg",
+      "url": "https://api.orioncmd.com/v1/watch"
+    },
+    {
       "slug": "strait-of-hormuz-closed",
       "name": "Strait of Hormuz Closed",
       "party": "1P",
@@ -7689,7 +7715,7 @@
         "ranked"
       ],
       "logo": "/logos/ax1.ico",
-      "url": "https://www.ax1.vc/api/q-verdict/operations/%7BoperationId%7D"
+      "url": "https://www.ax1.vc/api/dashboard/q-verdict/runs/%7BrunId%7D"
     },
     {
       "slug": "clash-of-coins",
@@ -8212,8 +8238,8 @@
       "category": "search",
       "endpoints": 6,
       "priced": 6,
-      "priceMin": 0.004,
-      "priceMedian": 0.0085,
+      "priceMin": 0.002,
+      "priceMedian": 0.0035,
       "networks": [
         "Base"
       ],
@@ -8226,7 +8252,7 @@
         "ranked"
       ],
       "logo": "/logos/agentsearchhq-com.ico",
-      "url": "https://api.agentsearchhq.com/x402/v1/search_and_read"
+      "url": "https://api.agentsearchhq.com/x402/v1/news"
     },
     {
       "slug": "blocksize-info",
@@ -8516,7 +8542,7 @@
         "ranked"
       ],
       "logo": "/logos/taifoon.png",
-      "url": "https://www.taifoon.io/api/x402/settlement-proof"
+      "url": "https://www.taifoon.io/api/skills/proof-verify-v5"
     },
     {
       "slug": "wdh-sh",
@@ -9323,6 +9349,30 @@
       ],
       "logo": null,
       "url": "https://www.ai-nexus402.app/api/nexus/deliver"
+    },
+    {
+      "slug": "opencheap",
+      "name": "OpenCheap",
+      "party": "1P",
+      "domain": "opencheap.si",
+      "category": "messaging",
+      "endpoints": 1,
+      "priced": 1,
+      "priceMin": 0.001,
+      "priceMedian": 0.001,
+      "networks": [
+        "Base"
+      ],
+      "hosts": [
+        "api.opencheap.si"
+      ],
+      "hostCount": 1,
+      "via": [],
+      "reasons": [
+        "ranked"
+      ],
+      "logo": "/logos/opencheap.png",
+      "url": "https://api.opencheap.si/v1/chat/completions"
     },
     {
       "slug": "post-quantum-ai-attestation",
