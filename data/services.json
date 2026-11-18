@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-11-17T16:18:27.777Z",
+  "generated_at": "2026-11-18T15:58:47.634Z",
   "status": "ok",
-  "scanned": 212916,
+  "scanned": 213568,
   "subset": false,
   "qualifying_reasons": [
     "brand",
@@ -9,11 +9,11 @@
     "ranked"
   ],
   "counts": {
-    "services": 377,
-    "endpoints": 46935,
-    "first_party": 354,
+    "services": 379,
+    "endpoints": 47019,
+    "first_party": 356,
     "third_party": 23,
-    "with_logo": 325
+    "with_logo": 327
   },
   "services": [
     {
@@ -432,7 +432,7 @@
         "brand"
       ],
       "logo": "/logos/coingecko-via.ico",
-      "url": "https://coingecko.use.x402atlas.com/ohlc"
+      "url": "https://coingecko.use.x402atlas.com/trending"
     },
     {
       "slug": "cloudflare-via",
@@ -732,7 +732,7 @@
         "brand"
       ],
       "logo": "/logos/deepgram-via.ico",
-      "url": "https://deepgram.x402.paywithlocus.com/deepgram/analyze"
+      "url": "https://deepgram.x402.paywithlocus.com/deepgram/list-models"
     },
     {
       "slug": "perplexity-via",
@@ -758,7 +758,7 @@
         "brand"
       ],
       "logo": "/logos/perplexity-via.png",
-      "url": "https://perplexity.x402.paywithlocus.com/perplexity/embed"
+      "url": "https://perplexity.x402.paywithlocus.com/perplexity/context-embed"
     },
     {
       "slug": "tavily-via",
@@ -784,7 +784,7 @@
         "brand"
       ],
       "logo": "/logos/tavily-via.ico",
-      "url": "https://tavily.x402.paywithlocus.com/tavily/extract"
+      "url": "https://tavily.x402.paywithlocus.com/tavily/crawl"
     },
     {
       "slug": "alchemy-via",
@@ -1320,10 +1320,10 @@
       "party": "1P",
       "domain": "taifoon.dev",
       "category": "data",
-      "endpoints": 599,
-      "priced": 95,
+      "endpoints": 593,
+      "priced": 85,
       "priceMin": 0.000236,
-      "priceMedian": 0.0012,
+      "priceMedian": 0.001512,
       "networks": [
         "Base",
         "Solana"
@@ -1337,7 +1337,7 @@
         "ranked"
       ],
       "logo": "/logos/taifoon.png",
-      "url": "https://coord.taifoon.dev/v1/x402/class/tee.typed.compile"
+      "url": "https://coord.taifoon.dev/v1/x402/class/web.search"
     },
     {
       "slug": "2s",
@@ -1412,7 +1412,7 @@
         "ranked"
       ],
       "logo": "/logos/minia2a-uk.svg",
-      "url": "https://minia2a.uk/x402/weather"
+      "url": "https://minia2a.uk/x402/web-search"
     },
     {
       "slug": "jarvisclaw-api",
@@ -1957,10 +1957,10 @@
       "party": "1P",
       "domain": "glianalabs.com",
       "category": "messaging",
-      "endpoints": 237,
-      "priced": 219,
+      "endpoints": 238,
+      "priced": 220,
       "priceMin": 0.002,
-      "priceMedian": 0.024,
+      "priceMedian": 0.02,
       "networks": [
         "Base",
         "Solana"
@@ -3298,8 +3298,8 @@
       "party": "1P",
       "domain": "apiacre.com",
       "category": "messaging",
-      "endpoints": 85,
-      "priced": 74,
+      "endpoints": 87,
+      "priced": 76,
       "priceMin": 0.001,
       "priceMedian": 0.01,
       "networks": [
@@ -3316,6 +3316,31 @@
       ],
       "logo": "/logos/api-acre.ico",
       "url": "https://apiacre.com/llms.txt"
+    },
+    {
+      "slug": "maxwellinternational-ai",
+      "name": "maxwellinternational.ai",
+      "party": "1P",
+      "domain": "maxwellinternational.ai",
+      "category": "search",
+      "endpoints": 84,
+      "priced": 84,
+      "priceMin": 0.002,
+      "priceMedian": 0.005,
+      "networks": [
+        "Base",
+        "Solana"
+      ],
+      "hosts": [
+        "api.maxwellinternational.ai"
+      ],
+      "hostCount": 1,
+      "via": [],
+      "reasons": [
+        "ranked"
+      ],
+      "logo": "/logos/maxwellinternational-ai.svg",
+      "url": "https://api.maxwellinternational.ai/v1/x402/endpoint/check"
     },
     {
       "slug": "oblique-markets",
@@ -3389,31 +3414,6 @@
       ],
       "logo": "/logos/onesource.ico",
       "url": "https://api.onesource.io/standard/v1/addresses"
-    },
-    {
-      "slug": "maxwellinternational-ai",
-      "name": "maxwellinternational.ai",
-      "party": "1P",
-      "domain": "maxwellinternational.ai",
-      "category": "search",
-      "endpoints": 83,
-      "priced": 83,
-      "priceMin": 0.002,
-      "priceMedian": 0.005,
-      "networks": [
-        "Base",
-        "Solana"
-      ],
-      "hosts": [
-        "api.maxwellinternational.ai"
-      ],
-      "hostCount": 1,
-      "via": [],
-      "reasons": [
-        "ranked"
-      ],
-      "logo": "/logos/maxwellinternational-ai.svg",
-      "url": "https://api.maxwellinternational.ai/v1/x402/endpoint/check"
     },
     {
       "slug": "sirenic",
@@ -3592,6 +3592,30 @@
       "url": "https://app.earnfi.fun/api/ai-agent/v1/work/reviews/mine"
     },
     {
+      "slug": "macaroon-network",
+      "name": "Macaroon Network",
+      "party": "1P",
+      "domain": "macaroonnetwork.com",
+      "category": "search",
+      "endpoints": 79,
+      "priced": 79,
+      "priceMin": 0.001,
+      "priceMedian": 0.003,
+      "networks": [
+        "Base"
+      ],
+      "hosts": [
+        "api.macaroonnetwork.com"
+      ],
+      "hostCount": 1,
+      "via": [],
+      "reasons": [
+        "ranked"
+      ],
+      "logo": "/logos/macaroon-network.png",
+      "url": "https://api.macaroonnetwork.com/execute/polymathica-cfd-simulation-validator-v1"
+    },
+    {
       "slug": "singit",
       "name": "SingIt",
       "party": "1P",
@@ -3639,30 +3663,6 @@
       ],
       "logo": "/logos/cn402.svg",
       "url": "https://api.cn402.com/zhanbu/zhougong"
-    },
-    {
-      "slug": "macaroon-network",
-      "name": "Macaroon Network",
-      "party": "1P",
-      "domain": "macaroonnetwork.com",
-      "category": "search",
-      "endpoints": 78,
-      "priced": 78,
-      "priceMin": 0.001,
-      "priceMedian": 0.003,
-      "networks": [
-        "Base"
-      ],
-      "hosts": [
-        "api.macaroonnetwork.com"
-      ],
-      "hostCount": 1,
-      "via": [],
-      "reasons": [
-        "ranked"
-      ],
-      "logo": "/logos/macaroon-network.png",
-      "url": "https://api.macaroonnetwork.com/execute/polymathica-transaction-intelligence-v1"
     },
     {
       "slug": "agentbit",
@@ -4356,6 +4356,34 @@
       ],
       "logo": "/logos/mapleai.ico",
       "url": "https://base.mapleai.shop/health"
+    },
+    {
+      "slug": "x402-forge",
+      "name": "x402 Forge",
+      "party": "1P",
+      "domain": "fizzl.eu",
+      "category": "compute",
+      "endpoints": 58,
+      "priced": 55,
+      "priceMin": 0.001,
+      "priceMedian": 1,
+      "networks": [
+        "Base",
+        "Solana"
+      ],
+      "hosts": [
+        "forge.fizzl.eu",
+        "presign-guard.fizzl.eu",
+        "x402-doctor.fizzl.eu",
+        "ichimoku-signal.fizzl.eu"
+      ],
+      "hostCount": 4,
+      "via": [],
+      "reasons": [
+        "ranked"
+      ],
+      "logo": "/logos/x402-forge.svg",
+      "url": "https://ichimoku-signal.fizzl.eu/setups"
     },
     {
       "slug": "apex-runner",
@@ -5932,6 +5960,31 @@
       "url": "https://kronossignals.com/api/v1/sample/eth"
     },
     {
+      "slug": "x402scan",
+      "name": "x402scan",
+      "party": "1P",
+      "domain": "x402scan.com",
+      "category": "search",
+      "endpoints": 28,
+      "priced": 24,
+      "priceMin": 0.01,
+      "priceMedian": 0.01,
+      "networks": [
+        "Base"
+      ],
+      "hosts": [
+        "x402scan.com",
+        "resources.x402scan.com"
+      ],
+      "hostCount": 2,
+      "via": [],
+      "reasons": [
+        "ranked"
+      ],
+      "logo": "/logos/x402scan.ico",
+      "url": "https://resources.x402scan.com/find-tool"
+    },
+    {
       "slug": "asn-lookup",
       "name": "ASN Lookup",
       "party": "1P",
@@ -5988,29 +6041,29 @@
       "url": "https://x402.pokt-agent.com/kr-names/romanize"
     },
     {
-      "slug": "x402scan",
-      "name": "x402scan",
+      "slug": "agent-einstein",
+      "name": "Agent Einstein",
       "party": "1P",
-      "domain": "x402scan.com",
-      "category": "search",
-      "endpoints": 27,
-      "priced": 23,
-      "priceMin": 0.01,
-      "priceMedian": 0.01,
+      "domain": "emc2ai.io",
+      "category": "trading",
+      "endpoints": 26,
+      "priced": 26,
+      "priceMin": 0.4,
+      "priceMedian": 0.75,
       "networks": [
-        "Base"
+        "Base",
+        "Solana"
       ],
       "hosts": [
-        "x402scan.com",
-        "resources.x402scan.com"
+        "emc2ai.io"
       ],
-      "hostCount": 2,
+      "hostCount": 1,
       "via": [],
       "reasons": [
         "ranked"
       ],
-      "logo": "/logos/x402scan.ico",
-      "url": "https://resources.x402scan.com/find-tool"
+      "logo": "/logos/agent-einstein.png",
+      "url": "https://emc2ai.io/x402/bitquery/candles"
     },
     {
       "slug": "apitoll",
@@ -7740,7 +7793,7 @@
         "ranked"
       ],
       "logo": "/logos/ax1.ico",
-      "url": "https://www.ax1.vc/api/dashboard/q-verdict/runs/%7BrunId%7D"
+      "url": "https://www.ax1.vc/api/q-verdict/operations/%7BoperationId%7D"
     },
     {
       "slug": "clash-of-coins",
