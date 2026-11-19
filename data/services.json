@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-11-18T15:58:47.634Z",
+  "generated_at": "2026-11-19T16:04:55.724Z",
   "status": "ok",
-  "scanned": 213568,
+  "scanned": 214893,
   "subset": false,
   "qualifying_reasons": [
     "brand",
@@ -9,11 +9,11 @@
     "ranked"
   ],
   "counts": {
-    "services": 379,
-    "endpoints": 47019,
-    "first_party": 356,
+    "services": 382,
+    "endpoints": 47356,
+    "first_party": 359,
     "third_party": 23,
-    "with_logo": 327
+    "with_logo": 330
   },
   "services": [
     {
@@ -432,7 +432,7 @@
         "brand"
       ],
       "logo": "/logos/coingecko-via.ico",
-      "url": "https://coingecko.use.x402atlas.com/trending"
+      "url": "https://coingecko.use.x402atlas.com/price"
     },
     {
       "slug": "cloudflare-via",
@@ -1022,9 +1022,9 @@
       "party": "1P",
       "domain": "m2mcent.com",
       "category": "data",
-      "endpoints": 3185,
-      "priced": 1061,
-      "priceMin": 0.01,
+      "endpoints": 3186,
+      "priced": 1062,
+      "priceMin": 0.005,
       "priceMedian": 0.025,
       "networks": [
         "Base"
@@ -1320,8 +1320,8 @@
       "party": "1P",
       "domain": "taifoon.dev",
       "category": "data",
-      "endpoints": 593,
-      "priced": 85,
+      "endpoints": 598,
+      "priced": 90,
       "priceMin": 0.000236,
       "priceMedian": 0.001512,
       "networks": [
@@ -1505,6 +1505,38 @@
       "url": "https://gateway.gedx402.com/v1/models"
     },
     {
+      "slug": "pyfile-x402-api",
+      "name": "Pyfile x402 API",
+      "party": "1P",
+      "domain": "ts.net",
+      "category": "compute",
+      "endpoints": 378,
+      "priced": 356,
+      "priceMin": 0.001,
+      "priceMedian": 0.01,
+      "networks": [
+        "Base",
+        "Solana"
+      ],
+      "hosts": [
+        "pyfile-agent.taile3ff35.ts.net",
+        "diamond.tail1b5f86.ts.net",
+        "vps-fc89c157-1.taila28d02.ts.net",
+        "ari001.tailb4ac3a.ts.net",
+        "desktop-suts94d.tail0b188d.ts.net",
+        "elon.tail49499f.ts.net",
+        "pop-os.tail08831d.ts.net",
+        "velux.taild4d007.ts.net"
+      ],
+      "hostCount": 41,
+      "via": [],
+      "reasons": [
+        "ranked"
+      ],
+      "logo": "/logos/pyfile-x402-api.svg",
+      "url": "https://vps-fc89c157-1.taila28d02.ts.net:10000/api/toolchain-cost-plan"
+    },
+    {
       "slug": "ddg-agent-payable-services",
       "name": "DDG Agent-Payable Services",
       "party": "1P",
@@ -1527,38 +1559,6 @@
       ],
       "logo": "/logos/ddg-agent-payable-services.png",
       "url": "https://agents.daedalusdevelopmentgroup.com/wallets.md"
-    },
-    {
-      "slug": "pyfile-x402-api",
-      "name": "Pyfile x402 API",
-      "party": "1P",
-      "domain": "ts.net",
-      "category": "compute",
-      "endpoints": 375,
-      "priced": 354,
-      "priceMin": 0.001,
-      "priceMedian": 0.01,
-      "networks": [
-        "Base",
-        "Solana"
-      ],
-      "hosts": [
-        "pyfile-agent.taile3ff35.ts.net",
-        "diamond.tail1b5f86.ts.net",
-        "vps-fc89c157-1.taila28d02.ts.net",
-        "ari001.tailb4ac3a.ts.net",
-        "desktop-suts94d.tail0b188d.ts.net",
-        "elon.tail49499f.ts.net",
-        "pop-os.tail08831d.ts.net",
-        "velux.taild4d007.ts.net"
-      ],
-      "hostCount": 40,
-      "via": [],
-      "reasons": [
-        "ranked"
-      ],
-      "logo": "/logos/pyfile-x402-api.svg",
-      "url": "https://vps-fc89c157-1.taila28d02.ts.net:10000/api/toolchain-cost-plan"
     },
     {
       "slug": "unykorn-genesis402-rail",
@@ -1744,6 +1744,31 @@
       "url": "https://markets.losbeto.xyz/stake"
     },
     {
+      "slug": "apex-faucet",
+      "name": "APEX Faucet",
+      "party": "1P",
+      "domain": "apexfaucet.xyz",
+      "category": "compute",
+      "endpoints": 313,
+      "priced": 313,
+      "priceMin": 0.001,
+      "priceMedian": 0.003,
+      "networks": [
+        "Base",
+        "Solana"
+      ],
+      "hosts": [
+        "apexfaucet.xyz"
+      ],
+      "hostCount": 1,
+      "via": [],
+      "reasons": [
+        "ranked"
+      ],
+      "logo": "/logos/apex-faucet.ico",
+      "url": "https://apexfaucet.xyz/api/x402/x402-recommend"
+    },
+    {
       "slug": "openweb-ninja",
       "name": "OpenWeb Ninja",
       "party": "1P",
@@ -1900,31 +1925,6 @@
       ],
       "logo": null,
       "url": "https://agentdatum.com/api/v1/ai"
-    },
-    {
-      "slug": "apex-faucet",
-      "name": "APEX Faucet",
-      "party": "1P",
-      "domain": "apexfaucet.xyz",
-      "category": "compute",
-      "endpoints": 249,
-      "priced": 249,
-      "priceMin": 0.001,
-      "priceMedian": 0.004,
-      "networks": [
-        "Base",
-        "Solana"
-      ],
-      "hosts": [
-        "apexfaucet.xyz"
-      ],
-      "hostCount": 1,
-      "via": [],
-      "reasons": [
-        "ranked"
-      ],
-      "logo": "/logos/apex-faucet.ico",
-      "url": "https://apexfaucet.xyz/api/x402/x1-spread-scan"
     },
     {
       "slug": "vextorium",
@@ -2201,6 +2201,31 @@
       ],
       "logo": "/logos/blockscout-com.ico",
       "url": "https://api.blockscout.com/services/metadata/api/v1/addresses:submit"
+    },
+    {
+      "slug": "scrapling-data",
+      "name": "Scrapling Data",
+      "party": "1P",
+      "domain": "scraplingdata.xyz",
+      "category": "compute",
+      "endpoints": 183,
+      "priced": 108,
+      "priceMin": 0.0009,
+      "priceMedian": 0.005,
+      "networks": [
+        "Base",
+        "Solana"
+      ],
+      "hosts": [
+        "scraplingdata.xyz"
+      ],
+      "hostCount": 1,
+      "via": [],
+      "reasons": [
+        "ranked"
+      ],
+      "logo": "/logos/scrapling-data.png",
+      "url": "https://scraplingdata.xyz/v1/card/success"
     },
     {
       "slug": "stack-facts",
@@ -2480,7 +2505,7 @@
         "ranked"
       ],
       "logo": "/logos/loyal-spark.ico",
-      "url": "https://api.loyalspark.online/verify-agent-plan-payment"
+      "url": "https://api.loyalspark.online/agent-register-siwe"
     },
     {
       "slug": "x402-factory",
@@ -2747,7 +2772,7 @@
         "ranked"
       ],
       "logo": "/logos/three-ws.ico",
-      "url": "https://three.ws/api/pump/quote-sdk"
+      "url": "https://three.ws/api/x402/skill-call"
     },
     {
       "slug": "tradepilotusa",
@@ -4332,6 +4357,30 @@
       "url": "https://stationfx.com/economic-data/sentiment/university-of-michigan-consumer-sentiment"
     },
     {
+      "slug": "apistead",
+      "name": "APIStead",
+      "party": "1P",
+      "domain": "qd.je",
+      "category": "search",
+      "endpoints": 58,
+      "priced": 48,
+      "priceMin": 0.001,
+      "priceMedian": 0.02,
+      "networks": [
+        "Base"
+      ],
+      "hosts": [
+        "apistead.qd.je"
+      ],
+      "hostCount": 1,
+      "via": [],
+      "reasons": [
+        "ranked"
+      ],
+      "logo": "/logos/apistead.ico",
+      "url": "https://apistead.qd.je/openapi.json"
+    },
+    {
       "slug": "mapleai",
       "name": "MapleAI",
       "party": "1P",
@@ -4735,6 +4784,30 @@
       "url": "https://superartist.supercapital.fun/short-story"
     },
     {
+      "slug": "ai-fusion-one-api",
+      "name": "AI Fusion One API",
+      "party": "1P",
+      "domain": "theaiworldnetwork.com",
+      "category": "compute",
+      "endpoints": 48,
+      "priced": 23,
+      "priceMin": 0.05,
+      "priceMedian": 0.05,
+      "networks": [
+        "Base"
+      ],
+      "hosts": [
+        "theaiworldnetwork.com"
+      ],
+      "hostCount": 1,
+      "via": [],
+      "reasons": [
+        "ranked"
+      ],
+      "logo": "/logos/ai-fusion-one-api.ico",
+      "url": "https://theaiworldnetwork.com/v1/billing/checkout"
+    },
+    {
       "slug": "geekvault",
       "name": "GeekVault",
       "party": "1P",
@@ -5008,30 +5081,6 @@
       ],
       "logo": "/logos/afriref.png",
       "url": "https://afriref.dev/v1/balance"
-    },
-    {
-      "slug": "apistead",
-      "name": "APIStead",
-      "party": "1P",
-      "domain": "qd.je",
-      "category": "search",
-      "endpoints": 41,
-      "priced": 31,
-      "priceMin": 0.001,
-      "priceMedian": 0.02,
-      "networks": [
-        "Base"
-      ],
-      "hosts": [
-        "apistead.qd.je"
-      ],
-      "hostCount": 1,
-      "via": [],
-      "reasons": [
-        "ranked"
-      ],
-      "logo": "/logos/apistead.ico",
-      "url": "https://apistead.qd.je/llms.txt"
     },
     {
       "slug": "agmsg",
@@ -6928,6 +6977,30 @@
       ],
       "logo": "/logos/scry-wallet-intelligence.png",
       "url": "https://scry.solanahub.de/x402/mint/%7Bmint%7D/risk"
+    },
+    {
+      "slug": "agentshield-live",
+      "name": "agentshield.live",
+      "party": "1P",
+      "domain": "agentshield.live",
+      "category": "compute",
+      "endpoints": 16,
+      "priced": 16,
+      "priceMin": 0.001,
+      "priceMedian": 0.009000000000000001,
+      "networks": [
+        "Base"
+      ],
+      "hosts": [
+        "agentshield.live"
+      ],
+      "hostCount": 1,
+      "via": [],
+      "reasons": [
+        "ranked"
+      ],
+      "logo": "/logos/agentshield-live.png",
+      "url": "https://agentshield.live/invoice"
     },
     {
       "slug": "aubrai-x402-service",
