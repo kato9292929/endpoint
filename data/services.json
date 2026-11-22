@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-11-21T15:01:01.714Z",
+  "generated_at": "2026-11-22T15:00:14.994Z",
   "status": "ok",
-  "scanned": 217796,
+  "scanned": 218633,
   "subset": false,
   "qualifying_reasons": [
     "brand",
@@ -10,7 +10,7 @@
   ],
   "counts": {
     "services": 390,
-    "endpoints": 49189,
+    "endpoints": 49291,
     "first_party": 367,
     "third_party": 23,
     "with_logo": 339
@@ -432,7 +432,7 @@
         "brand"
       ],
       "logo": "/logos/coingecko-via.ico",
-      "url": "https://coingecko.use.x402atlas.com/trending"
+      "url": "https://coingecko.use.x402atlas.com/ohlc"
     },
     {
       "slug": "cloudflare-via",
@@ -1347,10 +1347,10 @@
       "party": "1P",
       "domain": "taifoon.dev",
       "category": "data",
-      "endpoints": 590,
-      "priced": 82,
+      "endpoints": 584,
+      "priced": 75,
       "priceMin": 0.000236,
-      "priceMedian": 0.001512,
+      "priceMedian": 0.001607,
       "networks": [
         "Base",
         "Solana"
@@ -1725,8 +1725,8 @@
       "party": "1P",
       "domain": "apexfaucet.xyz",
       "category": "compute",
-      "endpoints": 334,
-      "priced": 334,
+      "endpoints": 335,
+      "priced": 335,
       "priceMin": 0.001,
       "priceMedian": 0.003,
       "networks": [
@@ -1742,7 +1742,7 @@
         "ranked"
       ],
       "logo": "/logos/apex-faucet.ico",
-      "url": "https://apexfaucet.xyz/api/x402/xen-portal"
+      "url": "https://apexfaucet.xyz/api/x402/x1-tx-explain"
     },
     {
       "slug": "strale-api",
@@ -1796,6 +1796,38 @@
       "url": "https://markets.losbeto.xyz/stake"
     },
     {
+      "slug": "tableproof",
+      "name": "TableProof",
+      "party": "1P",
+      "domain": "chatgpt.site",
+      "category": "data",
+      "endpoints": 313,
+      "priced": 261,
+      "priceMin": 0.001,
+      "priceMedian": 0.03,
+      "networks": [
+        "Base",
+        "Solana"
+      ],
+      "hosts": [
+        "tableproof-data.mitchellwhite.chatgpt.site",
+        "rowpocket-csv-rescue.josuegrnds21.chatgpt.site",
+        "ai-utility-farm.brycedees1.chatgpt.site",
+        "agentpass-protocol.rmalka06.chatgpt.site",
+        "agentready-audit.seshiccse023.chatgpt.site",
+        "bountysignal-radar-v2.minhtuan36zzz97948.chatgpt.site",
+        "moneypilot-c6f8c4.joedyermens.chatgpt.site",
+        "moneytest-x402-api.indierepo.chatgpt.site"
+      ],
+      "hostCount": 85,
+      "via": [],
+      "reasons": [
+        "ranked"
+      ],
+      "logo": "/logos/tableproof.svg",
+      "url": "https://agent-json-utility.pablovph.chatgpt.site/v1/launch-report"
+    },
+    {
       "slug": "openweb-ninja",
       "name": "OpenWeb Ninja",
       "party": "1P",
@@ -1819,38 +1851,6 @@
       ],
       "logo": "/logos/openweb-ninja.png",
       "url": "https://agents.openwebninja.com/zeroclick/agent/quote"
-    },
-    {
-      "slug": "tableproof",
-      "name": "TableProof",
-      "party": "1P",
-      "domain": "chatgpt.site",
-      "category": "data",
-      "endpoints": 311,
-      "priced": 260,
-      "priceMin": 0.001,
-      "priceMedian": 0.03,
-      "networks": [
-        "Base",
-        "Solana"
-      ],
-      "hosts": [
-        "tableproof-data.mitchellwhite.chatgpt.site",
-        "rowpocket-csv-rescue.josuegrnds21.chatgpt.site",
-        "ai-utility-farm.brycedees1.chatgpt.site",
-        "agentpass-protocol.rmalka06.chatgpt.site",
-        "agentready-audit.seshiccse023.chatgpt.site",
-        "bountysignal-radar-v2.minhtuan36zzz97948.chatgpt.site",
-        "moneypilot-c6f8c4.joedyermens.chatgpt.site",
-        "moneytest-x402-api.indierepo.chatgpt.site"
-      ],
-      "hostCount": 84,
-      "via": [],
-      "reasons": [
-        "ranked"
-      ],
-      "logo": "/logos/tableproof.svg",
-      "url": "https://agent-json-utility.pablovph.chatgpt.site/v1/launch-report"
     },
     {
       "slug": "tanod",
@@ -2033,7 +2033,7 @@
         "ranked"
       ],
       "logo": "/logos/zrok.png",
-      "url": "https://r4h1wrm8bt8l.shares.zrok.io/api/x402/discover"
+      "url": "https://atlasdata.shares.zrok.io/api/price/BTC"
     },
     {
       "slug": "locus",
@@ -2291,8 +2291,8 @@
       "party": "1P",
       "domain": "srv.us",
       "category": "search",
-      "endpoints": 186,
-      "priced": 156,
+      "endpoints": 187,
+      "priced": 157,
       "priceMin": 0,
       "priceMedian": 0.005,
       "networks": [
@@ -2309,7 +2309,7 @@
         "bp3ocaveiu74yyrd35hyt4b6j4.srv.us",
         "bj7e26lfpo4fthvr35hczdipby.srv.us"
       ],
-      "hostCount": 17,
+      "hostCount": 18,
       "via": [],
       "reasons": [
         "ranked"
@@ -2931,6 +2931,33 @@
       ],
       "logo": null,
       "url": "https://api.blockchainmoneymap.com/api/agents/recommend"
+    },
+    {
+      "slug": "onhub",
+      "name": "OnHub",
+      "party": "1P",
+      "domain": "onhub.ai",
+      "category": "compute",
+      "endpoints": 111,
+      "priced": 111,
+      "priceMin": 0.001,
+      "priceMedian": 0.003,
+      "networks": [
+        "Base",
+        "Solana"
+      ],
+      "hosts": [
+        "sol.onhub.ai",
+        "x402.onhub.ai",
+        "api.onhub.ai"
+      ],
+      "hostCount": 3,
+      "via": [],
+      "reasons": [
+        "ranked"
+      ],
+      "logo": null,
+      "url": "https://sol.onhub.ai/v1/ai/extract-entities"
     },
     {
       "slug": "youraitools",
@@ -3722,7 +3749,7 @@
         "ranked"
       ],
       "logo": "/logos/macaroon-network.png",
-      "url": "https://api.macaroonnetwork.com/execute/polymathica-cfd-simulation-validator-v1"
+      "url": "https://api.macaroonnetwork.com/execute/polymathica-transaction-intelligence-v1"
     },
     {
       "slug": "singit",
@@ -4642,6 +4669,30 @@
       "url": "https://x402.twit.sh/tweets/mediaUpload"
     },
     {
+      "slug": "x402-data-api",
+      "name": "x402 Data API",
+      "party": "1P",
+      "domain": "apix402data.com",
+      "category": "data",
+      "endpoints": 53,
+      "priced": 41,
+      "priceMin": 0.002,
+      "priceMedian": 0.01,
+      "networks": [
+        "Base"
+      ],
+      "hosts": [
+        "apix402data.com"
+      ],
+      "hostCount": 1,
+      "via": [],
+      "reasons": [
+        "ranked"
+      ],
+      "logo": "/logos/x402-data-api.svg",
+      "url": "https://apix402data.com/api/free/status"
+    },
+    {
       "slug": "datakoot-x402",
       "name": "Datakoot x402",
       "party": "1P",
@@ -5037,30 +5088,6 @@
       ],
       "logo": "/logos/tzkt-api.ico",
       "url": "https://x402.tzkt.io/v1/statistics/daily"
-    },
-    {
-      "slug": "x402-data-api",
-      "name": "x402 Data API",
-      "party": "1P",
-      "domain": "apix402data.com",
-      "category": "data",
-      "endpoints": 44,
-      "priced": 33,
-      "priceMin": 0.001,
-      "priceMedian": 0.02,
-      "networks": [
-        "Base"
-      ],
-      "hosts": [
-        "apix402data.com"
-      ],
-      "hostCount": 1,
-      "via": [],
-      "reasons": [
-        "ranked"
-      ],
-      "logo": "/logos/x402-data-api.svg",
-      "url": "https://apix402data.com/api/security/preflight-402/check"
     },
     {
       "slug": "agishub",
@@ -6012,33 +6039,6 @@
       "url": "https://api.getapi.nl/api/v1/scraping/email"
     },
     {
-      "slug": "onhub",
-      "name": "OnHub",
-      "party": "1P",
-      "domain": "onhub.ai",
-      "category": "compute",
-      "endpoints": 30,
-      "priced": 30,
-      "priceMin": 0.001,
-      "priceMedian": 0.01,
-      "networks": [
-        "Base",
-        "Solana"
-      ],
-      "hosts": [
-        "x402.onhub.ai",
-        "sol.onhub.ai",
-        "api.onhub.ai"
-      ],
-      "hostCount": 3,
-      "via": [],
-      "reasons": [
-        "ranked"
-      ],
-      "logo": null,
-      "url": "https://x402.onhub.ai/v1/storage"
-    },
-    {
       "slug": "paidapis-net",
       "name": "paidapis.net",
       "party": "1P",
@@ -6141,6 +6141,32 @@
       ],
       "logo": "/logos/twitr-sh.svg",
       "url": "https://twitr.sh/api/tools/x_community"
+    },
+    {
+      "slug": "brij-travel",
+      "name": "BRIJ Travel",
+      "party": "1P",
+      "domain": "brij.fi",
+      "category": "messaging",
+      "endpoints": 28,
+      "priced": 23,
+      "priceMin": 0.001,
+      "priceMedian": 0.01,
+      "networks": [
+        "Solana"
+      ],
+      "hosts": [
+        "travel.brij.fi",
+        "fov.brij.fi"
+      ],
+      "hostCount": 2,
+      "via": [],
+      "reasons": [
+        "pay-sh",
+        "ranked"
+      ],
+      "logo": "/logos/brij-travel.png",
+      "url": "https://travel.brij.fi"
     },
     {
       "slug": "dyoe",
@@ -7508,32 +7534,6 @@
       ],
       "logo": "/logos/tolca.ico",
       "url": "https://tolca.tonbot.ca/v1/payment-check"
-    },
-    {
-      "slug": "brij-travel",
-      "name": "BRIJ Travel",
-      "party": "1P",
-      "domain": "brij.fi",
-      "category": "messaging",
-      "endpoints": 14,
-      "priced": 9,
-      "priceMin": 0.001,
-      "priceMedian": 0.05,
-      "networks": [
-        "Solana"
-      ],
-      "hosts": [
-        "travel.brij.fi",
-        "fov.brij.fi"
-      ],
-      "hostCount": 2,
-      "via": [],
-      "reasons": [
-        "pay-sh",
-        "ranked"
-      ],
-      "logo": "/logos/brij-travel.png",
-      "url": "https://travel.brij.fi"
     },
     {
       "slug": "builtwith-api",

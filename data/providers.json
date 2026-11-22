@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-11-21T15:00:18.418Z",
+  "generated_at": "2026-11-22T14:59:30.675Z",
   "status": "ok",
   "source": "data/endpoints_full.json.gz",
-  "scanned": 217796,
+  "scanned": 218633,
   "subset": false,
   "firstParty": [
     {
@@ -336,6 +336,24 @@
       "brand": null
     },
     {
+      "host": "travel.brij.fi",
+      "name": "BRIJ Travel: Pay-per-call flight API",
+      "count": 25,
+      "priced": 20,
+      "priceMedian": 0.01,
+      "topCategory": "messaging",
+      "networks": [
+        "Solana"
+      ],
+      "sources": [
+        "pay-sh",
+        "x402scan"
+      ],
+      "sampleId": "846b7a758ffdc302",
+      "url": "https://travel.brij.fi",
+      "brand": null
+    },
+    {
       "host": "api.syntalic.com",
       "name": "CPG analytics, powered by agents",
       "count": 24,
@@ -390,24 +408,6 @@
       ],
       "sampleId": "943ac243243e50c1",
       "url": "https://x402.dtelecom.org",
-      "brand": null
-    },
-    {
-      "host": "travel.brij.fi",
-      "name": "BRIJ Travel: Pay-per-call flight API",
-      "count": 11,
-      "priced": 6,
-      "priceMedian": 0.055,
-      "topCategory": "messaging",
-      "networks": [
-        "Solana"
-      ],
-      "sources": [
-        "pay-sh",
-        "x402scan"
-      ],
-      "sampleId": "846b7a758ffdc302",
-      "url": "https://travel.brij.fi",
       "brand": null
     },
     {
