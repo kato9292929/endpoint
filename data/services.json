@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-11-23T18:24:57.868Z",
+  "generated_at": "2026-11-24T17:57:35.530Z",
   "status": "ok",
-  "scanned": 220221,
+  "scanned": 221209,
   "subset": false,
   "qualifying_reasons": [
     "brand",
@@ -10,10 +10,10 @@
   ],
   "counts": {
     "services": 392,
-    "endpoints": 49673,
+    "endpoints": 49775,
     "first_party": 369,
     "third_party": 23,
-    "with_logo": 341
+    "with_logo": 342
   },
   "services": [
     {
@@ -432,7 +432,7 @@
         "brand"
       ],
       "logo": "/logos/coingecko-via.ico",
-      "url": "https://coingecko.use.x402atlas.com/ohlc"
+      "url": "https://coingecko.use.x402atlas.com/price"
     },
     {
       "slug": "cloudflare-via",
@@ -761,7 +761,7 @@
         "brand"
       ],
       "logo": "/logos/perplexity-via.png",
-      "url": "https://perplexity.x402.paywithlocus.com/perplexity/embed"
+      "url": "https://perplexity.x402.paywithlocus.com/perplexity/context-embed"
     },
     {
       "slug": "tavily-via",
@@ -1347,10 +1347,10 @@
       "party": "1P",
       "domain": "taifoon.dev",
       "category": "data",
-      "endpoints": 577,
-      "priced": 66,
+      "endpoints": 596,
+      "priced": 75,
       "priceMin": 0.000236,
-      "priceMedian": 0.0015525,
+      "priceMedian": 0.0012,
       "networks": [
         "Base",
         "Solana"
@@ -1364,7 +1364,7 @@
         "ranked"
       ],
       "logo": "/logos/taifoon.png",
-      "url": "https://coord.taifoon.dev/v1/exchanges/edge_fcf3f111bc490a2b/call"
+      "url": "https://coord.taifoon.dev/v1/x402/class/web.search"
     },
     {
       "slug": "2s",
@@ -1447,8 +1447,8 @@
       "party": "1P",
       "domain": "ngrok-free.dev",
       "category": "data",
-      "endpoints": 508,
-      "priced": 287,
+      "endpoints": 513,
+      "priced": 288,
       "priceMin": 0.0001,
       "priceMedian": 0.01,
       "networks": [
@@ -1471,7 +1471,7 @@
         "ranked"
       ],
       "logo": "/logos/tiny-place-network-api.png",
-      "url": "https://zealous-unburned-tameness.ngrok-free.dev/"
+      "url": "https://zealous-unburned-tameness.ngrok-free.dev/status"
     },
     {
       "slug": "jarvisclaw-api",
@@ -1498,6 +1498,38 @@
       ],
       "logo": "/logos/jarvisclaw-api.png",
       "url": "https://api.jarvisclaw.ai/api/marketplace/apis"
+    },
+    {
+      "slug": "pyfile-x402-api",
+      "name": "Pyfile x402 API",
+      "party": "1P",
+      "domain": "ts.net",
+      "category": "compute",
+      "endpoints": 411,
+      "priced": 389,
+      "priceMin": 0.001,
+      "priceMedian": 0.01,
+      "networks": [
+        "Base",
+        "Solana"
+      ],
+      "hosts": [
+        "pyfile-agent.taile3ff35.ts.net",
+        "diamond.tail1b5f86.ts.net",
+        "oden.taila7610f.ts.net",
+        "vps-fc89c157-1.taila28d02.ts.net",
+        "ari001.tailb4ac3a.ts.net",
+        "desktop-suts94d.tail0b188d.ts.net",
+        "elon.tail49499f.ts.net",
+        "pop-os.tail08831d.ts.net"
+      ],
+      "hostCount": 42,
+      "via": [],
+      "reasons": [
+        "ranked"
+      ],
+      "logo": "/logos/pyfile-x402-api.svg",
+      "url": "https://vps-fc89c157-1.taila28d02.ts.net:10000/api/toolchain-cost-plan"
     },
     {
       "slug": "gedx402-search",
@@ -1532,38 +1564,6 @@
       "url": "https://gateway.gedx402.com/v1/models"
     },
     {
-      "slug": "pyfile-x402-api",
-      "name": "Pyfile x402 API",
-      "party": "1P",
-      "domain": "ts.net",
-      "category": "compute",
-      "endpoints": 378,
-      "priced": 356,
-      "priceMin": 0.001,
-      "priceMedian": 0.01,
-      "networks": [
-        "Base",
-        "Solana"
-      ],
-      "hosts": [
-        "pyfile-agent.taile3ff35.ts.net",
-        "diamond.tail1b5f86.ts.net",
-        "vps-fc89c157-1.taila28d02.ts.net",
-        "ari001.tailb4ac3a.ts.net",
-        "desktop-suts94d.tail0b188d.ts.net",
-        "elon.tail49499f.ts.net",
-        "pop-os.tail08831d.ts.net",
-        "velux.taild4d007.ts.net"
-      ],
-      "hostCount": 41,
-      "via": [],
-      "reasons": [
-        "ranked"
-      ],
-      "logo": "/logos/pyfile-x402-api.svg",
-      "url": "https://vps-fc89c157-1.taila28d02.ts.net:10000/api/toolchain-cost-plan"
-    },
-    {
       "slug": "ddg-agent-payable-services",
       "name": "DDG Agent-Payable Services",
       "party": "1P",
@@ -1586,6 +1586,31 @@
       ],
       "logo": "/logos/ddg-agent-payable-services.png",
       "url": "https://agents.daedalusdevelopmentgroup.com/wallets.md"
+    },
+    {
+      "slug": "apex-faucet",
+      "name": "APEX Faucet",
+      "party": "1P",
+      "domain": "apexfaucet.xyz",
+      "category": "trading",
+      "endpoints": 375,
+      "priced": 375,
+      "priceMin": 0.001,
+      "priceMedian": 0.003,
+      "networks": [
+        "Base",
+        "Solana"
+      ],
+      "hosts": [
+        "apexfaucet.xyz"
+      ],
+      "hostCount": 1,
+      "via": [],
+      "reasons": [
+        "ranked"
+      ],
+      "logo": "/logos/apex-faucet.ico",
+      "url": "https://apexfaucet.xyz/api/x402/xen-portal"
     },
     {
       "slug": "unykorn-genesis402-rail",
@@ -1643,31 +1668,6 @@
       ],
       "logo": "/logos/hergert-synthora.svg",
       "url": "https://api.hergertsynthora.com/v1/x402-preflight"
-    },
-    {
-      "slug": "apex-faucet",
-      "name": "APEX Faucet",
-      "party": "1P",
-      "domain": "apexfaucet.xyz",
-      "category": "compute",
-      "endpoints": 357,
-      "priced": 357,
-      "priceMin": 0.001,
-      "priceMedian": 0.003,
-      "networks": [
-        "Base",
-        "Solana"
-      ],
-      "hosts": [
-        "apexfaucet.xyz"
-      ],
-      "hostCount": 1,
-      "via": [],
-      "reasons": [
-        "ranked"
-      ],
-      "logo": "/logos/apex-faucet.ico",
-      "url": "https://apexfaucet.xyz/api/x402/zksync-token-verdict"
     },
     {
       "slug": "x402-web-tools",
@@ -1796,22 +1796,22 @@
       "url": "https://markets.losbeto.xyz/stake"
     },
     {
-      "slug": "tableproof",
-      "name": "TableProof",
+      "slug": "rowpocket",
+      "name": "RowPocket",
       "party": "1P",
       "domain": "chatgpt.site",
       "category": "data",
-      "endpoints": 314,
-      "priced": 262,
+      "endpoints": 321,
+      "priced": 269,
       "priceMin": 0.001,
-      "priceMedian": 0.03,
+      "priceMedian": 0.039,
       "networks": [
         "Base",
         "Solana"
       ],
       "hosts": [
-        "tableproof-data.mitchellwhite.chatgpt.site",
         "rowpocket-csv-rescue.josuegrnds21.chatgpt.site",
+        "tableproof-data.mitchellwhite.chatgpt.site",
         "ai-utility-farm.brycedees1.chatgpt.site",
         "agentpass-protocol.rmalka06.chatgpt.site",
         "agentready-audit.seshiccse023.chatgpt.site",
@@ -1819,12 +1819,12 @@
         "moneypilot-c6f8c4.joedyermens.chatgpt.site",
         "moneytest-x402-api.indierepo.chatgpt.site"
       ],
-      "hostCount": 86,
+      "hostCount": 87,
       "via": [],
       "reasons": [
         "ranked"
       ],
-      "logo": "/logos/tableproof.svg",
+      "logo": "/logos/rowpocket.svg",
       "url": "https://agent-json-utility.pablovph.chatgpt.site/v1/launch-report"
     },
     {
@@ -2585,6 +2585,37 @@
       "url": "https://answerpool.io/v1/sec/crosswalk"
     },
     {
+      "slug": "cyberwarex-com",
+      "name": "cyberwarex.com",
+      "party": "1P",
+      "domain": "cyberwarex.com",
+      "category": "search",
+      "endpoints": 135,
+      "priced": 72,
+      "priceMin": 0.001,
+      "priceMedian": 0.005,
+      "networks": [
+        "Base"
+      ],
+      "hosts": [
+        "chain.cyberwarex.com",
+        "search.cyberwarex.com",
+        "oracle.cyberwarex.com",
+        "web.cyberwarex.com",
+        "stocks.cyberwarex.com",
+        "simulate.cyberwarex.com",
+        "seo.cyberwarex.com",
+        "uptime.cyberwarex.com"
+      ],
+      "hostCount": 16,
+      "via": [],
+      "reasons": [
+        "ranked"
+      ],
+      "logo": "/logos/cyberwarex-com.png",
+      "url": "https://sanctions.cyberwarex.com/"
+    },
+    {
       "slug": "website-domain-security-audit",
       "name": "Website & domain security audit",
       "party": "1P",
@@ -2662,37 +2693,6 @@
       ],
       "logo": null,
       "url": "https://x402-factory.com/v1/forecast/window"
-    },
-    {
-      "slug": "cyberwarex-com",
-      "name": "cyberwarex.com",
-      "party": "1P",
-      "domain": "cyberwarex.com",
-      "category": "search",
-      "endpoints": 131,
-      "priced": 68,
-      "priceMin": 0.001,
-      "priceMedian": 0.005,
-      "networks": [
-        "Base"
-      ],
-      "hosts": [
-        "chain.cyberwarex.com",
-        "search.cyberwarex.com",
-        "oracle.cyberwarex.com",
-        "web.cyberwarex.com",
-        "stocks.cyberwarex.com",
-        "simulate.cyberwarex.com",
-        "seo.cyberwarex.com",
-        "uptime.cyberwarex.com"
-      ],
-      "hostCount": 16,
-      "via": [],
-      "reasons": [
-        "ranked"
-      ],
-      "logo": "/logos/cyberwarex-com.png",
-      "url": "https://sanctions.cyberwarex.com/"
     },
     {
       "slug": "agentsvc-io",
@@ -3525,7 +3525,7 @@
         "ranked"
       ],
       "logo": "/logos/maxwellinternational-ai.svg",
-      "url": "https://api.maxwellinternational.ai/v1/x402/endpoint/check"
+      "url": "https://api.maxwellinternational.ai/v1/weather/point"
     },
     {
       "slug": "oblique-markets",
@@ -3973,6 +3973,32 @@
       "url": "https://organiccryptoyyc.com:8443/v1/macro/inflation-adjust/%7Bamount%7D/%7Bfrom%7D/%7Bto%7D"
     },
     {
+      "slug": "sift-web-tools",
+      "name": "Sift Web Tools",
+      "party": "1P",
+      "domain": "hstgr.cloud",
+      "category": "search",
+      "endpoints": 72,
+      "priced": 64,
+      "priceMin": 0.001,
+      "priceMedian": 0.005,
+      "networks": [
+        "Base",
+        "Solana"
+      ],
+      "hosts": [
+        "sift.srv1996466.hstgr.cloud",
+        "srv2072903.hstgr.cloud"
+      ],
+      "hostCount": 2,
+      "via": [],
+      "reasons": [
+        "ranked"
+      ],
+      "logo": null,
+      "url": "https://srv2072903.hstgr.cloud/v1/score"
+    },
+    {
       "slug": "agent-hub",
       "name": "Agent Hub",
       "party": "1P",
@@ -4155,32 +4181,6 @@
       ],
       "logo": "/logos/1gateway.svg",
       "url": "https://1gateway.dev/agents.md"
-    },
-    {
-      "slug": "sift-web-tools",
-      "name": "Sift Web Tools",
-      "party": "1P",
-      "domain": "hstgr.cloud",
-      "category": "search",
-      "endpoints": 67,
-      "priced": 59,
-      "priceMin": 0.001,
-      "priceMedian": 0.005,
-      "networks": [
-        "Base",
-        "Solana"
-      ],
-      "hosts": [
-        "sift.srv1996466.hstgr.cloud",
-        "srv2072903.hstgr.cloud"
-      ],
-      "hostCount": 2,
-      "via": [],
-      "reasons": [
-        "ranked"
-      ],
-      "logo": null,
-      "url": "https://srv2072903.hstgr.cloud/v1/score"
     },
     {
       "slug": "arch-tools",
@@ -4518,6 +4518,30 @@
       "url": "https://stationfx.com/economic-data/sentiment/university-of-michigan-consumer-sentiment"
     },
     {
+      "slug": "x402-data-api",
+      "name": "x402 Data API",
+      "party": "1P",
+      "domain": "apix402data.com",
+      "category": "data",
+      "endpoints": 59,
+      "priced": 47,
+      "priceMin": 0.0018,
+      "priceMedian": 0.01,
+      "networks": [
+        "Base"
+      ],
+      "hosts": [
+        "apix402data.com"
+      ],
+      "hostCount": 1,
+      "via": [],
+      "reasons": [
+        "ranked"
+      ],
+      "logo": "/logos/x402-data-api.svg",
+      "url": "https://apix402data.com/api/free/status"
+    },
+    {
       "slug": "apistead",
       "name": "APIStead",
       "party": "1P",
@@ -4566,30 +4590,6 @@
       ],
       "logo": "/logos/mapleai.ico",
       "url": "https://base.mapleai.shop/health"
-    },
-    {
-      "slug": "x402-data-api",
-      "name": "x402 Data API",
-      "party": "1P",
-      "domain": "apix402data.com",
-      "category": "data",
-      "endpoints": 58,
-      "priced": 46,
-      "priceMin": 0.002,
-      "priceMedian": 0.01,
-      "networks": [
-        "Base"
-      ],
-      "hosts": [
-        "apix402data.com"
-      ],
-      "hostCount": 1,
-      "via": [],
-      "reasons": [
-        "ranked"
-      ],
-      "logo": "/logos/x402-data-api.svg",
-      "url": "https://apix402data.com/api/free/status"
     },
     {
       "slug": "x402-forge",
@@ -4642,6 +4642,31 @@
       ],
       "logo": "/logos/apex-runner.svg",
       "url": "https://apexrunner.ai/signals/whale-sentiment"
+    },
+    {
+      "slug": "coil-trade",
+      "name": "coil.trade",
+      "party": "1P",
+      "domain": "coil.trade",
+      "category": "trading",
+      "endpoints": 55,
+      "priced": 16,
+      "priceMin": 0.001,
+      "priceMedian": 0.01,
+      "networks": [
+        "Base",
+        "Solana"
+      ],
+      "hosts": [
+        "coil.trade"
+      ],
+      "hostCount": 1,
+      "via": [],
+      "reasons": [
+        "ranked"
+      ],
+      "logo": "/logos/coil-trade.png",
+      "url": "https://coil.trade/api/live/rules"
     },
     {
       "slug": "true402-dev",
@@ -4765,31 +4790,6 @@
       ],
       "logo": "/logos/cloudworldmodel-ai.ico",
       "url": "https://www.cloudworldmodel.ai/api/failures/%7BfailureId%7D"
-    },
-    {
-      "slug": "coil",
-      "name": "Coil",
-      "party": "1P",
-      "domain": "coil.trade",
-      "category": "trading",
-      "endpoints": 51,
-      "priced": 16,
-      "priceMin": 0.001,
-      "priceMedian": 0.01,
-      "networks": [
-        "Base",
-        "Solana"
-      ],
-      "hosts": [
-        "coil.trade"
-      ],
-      "hostCount": 1,
-      "via": [],
-      "reasons": [
-        "ranked"
-      ],
-      "logo": "/logos/coil.png",
-      "url": "https://coil.trade/api/research"
     },
     {
       "slug": "402utils",
@@ -4991,6 +4991,32 @@
       ],
       "logo": "/logos/vibe-springs.svg",
       "url": "https://vibesprings.net/api/trends/competitors"
+    },
+    {
+      "slug": "loophole-tape",
+      "name": "loophole tape",
+      "party": "1P",
+      "domain": "loopholetape.com",
+      "category": "data",
+      "endpoints": 45,
+      "priced": 24,
+      "priceMin": 0.001,
+      "priceMedian": 0.02,
+      "networks": [
+        "Base",
+        "Solana"
+      ],
+      "hosts": [
+        "api.loopholetape.com",
+        "replay.loopholetape.com"
+      ],
+      "hostCount": 2,
+      "via": [],
+      "reasons": [
+        "ranked"
+      ],
+      "logo": "/logos/loophole-tape.svg",
+      "url": "https://api.loopholetape.com/v1/token_check/%7Bmint%7D"
     },
     {
       "slug": "stabletravel",
@@ -5339,31 +5365,6 @@
       ],
       "logo": "/logos/globalapi-x402.ico",
       "url": "https://globalapi.dev/fr/company/%7Bsiren%7D"
-    },
-    {
-      "slug": "loophole-tape",
-      "name": "loophole tape",
-      "party": "1P",
-      "domain": "loopholetape.com",
-      "category": "data",
-      "endpoints": 40,
-      "priced": 23,
-      "priceMin": 0.001,
-      "priceMedian": 0.02,
-      "networks": [
-        "Base",
-        "Solana"
-      ],
-      "hosts": [
-        "api.loopholetape.com"
-      ],
-      "hostCount": 1,
-      "via": [],
-      "reasons": [
-        "ranked"
-      ],
-      "logo": "/logos/loophole-tape.svg",
-      "url": "https://api.loopholetape.com/v1/token_check/%7Bmint%7D"
     },
     {
       "slug": "readx",
@@ -8714,6 +8715,31 @@
       "url": "https://x402.purch.xyz/orders/solana"
     },
     {
+      "slug": "sign-in-cloudflare-access",
+      "name": "Sign in ・ Cloudflare Access",
+      "party": "1P",
+      "domain": "moonbeam.network",
+      "category": "messaging",
+      "endpoints": 6,
+      "priced": 6,
+      "priceMin": 0.0012,
+      "priceMedian": 0.002357,
+      "networks": [
+        "Base",
+        "Solana"
+      ],
+      "hosts": [
+        "next.moonbeam.network"
+      ],
+      "hostCount": 1,
+      "via": [],
+      "reasons": [
+        "ranked"
+      ],
+      "logo": "/logos/sign-in-cloudflare-access.svg",
+      "url": "https://next.moonbeam.network/api/acp/x402/seller/api-onesource-io/call/chain-erc20-balance"
+    },
+    {
       "slug": "tokensense-x402-api",
       "name": "TokenSense x402 API",
       "party": "1P",
@@ -8881,31 +8907,6 @@
       "url": "https://padelmaps.org/api/x402/matches"
     },
     {
-      "slug": "sign-in-cloudflare-access",
-      "name": "Sign in ・ Cloudflare Access",
-      "party": "1P",
-      "domain": "moonbeam.network",
-      "category": "data",
-      "endpoints": 5,
-      "priced": 5,
-      "priceMin": 0.0012,
-      "priceMedian": 0.001714,
-      "networks": [
-        "Base",
-        "Solana"
-      ],
-      "hosts": [
-        "next.moonbeam.network"
-      ],
-      "hostCount": 1,
-      "via": [],
-      "reasons": [
-        "ranked"
-      ],
-      "logo": "/logos/sign-in-cloudflare-access.svg",
-      "url": "https://next.moonbeam.network/api/acp/x402/seller/ax1-vc/call/q-verdict-resource"
-    },
-    {
       "slug": "superhighway",
       "name": "Superhighway",
       "party": "1P",
@@ -8952,7 +8953,7 @@
         "ranked"
       ],
       "logo": "/logos/taifoon.png",
-      "url": "https://www.taifoon.io/api/skills/settlement-proof"
+      "url": "https://www.taifoon.io/api/x402/settlement-proof"
     },
     {
       "slug": "wdh-sh",
@@ -9589,7 +9590,7 @@
       "reasons": [
         "pay-sh"
       ],
-      "logo": null,
+      "logo": "/logos/clustly.png",
       "url": "https://tip.clustly.ai"
     },
     {
