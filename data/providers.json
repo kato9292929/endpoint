@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-11-25T17:32:22.955Z",
+  "generated_at": "2026-11-26T17:14:12.042Z",
   "status": "ok",
   "source": "data/endpoints_full.json.gz",
-  "scanned": 221963,
+  "scanned": 223059,
   "subset": false,
   "firstParty": [
     {
@@ -336,6 +336,25 @@
       "brand": null
     },
     {
+      "host": "x402.dtelecom.org",
+      "name": "dTelecom x402 Gateway — Communication & AI APIs",
+      "count": 26,
+      "priced": 1,
+      "priceMedian": 0.1,
+      "topCategory": "compute",
+      "networks": [
+        "Base",
+        "Solana"
+      ],
+      "sources": [
+        "pay-sh",
+        "x402scan"
+      ],
+      "sampleId": "943ac243243e50c1",
+      "url": "https://x402.dtelecom.org",
+      "brand": null
+    },
+    {
       "host": "travel.brij.fi",
       "name": "BRIJ Travel: Pay-per-call flight API",
       "count": 25,
@@ -389,25 +408,6 @@
       ],
       "sampleId": "c524f732f5ebf89f",
       "url": "https://agentres.dev",
-      "brand": null
-    },
-    {
-      "host": "x402.dtelecom.org",
-      "name": "dTelecom x402 Gateway — WebRTC, STT & TTS API",
-      "count": 15,
-      "priced": 1,
-      "priceMedian": 0.1,
-      "topCategory": "media",
-      "networks": [
-        "Base",
-        "Solana"
-      ],
-      "sources": [
-        "pay-sh",
-        "x402scan"
-      ],
-      "sampleId": "943ac243243e50c1",
-      "url": "https://x402.dtelecom.org",
       "brand": null
     },
     {

@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-11-25T17:33:15.325Z",
+  "generated_at": "2026-11-26T17:15:12.483Z",
   "status": "ok",
-  "scanned": 221963,
+  "scanned": 223059,
   "subset": false,
   "qualifying_reasons": [
     "brand",
@@ -9,11 +9,11 @@
     "ranked"
   ],
   "counts": {
-    "services": 395,
-    "endpoints": 50100,
-    "first_party": 372,
+    "services": 398,
+    "endpoints": 50408,
+    "first_party": 375,
     "third_party": 23,
-    "with_logo": 344
+    "with_logo": 347
   },
   "services": [
     {
@@ -432,7 +432,7 @@
         "brand"
       ],
       "logo": "/logos/coingecko-via.ico",
-      "url": "https://coingecko.use.x402atlas.com/price"
+      "url": "https://coingecko.use.x402atlas.com/trending"
     },
     {
       "slug": "brave-via",
@@ -788,7 +788,7 @@
         "brand"
       ],
       "logo": "/logos/tavily-via.ico",
-      "url": "https://tavily.x402.paywithlocus.com/tavily/crawl"
+      "url": "https://tavily.x402.paywithlocus.com/tavily/extract"
     },
     {
       "slug": "alchemy-via",
@@ -1348,8 +1348,8 @@
       "party": "1P",
       "domain": "taifoon.dev",
       "category": "data",
-      "endpoints": 582,
-      "priced": 57,
+      "endpoints": 588,
+      "priced": 62,
       "priceMin": 0.000236,
       "priceMedian": 0.0012,
       "networks": [
@@ -1365,7 +1365,7 @@
         "ranked"
       ],
       "logo": "/logos/taifoon.png",
-      "url": "https://coord.taifoon.dev/v1/x402/class/agent.directory"
+      "url": "https://coord.taifoon.dev/v1/x402/class/web.search"
     },
     {
       "slug": "2s",
@@ -1448,8 +1448,8 @@
       "party": "1P",
       "domain": "ngrok-free.dev",
       "category": "data",
-      "endpoints": 513,
-      "priced": 288,
+      "endpoints": 514,
+      "priced": 289,
       "priceMin": 0.0001,
       "priceMedian": 0.01,
       "networks": [
@@ -1466,7 +1466,7 @@
         "upturned-penniless-obedient.ngrok-free.dev",
         "constructible-interpleural-boris.ngrok-free.dev"
       ],
-      "hostCount": 37,
+      "hostCount": 38,
       "via": [],
       "reasons": [
         "ranked"
@@ -1570,8 +1570,8 @@
       "party": "1P",
       "domain": "apexfaucet.xyz",
       "category": "trading",
-      "endpoints": 378,
-      "priced": 378,
+      "endpoints": 388,
+      "priced": 388,
       "priceMin": 0.001,
       "priceMedian": 0.003,
       "networks": [
@@ -2418,6 +2418,30 @@
       "url": "https://scvd.store/.well-known/scvd-signing-key"
     },
     {
+      "slug": "opendata-best",
+      "name": "OpenData Best",
+      "party": "1P",
+      "domain": "opendata.best",
+      "category": "search",
+      "endpoints": 172,
+      "priced": 172,
+      "priceMin": 0.006,
+      "priceMedian": 0.015,
+      "networks": [
+        "Base"
+      ],
+      "hosts": [
+        "x402.opendata.best"
+      ],
+      "hostCount": 1,
+      "via": [],
+      "reasons": [
+        "ranked"
+      ],
+      "logo": "/logos/opendata-best.ico",
+      "url": "https://x402.opendata.best/s/zumper-com/v1/search"
+    },
+    {
       "slug": "aiskills402",
       "name": "AISkills402",
       "party": "1P",
@@ -2672,6 +2696,31 @@
       "url": "https://macro.genexxis.com/health"
     },
     {
+      "slug": "agentsvc-io",
+      "name": "agentsvc.io",
+      "party": "1P",
+      "domain": "agentsvc.io",
+      "category": "messaging",
+      "endpoints": 133,
+      "priced": 133,
+      "priceMin": 0.002,
+      "priceMedian": 0.005,
+      "networks": [
+        "Base",
+        "Solana"
+      ],
+      "hosts": [
+        "agentsvc.io"
+      ],
+      "hostCount": 1,
+      "via": [],
+      "reasons": [
+        "ranked"
+      ],
+      "logo": "/logos/agentsvc-io.ico",
+      "url": "https://agentsvc.io/api/v1/proxy/qc-contractor-check"
+    },
+    {
       "slug": "loyal-spark",
       "name": "Loyal Spark",
       "party": "1P",
@@ -2718,31 +2767,6 @@
       ],
       "logo": null,
       "url": "https://x402-factory.com/v1/forecast/window"
-    },
-    {
-      "slug": "agentsvc-io",
-      "name": "agentsvc.io",
-      "party": "1P",
-      "domain": "agentsvc.io",
-      "category": "messaging",
-      "endpoints": 130,
-      "priced": 130,
-      "priceMin": 0.002,
-      "priceMedian": 0.00475,
-      "networks": [
-        "Base",
-        "Solana"
-      ],
-      "hosts": [
-        "agentsvc.io"
-      ],
-      "hostCount": 1,
-      "via": [],
-      "reasons": [
-        "ranked"
-      ],
-      "logo": "/logos/agentsvc-io.ico",
-      "url": "https://agentsvc.io/api/v1/proxy/service-finder"
     },
     {
       "slug": "netintel-api",
@@ -3883,8 +3907,8 @@
       "category": "compute",
       "endpoints": 76,
       "priced": 66,
-      "priceMin": 0.002,
-      "priceMedian": 0.002,
+      "priceMin": 0.003,
+      "priceMedian": 0.003,
       "networks": [
         "Base"
       ],
@@ -4207,6 +4231,54 @@
       "url": "https://surf.cascade.fyi/api/v1/twitter/trends"
     },
     {
+      "slug": "x402-data-api",
+      "name": "x402 Data API",
+      "party": "1P",
+      "domain": "apix402data.com",
+      "category": "data",
+      "endpoints": 69,
+      "priced": 56,
+      "priceMin": 0.0018,
+      "priceMedian": 0.01,
+      "networks": [
+        "Base"
+      ],
+      "hosts": [
+        "apix402data.com"
+      ],
+      "hostCount": 1,
+      "via": [],
+      "reasons": [
+        "ranked"
+      ],
+      "logo": "/logos/x402-data-api.svg",
+      "url": "https://apix402data.com/api/free/status"
+    },
+    {
+      "slug": "asterpay-api",
+      "name": "AsterPay API",
+      "party": "1P",
+      "domain": "asterpay.io",
+      "category": "compute",
+      "endpoints": 68,
+      "priced": 57,
+      "priceMin": 0.0015,
+      "priceMedian": 0.0075,
+      "networks": [
+        "Base"
+      ],
+      "hosts": [
+        "x402.asterpay.io"
+      ],
+      "hostCount": 1,
+      "via": [],
+      "reasons": [
+        "ranked"
+      ],
+      "logo": "/logos/asterpay-api.svg",
+      "url": "https://x402.asterpay.io/v2/x402/crypto/perps"
+    },
+    {
       "slug": "1gateway",
       "name": "1gateway",
       "party": "1P",
@@ -4230,30 +4302,6 @@
       ],
       "logo": "/logos/1gateway.svg",
       "url": "https://1gateway.dev/agents.md"
-    },
-    {
-      "slug": "x402-data-api",
-      "name": "x402 Data API",
-      "party": "1P",
-      "domain": "apix402data.com",
-      "category": "data",
-      "endpoints": 67,
-      "priced": 54,
-      "priceMin": 0.0018,
-      "priceMedian": 0.01,
-      "networks": [
-        "Base"
-      ],
-      "hosts": [
-        "apix402data.com"
-      ],
-      "hostCount": 1,
-      "via": [],
-      "reasons": [
-        "ranked"
-      ],
-      "logo": "/logos/x402-data-api.svg",
-      "url": "https://apix402data.com/api/free/status"
     },
     {
       "slug": "arch-tools",
@@ -4889,6 +4937,33 @@
       "url": "https://cryptyx.ai/api/v1/ai/trade-ideas"
     },
     {
+      "slug": "loophole-tape",
+      "name": "loophole tape",
+      "party": "1P",
+      "domain": "loopholetape.com",
+      "category": "data",
+      "endpoints": 50,
+      "priced": 29,
+      "priceMin": 0.001,
+      "priceMedian": 0.02,
+      "networks": [
+        "Base",
+        "Solana"
+      ],
+      "hosts": [
+        "api.loopholetape.com",
+        "loopholetape.com",
+        "replay.loopholetape.com"
+      ],
+      "hostCount": 3,
+      "via": [],
+      "reasons": [
+        "ranked"
+      ],
+      "logo": "/logos/loophole-tape.svg",
+      "url": "https://loopholetape.com/feedcheck/full"
+    },
+    {
       "slug": "x402-professorsausages-com",
       "name": "x402.professorsausages.com",
       "party": "1P",
@@ -5040,33 +5115,6 @@
       ],
       "logo": "/logos/vibe-springs.svg",
       "url": "https://vibesprings.net/api/trends/competitors"
-    },
-    {
-      "slug": "loophole-tape",
-      "name": "loophole tape",
-      "party": "1P",
-      "domain": "loopholetape.com",
-      "category": "data",
-      "endpoints": 46,
-      "priced": 25,
-      "priceMin": 0.001,
-      "priceMedian": 0.02,
-      "networks": [
-        "Base",
-        "Solana"
-      ],
-      "hosts": [
-        "api.loopholetape.com",
-        "replay.loopholetape.com",
-        "loopholetape.com"
-      ],
-      "hostCount": 3,
-      "via": [],
-      "reasons": [
-        "ranked"
-      ],
-      "logo": "/logos/loophole-tape.svg",
-      "url": "https://loopholetape.com/wallet-report/full"
     },
     {
       "slug": "stabletravel",
@@ -5734,6 +5782,31 @@
       ],
       "logo": "/logos/readx.svg",
       "url": "https://readx.sh/api/search/tweets"
+    },
+    {
+      "slug": "sign-in-cloudflare-access",
+      "name": "Sign in ・ Cloudflare Access",
+      "party": "1P",
+      "domain": "moonbeam.network",
+      "category": "messaging",
+      "endpoints": 35,
+      "priced": 34,
+      "priceMin": 0.001,
+      "priceMedian": 0.010499999999999999,
+      "networks": [
+        "Base",
+        "Solana"
+      ],
+      "hosts": [
+        "next.moonbeam.network"
+      ],
+      "hostCount": 1,
+      "via": [],
+      "reasons": [
+        "ranked"
+      ],
+      "logo": "/logos/sign-in-cloudflare-access.svg",
+      "url": "https://next.moonbeam.network/api/acp/x402/seller/laso-finance/call/get-card"
     },
     {
       "slug": "stablestudio",
@@ -6428,6 +6501,32 @@
       ],
       "logo": "/logos/apitoll.png",
       "url": "https://gas.apitoll.cloud/v1/base/gas"
+    },
+    {
+      "slug": "dtelecom-x402-gateway",
+      "name": "dTelecom x402 Gateway",
+      "party": "1P",
+      "domain": "dtelecom.org",
+      "category": "compute",
+      "endpoints": 26,
+      "priced": 1,
+      "priceMin": 0.1,
+      "priceMedian": 0.1,
+      "networks": [
+        "Base",
+        "Solana"
+      ],
+      "hosts": [
+        "x402.dtelecom.org"
+      ],
+      "hostCount": 1,
+      "via": [],
+      "reasons": [
+        "pay-sh",
+        "ranked"
+      ],
+      "logo": "/logos/dtelecom-x402-gateway.svg",
+      "url": "https://x402.dtelecom.org"
     },
     {
       "slug": "imgnai-katana-api",
@@ -7557,32 +7656,6 @@
       "url": "https://api.17711.xyz/registry/catalog/v1/catalog/find_services_by_capability"
     },
     {
-      "slug": "dtelecom-x402-gateway",
-      "name": "dTelecom x402 Gateway",
-      "party": "1P",
-      "domain": "dtelecom.org",
-      "category": "media",
-      "endpoints": 15,
-      "priced": 1,
-      "priceMin": 0.1,
-      "priceMedian": 0.1,
-      "networks": [
-        "Base",
-        "Solana"
-      ],
-      "hosts": [
-        "x402.dtelecom.org"
-      ],
-      "hostCount": 1,
-      "via": [],
-      "reasons": [
-        "pay-sh",
-        "ranked"
-      ],
-      "logo": "/logos/dtelecom-x402-gateway.svg",
-      "url": "https://x402.dtelecom.org"
-    },
-    {
       "slug": "image-via-zeroclick",
       "name": "Image via ZeroClick",
       "party": "1P",
@@ -7957,6 +8030,30 @@
       "url": "https://witness.outbid.sh/.well-known/x402"
     },
     {
+      "slug": "x402-gateway",
+      "name": "x402 gateway",
+      "party": "1P",
+      "domain": "donnyautomation.com",
+      "category": "search",
+      "endpoints": 11,
+      "priced": 11,
+      "priceMin": 0.005,
+      "priceMedian": 0.01,
+      "networks": [
+        "Base"
+      ],
+      "hosts": [
+        "x402.donnyautomation.com"
+      ],
+      "hostCount": 1,
+      "via": [],
+      "reasons": [
+        "ranked"
+      ],
+      "logo": "/logos/x402-gateway.png",
+      "url": "https://x402.donnyautomation.com/treasury/auctions"
+    },
+    {
       "slug": "21-million-pixels",
       "name": "21 Million Pixels",
       "party": "1P",
@@ -8079,30 +8176,6 @@
       "url": "https://stabledomains.dev/api/domain/renew"
     },
     {
-      "slug": "x402-gateway",
-      "name": "x402 gateway",
-      "party": "1P",
-      "domain": "donnyautomation.com",
-      "category": "search",
-      "endpoints": 10,
-      "priced": 10,
-      "priceMin": 0.005,
-      "priceMedian": 0.02,
-      "networks": [
-        "Base"
-      ],
-      "hosts": [
-        "x402.donnyautomation.com"
-      ],
-      "hostCount": 1,
-      "via": [],
-      "reasons": [
-        "ranked"
-      ],
-      "logo": "/logos/x402-gateway.png",
-      "url": "https://x402.donnyautomation.com/edgar/insiders"
-    },
-    {
       "slug": "3route",
       "name": "3Route",
       "party": "1P",
@@ -8151,7 +8224,7 @@
         "ranked"
       ],
       "logo": "/logos/ax1.ico",
-      "url": "https://ax1.vc/api/dashboard/q-verdict/runs/%7BrunId%7D"
+      "url": "https://www.ax1.vc/api/dashboard/q-verdict/runs/%7BrunId%7D"
     },
     {
       "slug": "clash-of-coins",
@@ -8790,31 +8863,6 @@
       "url": "https://x402.purch.xyz/orders/solana"
     },
     {
-      "slug": "sign-in-cloudflare-access",
-      "name": "Sign in ・ Cloudflare Access",
-      "party": "1P",
-      "domain": "moonbeam.network",
-      "category": "messaging",
-      "endpoints": 6,
-      "priced": 6,
-      "priceMin": 0.0012,
-      "priceMedian": 0.002357,
-      "networks": [
-        "Base",
-        "Solana"
-      ],
-      "hosts": [
-        "next.moonbeam.network"
-      ],
-      "hostCount": 1,
-      "via": [],
-      "reasons": [
-        "ranked"
-      ],
-      "logo": "/logos/sign-in-cloudflare-access.svg",
-      "url": "https://next.moonbeam.network/api/acp/x402/seller/api-onesource-io/call/chain-erc20-balance"
-    },
-    {
       "slug": "tokensense-x402-api",
       "name": "TokenSense x402 API",
       "party": "1P",
@@ -9028,7 +9076,7 @@
         "ranked"
       ],
       "logo": "/logos/taifoon.png",
-      "url": "https://www.taifoon.io/api/skills/proof-verify-v5"
+      "url": "https://www.taifoon.io/api/x402/settlement-proof"
     },
     {
       "slug": "wdh-sh",
@@ -9595,6 +9643,31 @@
       ],
       "logo": null,
       "url": "https://402signal.com/route"
+    },
+    {
+      "slug": "api-onchain-optimai-network",
+      "name": "api-onchain.optimai.network",
+      "party": "1P",
+      "domain": "optimai.network",
+      "category": "search",
+      "endpoints": 1,
+      "priced": 1,
+      "priceMin": 0.0025,
+      "priceMedian": 0.0025,
+      "networks": [
+        "Base",
+        "Solana"
+      ],
+      "hosts": [
+        "api-onchain.optimai.network"
+      ],
+      "hostCount": 1,
+      "via": [],
+      "reasons": [
+        "ranked"
+      ],
+      "logo": "/logos/api-onchain-optimai-network.svg",
+      "url": "https://api-onchain.optimai.network/external/v1/x402/search"
     },
     {
       "slug": "auteng-x402-compute",

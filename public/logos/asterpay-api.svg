@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-label="AsterPay">
+  <title>AsterPay</title>
+  <rect x="32" y="48" width="128" height="128" rx="14" transform="rotate(45 96 112)" fill="#1e3a8a"/>
+  <rect x="96" y="80" width="128" height="128" rx="14" transform="rotate(45 160 144)" fill="#3b82f6"/>
+</svg>
