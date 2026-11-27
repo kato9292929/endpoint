@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-11-26T17:15:12.483Z",
+  "generated_at": "2026-11-27T17:02:09.171Z",
   "status": "ok",
-  "scanned": 223059,
+  "scanned": 224311,
   "subset": false,
   "qualifying_reasons": [
     "brand",
@@ -9,11 +9,11 @@
     "ranked"
   ],
   "counts": {
-    "services": 398,
-    "endpoints": 50408,
-    "first_party": 375,
+    "services": 403,
+    "endpoints": 51646,
+    "first_party": 380,
     "third_party": 23,
-    "with_logo": 347
+    "with_logo": 352
   },
   "services": [
     {
@@ -762,7 +762,7 @@
         "brand"
       ],
       "logo": "/logos/perplexity-via.png",
-      "url": "https://perplexity.x402.paywithlocus.com/perplexity/context-embed"
+      "url": "https://perplexity.x402.paywithlocus.com/perplexity/embed"
     },
     {
       "slug": "tavily-via",
@@ -788,7 +788,7 @@
         "brand"
       ],
       "logo": "/logos/tavily-via.ico",
-      "url": "https://tavily.x402.paywithlocus.com/tavily/extract"
+      "url": "https://tavily.x402.paywithlocus.com/tavily/map"
     },
     {
       "slug": "alchemy-via",
@@ -1343,13 +1343,37 @@
       "url": "https://agent402.tools/api/skill-packs.json"
     },
     {
+      "slug": "magentlab-com",
+      "name": "magentlab.com",
+      "party": "1P",
+      "domain": "magentlab.com",
+      "category": "search",
+      "endpoints": 595,
+      "priced": 595,
+      "priceMin": 0.001,
+      "priceMedian": 0.005,
+      "networks": [
+        "Base"
+      ],
+      "hosts": [
+        "api.magentlab.com"
+      ],
+      "hostCount": 1,
+      "via": [],
+      "reasons": [
+        "ranked"
+      ],
+      "logo": "/logos/magentlab-com.svg",
+      "url": "https://api.magentlab.com/api/calc/has-bled"
+    },
+    {
       "slug": "taifoon",
       "name": "Taifoon",
       "party": "1P",
       "domain": "taifoon.dev",
       "category": "data",
-      "endpoints": 588,
-      "priced": 62,
+      "endpoints": 593,
+      "priced": 66,
       "priceMin": 0.000236,
       "priceMedian": 0.0012,
       "networks": [
@@ -1587,7 +1611,32 @@
         "ranked"
       ],
       "logo": "/logos/apex-faucet.ico",
-      "url": "https://apexfaucet.xyz/api/x402/zksync-token-verdict"
+      "url": "https://apexfaucet.xyz/api/x402/xen-portal"
+    },
+    {
+      "slug": "unykorn-genesis402-rail",
+      "name": "UnyKorn Genesis402 rail",
+      "party": "1P",
+      "domain": "unykorn.org",
+      "category": "data",
+      "endpoints": 381,
+      "priced": 381,
+      "priceMin": 0.001,
+      "priceMedian": 0.003,
+      "networks": [
+        "Base",
+        "Solana"
+      ],
+      "hosts": [
+        "twin.unykorn.org"
+      ],
+      "hostCount": 1,
+      "via": [],
+      "reasons": [
+        "ranked"
+      ],
+      "logo": "/logos/unykorn-genesis402-rail.svg",
+      "url": "https://twin.unykorn.org/credits/25"
     },
     {
       "slug": "ddg-agent-payable-services",
@@ -1612,31 +1661,6 @@
       ],
       "logo": "/logos/ddg-agent-payable-services.png",
       "url": "https://agents.daedalusdevelopmentgroup.com/wallets.md"
-    },
-    {
-      "slug": "unykorn-genesis402-rail",
-      "name": "UnyKorn Genesis402 rail",
-      "party": "1P",
-      "domain": "unykorn.org",
-      "category": "data",
-      "endpoints": 365,
-      "priced": 365,
-      "priceMin": 0.001,
-      "priceMedian": 0.002,
-      "networks": [
-        "Base",
-        "Solana"
-      ],
-      "hosts": [
-        "twin.unykorn.org"
-      ],
-      "hostCount": 1,
-      "via": [],
-      "reasons": [
-        "ranked"
-      ],
-      "logo": "/logos/unykorn-genesis402-rail.svg",
-      "url": "https://twin.unykorn.org/credits/25"
     },
     {
       "slug": "hergert-synthora",
@@ -1955,6 +1979,30 @@
       "url": "https://apiv2.laevitas.ch/api/v1/options/backtests"
     },
     {
+      "slug": "aipaygen",
+      "name": "AIPayGen",
+      "party": "1P",
+      "domain": "aipaygen.com",
+      "category": "compute",
+      "endpoints": 271,
+      "priced": 86,
+      "priceMin": 0.001,
+      "priceMedian": 0.001,
+      "networks": [
+        "Base"
+      ],
+      "hosts": [
+        "aipaygen.com"
+      ],
+      "hostCount": 1,
+      "via": [],
+      "reasons": [
+        "ranked"
+      ],
+      "logo": "/logos/aipaygen.svg",
+      "url": "https://aipaygen.com/v1/keys/connector"
+    },
+    {
       "slug": "adh",
       "name": "ADH",
       "party": "1P",
@@ -2027,6 +2075,31 @@
       ],
       "logo": "/logos/vextorium.svg",
       "url": "https://api.vextorium.com/v1/g7-policy-rates"
+    },
+    {
+      "slug": "x402-bazaar",
+      "name": "x402 Bazaar",
+      "party": "1P",
+      "domain": "com.tr",
+      "category": "messaging",
+      "endpoints": 239,
+      "priced": 239,
+      "priceMin": 0.002,
+      "priceMedian": 0.02,
+      "networks": [
+        "Base",
+        "Solana"
+      ],
+      "hosts": [
+        "402.com.tr"
+      ],
+      "hostCount": 1,
+      "via": [],
+      "reasons": [
+        "ranked"
+      ],
+      "logo": "/logos/x402-bazaar.png",
+      "url": "https://402.com.tr/api/x402/buy-credits"
     },
     {
       "slug": "zrok",
@@ -2390,7 +2463,7 @@
         "ranked"
       ],
       "logo": "/logos/code402.svg",
-      "url": "https://hcrb.in/v1/receipt/verify"
+      "url": "https://hcrb.in/v1/slm/model-card"
     },
     {
       "slug": "scvd-general-store",
@@ -2488,6 +2561,37 @@
       "url": "https://phion.systems/v1/verify"
     },
     {
+      "slug": "defi-safety-oracle",
+      "name": "DeFi Safety Oracle",
+      "party": "1P",
+      "domain": "cyberwarex.com",
+      "category": "search",
+      "endpoints": 164,
+      "priced": 90,
+      "priceMin": 0.001,
+      "priceMedian": 0.005,
+      "networks": [
+        "Base"
+      ],
+      "hosts": [
+        "oracle.cyberwarex.com",
+        "chain.cyberwarex.com",
+        "search.cyberwarex.com",
+        "web.cyberwarex.com",
+        "domain.cyberwarex.com",
+        "video.cyberwarex.com",
+        "stocks.cyberwarex.com",
+        "simulate.cyberwarex.com"
+      ],
+      "hostCount": 19,
+      "via": [],
+      "reasons": [
+        "ranked"
+      ],
+      "logo": "/logos/defi-safety-oracle.png",
+      "url": "https://sanctions.cyberwarex.com/"
+    },
+    {
       "slug": "rotary-agency",
       "name": "Rotary Agency",
       "party": "1P",
@@ -2511,37 +2615,6 @@
       ],
       "logo": null,
       "url": "https://rotaryagency.uk/api/crypto/price"
-    },
-    {
-      "slug": "cyberwarex-com",
-      "name": "cyberwarex.com",
-      "party": "1P",
-      "domain": "cyberwarex.com",
-      "category": "search",
-      "endpoints": 161,
-      "priced": 87,
-      "priceMin": 0.001,
-      "priceMedian": 0.005,
-      "networks": [
-        "Base"
-      ],
-      "hosts": [
-        "chain.cyberwarex.com",
-        "oracle.cyberwarex.com",
-        "search.cyberwarex.com",
-        "web.cyberwarex.com",
-        "domain.cyberwarex.com",
-        "video.cyberwarex.com",
-        "stocks.cyberwarex.com",
-        "simulate.cyberwarex.com"
-      ],
-      "hostCount": 19,
-      "via": [],
-      "reasons": [
-        "ranked"
-      ],
-      "logo": "/logos/cyberwarex-com.png",
-      "url": "https://sanctions.cyberwarex.com/"
     },
     {
       "slug": "x402stock",
@@ -3004,6 +3077,30 @@
       "url": "https://www.tradepilotusa.com/api/agent-commerce/v1/doorplace/quote"
     },
     {
+      "slug": "x402-gateway",
+      "name": "x402-gateway",
+      "party": "1P",
+      "domain": "freeq.one",
+      "category": "messaging",
+      "endpoints": 114,
+      "priced": 110,
+      "priceMin": 0,
+      "priceMedian": 0.005,
+      "networks": [
+        "Base"
+      ],
+      "hosts": [
+        "x402.freeq.one"
+      ],
+      "hostCount": 1,
+      "via": [],
+      "reasons": [
+        "ranked"
+      ],
+      "logo": "/logos/x402-gateway.png",
+      "url": "https://x402.freeq.one/health"
+    },
+    {
       "slug": "seo-and-keyword-data-api",
       "name": "SEO and Keyword Data API",
       "party": "1P",
@@ -3031,30 +3128,6 @@
       "url": "https://derivs.duoleads.com/v1/options"
     },
     {
-      "slug": "x402-gateway",
-      "name": "x402-gateway",
-      "party": "1P",
-      "domain": "freeq.one",
-      "category": "messaging",
-      "endpoints": 112,
-      "priced": 108,
-      "priceMin": 0,
-      "priceMedian": 0.005,
-      "networks": [
-        "Base"
-      ],
-      "hosts": [
-        "x402.freeq.one"
-      ],
-      "hostCount": 1,
-      "via": [],
-      "reasons": [
-        "ranked"
-      ],
-      "logo": "/logos/x402-gateway.png",
-      "url": "https://x402.freeq.one/tools/cargo_run/result/%7Bjob_id%7D"
-    },
-    {
       "slug": "blockchain-money-map",
       "name": "Blockchain Money Map",
       "party": "1P",
@@ -3077,6 +3150,30 @@
       ],
       "logo": null,
       "url": "https://api.blockchainmoneymap.com/api/agents/recommend"
+    },
+    {
+      "slug": "liquidvision-app",
+      "name": "LiquidVision.app",
+      "party": "1P",
+      "domain": "liquidvision.app",
+      "category": "messaging",
+      "endpoints": 111,
+      "priced": 55,
+      "priceMin": 0.005,
+      "priceMedian": 0.005,
+      "networks": [
+        "Base"
+      ],
+      "hosts": [
+        "liquidvision.app"
+      ],
+      "hostCount": 1,
+      "via": [],
+      "reasons": [
+        "ranked"
+      ],
+      "logo": "/logos/liquidvision-app.svg",
+      "url": "https://liquidvision.app/api/v1/brief"
     },
     {
       "slug": "onhub",
@@ -3948,30 +4045,6 @@
       "url": "https://grokzilla.shop/agents.md"
     },
     {
-      "slug": "aipaygen",
-      "name": "AIPayGen",
-      "party": "1P",
-      "domain": "aipaygen.com",
-      "category": "compute",
-      "endpoints": 73,
-      "priced": 70,
-      "priceMin": 0.001,
-      "priceMedian": 0.001,
-      "networks": [
-        "Base"
-      ],
-      "hosts": [
-        "aipaygen.com"
-      ],
-      "hostCount": 1,
-      "via": [],
-      "reasons": [
-        "ranked"
-      ],
-      "logo": "/logos/aipaygen.svg",
-      "url": "https://aipaygen.com/v1/search_marketplace"
-    },
-    {
       "slug": "webbersites",
       "name": "WebberSites",
       "party": "1P",
@@ -4231,30 +4304,6 @@
       "url": "https://surf.cascade.fyi/api/v1/twitter/trends"
     },
     {
-      "slug": "x402-data-api",
-      "name": "x402 Data API",
-      "party": "1P",
-      "domain": "apix402data.com",
-      "category": "data",
-      "endpoints": 69,
-      "priced": 56,
-      "priceMin": 0.0018,
-      "priceMedian": 0.01,
-      "networks": [
-        "Base"
-      ],
-      "hosts": [
-        "apix402data.com"
-      ],
-      "hostCount": 1,
-      "via": [],
-      "reasons": [
-        "ranked"
-      ],
-      "logo": "/logos/x402-data-api.svg",
-      "url": "https://apix402data.com/api/free/status"
-    },
-    {
       "slug": "asterpay-api",
       "name": "AsterPay API",
       "party": "1P",
@@ -4277,6 +4326,31 @@
       ],
       "logo": "/logos/asterpay-api.svg",
       "url": "https://x402.asterpay.io/v2/x402/crypto/perps"
+    },
+    {
+      "slug": "x402-data-api",
+      "name": "x402 Data API",
+      "party": "1P",
+      "domain": "apix402data.com",
+      "category": "data",
+      "endpoints": 68,
+      "priced": 51,
+      "priceMin": 0.001,
+      "priceMedian": 0.005,
+      "networks": [
+        "Base",
+        "Solana"
+      ],
+      "hosts": [
+        "apix402data.com"
+      ],
+      "hostCount": 1,
+      "via": [],
+      "reasons": [
+        "ranked"
+      ],
+      "logo": "/logos/x402-data-api.svg",
+      "url": "https://apix402data.com/api/discover/dead"
     },
     {
       "slug": "1gateway",
@@ -5344,6 +5418,30 @@
       "url": "https://afriref.dev/v1/balance"
     },
     {
+      "slug": "siftingio-market-data-x402",
+      "name": "SiftingIO market data (x402",
+      "party": "1P",
+      "domain": "sifting.io",
+      "category": "messaging",
+      "endpoints": 41,
+      "priced": 41,
+      "priceMin": 0.002,
+      "priceMedian": 0.005,
+      "networks": [
+        "Base"
+      ],
+      "hosts": [
+        "x402.sifting.io"
+      ],
+      "hostCount": 1,
+      "via": [],
+      "reasons": [
+        "ranked"
+      ],
+      "logo": "/logos/siftingio-market-data-x402.ico",
+      "url": "https://x402.sifting.io/v1/symbols"
+    },
+    {
       "slug": "agmsg",
       "name": "AgMsg",
       "party": "1P",
@@ -6216,6 +6314,30 @@
       ],
       "logo": "/logos/tbs-digital-com.svg",
       "url": "https://company-x402.tbs-digital.com/health"
+    },
+    {
+      "slug": "cortexcloud",
+      "name": "CortexCloud",
+      "party": "1P",
+      "domain": "cortexcloud.org",
+      "category": "compute",
+      "endpoints": 29,
+      "priced": 16,
+      "priceMin": 0.004,
+      "priceMedian": 0.004,
+      "networks": [
+        "Base"
+      ],
+      "hosts": [
+        "api.cortexcloud.org"
+      ],
+      "hostCount": 1,
+      "via": [],
+      "reasons": [
+        "ranked"
+      ],
+      "logo": "/logos/cortexcloud.png",
+      "url": "https://api.cortexcloud.org/health"
     },
     {
       "slug": "palmyr",
@@ -8248,7 +8370,7 @@
         "ranked"
       ],
       "logo": "/logos/clash-of-coins.ico",
-      "url": "https://x402.clashofcoins.com/craft/x402/config"
+      "url": "https://x402.clashofcoins.com/craft/x402/quote"
     },
     {
       "slug": "clawfetch-ai",
